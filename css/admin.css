@@ -1,476 +1,1289 @@
 /* ==========================================
-   REDE ESPECIALISTAS
-   ADMIN PANEL - MODERN UI
+REDE ESPECIALISTAS
+PAINEL ADMINISTRATIVO
 ========================================== */
-/* ================= RESET ================= */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
 
-    font-family:
+/* ==========================================
+RESET
+========================================== */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+```
+font-family:
     "Segoe UI",
     Arial,
     sans-serif;
+```
+
 }
+
+:root{
+--primary:#2563eb;
+--primary-dark:#1d4ed8;
+
+```
+--green:#16a34a;
+--green-dark:#15803d;
+
+--red:#dc2626;
+--red-dark:#b91c1c;
+
+--gray:#64748b;
+--dark:#0f172a;
+
+--background:#f8fafc;
+
+--border:#e2e8f0;
+
+--text:#1e293b;
+--text-light:#64748b;
+```
+
+}
+
 body{
-    background:#f8fafc;
-    color:#1e293b;
+background:var(--background);
+color:var(--text);
 }
-/* ================= UTILIDADES ================= */
+
+/* ==========================================
+UTILIDADES
+========================================== */
+
 .hidden{
-    display:none!important;
+display:none !important;
 }
-/* ================= LOGIN ================= */
+
+/* ==========================================
+LOGIN
+========================================== */
+
 .login-screen{
-    width:100%;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:
+width:100%;
+min-height:100vh;
+
+```
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:20px;
+
+background:
     linear-gradient(
         135deg,
         #0f172a,
+        #1e40af,
         #2563eb
     );
+```
+
 }
+
 .login-box{
-    width:420px;
-    background:white;
-    padding:45px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:
+width:100%;
+max-width:420px;
+
+```
+background:white;
+
+padding:45px;
+
+border-radius:24px;
+
+text-align:center;
+
+box-shadow:
     0 25px 60px rgba(0,0,0,.25);
-    animation:
-    aparecer .4s ease;
+
+animation:aparecer .4s ease;
+```
+
 }
+
 @keyframes aparecer{
+
+```
 from{
     opacity:0;
     transform:translateY(20px);
 }
+
 to{
     opacity:1;
-    transform:none;
+    transform:translateY(0);
 }
+```
+
 }
+
 .logo{
-    width:90px;
-    margin-bottom:20px;
+width:90px;
+height:90px;
+
+```
+object-fit:contain;
+
+margin-bottom:20px;
+```
+
 }
+
 .login-box h1{
-    color:#2563eb;
-    font-size:28px;
+color:var(--primary);
+font-size:28px;
 }
+
 .login-box p{
-    margin:10px 0 30px;
-    color:#64748b;
+margin:10px 0 30px;
+color:var(--text-light);
 }
+
 .login-box input{
-    width:100%;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:12px;
-    border:
-    1px solid #cbd5e1;
-    font-size:15px;
+width:100%;
+
+```
+padding:15px;
+
+margin-bottom:15px;
+
+border-radius:12px;
+
+border:1px solid #cbd5e1;
+
+font-size:15px;
+
+transition:.2s;
+```
+
 }
+
 .login-box input:focus{
-    outline:none;
-    border-color:#2563eb;
+outline:none;
+
+```
+border-color:var(--primary);
+
+box-shadow:
+    0 0 0 3px rgba(37,99,235,.12);
+```
+
 }
+
 .login-box button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+width:100%;
+
+```
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:var(--primary);
+
+color:white;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.2s;
+```
+
 }
+
 .login-box button:hover{
-    background:#1d4ed8;
-    transform:translateY(-2px);
+background:var(--primary-dark);
+transform:translateY(-2px);
 }
-/* ================= PAINEL ================= */
+
+/* ==========================================
+PAINEL
+========================================== */
+
 .painel{
-    display:flex;
-    width:100%;
-    min-height:100vh;
+display:flex;
+
+```
+width:100%;
+min-height:100vh;
+```
+
 }
-/* ================= SIDEBAR ================= */
+
+/* ==========================================
+SIDEBAR
+========================================== */
+
 .sidebar{
-    width:280px;
-    height:100vh;
-    background:
+width:280px;
+height:100vh;
+
+```
+position:fixed;
+
+top:0;
+left:0;
+
+z-index:1000;
+
+display:flex;
+flex-direction:column;
+
+background:
     linear-gradient(
         180deg,
         #0f172a,
         #111827
     );
-    color:white;
-    display:flex;
-    flex-direction:column;
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:1000;
+
+color:white;
+
+overflow:hidden;
+```
+
 }
-/* LOGO SIDEBAR */
+
+/* ==========================================
+LOGO SIDEBAR
+========================================== */
+
 .sidebar-logo{
-    padding:35px 20px;
-    text-align:center;
-    border-bottom:
-    1px solid rgba(255,255,255,.1);
+padding:28px 20px;
+
+```
+text-align:center;
+
+border-bottom:
+    1px solid rgba(255,255,255,.08);
+```
+
 }
+
 .logo-area{
-    width:75px;
-    height:75px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:transparent;
-    border-radius:20px;
-}
-.logo-area img{
-    width:45px;
-    height:45px;
-    object-fit:contain;
-}
-.sidebar-logo h2{
-    margin-top:15px;
-    font-size:22px;
-    line-height:1.2;
-}
-.sidebar-logo span{
-    display:block;
-    margin-top:8px;
-    color:#94a3b8;
-    font-size:12px;
-}
-/* MENU */
-.sidebar-menu{
-    flex:1;
-    overflow-y:auto;
-    padding:20px;
-}
-.sidebar-menu::-webkit-scrollbar{
-   width:5px;
-}
-.sidebar-menu::-webkit-scrollbar-thumb{
-    background:#334155;
-    border-radius:10px;
-}
-.menu-title{
-    font-size:11px;
-    color:#64748b;
-    margin:18px 0 10px;
-    letter-spacing:1px;
-}
-.menu-btn{
-    width:100%;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:15px;
-    margin-bottom:8px;
-    border:none;
-    border-radius:12px;
-    background:transparent;
-    color:white;
-    cursor:pointer;
-    font-size:15px;
-    transition:.3s;
-}
-.menu-btn .icon{
-    width:25px;
-    font-size:20px;
-}
-.menu-btn:hover{
-    background:
-    rgba(37,99,blue,.25);
-}
-.menu-btn.active{
-    background:#2563eb;
-    box-shadow:
-    0 8px 20px rgba(37,99,235,.35);
-}
-/* ================= SIDEBAR FOOTER ================= */
-.sidebar-footer{
-    padding:20px;
-    border-top:
-    1px solid rgba(255,255,255,.1);
-}
-.admin-info{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px;
-    background:
+width:72px;
+height:72px;
+
+```
+margin:auto;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:20px;
+
+background:
     rgba(255,255,255,.08);
-    border-radius:15px;
-    margin-bottom:15px;
+```
+
 }
+
+.logo-area img{
+width:45px;
+height:45px;
+
+```
+object-fit:contain;
+```
+
+}
+
+.sidebar-logo h2{
+margin-top:15px;
+
+```
+font-size:21px;
+
+line-height:1.2;
+
+color:white;
+```
+
+}
+
+.sidebar-logo span{
+display:block;
+
+```
+margin-top:8px;
+
+color:#94a3b8;
+
+font-size:12px;
+```
+
+}
+
+/* ==========================================
+MENU
+========================================== */
+
+.sidebar-menu{
+flex:1;
+
+```
+overflow-y:auto;
+
+padding:15px;
+```
+
+}
+
+.sidebar-menu::-webkit-scrollbar{
+width:5px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb{
+background:#334155;
+
+```
+border-radius:10px;
+```
+
+}
+
+.menu-title{
+font-size:10px;
+
+```
+color:#64748b;
+
+margin:
+    18px 10px 8px;
+
+letter-spacing:1px;
+
+font-weight:bold;
+```
+
+}
+
+.menu-btn{
+width:100%;
+
+```
+display:flex;
+align-items:center;
+
+gap:13px;
+
+padding:13px 15px;
+
+margin-bottom:6px;
+
+border:none;
+
+border-radius:12px;
+
+background:transparent;
+
+color:#e2e8f0;
+
+cursor:pointer;
+
+font-size:14px;
+
+text-align:left;
+
+transition:.2s;
+```
+
+}
+
+.menu-btn .icon{
+width:25px;
+
+```
+font-size:18px;
+
+text-align:center;
+```
+
+}
+
+.menu-btn:hover{
+background:
+rgba(37,99,235,.20);
+
+```
+color:white;
+```
+
+}
+
+.menu-btn.active{
+background:var(--primary);
+
+```
+color:white;
+
+box-shadow:
+    0 8px 20px rgba(37,99,235,.30);
+```
+
+}
+
+/* ==========================================
+FOOTER SIDEBAR
+========================================== */
+
+.sidebar-footer{
+padding:15px;
+
+```
+border-top:
+    1px solid rgba(255,255,255,.08);
+```
+
+}
+
+.admin-info{
+display:flex;
+
+```
+align-items:center;
+
+gap:12px;
+
+padding:12px;
+
+background:
+    rgba(255,255,255,.06);
+
+border-radius:14px;
+
+margin-bottom:12px;
+```
+
+}
+
 .avatar{
-    width:40px;
-    height:40px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#2563eb;
-    border-radius:50%;
+width:40px;
+height:40px;
+
+```
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+background:var(--primary);
+
+border-radius:50%;
+```
+
 }
+
 .admin-info strong{
-    display:block;
-    color:white;
-    font-size:14px;
+display:block;
+
+```
+color:white;
+
+font-size:14px;
+```
+
 }
+
 .admin-info small{
-    color:#94a3b8;
+color:#94a3b8;
+
+```
+font-size:11px;
+```
+
 }
+
+/* BOTÃO VOLTAR */
+
+.btn-voltar-site{
+width:100%;
+
+```
+padding:12px;
+
+margin-bottom:10px;
+
+border:none;
+
+border-radius:10px;
+
+background:
+    rgba(255,255,255,.08);
+
+color:white;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.2s;
+```
+
+}
+
+.btn-voltar-site:hover{
+background:
+rgba(255,255,255,.15);
+}
+
+/* LOGOUT */
+
 .logout{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#dc2626;
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
+width:100%;
+
+```
+padding:12px;
+
+border:none;
+
+border-radius:10px;
+
+background:var(--red);
+
+color:white;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:.2s;
+```
+
 }
+
 .logout:hover{
-    background:#b91c1c;
+background:var(--red-dark);
 }
-/* ================= CONTEÚDO PRINCIPAL ================= */
+
+/* ==========================================
+CONTEÚDO
+========================================== */
+
 .content{
+margin-left:280px;
 
-    margin-left:280px;
+```
+width:calc(100% - 280px);
 
-    width:calc(100% - 280px);
+min-height:100vh;
 
-    min-height:100vh;
-
-    overflow-x:hidden;
+overflow-x:hidden;
+```
 
 }
-/* ================= TOPO ================= */
+
+/* ==========================================
+TOPBAR
+========================================== */
+
 .topbar{
-    height:80px;
-    background:white;
-    display:flex;
-    align-items:center;
-    padding:0 35px;
-    position:sticky;
-    top:0;
-    z-index:10;
-    box-shadow:
-    0 3px 15px rgba(0,0,0,.08);
+min-height:80px;
+
+```
+background:white;
+
+display:flex;
+align-items:center;
+
+padding:15px 35px;
+
+position:sticky;
+
+top:0;
+
+z-index:100;
+
+border-bottom:
+    1px solid var(--border);
+```
+
 }
+
+.topbar-subtitle{
+display:block;
+
+```
+font-size:12px;
+
+color:var(--text-light);
+
+margin-bottom:3px;
+```
+
+}
+
 .topbar h1{
-    color:#2563eb;
-    font-size:26px;
+color:var(--text);
+
+```
+font-size:24px;
+```
+
 }
-/* ================= PÁGINAS ================= */
+
+/* ==========================================
+PÁGINAS
+========================================== */
+
 .page{
-    padding:35px;
+padding:35px;
+
+```
+max-width:1500px;
+```
+
 }
+
 .page-header{
-    margin-bottom:25px;
+margin-bottom:25px;
 }
+
 .page-header h2{
-    font-size:28px;
-    color:#1e293b;
+font-size:27px;
+
+```
+color:var(--text);
+```
+
 }
+
 .page-header p{
-    color:#64748b;
-    margin-top:5px;
+color:var(--text-light);
+
+```
+margin-top:6px;
+```
+
 }
-/* ================= DASHBOARD ================= */
+
+/* ==========================================
+DASHBOARD
+========================================== */
+
 .cards{
-    display:grid;
-    grid-template-columns:
+display:grid;
+
+```
+grid-template-columns:
     repeat(auto-fit,minmax(220px,1fr));
-    gap:25px;
+
+gap:20px;
+```
+
 }
+
 .card{
-    background:white;
-    padding:30px;
-    border-radius:22px;
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.06);
-    margin-bottom:25px;
-    transition:.3s;
+background:white;
+
+```
+padding:25px;
+
+border-radius:18px;
+
+border:
+    1px solid #eef2f7;
+
+box-shadow:
+    0 5px 20px rgba(15,23,42,.05);
+
+margin-bottom:25px;
+```
+
 }
-.card:hover{
-    transform:translateY(-5px);
+
+/* CARD DASHBOARD */
+
+.dashboard-card{
+position:relative;
+
+```
+overflow:hidden;
+
+transition:
+    transform .2s,
+    box-shadow .2s;
+```
+
 }
+
+.dashboard-card:hover{
+transform:translateY(-4px);
+
+```
+box-shadow:
+    0 12px 30px rgba(15,23,42,.10);
+```
+
+}
+
+.card-icon{
+width:46px;
+height:46px;
+
+```
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+background:#eff6ff;
+
+border-radius:14px;
+
+font-size:23px;
+
+margin-bottom:15px;
+```
+
+}
+
 .card h3{
-    color:#64748b;
-    font-size:16px;
+color:var(--text-light);
+
+```
+font-size:15px;
+
+font-weight:600;
+```
+
 }
+
 .card span{
-    display:block;
-    margin-top:15px;
-    font-size:42px;
-    font-weight:800;
-    color:#2563eb;
+display:block;
+
+```
+margin-top:8px;
+
+font-size:38px;
+
+font-weight:800;
+
+color:var(--primary);
+```
+
 }
+
 .dashboard-card small{
-    display:block;
-    margin-top:10px;
-    color:#64748b;
+display:block;
+
+```
+margin-top:8px;
+
+color:var(--text-light);
+```
+
 }
-/* ================= FORMULÁRIOS ================= */
+
+/* ==========================================
+FORMULÁRIOS
+========================================== */
+
+.form-card h3{
+margin-bottom:20px;
+
+```
+color:var(--text);
+
+font-size:18px;
+```
+
+}
+
 .form-grid{
-    display:grid;
-    grid-template-columns:
-    repeat(2,1fr);
-    gap:20px;
+display:grid;
+
+```
+grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
+gap:18px;
+```
+
 }
-.form-grid label{
-    display:block;
-    margin-bottom:5px;
-    font-size:14px;
-    font-weight:600;
-    color:#475569;
-}
+
 .form-grid .full{
-    grid-column:
-    1 / -1;
+grid-column:
+1 / -1;
 }
+
+label{
+display:block;
+
+```
+margin-bottom:6px;
+
+font-size:13px;
+
+font-weight:600;
+
+color:#475569;
+```
+
+}
+
 input,
 select{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    margin-bottom:12px;
-    border-radius:12px;
-    border:
+width:100%;
+
+```
+padding:13px 14px;
+
+border-radius:10px;
+
+border:
     1px solid #cbd5e1;
-    background:white;
-    font-size:15px;
+
+background:white;
+
+color:var(--text);
+
+font-size:14px;
+
+transition:.2s;
+```
+
 }
+
 input:focus,
 select:focus{
-    outline:none;
-    border-color:#2563eb;
-    box-shadow:
-    0 0 0 3px rgba(37,99,235,.1);
+outline:none;
+
+```
+border-color:var(--primary);
+
+box-shadow:
+    0 0 0 3px rgba(37,99,235,.10);
+```
+
 }
-/* ================= LISTAS ================= */
-.box{
-    background:white;
-    padding:18px;
-    border-radius:16px;
-    margin-bottom:12px;
-    box-shadow:
-    0 5px 15px rgba(0,0,0,.06);
+
+/* ==========================================
+CHECKBOX
+========================================== */
+
+.checkbox-area{
+display:flex;
+
+```
+align-items:center;
+
+gap:8px;
+
+margin-top:20px;
+
+cursor:pointer;
+```
+
 }
-.box h3{
-    font-size:17px;
-    color:#1e293b;
+
+.checkbox-area input{
+width:18px;
+height:18px;
+
+```
+margin:0;
+
+accent-color:var(--primary);
+```
+
 }
-.box small{
-    color:#64748b;
+
+.checkbox-area span{
+font-size:14px;
 }
-/* ================= BOTÕES ================= */
+
+/* ==========================================
+GRUPO DE BOTÕES
+========================================== */
+
+.button-group{
+display:flex;
+
+```
+flex-wrap:wrap;
+
+gap:10px;
+
+margin-top:25px;
+```
+
+}
+
+/* ==========================================
+BOTÕES
+========================================== */
+
 button{
-    font-family:inherit;
+font-family:inherit;
 }
+
 .green,
 .blue,
 .gray,
 .red{
-    border:none;
-    padding:13px 22px;
-    border-radius:12px;
-    cursor:pointer;
-    font-weight:bold;
-    transition:.3s;
+border:none;
+
+```
+padding:12px 20px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-weight:600;
+
+font-size:14px;
+
+transition:
+    transform .2s,
+    filter .2s;
+```
+
 }
+
 .green{
-    background:#16a34a;
-    color:white;
+background:var(--green);
+color:white;
 }
+
 .blue{
-    background:#2563eb;
-    color:white;
+background:var(--primary);
+color:white;
 }
+
 .gray{
-    background:#64748b;
-    color:white;
+background:var(--gray);
+color:white;
 }
+
 .red{
-    background:#dc2626;
-    color:white;
+background:var(--red);
+color:white;
 }
+
 .green:hover,
 .blue:hover,
 .gray:hover,
 .red:hover{
-    transform:translateY(-2px);
-    filter:brightness(.95);
+transform:translateY(-2px);
+
+```
+filter:brightness(.96);
+```
+
 }
-/* ================= STATUS ================= */
+
+/* ==========================================
+TÍTULOS DOS CARDS
+========================================== */
+
+.card-title-row{
+display:flex;
+
+```
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:15px;
+```
+
+}
+
+.card > h3{
+margin-bottom:15px;
+}
+
+/* ==========================================
+LISTAS
+========================================== */
+
+.box{
+background:#fff;
+
+```
+padding:18px;
+
+border-radius:14px;
+
+border:
+    1px solid var(--border);
+
+margin-top:10px;
+
+transition:.2s;
+```
+
+}
+
+.box:hover{
+border-color:#bfdbfe;
+
+```
+box-shadow:
+    0 5px 15px rgba(37,99,235,.06);
+```
+
+}
+
+.box h3{
+margin:0;
+
+```
+font-size:16px;
+
+color:var(--text);
+```
+
+}
+
+.box small{
+display:block;
+
+```
+margin-top:5px;
+
+color:var(--text-light);
+
+font-size:12px;
+```
+
+}
+
+.lista-vinculos{
+margin-top:20px;
+}
+
+/* ==========================================
+STATUS
+========================================== */
+
 .status{
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
+display:inline-block;
+
+```
+padding:5px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
+font-weight:bold;
+```
+
 }
+
 .status.ativo{
-    background:#dcfce7;
-    color:#15803d;
+background:#dcfce7;
+color:#15803d;
 }
+
 .status.inativo{
-    background:#fee2e2;
-    color:#b91c1c;
+background:#fee2e2;
+color:#b91c1c;
 }
-/* ================= LINHA DIVISÓRIA ================= */
-hr{
-    border:none;
-    border-top:
-    1px dashed #cbd5e1;
+
+/* ==========================================
+RESPONSIVIDADE
+========================================== */
+
+@media(max-width:1000px){
+
+```
+.sidebar{
+    width:230px;
 }
-/* ================= RESPONSIVO ================= */
-@media(max-width:900px){
-    .sidebar{
-        width:80px;
-    }
-    .content{
-        margin-left:80px;
-        width:calc(100% - 80px);
-    }
-    .sidebar-logo h2,
-    .sidebar-logo span,
-    .admin-info div:not(.avatar),
-    .menu-btn span:not(.icon){
-        display:none;
-    }
-    .menu-btn{
-        justify-content:center;
-    }
-    .sidebar-menu{
-        padding:10px;
-    }
+
+.content{
+    margin-left:230px;
+    width:calc(100% - 230px);
 }
-@media(max-width:700px){
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-    .page{
-        padding:20px;
-    }
-    .topbar{
-        padding:0 20px;
-    }
-    .topbar h1{
-        font-size:20px;
-    }
+```
+
+}
+
+@media(max-width:800px){
+
+```
+.sidebar{
+    width:75px;
+}
+
+
+.content{
+    margin-left:75px;
+    width:calc(100% - 75px);
+}
+
+
+.sidebar-logo{
+    padding:20px 5px;
+}
+
+
+.sidebar-logo h2,
+.sidebar-logo span,
+.admin-text,
+.menu-btn span:not(.icon),
+.menu-title{
+    display:none;
+}
+
+
+.logo-area{
+    width:55px;
+    height:55px;
+}
+
+
+.logo-area img{
+    width:35px;
+    height:35px;
+}
+
+
+.sidebar-menu{
+    padding:10px;
+}
+
+
+.menu-btn{
+    justify-content:center;
+
+    padding:13px 5px;
+}
+
+
+.menu-btn .icon{
+    width:auto;
+}
+
+
+.admin-info{
+    justify-content:center;
+
+    padding:8px;
+}
+
+
+.btn-voltar-site,
+.logout{
+    font-size:0;
+
+    height:42px;
+}
+
+
+.btn-voltar-site::after{
+    content:"←";
+    font-size:20px;
+}
+
+
+.logout::after{
+    content:"🚪";
+    font-size:18px;
+}
+```
+
+}
+
+@media(max-width:650px){
+
+```
+.page{
+    padding:20px;
+}
+
+
+.topbar{
+    padding:15px 20px;
+}
+
+
+.topbar h1{
+    font-size:21px;
+}
+
+
+.page-header h2{
+    font-size:23px;
+}
+
+
+.form-grid{
+    grid-template-columns:1fr;
+}
+
+
+.form-grid .full{
+    grid-column:auto;
+}
+
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+
+.button-group{
+    flex-direction:column;
+}
+
+
+.button-group button{
+    width:100%;
+}
+
+
+.box{
+    padding:15px;
+}
+
+
+.box button{
+    margin-left:10px !important;
+}
+```
+
+}
+
+@media(max-width:450px){
+
+```
+.sidebar{
+    width:65px;
+}
+
+
+.content{
+    margin-left:65px;
+    width:calc(100% - 65px);
+}
+
+
+.page{
+    padding:15px;
+}
+
+
+.card{
+    padding:18px;
+}
+
+
+.topbar{
+    min-height:70px;
+}
+```
+
 }
