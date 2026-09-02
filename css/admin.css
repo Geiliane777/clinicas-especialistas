@@ -134,32 +134,6 @@ PAINEL PRINCIPAL
 SIDEBAR
 ====================================== */
 
-.sidebar {
-    /*
-    Impede completamente que a sidebar
-    fique estreita ou seja comprimida
-    */
-
-    flex: 0 0 260px;
-
-    width: 260px;
-    min-width: 260px;
-    max-width: 260px;
-
-    min-height: 100vh;
-
-    background: #1e293b;
-    color: white;
-
-    display: flex;
-    flex-direction: column;
-
-    overflow: hidden;
-
-    position: relative;
-    z-index: 10;
-}
-
 
 /* ======================================
 LOGO DA SIDEBAR
@@ -226,162 +200,68 @@ LOGO DA SIDEBAR
 
 
 /* ======================================
-MENU
+SIDEBAR
+====================================== */
+
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    height: 100vh;
+
+    background: #1e293b;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 10;
+
+    overflow: hidden;
+}
+
+/* ======================================
+MENU COM ROLAGEM
 ====================================== */
 
 .sidebar-menu {
     flex: 1;
 
-    width: 100%;
-
     padding: 20px 12px;
 
     overflow-y: auto;
+
+    min-height: 0;
 }
 
-.menu-title {
-    font-size: 11px;
+/* Barra de rolagem do menu */
 
-    font-weight: bold;
-
-    color: #94a3b8;
-
-    margin: 20px 10px 8px;
+.sidebar-menu::-webkit-scrollbar {
+    width: 6px;
 }
 
-.menu-btn {
-    width: 100%;
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 10px;
+}
 
-    border: none;
-
+.sidebar-menu::-webkit-scrollbar-track {
     background: transparent;
-
-    color: #e2e8f0;
-
-    padding: 12px 15px;
-
-    margin-bottom: 5px;
-
-    border-radius: 8px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    font-size: 14px;
-
-    transition: 0.2s;
 }
-
-.menu-btn:hover {
-    background: #334155;
-}
-
-.menu-btn.active {
-    background: #2563eb;
-    color: white;
-}
-
-.icon {
-    font-size: 18px;
-
-    width: 25px;
-
-    text-align: center;
-
-    flex-shrink: 0;
-}
-
 
 /* ======================================
-FOOTER SIDEBAR
+FOOTER
 ====================================== */
 
 .sidebar-footer {
-    width: 100%;
-
     padding: 15px;
 
-    border-top:
-        1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+    flex-shrink: 0;
 }
-
-.admin-info {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-bottom: 15px;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-
-    min-width: 40px;
-
-    border-radius: 50%;
-
-    background: #334155;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-}
-
-.admin-text {
-    display: flex;
-
-    flex-direction: column;
-
-    overflow: hidden;
-}
-
-.admin-text strong {
-    color: white;
-}
-
-.admin-text small {
-    color: #94a3b8;
-
-    margin-top: 3px;
-}
-
-.btn-voltar-site,
-.logout {
-    width: 100%;
-
-    border: none;
-
-    border-radius: 7px;
-
-    padding: 10px;
-
-    margin-top: 8px;
-
-    cursor: pointer;
-
-    color: white;
-}
-
-.btn-voltar-site {
-    background: #334155;
-}
-
-.logout {
-    background: #dc2626;
-}
-
-
 /* ======================================
 CONTEÚDO PRINCIPAL
 ====================================== */
