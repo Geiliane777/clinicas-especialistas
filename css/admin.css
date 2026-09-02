@@ -1,5 +1,5 @@
 /* ======================================
-RESET
+RESET GERAL
 ====================================== */
 
 * {
@@ -11,7 +11,7 @@ RESET
 html,
 body {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
 }
 
 body {
@@ -20,77 +20,210 @@ body {
     overflow-x: hidden;
 }
 
+
 /* ======================================
-CONTROLE DE IMAGENS
-IMPORTANTE PARA NÃO DEIXAR O DENTE GIGANTE
+CONTROLE GERAL DE IMAGENS
 ====================================== */
 
+/* Evita imagens gigantes */
+
 img {
+    display: block;
     max-width: 100%;
 }
 
+
 /* ======================================
-PAINEL
+TELA DE LOGIN
+====================================== */
+
+.login-screen {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f4f6f9;
+}
+
+.login-box {
+    width: 400px;
+    max-width: 90%;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.login-box .logo {
+    width: 80px;
+    height: 80px;
+
+    object-fit: contain;
+
+    margin: 0 auto 20px;
+}
+
+.login-box h1 {
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    margin-bottom: 12px;
+}
+
+.login-box button {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+#loginMensagem {
+    margin-top: 15px;
+}
+
+
+/* ======================================
+CLASSE HIDDEN
+====================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ======================================
+PAINEL PRINCIPAL
 ====================================== */
 
 .painel {
-    display: flex;
-    min-height: 100vh;
     width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: stretch;
 }
+
 
 /* ======================================
 SIDEBAR
 ====================================== */
 
 .sidebar {
+    /*
+    Impede completamente que a sidebar
+    fique estreita ou seja comprimida
+    */
+
+    flex: 0 0 260px;
+
     width: 260px;
     min-width: 260px;
+    max-width: 260px;
+
     min-height: 100vh;
+
     background: #1e293b;
     color: white;
 
     display: flex;
     flex-direction: column;
 
+    overflow: hidden;
+
     position: relative;
     z-index: 10;
 }
 
+
 /* ======================================
-LOGO SIDEBAR
+LOGO DA SIDEBAR
 ====================================== */
 
 .sidebar-logo {
+    width: 100%;
+
     padding: 25px 20px;
+
     text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.1);
 }
 
 .logo-area {
+    width: 100%;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     margin-bottom: 12px;
 }
 
-.logo-area img {
+
+/* CONTROLE FORÇADO DO DENTE */
+
+.sidebar .logo-area img {
     width: 65px !important;
+    min-width: 65px !important;
+    max-width: 65px !important;
+
     height: 65px !important;
+    max-height: 65px !important;
+
     object-fit: contain;
-    display: block;
+
+    margin: 0 auto;
+
+    flex: none;
 }
+
 
 .sidebar-logo h2 {
     font-size: 22px;
+
     line-height: 1.2;
+
     margin-bottom: 8px;
+
+    color: white;
 }
 
 .sidebar-logo span {
+    display: block;
+
     font-size: 12px;
+
     color: #cbd5e1;
 }
+
 
 /* ======================================
 MENU
@@ -98,32 +231,47 @@ MENU
 
 .sidebar-menu {
     flex: 1;
+
+    width: 100%;
+
     padding: 20px 12px;
+
+    overflow-y: auto;
 }
 
 .menu-title {
     font-size: 11px;
+
     font-weight: bold;
+
     color: #94a3b8;
+
     margin: 20px 10px 8px;
 }
 
 .menu-btn {
     width: 100%;
+
     border: none;
+
     background: transparent;
+
     color: #e2e8f0;
 
     padding: 12px 15px;
+
     margin-bottom: 5px;
 
     border-radius: 8px;
 
     display: flex;
+
     align-items: center;
+
     gap: 12px;
 
     cursor: pointer;
+
     text-align: left;
 
     font-size: 14px;
@@ -142,20 +290,33 @@ MENU
 
 .icon {
     font-size: 18px;
+
+    width: 25px;
+
+    text-align: center;
+
+    flex-shrink: 0;
 }
+
 
 /* ======================================
 FOOTER SIDEBAR
 ====================================== */
 
 .sidebar-footer {
+    width: 100%;
+
     padding: 15px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+
+    border-top:
+        1px solid rgba(255,255,255,0.1);
 }
 
 .admin-info {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     margin-bottom: 15px;
@@ -165,22 +326,33 @@ FOOTER SIDEBAR
     width: 40px;
     height: 40px;
 
+    min-width: 40px;
+
     border-radius: 50%;
 
     background: #334155;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 }
 
 .admin-text {
     display: flex;
+
     flex-direction: column;
+
+    overflow: hidden;
+}
+
+.admin-text strong {
+    color: white;
 }
 
 .admin-text small {
     color: #94a3b8;
+
     margin-top: 3px;
 }
 
@@ -189,6 +361,7 @@ FOOTER SIDEBAR
     width: 100%;
 
     border: none;
+
     border-radius: 7px;
 
     padding: 10px;
@@ -196,58 +369,81 @@ FOOTER SIDEBAR
     margin-top: 8px;
 
     cursor: pointer;
+
+    color: white;
 }
 
 .btn-voltar-site {
     background: #334155;
-    color: white;
 }
 
 .logout {
     background: #dc2626;
-    color: white;
 }
+
 
 /* ======================================
 CONTEÚDO PRINCIPAL
 ====================================== */
 
 .content {
-    flex: 1;
+    /*
+    Ocupa todo espaço restante
+    */
+
+    flex: 1 1 auto;
+
+    width: calc(100% - 260px);
+
     min-width: 0;
+
     min-height: 100vh;
 
     background: #f4f6f9;
+
+    overflow-x: hidden;
 }
+
 
 /* ======================================
 TOPO
 ====================================== */
 
 .topbar {
+    width: 100%;
+
     background: white;
 
     padding: 20px 30px;
 
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom:
+        1px solid #e5e7eb;
 }
 
 .topbar-subtitle {
+    display: block;
+
     font-size: 13px;
+
     color: #64748b;
 }
 
 .topbar h1 {
     margin-top: 5px;
+
     font-size: 26px;
+
     color: #1e293b;
 }
+
 
 /* ======================================
 PÁGINAS
 ====================================== */
 
 .page {
+    width: 100%;
+
     padding: 30px;
 }
 
@@ -255,9 +451,6 @@ PÁGINAS
     display: none !important;
 }
 
-.hidden {
-    display: none !important;
-}
 
 /* ======================================
 CABEÇALHO DAS PÁGINAS
@@ -269,7 +462,9 @@ CABEÇALHO DAS PÁGINAS
 
 .page-header h2 {
     font-size: 24px;
+
     color: #1e293b;
+
     margin-bottom: 5px;
 }
 
@@ -277,11 +472,14 @@ CABEÇALHO DAS PÁGINAS
     color: #64748b;
 }
 
+
 /* ======================================
 CARDS
 ====================================== */
 
 .cards {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns:
@@ -294,6 +492,8 @@ CARDS
 }
 
 .card {
+    width: 100%;
+
     background: white;
 
     border-radius: 10px;
@@ -307,6 +507,7 @@ CARDS
         rgba(0,0,0,0.05);
 }
 
+
 /* ======================================
 CARDS DASHBOARD
 ====================================== */
@@ -317,12 +518,15 @@ CARDS DASHBOARD
 
 .card-icon {
     font-size: 28px;
+
     margin-bottom: 12px;
 }
 
 .dashboard-card h3 {
     font-size: 15px;
+
     color: #64748b;
+
     margin-bottom: 10px;
 }
 
@@ -330,6 +534,7 @@ CARDS DASHBOARD
     display: block;
 
     font-size: 30px;
+
     font-weight: bold;
 
     color: #1e293b;
@@ -340,6 +545,7 @@ CARDS DASHBOARD
 .dashboard-card small {
     color: #94a3b8;
 }
+
 
 /* ======================================
 FORMULÁRIOS
@@ -352,6 +558,7 @@ FORMULÁRIOS
 .form-card h3,
 .card h3 {
     margin-bottom: 20px;
+
     color: #1e293b;
 }
 
@@ -372,17 +579,29 @@ FORMULÁRIOS
 
 .form-grid div {
     display: flex;
+
     flex-direction: column;
 }
 
+
+/* ======================================
+LABELS
+====================================== */
+
 label {
     font-size: 14px;
+
     font-weight: 600;
 
     color: #475569;
 
     margin-bottom: 7px;
 }
+
+
+/* ======================================
+INPUTS
+====================================== */
 
 input,
 select {
@@ -397,6 +616,8 @@ select {
     font-size: 14px;
 
     outline: none;
+
+    background: white;
 }
 
 input:focus,
@@ -404,8 +625,9 @@ select:focus {
     border-color: #2563eb;
 }
 
+
 /* ======================================
-BOTÕES
+BOTÕES GERAIS
 ====================================== */
 
 button {
@@ -429,6 +651,8 @@ button {
     font-weight: 600;
 
     margin-top: 10px;
+
+    transition: 0.2s;
 }
 
 .green {
@@ -463,15 +687,19 @@ button {
     background: #475569;
 }
 
+
 /* ======================================
 GRUPO DE BOTÕES
 ====================================== */
 
 .button-group {
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 10px;
 }
+
 
 /* ======================================
 CHECKBOX
@@ -479,7 +707,9 @@ CHECKBOX
 
 .checkbox-area {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     margin: 15px 0;
@@ -488,6 +718,7 @@ CHECKBOX
 .checkbox-area input {
     width: auto;
 }
+
 
 /* ======================================
 LISTAS
@@ -500,38 +731,52 @@ LISTAS
 #listaCidades,
 #listaBairros,
 .lista-vinculos {
+    width: 100%;
+
     margin-top: 20px;
 }
 
+
 /* ======================================
-ITENS DAS LISTAS
+ITEMS DAS LISTAS
 ====================================== */
 
 .item-lista {
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     gap: 15px;
 
     padding: 15px;
 
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom:
+        1px solid #e5e7eb;
 }
 
 .item-lista:last-child {
     border-bottom: none;
 }
 
+
 /* ======================================
-RESPONSIVO
+RESPONSIVO - TABLET
 ====================================== */
 
 @media (max-width: 900px) {
 
     .sidebar {
+        flex-basis: 220px;
+
         width: 220px;
         min-width: 220px;
+        max-width: 220px;
+    }
+
+    .content {
+        width: calc(100% - 220px);
     }
 
     .form-grid {
@@ -539,6 +784,11 @@ RESPONSIVO
     }
 
 }
+
+
+/* ======================================
+RESPONSIVO - CELULAR
+====================================== */
 
 @media (max-width: 700px) {
 
@@ -549,11 +799,23 @@ RESPONSIVO
     .sidebar {
         width: 100%;
         min-width: 100%;
+        max-width: 100%;
+
         min-height: auto;
+
+        flex: none;
+    }
+
+    .sidebar-logo {
+        padding: 15px;
     }
 
     .sidebar-footer {
         display: none;
+    }
+
+    .content {
+        width: 100%;
     }
 
     .page {
