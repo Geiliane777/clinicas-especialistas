@@ -1,745 +1,1510 @@
-/* ==========================================
-REDE ESPECIALISTAS
-PAINEL ADMINISTRATIVO
-========================================== */
+/* ======================================
+RESET
+====================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI", Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+:root {
+--primary: #2563eb;
+--primary-dark: #1d4ed8;
+
+
+--green: #16a34a;
+--green-dark: #15803d;
+
+--red: #dc2626;
+--red-dark: #b91c1c;
+
+--gray: #64748b;
+--gray-dark: #475569;
+
+--blue: #0ea5e9;
+
+--background: #f1f5f9;
+--card: #ffffff;
+
+--text: #1e293b;
+--text-light: #64748b;
+
+--border: #e2e8f0;
+
+--sidebar: #172554;
+
+
 }
 
-:root{
-    --primary:#2563eb;
-    --primary-dark:#1d4ed8;
+/* ======================================
+BODY
+====================================== */
 
-    --green:#16a34a;
-    --green-dark:#15803d;
+body {
+font-family:
+Arial,
+Helvetica,
+sans-serif;
 
-    --red:#dc2626;
-    --red-dark:#b91c1c;
 
-    --gray:#64748b;
-    --dark:#0f172a;
+background: var(--background);
+color: var(--text);
 
-    --background:#f8fafc;
 
-    --border:#e2e8f0;
-
-    --text:#1e293b;
-    --text-light:#64748b;
 }
 
-body{
-    background:var(--background);
-    color:var(--text);
+/* ======================================
+UTILITÁRIOS
+====================================== */
+
+.hidden {
+display: none !important;
 }
 
-/* UTILIDADES */
-
-.hidden{
-    display:none !important;
-}
-
-/* ==========================================
+/* ======================================
 LOGIN
-========================================== */
+====================================== */
 
-.login-screen{
-    width:100%;
-    min-height:100vh;
+.login-screen {
+width: 100%;
+min-height: 100vh;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
-    padding:20px;
+display: flex;
 
-    background:linear-gradient(
+justify-content: center;
+align-items: center;
+
+padding: 20px;
+
+background:
+    linear-gradient(
         135deg,
-        #0f172a,
-        #1e40af,
+        #172554,
         #2563eb
     );
+
+
 }
 
-.login-box{
-    width:100%;
-    max-width:420px;
+.login-box {
+width: 100%;
+max-width: 400px;
 
-    background:white;
 
-    padding:45px;
+background: white;
 
-    border-radius:24px;
+border-radius: 18px;
 
-    text-align:center;
+padding: 40px;
 
-    box-shadow:0 25px 60px rgba(0,0,0,.25);
+text-align: center;
 
-    animation:aparecer .4s ease;
+box-shadow:
+    0 20px 50px
+    rgba(0,0,0,0.25);
+
+
 }
 
-@keyframes aparecer{
+.login-box .logo {
+width: 80px;
+height: 80px;
 
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+object-fit: contain;
+
+margin-bottom: 15px;
+
+
 }
 
-.logo{
-    width:90px;
-    height:90px;
+.login-box h1 {
+font-size: 25px;
 
-    object-fit:contain;
 
-    margin-bottom:20px;
+color: #172554;
+
+margin-bottom: 8px;
+
+
 }
 
-.login-box h1{
-    color:var(--primary);
-    font-size:28px;
+.login-box p {
+color: var(--text-light);
+
+
+margin-bottom: 25px;
+
+
 }
 
-.login-box p{
-    margin:10px 0 30px;
-    color:var(--text-light);
+.login-box input {
+width: 100%;
+
+
+padding: 13px;
+
+border-radius: 8px;
+
+border:
+    1px solid
+    var(--border);
+
+margin-bottom: 12px;
+
+font-size: 15px;
+
+outline: none;
+
+
 }
 
-.login-box input{
-    width:100%;
+.login-box input:focus {
+border-color:
+var(--primary);
 
-    padding:15px;
 
-    margin-bottom:15px;
+box-shadow:
+    0 0 0 3px
+    rgba(37,99,235,0.12);
 
-    border-radius:12px;
 
-    border:1px solid #cbd5e1;
-
-    font-size:15px;
 }
 
-.login-box button{
-    width:100%;
+.login-box button {
+width: 100%;
 
-    padding:15px;
 
-    border:none;
+padding: 13px;
 
-    border-radius:12px;
+border: none;
 
-    background:var(--primary);
+border-radius: 8px;
 
-    color:white;
+background:
+    var(--primary);
 
-    font-size:16px;
+color: white;
 
-    font-weight:bold;
+font-size: 16px;
 
-    cursor:pointer;
+font-weight: bold;
+
+cursor: pointer;
+
+transition: 0.2s;
+
+
 }
 
-/* ==========================================
+.login-box button:hover {
+background:
+var(--primary-dark);
+
+
+transform:
+    translateY(-1px);
+
+
+}
+
+#loginMensagem {
+margin-top: 15px;
+
+
+font-size: 14px;
+
+
+}
+
+/* ======================================
 PAINEL
-========================================== */
+====================================== */
 
-.painel{
-    display:flex;
-    width:100%;
-    min-height:100vh;
+.painel {
+display: flex;
+
+
+min-height: 100vh;
+
+
 }
 
-/* ==========================================
+/* ======================================
 SIDEBAR
-========================================== */
+====================================== */
 
-.sidebar{
-    width:280px;
-    height:100vh;
+.sidebar {
+width: 260px;
 
-    position:fixed;
 
-    top:0;
-    left:0;
+min-height: 100vh;
 
-    z-index:1000;
+background:
+    var(--sidebar);
 
-    display:flex;
-    flex-direction:column;
+color: white;
 
-    background:linear-gradient(
-        180deg,
-        #0f172a,
-        #111827
-    );
+display: flex;
 
-    color:white;
+flex-direction: column;
+
+position: fixed;
+
+left: 0;
+top: 0;
+
+z-index: 100;
+
+
 }
 
-.sidebar-logo{
-    padding:28px 20px;
+/* ======================================
+LOGO SIDEBAR
+====================================== */
 
-    text-align:center;
+.sidebar-logo {
+padding: 30px 25px;
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+
+text-align: center;
+
+border-bottom:
+    1px solid
+    rgba(255,255,255,0.1);
+
+
 }
 
-.logo-area{
-    width:72px;
-    height:72px;
+.logo-area {
+width: 60px;
+height: 60px;
 
-    margin:auto;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+margin:
+    0 auto 12px;
 
-    border-radius:20px;
+display: flex;
 
-    background:rgba(255,255,255,.08);
+justify-content: center;
+align-items: center;
+
+background: white;
+
+border-radius: 14px;
+
+
 }
 
-.logo-area img{
-    width:45px;
-    height:45px;
+.logo-area img {
+width: 42px;
+height: 42px;
 
-    object-fit:contain;
+
+object-fit: contain;
+
+
 }
 
-.sidebar-logo h2{
-    margin-top:15px;
+.sidebar-logo h2 {
+font-size: 22px;
 
-    font-size:21px;
 
-    color:white;
+line-height: 1.1;
+
+margin-bottom: 8px;
+
+
 }
 
-.sidebar-logo span{
-    display:block;
+.sidebar-logo span {
+font-size: 12px;
 
-    margin-top:8px;
 
-    color:#94a3b8;
+color:
+    rgba(255,255,255,0.65);
 
-    font-size:12px;
+
 }
 
-/* MENU */
+/* ======================================
+MENU
+====================================== */
 
-.sidebar-menu{
-    flex:1;
+.sidebar-menu {
+flex: 1;
 
-    overflow-y:auto;
 
-    padding:15px;
+padding:
+    20px 12px;
+
+overflow-y: auto;
+
+
 }
 
-.menu-title{
-    font-size:10px;
+.menu-title {
+font-size: 11px;
 
-    color:#64748b;
 
-    margin:18px 10px 8px;
+font-weight: bold;
 
-    letter-spacing:1px;
+letter-spacing: 1px;
 
-    font-weight:bold;
+color:
+    rgba(255,255,255,0.45);
+
+margin:
+    20px 12px 8px;
+
+
 }
 
-.menu-btn{
-    width:100%;
+.menu-btn {
+width: 100%;
 
-    display:flex;
-    align-items:center;
 
-    gap:13px;
+display: flex;
 
-    padding:13px 15px;
+align-items: center;
 
-    margin-bottom:6px;
+gap: 12px;
 
-    border:none;
+padding:
+    13px 15px;
 
-    border-radius:12px;
+border: none;
 
-    background:transparent;
+border-radius: 8px;
 
-    color:#e2e8f0;
+background: transparent;
 
-    cursor:pointer;
+color:
+    rgba(255,255,255,0.75);
 
-    font-size:14px;
+font-size: 14px;
 
-    text-align:left;
+cursor: pointer;
 
-    transition:.2s;
+text-align: left;
+
+transition: 0.2s;
+
+margin-bottom: 4px;
+
+
 }
 
-.menu-btn:hover{
-    background:rgba(37,99,235,.20);
+.menu-btn:hover {
+background:
+rgba(255,255,255,0.08);
+
+
+color: white;
+
+
 }
 
-.menu-btn.active{
-    background:var(--primary);
+.menu-btn.active {
+background:
+var(--primary);
 
-    color:white;
+
+color: white;
+
+font-weight: bold;
+
+
 }
 
-.menu-btn .icon{
-    font-size:18px;
+.menu-btn .icon {
+font-size: 18px;
 }
 
-/* FOOTER */
+/* ======================================
+FOOTER SIDEBAR
+====================================== */
 
-.sidebar-footer{
-    padding:15px;
+.sidebar-footer {
+padding: 18px;
 
-    border-top:1px solid rgba(255,255,255,.08);
+
+border-top:
+    1px solid
+    rgba(255,255,255,0.1);
+
+
 }
 
-.admin-info{
-    display:flex;
+.admin-info {
+display: flex;
 
-    align-items:center;
 
-    gap:12px;
+align-items: center;
 
-    padding:12px;
+gap: 10px;
 
-    background:rgba(255,255,255,.06);
+margin-bottom: 18px;
 
-    border-radius:14px;
 
-    margin-bottom:12px;
 }
 
-.avatar{
-    width:40px;
-    height:40px;
+.avatar {
+width: 40px;
+height: 40px;
 
-    display:flex;
 
-    align-items:center;
-    justify-content:center;
+display: flex;
 
-    background:var(--primary);
+justify-content: center;
+align-items: center;
 
-    border-radius:50%;
+background:
+    var(--primary);
+
+border-radius: 50%;
+
+font-size: 20px;
+
+
 }
 
-.admin-info strong{
-    display:block;
-    color:white;
+.admin-text {
+display: flex;
+
+
+flex-direction: column;
+
+
 }
 
-.admin-info small{
-    color:#94a3b8;
+.admin-text strong {
+font-size: 13px;
 }
+
+.admin-text small {
+font-size: 11px;
+
+
+color:
+    rgba(255,255,255,0.55);
+
+
+}
+
+/* ======================================
+BOTÕES SIDEBAR
+====================================== */
 
 .btn-voltar-site,
-.logout{
-    width:100%;
+.logout {
+width: 100%;
 
-    padding:12px;
 
-    border:none;
+padding: 10px;
 
-    border-radius:10px;
+border-radius: 7px;
 
-    color:white;
+cursor: pointer;
 
-    cursor:pointer;
+font-size: 13px;
 
-    margin-top:8px;
+transition: 0.2s;
+
+
 }
 
-.btn-voltar-site{
-    background:rgba(255,255,255,.08);
+.btn-voltar-site {
+background: transparent;
+
+
+color: white;
+
+border:
+    1px solid
+    rgba(255,255,255,0.2);
+
+margin-bottom: 8px;
+
+
 }
 
-.logout{
-    background:var(--red);
+.btn-voltar-site:hover {
+background:
+rgba(255,255,255,0.1);
 }
 
-/* ==========================================
+.logout {
+border: none;
+
+
+background:
+    rgba(220,38,38,0.15);
+
+color: #fca5a5;
+
+
+}
+
+.logout:hover {
+background:
+rgba(220,38,38,0.3);
+}
+
+/* ======================================
 CONTEÚDO
-========================================== */
+====================================== */
 
-.content{
-    margin-left:280px;
+.content {
+width: 100%;
 
-    width:calc(100% - 280px);
 
-    min-height:100vh;
+margin-left: 260px;
+
+min-height: 100vh;
+
+
 }
 
-/* TOPBAR */
+/* ======================================
+TOPBAR
+====================================== */
 
-.topbar{
-    min-height:80px;
+.topbar {
+background: white;
 
-    background:white;
 
-    display:flex;
-    align-items:center;
+padding:
+    25px 40px;
 
-    padding:15px 35px;
+border-bottom:
+    1px solid
+    var(--border);
 
-    border-bottom:1px solid var(--border);
+
 }
 
-.topbar-subtitle{
-    display:block;
+.topbar-subtitle {
+font-size: 13px;
 
-    font-size:12px;
 
-    color:var(--text-light);
+color:
+    var(--text-light);
+
+
 }
 
-.topbar h1{
-    font-size:24px;
+.topbar h1 {
+font-size: 28px;
+
+
+margin-top: 4px;
+
+
 }
 
-/* PÁGINAS */
+/* ======================================
+PÁGINAS
+====================================== */
 
-.page{
-    padding:35px;
+.page {
+padding: 35px 40px;
 
-    max-width:1500px;
+
+max-width: 1600px;
+
+
 }
 
-.page-header{
-    margin-bottom:25px;
+.page-header {
+margin-bottom: 25px;
 }
 
-.page-header h2{
-    font-size:27px;
+.page-header h2 {
+font-size: 23px;
+
+
+margin-bottom: 7px;
+
+
 }
 
-.page-header p{
-    color:var(--text-light);
+.page-header p {
+color:
+var(--text-light);
 
-    margin-top:6px;
+
+font-size: 14px;
+
+
 }
 
-/* ==========================================
+/* ======================================
 CARDS
-========================================== */
+====================================== */
 
-.cards{
-    display:grid;
+.card {
+background:
+var(--card);
 
-    grid-template-columns:repeat(
+
+border:
+    1px solid
+    var(--border);
+
+border-radius: 12px;
+
+padding: 25px;
+
+margin-bottom: 25px;
+
+box-shadow:
+    0 2px 8px
+    rgba(0,0,0,0.03);
+
+
+}
+
+.card h3 {
+margin-bottom: 20px;
+
+
+font-size: 17px;
+
+
+}
+
+/* ======================================
+DASHBOARD
+====================================== */
+
+.cards {
+display: grid;
+
+
+grid-template-columns:
+    repeat(
         auto-fit,
-        minmax(220px,1fr)
+        minmax(200px, 1fr)
     );
 
-    gap:20px;
+gap: 20px;
+
+
 }
 
-.card{
-    background:white;
+.dashboard-card {
+text-align: center;
 
-    padding:25px;
 
-    border-radius:18px;
+padding: 28px 20px;
 
-    border:1px solid #eef2f7;
+margin-bottom: 0;
 
-    box-shadow:0 5px 20px rgba(15,23,42,.05);
+transition: 0.2s;
 
-    margin-bottom:25px;
+
 }
 
-.dashboard-card{
-    transition:.2s;
+.dashboard-card:hover {
+transform:
+translateY(-3px);
+
+
+box-shadow:
+    0 10px 25px
+    rgba(0,0,0,0.08);
+
+
 }
 
-.dashboard-card:hover{
-    transform:translateY(-4px);
+.card-icon {
+font-size: 35px;
+
+
+margin-bottom: 12px;
+
+
 }
 
-.card-icon{
-    width:46px;
-    height:46px;
+.dashboard-card h3 {
+font-size: 15px;
 
-    display:flex;
 
-    align-items:center;
-    justify-content:center;
+margin-bottom: 10px;
 
-    background:#eff6ff;
+color:
+    var(--text-light);
 
-    border-radius:14px;
 
-    font-size:23px;
-
-    margin-bottom:15px;
 }
 
-.card h3{
-    color:var(--text-light);
+.dashboard-card span {
+display: block;
 
-    font-size:15px;
+
+font-size: 34px;
+
+font-weight: bold;
+
+color:
+    var(--primary);
+
+margin-bottom: 5px;
+
+
 }
 
-.card span{
-    display:block;
-
-    margin-top:8px;
-
-    font-size:38px;
-
-    font-weight:bold;
-
-    color:var(--primary);
+.dashboard-card small {
+color:
+var(--text-light);
 }
 
-/* ==========================================
+/* ======================================
 FORMULÁRIOS
-========================================== */
+====================================== */
 
-.form-card h3{
-    margin-bottom:20px;
+.form-card {
+max-width: 100%;
 }
 
-.form-grid{
-    display:grid;
+.form-grid {
+display: grid;
 
-    grid-template-columns:repeat(2,1fr);
 
-    gap:18px;
+grid-template-columns:
+    repeat(
+        2,
+        minmax(0, 1fr)
+    );
+
+gap: 18px;
+
+margin-bottom: 20px;
+
+
 }
 
-.form-grid .full{
-    grid-column:1 / -1;
+.form-grid > div {
+display: flex;
+
+
+flex-direction: column;
+
+
 }
 
-label{
-    display:block;
+.form-grid .full {
+grid-column:
+1 / -1;
+}
 
-    margin-bottom:6px;
+label {
+font-size: 13px;
 
-    font-size:13px;
 
-    font-weight:600;
+font-weight: bold;
 
-    color:#475569;
+margin-bottom: 7px;
+
+color:
+    var(--text);
+
+
 }
 
 input,
-select{
-    width:100%;
+select {
+width: 100%;
 
-    padding:13px 14px;
 
-    border-radius:10px;
+padding:
+    11px 13px;
 
-    border:1px solid #cbd5e1;
+border:
+    1px solid
+    var(--border);
 
-    background:white;
+border-radius: 7px;
 
-    font-size:14px;
+background: white;
+
+color:
+    var(--text);
+
+font-size: 14px;
+
+outline: none;
+
+transition: 0.2s;
+
+
 }
 
 input:focus,
-select:focus{
-    outline:none;
+select:focus {
+border-color:
+var(--primary);
 
-    border-color:var(--primary);
 
-    box-shadow:0 0 0 3px rgba(37,99,235,.10);
+box-shadow:
+    0 0 0 3px
+    rgba(37,99,235,0.1);
+
+
 }
 
-/* CHECKBOX */
+/* ======================================
+FILTROS
+====================================== */
 
-.checkbox-area{
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-top:20px;
-
-    cursor:pointer;
+#filtro_clinica_nome,
+#filtro_estado_regiao,
+#filtro_cidade_estado,
+#filtro_bairro_cidade {
+margin-bottom: 20px;
 }
 
-.checkbox-area input{
-    width:18px;
-    height:18px;
-}
+/* ======================================
+BOTÕES
+====================================== */
 
-/* BOTÕES */
-
-.button-group{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-top:25px;
+button {
+font-family: inherit;
 }
 
 .green,
+.red,
 .blue,
-.gray,
-.red{
-    border:none;
+.gray {
+border: none;
 
-    padding:12px 20px;
 
-    border-radius:10px;
+padding:
+    11px 18px;
 
-    cursor:pointer;
+border-radius: 7px;
 
-    font-weight:600;
+color: white;
 
-    font-size:14px;
+font-size: 14px;
 
-    margin-top:15px;
+font-weight: bold;
+
+cursor: pointer;
+
+transition: 0.2s;
+
+
 }
 
-.green{
-    background:var(--green);
-    color:white;
+.green {
+background:
+var(--green);
 }
 
-.blue{
-    background:var(--primary);
-    color:white;
+.green:hover {
+background:
+var(--green-dark);
+
+
+transform:
+    translateY(-1px);
+
+
 }
 
-.gray{
-    background:var(--gray);
-    color:white;
+.red {
+background:
+var(--red);
 }
 
-.red{
-    background:var(--red);
-    color:white;
+.red:hover {
+background:
+var(--red-dark);
+
+
+transform:
+    translateY(-1px);
+
+
 }
 
-/* ==========================================
-LISTAS
-========================================== */
-
-.box{
-    background:#fff;
-
-    padding:18px;
-
-    border-radius:14px;
-
-    border:1px solid var(--border);
-
-    margin-top:10px;
+.blue {
+background:
+var(--blue);
 }
 
-.box h3{
-    margin:0;
+.blue:hover {
+background:
+#0284c7;
 
-    font-size:16px;
 
-    color:var(--text);
+transform:
+    translateY(-1px);
+
+
 }
 
-.box small{
-    display:block;
-
-    margin-top:5px;
-
-    color:var(--text-light);
+.gray {
+background:
+var(--gray);
 }
 
-.lista-vinculos{
-    margin-top:20px;
+.gray:hover {
+background:
+var(--gray-dark);
 }
 
-/* STATUS */
+/* ======================================
+GRUPO DE BOTÕES
+====================================== */
 
-.status{
-    display:inline-block;
+.button-group {
+display: flex;
 
-    padding:5px 12px;
 
-    border-radius:20px;
+flex-wrap: wrap;
 
-    font-size:12px;
+gap: 10px;
 
-    font-weight:bold;
+margin-top: 20px;
+
+
 }
 
-.status.ativo{
-    background:#dcfce7;
-    color:#15803d;
+/* ======================================
+CHECKBOX
+====================================== */
+
+.checkbox-area {
+display: flex;
+
+
+align-items: center;
+
+gap: 8px;
+
+cursor: pointer;
+
+margin-top: 5px;
+
+
 }
 
-.status.inativo{
-    background:#fee2e2;
-    color:#b91c1c;
+.checkbox-area input {
+width: 17px;
+height: 17px;
+
+
+cursor: pointer;
+
+
 }
 
-/* ==========================================
-RESPONSIVIDADE
-========================================== */
-
-@media(max-width:800px){
-
-    .sidebar{
-        width:75px;
-    }
-
-    .content{
-        margin-left:75px;
-        width:calc(100% - 75px);
-    }
-
-    .sidebar-logo h2,
-    .sidebar-logo span,
-    .admin-text,
-    .menu-btn span:not(.icon),
-    .menu-title{
-        display:none;
-    }
-
-    .menu-btn{
-        justify-content:center;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid .full{
-        grid-column:auto;
-    }
+.checkbox-area span {
+font-size: 14px;
 }
 
-@media(max-width:650px){
+/* ======================================
+LISTAS ADMINISTRATIVAS
+====================================== */
 
-    .page{
-        padding:20px;
-    }
+#listaClinicas,
+#listaRegioes,
+#listaEstados,
+#listaCidades,
+#listaBairros,
+#listaEspecialidades {
+display: grid;
 
-    .cards{
-        grid-template-columns:1fr;
-    }
 
-    .button-group{
-        flex-direction:column;
-    }
+grid-template-columns:
+    repeat(
+        auto-fill,
+        minmax(250px, 1fr)
+    );
 
-    .button-group button{
-        width:100%;
-    }
+gap: 15px;
+
+
+}
+
+/* ======================================
+BOX DAS LISTAS
+====================================== */
+
+.box {
+border:
+1px solid
+var(--border);
+
+
+border-radius: 10px;
+
+padding: 18px;
+
+background:
+    #fafafa;
+
+transition: 0.2s;
+
+
+}
+
+.box:hover {
+border-color:
+var(--primary);
+
+
+transform:
+    translateY(-2px);
+
+box-shadow:
+    0 5px 15px
+    rgba(0,0,0,0.06);
+
+
+}
+
+.box h3 {
+font-size: 16px;
+
+
+margin-bottom: 10px;
+
+
+}
+
+.box small {
+display: block;
+
+
+margin-bottom: 6px;
+
+color:
+    var(--text-light);
+
+
+}
+
+.box button {
+margin-top: 12px;
+}
+
+/* ======================================
+STATUS
+====================================== */
+
+.status {
+display: inline-block;
+
+
+padding:
+    4px 9px;
+
+border-radius: 20px;
+
+font-size: 11px;
+
+font-weight: bold;
+
+text-transform: uppercase;
+
+margin-top: 5px;
+
+
+}
+
+.status.ativo {
+background:
+#dcfce7;
+
+
+color:
+    #15803d;
+
+
+}
+
+.status.inativo {
+background:
+#fee2e2;
+
+
+color:
+    #b91c1c;
+
+
+}
+
+/* ======================================
+LISTA DE VÍNCULOS
+CLÍNICA + ESPECIALIDADE + REDE
+====================================== */
+
+.lista-vinculos {
+margin-top: 25px;
+
+
+display: flex;
+
+flex-direction: column;
+
+gap: 10px;
+
+
+}
+
+.vinculo-item {
+display: flex;
+
+
+justify-content: space-between;
+
+align-items: center;
+
+gap: 15px;
+
+padding:
+    15px;
+
+border:
+    1px solid
+    var(--border);
+
+border-radius: 9px;
+
+background:
+    #f8fafc;
+
+
+}
+
+.vinculo-info {
+display: flex;
+
+
+flex-direction: column;
+
+gap: 4px;
+
+
+}
+
+.vinculo-info strong {
+font-size: 14px;
+}
+
+.vinculo-info small {
+color:
+var(--text-light);
+
+
+font-size: 12px;
+
+
+}
+
+/* ======================================
+BADGES DE REDE
+====================================== */
+
+.badge-rede {
+display: inline-flex;
+
+
+align-items: center;
+
+width: fit-content;
+
+padding:
+    4px 9px;
+
+border-radius: 20px;
+
+font-size: 11px;
+
+font-weight: bold;
+
+margin-top: 4px;
+
+
+}
+
+.badge-especialistas {
+background:
+#dbeafe;
+
+
+color:
+    #1d4ed8;
+
+
+}
+
+.badge-sindilegis {
+background:
+#f3e8ff;
+
+
+color:
+    #7e22ce;
+
+
+}
+
+/* ======================================
+BOTÃO REMOVER VÍNCULO
+====================================== */
+
+.btn-remover-vinculo {
+border: none;
+
+
+background:
+    #fee2e2;
+
+color:
+    #dc2626;
+
+padding:
+    8px 12px;
+
+border-radius: 6px;
+
+cursor: pointer;
+
+font-size: 13px;
+
+font-weight: bold;
+
+transition: 0.2s;
+
+
+}
+
+.btn-remover-vinculo:hover {
+background:
+#fecaca;
+}
+
+/* ======================================
+SCROLLBAR
+====================================== */
+
+.sidebar-menu::-webkit-scrollbar {
+width: 5px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+background:
+rgba(255,255,255,0.2);
+
+
+border-radius: 10px;
+
+
+}
+
+/* ======================================
+RESPONSIVIDADE - TABLET
+====================================== */
+
+@media (max-width: 900px) {
+
+
+.sidebar {
+    width: 220px;
+}
+
+
+.content {
+    margin-left: 220px;
+}
+
+
+.topbar {
+    padding:
+        20px 25px;
+}
+
+
+.page {
+    padding:
+        25px;
+}
+
+
+.form-grid {
+    grid-template-columns:
+        1fr;
+}
+
+
+.form-grid .full {
+    grid-column: auto;
+}
+
+
+}
+
+/* ======================================
+RESPONSIVIDADE - CELULAR
+====================================== */
+
+@media (max-width: 700px) {
+
+
+.painel {
+    display: block;
+}
+
+
+.sidebar {
+    position: relative;
+
+    width: 100%;
+
+    min-height: auto;
+}
+
+
+.sidebar-logo {
+    padding: 20px;
+}
+
+
+.sidebar-menu {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    padding: 12px;
+}
+
+
+.menu-title {
+    width: 100%;
+
+    margin:
+        12px 5px 5px;
+}
+
+
+.menu-btn {
+    width: auto;
+
+    flex: 1;
+
+    min-width: 140px;
+
+    justify-content: center;
+
+    padding: 10px;
+}
+
+
+.sidebar-footer {
+    padding: 15px;
+}
+
+
+.content {
+    margin-left: 0;
+}
+
+
+.topbar {
+    padding:
+        20px;
+}
+
+
+.topbar h1 {
+    font-size: 24px;
+}
+
+
+.page {
+    padding: 20px;
+}
+
+
+.cards {
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+}
+
+
+#listaClinicas,
+#listaRegioes,
+#listaEstados,
+#listaCidades,
+#listaBairros,
+#listaEspecialidades {
+    grid-template-columns:
+        1fr;
+}
+
+
+.vinculo-item {
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+.btn-remover-vinculo {
+    width: 100%;
+}
+
+
+.button-group {
+    flex-direction: column;
+}
+
+
+.button-group button {
+    width: 100%;
+}
+
+
+}
+
+/* ======================================
+RESPONSIVIDADE - TELAS PEQUENAS
+====================================== */
+
+@media (max-width: 450px) {
+
+
+.login-box {
+    padding: 30px 20px;
+}
+
+
+.cards {
+    grid-template-columns:
+        1fr;
+}
+
+
+.menu-btn {
+    min-width: 100%;
+}
+
+
+.page-header h2 {
+    font-size: 20px;
+}
+
+
 }
