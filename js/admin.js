@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 console.log("Admin.js carregado com sucesso!");
 
-if (typeof supabase === "undefined") {
-    console.error("Supabase não foi carregado.");
+if (typeof supabaseClient === "undefined") {
+    console.error("supabaseClient não foi carregado.");
     return;
 }
 
@@ -145,7 +145,7 @@ async function popularRegioes(selectId) {
     const valorAtual = select.value;
 
     const { data, error } =
-        await supabase
+        await supabaseClient
             .from("regioes")
             .select("*")
             .order("nome");
@@ -201,7 +201,7 @@ async function popularEstados(
         "Selecione Estado"
     );
 
-    let query = supabase
+    let query = supabaseClient
         .from("estados")
         .select("*")
         .order("nome");
@@ -259,7 +259,7 @@ async function popularCidades(
         "Selecione Cidade"
     );
 
-    let query = supabase
+    let query = supabaseClient
         .from("cidades")
         .select("*")
         .order("nome");
@@ -317,7 +317,7 @@ async function popularBairros(
         "Selecione Bairro"
     );
 
-    let query = supabase
+    let query = supabaseClient
         .from("bairros")
         .select("*")
         .order("nome");
@@ -368,7 +368,7 @@ async function popularEspecialidades(selectId) {
     if (!select) return;
 
     const { data, error } =
-        await supabase
+        await supabaseClient
             .from("especialidades")
             .select("*")
             .order("nome");
@@ -531,7 +531,7 @@ function ligarCascataLocalizacao(prefixo) {
 async function contarRegistros(tabela) {
 
     const { count, error } =
-        await supabase
+        await supabaseClient
             .from(tabela)
             .select("*", {
                 count: "exact",
@@ -619,7 +619,7 @@ if (btnSalvarRegiao) {
             }
 
             const { error } =
-                await supabase
+                await supabaseClient
                     .from("regioes")
                     .insert({ nome });
 
@@ -656,7 +656,7 @@ async function carregarRegioes() {
     if (!lista) return;
 
     const { data, error } =
-        await supabase
+        await supabaseClient
             .from("regioes")
             .select("*")
             .order("nome");
@@ -719,7 +719,7 @@ async function carregarRegioes() {
                     }
 
                     const { error } =
-                        await supabase
+                        await supabaseClient
                             .from("regioes")
                             .delete()
                             .eq(
@@ -789,7 +789,7 @@ if (btnSalvarEspecialidade) {
             }
 
             const { error } =
-                await supabase
+                await supabaseClient
                     .from("especialidades")
                     .insert({
                         nome,
@@ -833,7 +833,7 @@ async function carregarEspecialidades() {
     if (!lista) return;
 
     const { data, error } =
-        await supabase
+        await supabaseClient
             .from("especialidades")
             .select("*")
             .order("nome");
@@ -904,7 +904,7 @@ async function carregarEspecialidades() {
                     }
 
                     const { error } =
-                        await supabase
+                        await supabaseClient
                             .from("especialidades")
                             .delete()
                             .eq(
@@ -959,7 +959,7 @@ async function carregarEstados() {
         );
 
     let query =
-        supabase
+        supabaseClient
             .from("estados")
             .select(`
                 *,
@@ -1031,7 +1031,7 @@ async function carregarCidades() {
     if (!lista) return;
 
     const { data, error } =
-        await supabase
+        await supabaseClient
             .from("cidades")
             .select(`
                 *,
@@ -1092,7 +1092,7 @@ async function carregarBairros() {
     if (!lista) return;
 
     const { data, error } =
-        await supabase
+        await supabaseClient
             .from("bairros")
             .select(`
                 *,
@@ -1161,7 +1161,7 @@ async function carregarClinicas() {
             .trim();
 
     let query =
-        supabase
+        supabaseClient
             .from("clinicas")
             .select(`
                 *,
