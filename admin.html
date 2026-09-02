@@ -29,7 +29,6 @@
 
 </head>
 
-
 <body>
 
 
@@ -46,8 +45,8 @@ LOGIN
 
         <img
             src="img/tooth.png"
-            class="logo-login"
-            alt="Logo"
+            class="logo"
+            alt="Logo Rede Especialistas"
         >
 
         <h1>
@@ -58,40 +57,21 @@ LOGIN
             Painel Administrativo
         </p>
 
+        <input
+            type="text"
+            id="usuario"
+            placeholder="Usuário"
+        >
 
-        <div class="login-form">
+        <input
+            type="password"
+            id="senha"
+            placeholder="Senha"
+        >
 
-            <label>
-                Usuário
-            </label>
-
-            <input
-                type="text"
-                id="usuario"
-                placeholder="Digite seu usuário"
-            >
-
-
-            <label>
-                Senha
-            </label>
-
-            <input
-                type="password"
-                id="senha"
-                placeholder="Digite sua senha"
-            >
-
-
-            <button
-                id="btnLogin"
-                class="btn-login"
-            >
-                Entrar
-            </button>
-
-        </div>
-
+        <button id="btnLogin">
+            Entrar
+        </button>
 
         <div id="loginMensagem"></div>
 
@@ -101,7 +81,7 @@ LOGIN
 
 
 <!-- ======================================
-PAINEL
+PAINEL ADMINISTRATIVO
 ====================================== -->
 
 <div
@@ -130,12 +110,10 @@ PAINEL
 
             </div>
 
-
             <h2>
                 Rede<br>
                 Especialistas
             </h2>
-
 
             <span>
                 Painel Administrativo
@@ -144,7 +122,9 @@ PAINEL
         </div>
 
 
-        <!-- MENU -->
+        <!-- ======================================
+        MENU
+        ====================================== -->
 
         <nav class="sidebar-menu">
 
@@ -153,11 +133,11 @@ PAINEL
                 PRINCIPAL
             </p>
 
-
             <button
                 class="menu-btn active"
                 data-page="dashboard"
             >
+
                 <span class="icon">
                     📊
                 </span>
@@ -165,6 +145,7 @@ PAINEL
                 <span>
                     Dashboard
                 </span>
+
             </button>
 
 
@@ -172,11 +153,11 @@ PAINEL
                 GESTÃO
             </p>
 
-
             <button
                 class="menu-btn"
                 data-page="clinicas"
             >
+
                 <span class="icon">
                     🏥
                 </span>
@@ -184,6 +165,7 @@ PAINEL
                 <span>
                     Clínicas
                 </span>
+
             </button>
 
 
@@ -191,6 +173,7 @@ PAINEL
                 class="menu-btn"
                 data-page="especialidades"
             >
+
                 <span class="icon">
                     🦷
                 </span>
@@ -198,6 +181,7 @@ PAINEL
                 <span>
                     Especialidades
                 </span>
+
             </button>
 
 
@@ -210,6 +194,7 @@ PAINEL
                 class="menu-btn"
                 data-page="regioes"
             >
+
                 <span class="icon">
                     🌎
                 </span>
@@ -217,6 +202,7 @@ PAINEL
                 <span>
                     Regiões
                 </span>
+
             </button>
 
 
@@ -224,6 +210,7 @@ PAINEL
                 class="menu-btn"
                 data-page="estados"
             >
+
                 <span class="icon">
                     📍
                 </span>
@@ -231,6 +218,7 @@ PAINEL
                 <span>
                     Estados
                 </span>
+
             </button>
 
 
@@ -238,6 +226,7 @@ PAINEL
                 class="menu-btn"
                 data-page="cidades"
             >
+
                 <span class="icon">
                     🏙️
                 </span>
@@ -245,6 +234,7 @@ PAINEL
                 <span>
                     Cidades
                 </span>
+
             </button>
 
 
@@ -252,6 +242,7 @@ PAINEL
                 class="menu-btn"
                 data-page="bairros"
             >
+
                 <span class="icon">
                     📌
                 </span>
@@ -259,23 +250,24 @@ PAINEL
                 <span>
                     Bairros
                 </span>
+
             </button>
 
 
         </nav>
 
 
-        <!-- FOOTER -->
+        <!-- ======================================
+        FOOTER SIDEBAR
+        ====================================== -->
 
         <div class="sidebar-footer">
-
 
             <div class="admin-info">
 
                 <div class="avatar">
                     👤
                 </div>
-
 
                 <div class="admin-text">
 
@@ -306,7 +298,6 @@ PAINEL
             >
                 🚪 Sair
             </button>
-
 
         </div>
 
@@ -351,22 +342,17 @@ PAINEL
             class="page"
         >
 
-
-            <div class="page-header">
-
-                <h2>
-                    Visão Geral
-                </h2>
-
-                <p>
-                    Acompanhe os dados cadastrados na rede.
-                </p>
-
-            </div>
+            <!--
+            REMOVIDO:
+            "Visão Geral"
+            "Acompanhe os dados cadastrados na rede."
+            -->
 
 
             <div class="cards">
 
+
+                <!-- CLÍNICAS -->
 
                 <div class="card dashboard-card">
 
@@ -389,6 +375,8 @@ PAINEL
                 </div>
 
 
+                <!-- ESPECIALIDADES -->
+
                 <div class="card dashboard-card">
 
                     <div class="card-icon">
@@ -409,6 +397,8 @@ PAINEL
 
                 </div>
 
+
+                <!-- REGIÕES -->
 
                 <div class="card dashboard-card">
 
@@ -431,6 +421,8 @@ PAINEL
                 </div>
 
 
+                <!-- ESTADOS -->
+
                 <div class="card dashboard-card">
 
                     <div class="card-icon">
@@ -452,6 +444,8 @@ PAINEL
                 </div>
 
 
+                <!-- CIDADES -->
+
                 <div class="card dashboard-card">
 
                     <div class="card-icon">
@@ -472,6 +466,8 @@ PAINEL
 
                 </div>
 
+
+                <!-- BAIRROS -->
 
                 <div class="card dashboard-card">
 
@@ -496,7 +492,6 @@ PAINEL
 
             </div>
 
-
         </section>
 
 
@@ -512,43 +507,26 @@ PAINEL
 
             <div class="page-header">
 
-                <div>
+                <h2>
+                    Clínicas
+                </h2>
 
-                    <h2>
-                        Gerenciamento de Clínicas
-                    </h2>
-
-                    <p>
-                        Cadastre, edite e gerencie as clínicas.
-                    </p>
-
-                </div>
+                <p>
+                    Cadastre e gerencie as clínicas credenciadas.
+                </p>
 
             </div>
 
 
             <!-- ======================================
-            FORMULÁRIO NOVA CLÍNICA
+            NOVA CLÍNICA
             ====================================== -->
 
             <div class="card form-card">
 
-
-                <div class="card-title">
-
-                    <div>
-
-                        <h3>
-                            ➕ Nova Clínica
-                        </h3>
-
-                        <p>
-                            Preencha os dados para cadastrar uma clínica.
-                        </p>
-
-                    </div>
-
-                </div>
+                <h3>
+                    ➕ Nova Clínica
+                </h3>
 
 
                 <div class="form-grid">
@@ -556,13 +534,13 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_nome">
                             Nome da Clínica
                         </label>
 
                         <input
-                            id="clinica_nome"
                             type="text"
+                            id="clinica_nome"
                             placeholder="Digite o nome da clínica"
                         >
 
@@ -571,13 +549,13 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_telefone">
                             Telefone
                         </label>
 
                         <input
-                            id="clinica_telefone"
                             type="text"
+                            id="clinica_telefone"
                             placeholder="(00) 00000-0000"
                         >
 
@@ -586,13 +564,13 @@ PAINEL
 
                     <div class="full">
 
-                        <label>
+                        <label for="clinica_endereco">
                             Endereço
                         </label>
 
                         <input
-                            id="clinica_endereco"
                             type="text"
+                            id="clinica_endereco"
                             placeholder="Rua, número"
                         >
 
@@ -601,14 +579,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_regiao">
                             Região
                         </label>
 
                         <select id="clinica_regiao">
 
                             <option value="">
-                                Selecione a Região
+                                Selecione Região
                             </option>
 
                         </select>
@@ -618,14 +596,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_estado">
                             Estado
                         </label>
 
                         <select id="clinica_estado">
 
                             <option value="">
-                                Selecione o Estado
+                                Selecione Estado
                             </option>
 
                         </select>
@@ -635,14 +613,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_cidade">
                             Cidade
                         </label>
 
                         <select id="clinica_cidade">
 
                             <option value="">
-                                Selecione a Cidade
+                                Selecione Cidade
                             </option>
 
                         </select>
@@ -652,14 +630,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_bairro">
                             Bairro
                         </label>
 
                         <select id="clinica_bairro">
 
                             <option value="">
-                                Selecione o Bairro
+                                Selecione Bairro
                             </option>
 
                         </select>
@@ -669,14 +647,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_especialidade">
                             Especialidade
                         </label>
 
                         <select id="clinica_especialidade">
 
                             <option value="">
-                                Selecione a Especialidade
+                                Selecione Especialidade
                             </option>
 
                         </select>
@@ -686,7 +664,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="clinica_rede">
                             Rede
                         </label>
 
@@ -720,14 +698,12 @@ PAINEL
 
 
             <!-- ======================================
-            TABELA DE CLÍNICAS
+            CLÍNICAS CADASTRADAS
             ====================================== -->
 
-            <div class="card tabela-card">
+            <div class="card">
 
-
-                <div class="table-header">
-
+                <div class="card-header-admin">
 
                     <div>
 
@@ -736,69 +712,29 @@ PAINEL
                         </h3>
 
                         <p>
-                            Visualize, edite ou exclua clínicas cadastradas.
+                            Consulte, edite ou exclua uma clínica.
                         </p>
 
                     </div>
 
 
-                    <div class="table-actions">
+                    <div class="campo-busca">
 
                         <input
-                            id="filtro_clinica_nome"
                             type="text"
+                            id="filtro_clinica_nome"
                             placeholder="🔎 Buscar clínica..."
                         >
 
                     </div>
 
-
                 </div>
 
 
-                <div class="table-responsive">
-
-                    <table class="tabela">
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Clínica
-                                </th>
-
-                                <th>
-                                    Telefone
-                                </th>
-
-                                <th>
-                                    Localização
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                                <th class="col-acoes">
-                                    Ações
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody id="listaClinicas">
-
-                            <!-- CLÍNICAS CARREGADAS PELO JS -->
-
-                        </tbody>
-
-
-                    </table>
-
-                </div>
+                <div
+                    id="listaClinicas"
+                    class="lista-clinicas-admin"
+                ></div>
 
 
             </div>
@@ -824,13 +760,11 @@ PAINEL
                 </h2>
 
                 <p>
-                    Atualize as informações da clínica selecionada.
+                    Atualize os dados da clínica selecionada.
                 </p>
 
             </div>
 
-
-            <!-- DADOS DA CLÍNICA -->
 
             <div class="card form-card">
 
@@ -840,6 +774,10 @@ PAINEL
                     id="edit_clinica_id"
                 >
 
+
+                <!-- ======================================
+                DADOS DA CLÍNICA
+                ====================================== -->
 
                 <h3>
                     🏥 Dados da Clínica
@@ -851,13 +789,13 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_clinica_nome">
                             Nome da Clínica
                         </label>
 
                         <input
-                            id="edit_clinica_nome"
                             type="text"
+                            id="edit_clinica_nome"
                         >
 
                     </div>
@@ -865,13 +803,13 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_clinica_telefone">
                             Telefone
                         </label>
 
                         <input
-                            id="edit_clinica_telefone"
                             type="text"
+                            id="edit_clinica_telefone"
                         >
 
                     </div>
@@ -879,13 +817,13 @@ PAINEL
 
                     <div class="full">
 
-                        <label>
+                        <label for="edit_clinica_endereco">
                             Endereço
                         </label>
 
                         <input
-                            id="edit_clinica_endereco"
                             type="text"
+                            id="edit_clinica_endereco"
                         >
 
                     </div>
@@ -893,7 +831,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_clinica_regiao">
                             Região
                         </label>
 
@@ -910,7 +848,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_clinica_estado">
                             Estado
                         </label>
 
@@ -927,7 +865,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_clinica_cidade">
                             Cidade
                         </label>
 
@@ -944,7 +882,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_clinica_bairro">
                             Bairro
                         </label>
 
@@ -962,19 +900,29 @@ PAINEL
                 </div>
 
 
-                <label class="checkbox-area">
+                <!-- ======================================
+                STATUS DA CLÍNICA
+                ====================================== -->
 
-                    <input
-                        type="checkbox"
-                        id="edit_clinica_ativo"
-                    >
+                <div class="status-clinica-area">
 
-                    <span>
-                        Clínica ativa
+                    <span class="status-label">
+                        Status atual:
                     </span>
 
-                </label>
+                    <span
+                        id="statusClinicaTexto"
+                        class="status ativo"
+                    >
+                        Ativa
+                    </span>
 
+                </div>
+
+
+                <!-- ======================================
+                BOTÕES DA CLÍNICA
+                ====================================== -->
 
                 <div class="button-group">
 
@@ -984,6 +932,23 @@ PAINEL
                         class="green"
                     >
                         💾 Atualizar Clínica
+                    </button>
+
+
+                    <!--
+                    BOTÃO DINÂMICO:
+                    JS ALTERARÁ ENTRE
+                    "Ativar Clínica"
+                    e
+                    "Desativar Clínica"
+                    -->
+
+                    <button
+                        id="btnToggleStatusClinica"
+                        class="orange"
+                        type="button"
+                    >
+                        ⏸ Desativar Clínica
                     </button>
 
 
@@ -1010,19 +975,17 @@ PAINEL
 
 
             <!-- ======================================
-            ESPECIALIDADES VINCULADAS
+            ESPECIALIDADES VINCULADAS À CLÍNICA
             ====================================== -->
 
             <div class="card">
 
-
                 <h3>
-                    🦷 Especialidades vinculadas
+                    🦷 Especialidades da Clínica
                 </h3>
 
-
                 <p class="descricao-card">
-                    Adicione ou remova especialidades desta clínica.
+                    Gerencie as especialidades e redes vinculadas à clínica.
                 </p>
 
 
@@ -1031,14 +994,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_especialidade">
                             Especialidade
                         </label>
 
                         <select id="edit_especialidade">
 
                             <option value="">
-                                Selecione uma Especialidade
+                                Selecione Especialidade
                             </option>
 
                         </select>
@@ -1048,7 +1011,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="edit_rede">
                             Rede
                         </label>
 
@@ -1081,11 +1044,7 @@ PAINEL
                 <div
                     id="listaEspRede"
                     class="lista-vinculos"
-                >
-
-                    <!-- ESPECIALIDADES VINCULADAS -->
-
-                </div>
+                ></div>
 
 
             </div>
@@ -1111,44 +1070,92 @@ PAINEL
                 </h2>
 
                 <p>
-                    Gerencie as especialidades disponíveis.
+                    Gerencie as especialidades disponíveis nas redes.
                 </p>
 
             </div>
 
 
-            <div class="card form-card">
+            <!-- ======================================
+            NOVA ESPECIALIDADE
+            ====================================== -->
 
+            <div class="card form-card">
 
                 <h3>
                     ➕ Nova Especialidade
                 </h3>
 
 
-                <div class="form-grid">
+                <label for="nova_especialidade">
+                    Nome da Especialidade
+                </label>
 
+
+                <input
+                    type="text"
+                    id="nova_especialidade"
+                    placeholder="Ex: Ortodontia"
+                >
+
+
+                <!--
+                NÃO EXISTE REDE NA TABELA especialidades.
+
+                A REDE É DEFINIDA EM:
+                clinica_especialidades.rede
+                -->
+
+
+                <button
+                    id="btnSalvarEspecialidade"
+                    class="green"
+                >
+                    💾 Salvar Especialidade
+                </button>
+
+
+            </div>
+
+
+            <!-- ======================================
+            ESPECIALIDADES CADASTRADAS
+            ====================================== -->
+
+            <div class="card">
+
+                <div class="card-header-admin">
 
                     <div>
 
-                        <label>
-                            Nome da Especialidade
-                        </label>
+                        <h3>
+                            🦷 Especialidades cadastradas
+                        </h3>
 
-                        <input
-                            id="nova_especialidade"
-                            placeholder="Ex: Ortodontia"
-                        >
+                        <p>
+                            As redes são definidas pelos vínculos das clínicas.
+                        </p>
 
                     </div>
 
+                </div>
+
+
+                <!-- FILTRO POR REDE -->
+
+                <div class="filtros-admin">
 
                     <div>
 
-                        <label>
-                            Rede
+                        <label for="filtro_especialidade_rede">
+                            Filtrar por Rede
                         </label>
 
-                        <select id="especialidade_rede">
+                        <select id="filtro_especialidade_rede">
+
+                            <option value="">
+                                Todas as Redes
+                            </option>
 
                             <option value="especialistas">
                                 Rede Especialistas
@@ -1163,26 +1170,21 @@ PAINEL
                     </div>
 
 
+                    <div>
+
+                        <label for="filtro_especialidade_nome">
+                            Buscar Especialidade
+                        </label>
+
+                        <input
+                            type="text"
+                            id="filtro_especialidade_nome"
+                            placeholder="🔎 Digite o nome..."
+                        >
+
+                    </div>
+
                 </div>
-
-
-                <button
-                    id="btnSalvarEspecialidade"
-                    class="green"
-                >
-                    💾 Salvar Especialidade
-                </button>
-
-
-            </div>
-
-
-            <div class="card">
-
-
-                <h3>
-                    📋 Especialidades cadastradas
-                </h3>
 
 
                 <div
@@ -1220,41 +1222,65 @@ PAINEL
             </div>
 
 
+            <!-- FORMULÁRIO -->
+
             <div class="card form-card">
 
-
-                <h3>
+                <h3 id="tituloFormRegiao">
                     ➕ Nova Região
                 </h3>
 
 
-                <label>
+                <input
+                    type="hidden"
+                    id="edit_regiao_id"
+                >
+
+
+                <label for="nova_regiao">
                     Nome da Região
                 </label>
 
 
                 <input
+                    type="text"
                     id="nova_regiao"
                     placeholder="Ex: Centro-Oeste"
                 >
 
 
-                <button
-                    id="btnSalvarRegiao"
-                    class="green"
-                >
-                    💾 Salvar Região
-                </button>
+                <div class="button-group">
+
+
+                    <button
+                        id="btnSalvarRegiao"
+                        class="green"
+                    >
+                        💾 Salvar Região
+                    </button>
+
+
+                    <button
+                        id="btnCancelarEdicaoRegiao"
+                        class="gray hidden"
+                        type="button"
+                    >
+                        ✖ Cancelar
+                    </button>
+
+
+                </div>
 
 
             </div>
 
 
+            <!-- LISTA -->
+
             <div class="card">
 
-
                 <h3>
-                    📋 Regiões cadastradas
+                    🌎 Regiões cadastradas
                 </h3>
 
 
@@ -1293,12 +1319,20 @@ PAINEL
             </div>
 
 
+            <!-- FORMULÁRIO -->
+
             <div class="card form-card">
 
 
-                <h3>
+                <h3 id="tituloFormEstado">
                     ➕ Novo Estado
                 </h3>
+
+
+                <input
+                    type="hidden"
+                    id="edit_estado_id"
+                >
 
 
                 <div class="form-grid">
@@ -1306,7 +1340,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="estado_regiao">
                             Região
                         </label>
 
@@ -1323,13 +1357,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="novo_estado">
                             Nome do Estado
                         </label>
 
                         <input
+                            type="text"
                             id="novo_estado"
-                            placeholder="Ex: Distrito Federal"
+                            placeholder="Ex: Alagoas"
                         >
 
                     </div>
@@ -1338,22 +1373,38 @@ PAINEL
                 </div>
 
 
-                <button
-                    id="btnSalvarEstado"
-                    class="green"
-                >
-                    💾 Salvar Estado
-                </button>
+                <div class="button-group">
+
+
+                    <button
+                        id="btnSalvarEstado"
+                        class="green"
+                    >
+                        💾 Salvar Estado
+                    </button>
+
+
+                    <button
+                        id="btnCancelarEdicaoEstado"
+                        class="gray hidden"
+                        type="button"
+                    >
+                        ✖ Cancelar
+                    </button>
+
+
+                </div>
 
 
             </div>
 
 
+            <!-- LISTA -->
+
             <div class="card">
 
-
                 <h3>
-                    📋 Estados cadastrados
+                    📍 Estados cadastrados
                 </h3>
 
 
@@ -1401,12 +1452,20 @@ PAINEL
             </div>
 
 
+            <!-- FORMULÁRIO -->
+
             <div class="card form-card">
 
 
-                <h3>
+                <h3 id="tituloFormCidade">
                     ➕ Nova Cidade
                 </h3>
+
+
+                <input
+                    type="hidden"
+                    id="edit_cidade_id"
+                >
 
 
                 <div class="form-grid">
@@ -1414,7 +1473,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="cidade_estado">
                             Estado
                         </label>
 
@@ -1431,13 +1490,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="nova_cidade">
                             Nome da Cidade
                         </label>
 
                         <input
+                            type="text"
                             id="nova_cidade"
-                            placeholder="Ex: Brasília"
+                            placeholder="Ex: Maceió"
                         >
 
                     </div>
@@ -1446,22 +1506,38 @@ PAINEL
                 </div>
 
 
-                <button
-                    id="btnSalvarCidade"
-                    class="green"
-                >
-                    💾 Salvar Cidade
-                </button>
+                <div class="button-group">
+
+
+                    <button
+                        id="btnSalvarCidade"
+                        class="green"
+                    >
+                        💾 Salvar Cidade
+                    </button>
+
+
+                    <button
+                        id="btnCancelarEdicaoCidade"
+                        class="gray hidden"
+                        type="button"
+                    >
+                        ✖ Cancelar
+                    </button>
+
+
+                </div>
 
 
             </div>
 
 
+            <!-- LISTA -->
+
             <div class="card">
 
-
                 <h3>
-                    📋 Cidades cadastradas
+                    🏙️ Cidades cadastradas
                 </h3>
 
 
@@ -1509,12 +1585,20 @@ PAINEL
             </div>
 
 
+            <!-- FORMULÁRIO -->
+
             <div class="card form-card">
 
 
-                <h3>
+                <h3 id="tituloFormBairro">
                     ➕ Novo Bairro
                 </h3>
+
+
+                <input
+                    type="hidden"
+                    id="edit_bairro_id"
+                >
 
 
                 <div class="form-grid">
@@ -1522,7 +1606,7 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="bairro_cidade">
                             Cidade
                         </label>
 
@@ -1539,13 +1623,14 @@ PAINEL
 
                     <div>
 
-                        <label>
+                        <label for="novo_bairro">
                             Nome do Bairro
                         </label>
 
                         <input
+                            type="text"
                             id="novo_bairro"
-                            placeholder="Ex: Asa Norte"
+                            placeholder="Ex: Farol"
                         >
 
                     </div>
@@ -1554,22 +1639,38 @@ PAINEL
                 </div>
 
 
-                <button
-                    id="btnSalvarBairro"
-                    class="green"
-                >
-                    💾 Salvar Bairro
-                </button>
+                <div class="button-group">
+
+
+                    <button
+                        id="btnSalvarBairro"
+                        class="green"
+                    >
+                        💾 Salvar Bairro
+                    </button>
+
+
+                    <button
+                        id="btnCancelarEdicaoBairro"
+                        class="gray hidden"
+                        type="button"
+                    >
+                        ✖ Cancelar
+                    </button>
+
+
+                </div>
 
 
             </div>
 
 
+            <!-- LISTA -->
+
             <div class="card">
 
-
                 <h3>
-                    📋 Bairros cadastrados
+                    📌 Bairros cadastrados
                 </h3>
 
 
@@ -1602,19 +1703,15 @@ PAINEL
 
 <!-- ======================================
 SCRIPTS
-ORDEM IMPORTANTE
 ====================================== -->
 
-
-<!-- CONFIGURAÇÃO SUPABASE -->
+<!-- CONFIGURAÇÃO DO SUPABASE -->
 <script src="js/supabase.js"></script>
-
 
 <!-- LOGIN -->
 <script src="js/login.js"></script>
 
-
-<!-- ADMINISTRATIVO -->
+<!-- PAINEL ADMINISTRATIVO -->
 <script src="js/admin.js"></script>
 
 
