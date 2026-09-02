@@ -998,3 +998,18 @@ async function carregarTotalRegioes(){
         .select("*", { count: "exact", head: true });
     document.getElementById("totalRegioes").textContent = count;
 }
+document.addEventListener("DOMContentLoaded", () => {
+
+    const btnVoltarSite = document.getElementById("btnVoltarSite");
+
+    if(btnVoltarSite){
+
+        btnVoltarSite.addEventListener("click", () => {
+
+            window.location.href = "index.html";
+
+        });
+
+    }
+
+});
