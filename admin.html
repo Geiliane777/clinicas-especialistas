@@ -11,9 +11,14 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Painel Administrativo | Rede Especialistas</title>
+<title>
+    Painel Administrativo | Rede Especialistas
+</title>
 
-<link rel="icon" href="img/tooth.png">
+<link
+    rel="icon"
+    href="img/tooth.png"
+>
 
 <link
     rel="stylesheet"
@@ -43,7 +48,7 @@ LOGIN
     <img
         src="img/tooth.png"
         class="logo"
-        alt="Logo Rede Especialistas"
+        alt="Logo"
     >
 
     <h1>
@@ -82,7 +87,7 @@ LOGIN
 </div>
 
 <!-- ======================================
-PAINEL ADMINISTRATIVO
+PAINEL
 ====================================== -->
 
 <div
@@ -97,25 +102,17 @@ SIDEBAR
 <aside class="sidebar">
 
 
-<!-- LOGO -->
-
 <div class="sidebar-logo">
 
-    <div class="logo-area">
-
-        <img
-            src="img/tooth.png"
-            alt="Logo"
-        >
-
-    </div>
-
+    <img
+        src="img/tooth.png"
+        alt="Logo"
+    >
 
     <h2>
         Rede<br>
         Especialistas
     </h2>
-
 
     <span>
         Painel Administrativo
@@ -139,15 +136,7 @@ SIDEBAR
         class="menu-btn active"
         data-page="dashboard"
     >
-
-        <span class="icon">
-            📊
-        </span>
-
-        <span>
-            Dashboard
-        </span>
-
+        📊 Dashboard
     </button>
 
 
@@ -161,32 +150,15 @@ SIDEBAR
         class="menu-btn"
         data-page="clinicas"
     >
-
-        <span class="icon">
-            🏥
-        </span>
-
-        <span>
-            Clínicas
-        </span>
-
+        🏥 Clínicas
     </button>
-
 
 
     <button
         class="menu-btn"
         data-page="especialidades"
     >
-
-        <span class="icon">
-            🦷
-        </span>
-
-        <span>
-            Especialidades
-        </span>
-
+        🦷 Especialidades
     </button>
 
 
@@ -200,66 +172,31 @@ SIDEBAR
         class="menu-btn"
         data-page="regioes"
     >
-
-        <span class="icon">
-            🌎
-        </span>
-
-        <span>
-            Regiões
-        </span>
-
+        🌎 Regiões
     </button>
-
 
 
     <button
         class="menu-btn"
         data-page="estados"
     >
-
-        <span class="icon">
-            📍
-        </span>
-
-        <span>
-            Estados
-        </span>
-
+        📍 Estados
     </button>
-
 
 
     <button
         class="menu-btn"
         data-page="cidades"
     >
-
-        <span class="icon">
-            🏙️
-        </span>
-
-        <span>
-            Cidades
-        </span>
-
+        🏙️ Cidades
     </button>
-
 
 
     <button
         class="menu-btn"
         data-page="bairros"
     >
-
-        <span class="icon">
-            📌
-        </span>
-
-        <span>
-            Bairros
-        </span>
-
+        📌 Bairros
     </button>
 
 
@@ -279,7 +216,7 @@ SIDEBAR
         </div>
 
 
-        <div class="admin-text">
+        <div>
 
             <strong>
                 Administrador
@@ -302,7 +239,6 @@ SIDEBAR
     >
         ← Voltar para Rede
     </button>
-
 
 
     <button
@@ -333,7 +269,7 @@ TOPO
 
 <div>
 
-    <span class="topbar-subtitle">
+    <span>
         Painel Administrativo
     </span>
 
@@ -363,7 +299,7 @@ DASHBOARD
     </h2>
 
     <p>
-        Acompanhe os dados cadastrados no sistema.
+        Acompanhe os dados da rede.
     </p>
 
 </div>
@@ -431,10 +367,6 @@ DASHBOARD
             0
         </span>
 
-        <small>
-            Total cadastradas
-        </small>
-
     </div>
 
 
@@ -452,10 +384,6 @@ DASHBOARD
         <span id="totalEstados">
             0
         </span>
-
-        <small>
-            Total cadastrados
-        </small>
 
     </div>
 
@@ -475,10 +403,6 @@ DASHBOARD
             0
         </span>
 
-        <small>
-            Total cadastradas
-        </small>
-
     </div>
 
 
@@ -496,10 +420,6 @@ DASHBOARD
         <span id="totalBairros">
             0
         </span>
-
-        <small>
-            Total cadastrados
-        </small>
 
     </div>
 
@@ -526,7 +446,7 @@ CLÍNICAS
     </h2>
 
     <p>
-        Cadastre e gerencie as clínicas da rede.
+        Cadastre e gerencie as clínicas.
     </p>
 
 </div>
@@ -553,7 +473,7 @@ CLÍNICAS
 
             <input
                 id="clinica_nome"
-                placeholder="Digite o nome da clínica"
+                placeholder="Nome da clínica"
             >
 
         </div>
@@ -596,13 +516,7 @@ CLÍNICAS
                 Região
             </label>
 
-            <select id="clinica_regiao">
-
-                <option value="">
-                    Selecione Região
-                </option>
-
-            </select>
+            <select id="clinica_regiao"></select>
 
         </div>
 
@@ -614,13 +528,7 @@ CLÍNICAS
                 Estado
             </label>
 
-            <select id="clinica_estado">
-
-                <option value="">
-                    Selecione Estado
-                </option>
-
-            </select>
+            <select id="clinica_estado"></select>
 
         </div>
 
@@ -632,13 +540,7 @@ CLÍNICAS
                 Cidade
             </label>
 
-            <select id="clinica_cidade">
-
-                <option value="">
-                    Selecione Cidade
-                </option>
-
-            </select>
+            <select id="clinica_cidade"></select>
 
         </div>
 
@@ -650,10 +552,38 @@ CLÍNICAS
                 Bairro
             </label>
 
-            <select id="clinica_bairro">
+            <select id="clinica_bairro"></select>
 
-                <option value="">
-                    Selecione Bairro
+        </div>
+
+
+
+        <div>
+
+            <label>
+                Especialidade
+            </label>
+
+            <select id="clinica_especialidade"></select>
+
+        </div>
+
+
+
+        <div>
+
+            <label>
+                Rede
+            </label>
+
+            <select id="clinica_rede">
+
+                <option value="especialistas">
+                    Rede Especialistas
+                </option>
+
+                <option value="sindilegis">
+                    Rede Sindilegis
                 </option>
 
             </select>
@@ -717,14 +647,14 @@ EDITAR CLÍNICA
     </h2>
 
     <p>
-        Atualize os dados e especialidades da clínica.
+        Atualize os dados e especialidades.
     </p>
 
 </div>
 
 
 
-<!-- DADOS DA CLÍNICA -->
+<!-- DADOS -->
 
 <div class="card form-card">
 
@@ -780,13 +710,7 @@ EDITAR CLÍNICA
                 Região
             </label>
 
-            <select id="edit_clinica_regiao">
-
-                <option value="">
-                    Selecione Região
-                </option>
-
-            </select>
+            <select id="edit_clinica_regiao"></select>
 
         </div>
 
@@ -798,13 +722,7 @@ EDITAR CLÍNICA
                 Estado
             </label>
 
-            <select id="edit_clinica_estado">
-
-                <option value="">
-                    Selecione Estado
-                </option>
-
-            </select>
+            <select id="edit_clinica_estado"></select>
 
         </div>
 
@@ -816,13 +734,7 @@ EDITAR CLÍNICA
                 Cidade
             </label>
 
-            <select id="edit_clinica_cidade">
-
-                <option value="">
-                    Selecione Cidade
-                </option>
-
-            </select>
+            <select id="edit_clinica_cidade"></select>
 
         </div>
 
@@ -834,13 +746,7 @@ EDITAR CLÍNICA
                 Bairro
             </label>
 
-            <select id="edit_clinica_bairro">
-
-                <option value="">
-                    Selecione Bairro
-                </option>
-
-            </select>
+            <select id="edit_clinica_bairro"></select>
 
         </div>
 
@@ -856,9 +762,7 @@ EDITAR CLÍNICA
             id="edit_clinica_ativo"
         >
 
-        <span>
-            Clínica ativa
-        </span>
+        Clínica ativa
 
     </label>
 
@@ -868,26 +772,24 @@ EDITAR CLÍNICA
 
 
         <button
-            class="green"
             id="btnAtualizarClinica"
+            class="green"
         >
             💾 Atualizar
         </button>
 
 
-
         <button
-            class="red"
             id="btnExcluirClinica"
+            class="red"
         >
-            🗑 Excluir Clínica
+            🗑 Excluir
         </button>
 
 
-
         <button
-            class="gray"
             id="btnVoltarClinicas"
+            class="gray"
         >
             ← Voltar
         </button>
@@ -921,13 +823,7 @@ ESPECIALIDADES VINCULADAS
                 Especialidade
             </label>
 
-            <select id="edit_especialidade">
-
-                <option value="">
-                    Selecione Especialidade
-                </option>
-
-            </select>
+            <select id="edit_especialidade"></select>
 
         </div>
 
@@ -995,7 +891,7 @@ ESPECIALIDADES
     </h2>
 
     <p>
-        Gerencie os tipos de atendimento disponíveis.
+        Gerencie as especialidades.
     </p>
 
 </div>
@@ -1013,16 +909,38 @@ ESPECIALIDADES
     <div class="form-grid">
 
 
-        <div class="full">
+        <div>
 
             <label>
-                Nome da especialidade
+                Nome
             </label>
 
             <input
                 id="nova_especialidade"
-                placeholder="Ex: Implantodontia"
+                placeholder="Ex: Ortodontia"
             >
+
+        </div>
+
+
+
+        <div>
+
+            <label>
+                Rede
+            </label>
+
+            <select id="especialidade_rede">
+
+                <option value="especialistas">
+                    Rede Especialistas
+                </option>
+
+                <option value="sindilegis">
+                    Rede Sindilegis
+                </option>
+
+            </select>
 
         </div>
 
@@ -1032,8 +950,8 @@ ESPECIALIDADES
 
 
     <button
-        class="green"
         id="btnSalvarEspecialidade"
+        class="green"
     >
         💾 Salvar Especialidade
     </button>
@@ -1045,16 +963,11 @@ ESPECIALIDADES
 
 <div class="card">
 
-
     <h3>
         📋 Especialidades cadastradas
     </h3>
 
-
-    <div
-        id="listaEspecialidades"
-    ></div>
-
+    <div id="listaEspecialidades"></div>
 
 </div>
 
@@ -1077,26 +990,14 @@ REGIÕES
         🌎 Regiões
     </h2>
 
-    <p>
-        Gerencie as regiões de atendimento.
-    </p>
-
 </div>
-
 
 
 <div class="card form-card">
 
-
-    <h3>
-        ➕ Nova Região
-    </h3>
-
-
     <label>
-        Nome da região
+        Nome da Região
     </label>
-
 
     <input
         id="nova_regiao"
@@ -1105,8 +1006,8 @@ REGIÕES
 
 
     <button
-        class="green"
         id="btnSalvarRegiao"
+        class="green"
     >
         💾 Salvar Região
     </button>
@@ -1118,14 +1019,7 @@ REGIÕES
 
 <div class="card">
 
-
-    <h3>
-        📋 Regiões cadastradas
-    </h3>
-
-
     <div id="listaRegioes"></div>
-
 
 </div>
 
@@ -1148,20 +1042,11 @@ ESTADOS
         📍 Estados
     </h2>
 
-    <p>
-        Cadastre os estados vinculados às regiões.
-    </p>
-
 </div>
 
 
 
 <div class="card form-card">
-
-
-    <h3>
-        ➕ Novo Estado
-    </h3>
 
 
     <div class="form-grid">
@@ -1173,13 +1058,7 @@ ESTADOS
                 Região
             </label>
 
-            <select id="estado_regiao">
-
-                <option value="">
-                    Selecione Região
-                </option>
-
-            </select>
+            <select id="estado_regiao"></select>
 
         </div>
 
@@ -1204,8 +1083,8 @@ ESTADOS
 
 
     <button
-        class="green"
         id="btnSalvarEstado"
+        class="green"
     >
         💾 Salvar Estado
     </button>
@@ -1218,18 +1097,9 @@ ESTADOS
 <div class="card">
 
 
-    <h3>
-        📋 Estados cadastrados
-    </h3>
-
-
-    <select id="filtro_estado_regiao">
-
-        <option value="">
-            Todas as Regiões
-        </option>
-
-    </select>
+    <select
+        id="filtro_estado_regiao"
+    ></select>
 
 
     <div id="listaEstados"></div>
@@ -1256,20 +1126,11 @@ CIDADES
         🏙️ Cidades
     </h2>
 
-    <p>
-        Gerencie os municípios cadastrados.
-    </p>
-
 </div>
 
 
 
 <div class="card form-card">
-
-
-    <h3>
-        ➕ Nova Cidade
-    </h3>
 
 
     <div class="form-grid">
@@ -1281,13 +1142,7 @@ CIDADES
                 Estado
             </label>
 
-            <select id="cidade_estado">
-
-                <option value="">
-                    Selecione Estado
-                </option>
-
-            </select>
+            <select id="cidade_estado"></select>
 
         </div>
 
@@ -1312,8 +1167,8 @@ CIDADES
 
 
     <button
-        class="green"
         id="btnSalvarCidade"
+        class="green"
     >
         💾 Salvar Cidade
     </button>
@@ -1326,18 +1181,9 @@ CIDADES
 <div class="card">
 
 
-    <h3>
-        📋 Cidades cadastradas
-    </h3>
-
-
-    <select id="filtro_cidade_estado">
-
-        <option value="">
-            Todos os Estados
-        </option>
-
-    </select>
+    <select
+        id="filtro_cidade_estado"
+    ></select>
 
 
     <div id="listaCidades"></div>
@@ -1364,20 +1210,11 @@ BAIRROS
         📌 Bairros
     </h2>
 
-    <p>
-        Gerencie os bairros disponíveis.
-    </p>
-
 </div>
 
 
 
 <div class="card form-card">
-
-
-    <h3>
-        ➕ Novo Bairro
-    </h3>
 
 
     <div class="form-grid">
@@ -1389,13 +1226,7 @@ BAIRROS
                 Cidade
             </label>
 
-            <select id="bairro_cidade">
-
-                <option value="">
-                    Selecione Cidade
-                </option>
-
-            </select>
+            <select id="bairro_cidade"></select>
 
         </div>
 
@@ -1420,8 +1251,8 @@ BAIRROS
 
 
     <button
-        class="green"
         id="btnSalvarBairro"
+        class="green"
     >
         💾 Salvar Bairro
     </button>
@@ -1434,18 +1265,9 @@ BAIRROS
 <div class="card">
 
 
-    <h3>
-        📋 Bairros cadastrados
-    </h3>
-
-
-    <select id="filtro_bairro_cidade">
-
-        <option value="">
-            Todas as Cidades
-        </option>
-
-    </select>
+    <select
+        id="filtro_bairro_cidade"
+    ></select>
 
 
     <div id="listaBairros"></div>
@@ -1464,15 +1286,9 @@ BAIRROS
 SCRIPTS
 ====================================== -->
 
-<!-- SUPABASE -->
-
 <script src="js/supabase.js"></script>
 
-<!-- LOGIN -->
-
 <script src="js/login.js"></script>
-
-<!-- ADMINISTRATIVO -->
 
 <script src="js/admin.js"></script>
 
