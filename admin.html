@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <title>
+        Painel Administrativo | Rede Especialistas
+    </title>
 
-<title>
-    Painel Administrativo | Rede Especialistas
-</title>
+    <link
+        rel="icon"
+        href="img/tooth.png"
+    >
 
-<link
-    rel="icon"
-    href="img/tooth.png"
->
+    <link
+        rel="stylesheet"
+        href="css/admin.css"
+    >
 
-<link
-    rel="stylesheet"
-    href="css/admin.css"
->
-
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
+
 <body>
+
 
 <!-- ======================================
 LOGIN
@@ -42,49 +42,63 @@ LOGIN
     class="login-screen"
 >
 
+    <div class="login-box">
 
-<div class="login-box">
+        <img
+            src="img/tooth.png"
+            class="logo-login"
+            alt="Logo"
+        >
 
-    <img
-        src="img/tooth.png"
-        class="logo"
-        alt="Logo"
-    >
+        <h1>
+            Rede Especialistas
+        </h1>
 
-    <h1>
-        Rede Especialistas
-    </h1>
-
-    <p>
-        Painel Administrativo
-    </p>
-
-
-    <input
-        type="text"
-        id="usuario"
-        placeholder="Usuário"
-    >
+        <p>
+            Painel Administrativo
+        </p>
 
 
-    <input
-        type="password"
-        id="senha"
-        placeholder="Senha"
-    >
+        <div class="login-form">
+
+            <label>
+                Usuário
+            </label>
+
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Digite seu usuário"
+            >
 
 
-    <button id="btnLogin">
-        Entrar
-    </button>
+            <label>
+                Senha
+            </label>
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Digite sua senha"
+            >
 
 
-    <div id="loginMensagem"></div>
+            <button
+                id="btnLogin"
+                class="btn-login"
+            >
+                Entrar
+            </button>
+
+        </div>
+
+
+        <div id="loginMensagem"></div>
+
+    </div>
 
 </div>
 
-
-</div>
 
 <!-- ======================================
 PAINEL
@@ -95,1202 +109,1514 @@ PAINEL
     class="painel hidden"
 >
 
-<!-- ======================================
-SIDEBAR
-====================================== -->
 
-<aside class="sidebar">
+    <!-- ======================================
+    SIDEBAR
+    ====================================== -->
 
-
-<div class="sidebar-logo">
-
-    <img
-        src="img/tooth.png"
-        alt="Logo"
-    >
-
-    <h2>
-        Rede<br>
-        Especialistas
-    </h2>
-
-    <span>
-        Painel Administrativo
-    </span>
-
-</div>
+    <aside class="sidebar">
 
 
+        <!-- LOGO -->
 
-<!-- MENU -->
+        <div class="sidebar-logo">
 
-<nav class="sidebar-menu">
+            <div class="logo-area">
 
+                <img
+                    src="img/tooth.png"
+                    alt="Logo Rede Especialistas"
+                >
 
-    <p class="menu-title">
-        PRINCIPAL
-    </p>
-
-
-    <button
-        class="menu-btn active"
-        data-page="dashboard"
-    >
-        📊 Dashboard
-    </button>
+            </div>
 
 
-
-    <p class="menu-title">
-        GESTÃO
-    </p>
-
-
-    <button
-        class="menu-btn"
-        data-page="clinicas"
-    >
-        🏥 Clínicas
-    </button>
+            <h2>
+                Rede<br>
+                Especialistas
+            </h2>
 
 
-    <button
-        class="menu-btn"
-        data-page="especialidades"
-    >
-        🦷 Especialidades
-    </button>
-
-
-
-    <p class="menu-title">
-        LOCALIZAÇÃO
-    </p>
-
-
-    <button
-        class="menu-btn"
-        data-page="regioes"
-    >
-        🌎 Regiões
-    </button>
-
-
-    <button
-        class="menu-btn"
-        data-page="estados"
-    >
-        📍 Estados
-    </button>
-
-
-    <button
-        class="menu-btn"
-        data-page="cidades"
-    >
-        🏙️ Cidades
-    </button>
-
-
-    <button
-        class="menu-btn"
-        data-page="bairros"
-    >
-        📌 Bairros
-    </button>
-
-
-</nav>
-
-
-
-<!-- FOOTER -->
-
-<div class="sidebar-footer">
-
-
-    <div class="admin-info">
-
-        <div class="avatar">
-            👤
-        </div>
-
-
-        <div>
-
-            <strong>
-                Administrador
-            </strong>
-
-            <small>
-                Acesso total
-            </small>
+            <span>
+                Painel Administrativo
+            </span>
 
         </div>
 
-    </div>
 
+        <!-- MENU -->
 
+        <nav class="sidebar-menu">
 
-    <button
-        id="btnVoltarSite"
-        class="btn-voltar-site"
-        onclick="location.href='index.html'"
-    >
-        ← Voltar para Rede
-    </button>
 
+            <p class="menu-title">
+                PRINCIPAL
+            </p>
 
-    <button
-        id="btnLogout"
-        class="logout"
-    >
-        🚪 Sair
-    </button>
 
-
-</div>
-
-
-</aside>
-
-<!-- ======================================
-CONTEÚDO
-====================================== -->
-
-<main class="content">
-
-<!-- ======================================
-TOPO
-====================================== -->
-
-<header class="topbar">
-
-
-<div>
-
-    <span>
-        Painel Administrativo
-    </span>
-
-    <h1 id="tituloPagina">
-        Dashboard
-    </h1>
-
-</div>
-
-
-</header>
-
-<!-- ======================================
-DASHBOARD
-====================================== -->
-
-<section
-    id="dashboard"
-    class="page"
->
-
-
-<div class="page-header">
-
-    <h2>
-        Visão Geral
-    </h2>
-
-    <p>
-        Acompanhe os dados da rede.
-    </p>
-
-</div>
-
-
-
-<div class="cards">
-
-
-    <div class="card dashboard-card">
-
-        <div class="card-icon">
-            🏥
-        </div>
-
-        <h3>
-            Clínicas
-        </h3>
-
-        <span id="totalClinicas">
-            0
-        </span>
-
-        <small>
-            Total cadastradas
-        </small>
-
-    </div>
-
-
-
-    <div class="card dashboard-card">
-
-        <div class="card-icon">
-            🦷
-        </div>
-
-        <h3>
-            Especialidades
-        </h3>
-
-        <span id="totalEspecialidades">
-            0
-        </span>
-
-        <small>
-            Total cadastradas
-        </small>
-
-    </div>
-
-
-
-    <div class="card dashboard-card">
-
-        <div class="card-icon">
-            🌎
-        </div>
-
-        <h3>
-            Regiões
-        </h3>
-
-        <span id="totalRegioes">
-            0
-        </span>
-
-    </div>
-
-
-
-    <div class="card dashboard-card">
-
-        <div class="card-icon">
-            📍
-        </div>
-
-        <h3>
-            Estados
-        </h3>
-
-        <span id="totalEstados">
-            0
-        </span>
-
-    </div>
-
-
-
-    <div class="card dashboard-card">
-
-        <div class="card-icon">
-            🏙️
-        </div>
-
-        <h3>
-            Cidades
-        </h3>
-
-        <span id="totalCidades">
-            0
-        </span>
-
-    </div>
-
-
-
-    <div class="card dashboard-card">
-
-        <div class="card-icon">
-            📌
-        </div>
-
-        <h3>
-            Bairros
-        </h3>
-
-        <span id="totalBairros">
-            0
-        </span>
-
-    </div>
-
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-CLÍNICAS
-====================================== -->
-
-<section
-    id="clinicas"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        Gerenciamento de Clínicas
-    </h2>
-
-    <p>
-        Cadastre e gerencie as clínicas.
-    </p>
-
-</div>
-
-
-
-<!-- NOVA CLÍNICA -->
-
-<div class="card form-card">
-
-    <h3>
-        🏥 Nova Clínica
-    </h3>
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Nome da Clínica
-            </label>
-
-            <input
-                id="clinica_nome"
-                placeholder="Nome da clínica"
+            <button
+                class="menu-btn active"
+                data-page="dashboard"
             >
+                <span class="icon">
+                    📊
+                </span>
 
-        </div>
+                <span>
+                    Dashboard
+                </span>
+            </button>
 
 
+            <p class="menu-title">
+                GESTÃO
+            </p>
 
-        <div>
 
-            <label>
-                Telefone
-            </label>
-
-            <input
-                id="clinica_telefone"
-                placeholder="(00) 00000-0000"
+            <button
+                class="menu-btn"
+                data-page="clinicas"
             >
+                <span class="icon">
+                    🏥
+                </span>
 
-        </div>
+                <span>
+                    Clínicas
+                </span>
+            </button>
 
 
-
-        <div class="full">
-
-            <label>
-                Endereço
-            </label>
-
-            <input
-                id="clinica_endereco"
-                placeholder="Rua, número"
+            <button
+                class="menu-btn"
+                data-page="especialidades"
             >
+                <span class="icon">
+                    🦷
+                </span>
+
+                <span>
+                    Especialidades
+                </span>
+            </button>
+
+
+            <p class="menu-title">
+                LOCALIZAÇÃO
+            </p>
+
+
+            <button
+                class="menu-btn"
+                data-page="regioes"
+            >
+                <span class="icon">
+                    🌎
+                </span>
+
+                <span>
+                    Regiões
+                </span>
+            </button>
+
+
+            <button
+                class="menu-btn"
+                data-page="estados"
+            >
+                <span class="icon">
+                    📍
+                </span>
+
+                <span>
+                    Estados
+                </span>
+            </button>
+
+
+            <button
+                class="menu-btn"
+                data-page="cidades"
+            >
+                <span class="icon">
+                    🏙️
+                </span>
+
+                <span>
+                    Cidades
+                </span>
+            </button>
+
+
+            <button
+                class="menu-btn"
+                data-page="bairros"
+            >
+                <span class="icon">
+                    📌
+                </span>
+
+                <span>
+                    Bairros
+                </span>
+            </button>
+
+
+        </nav>
+
+
+        <!-- FOOTER -->
+
+        <div class="sidebar-footer">
+
+
+            <div class="admin-info">
+
+                <div class="avatar">
+                    👤
+                </div>
+
+
+                <div class="admin-text">
+
+                    <strong>
+                        Administrador
+                    </strong>
+
+                    <small>
+                        Acesso total
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="btnVoltarSite"
+                class="btn-voltar-site"
+            >
+                ← Voltar para Rede
+            </button>
+
+
+            <button
+                id="btnLogout"
+                class="logout"
+            >
+                🚪 Sair
+            </button>
+
 
         </div>
 
 
+    </aside>
 
-        <div>
 
-            <label>
-                Região
-            </label>
+    <!-- ======================================
+    CONTEÚDO PRINCIPAL
+    ====================================== -->
 
-            <select id="clinica_regiao"></select>
+    <main class="content">
 
-        </div>
 
+        <!-- ======================================
+        TOPBAR
+        ====================================== -->
 
+        <header class="topbar">
 
-        <div>
+            <div>
 
-            <label>
-                Estado
-            </label>
+                <span class="topbar-subtitle">
+                    Painel Administrativo
+                </span>
 
-            <select id="clinica_estado"></select>
+                <h1 id="tituloPagina">
+                    Dashboard
+                </h1>
 
-        </div>
+            </div>
 
+        </header>
 
 
-        <div>
+        <!-- ======================================
+        DASHBOARD
+        ====================================== -->
 
-            <label>
-                Cidade
-            </label>
-
-            <select id="clinica_cidade"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Bairro
-            </label>
-
-            <select id="clinica_bairro"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Especialidade
-            </label>
-
-            <select id="clinica_especialidade"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Rede
-            </label>
-
-            <select id="clinica_rede">
-
-                <option value="especialistas">
-                    Rede Especialistas
-                </option>
-
-                <option value="sindilegis">
-                    Rede Sindilegis
-                </option>
-
-            </select>
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        id="btnSalvarClinica"
-        class="green"
-    >
-        💾 Salvar Clínica
-    </button>
-
-
-</div>
-
-
-
-<!-- LISTA -->
-
-<div class="card">
-
-    <h3>
-        📋 Clínicas cadastradas
-    </h3>
-
-
-    <input
-        id="filtro_clinica_nome"
-        placeholder="🔎 Buscar clínica pelo nome"
-    >
-
-
-    <div id="listaClinicas"></div>
-
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-EDITAR CLÍNICA
-====================================== -->
-
-<section
-    id="editarClinica"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        Editar Clínica
-    </h2>
-
-    <p>
-        Atualize os dados e especialidades.
-    </p>
-
-</div>
-
-
-
-<!-- DADOS -->
-
-<div class="card form-card">
-
-
-    <input
-        type="hidden"
-        id="edit_clinica_id"
-    >
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Nome
-            </label>
-
-            <input id="edit_clinica_nome">
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Telefone
-            </label>
-
-            <input id="edit_clinica_telefone">
-
-        </div>
-
-
-
-        <div class="full">
-
-            <label>
-                Endereço
-            </label>
-
-            <input id="edit_clinica_endereco">
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Região
-            </label>
-
-            <select id="edit_clinica_regiao"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Estado
-            </label>
-
-            <select id="edit_clinica_estado"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Cidade
-            </label>
-
-            <select id="edit_clinica_cidade"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Bairro
-            </label>
-
-            <select id="edit_clinica_bairro"></select>
-
-        </div>
-
-
-    </div>
-
-
-
-    <label class="checkbox-area">
-
-        <input
-            type="checkbox"
-            id="edit_clinica_ativo"
+        <section
+            id="dashboard"
+            class="page"
         >
 
-        Clínica ativa
 
-    </label>
+            <div class="page-header">
+
+                <h2>
+                    Visão Geral
+                </h2>
+
+                <p>
+                    Acompanhe os dados cadastrados na rede.
+                </p>
+
+            </div>
 
 
+            <div class="cards">
 
-    <div class="button-group">
+
+                <div class="card dashboard-card">
+
+                    <div class="card-icon">
+                        🏥
+                    </div>
+
+                    <h3>
+                        Clínicas
+                    </h3>
+
+                    <span id="totalClinicas">
+                        0
+                    </span>
+
+                    <small>
+                        Total cadastradas
+                    </small>
+
+                </div>
 
 
-        <button
-            id="btnAtualizarClinica"
-            class="green"
+                <div class="card dashboard-card">
+
+                    <div class="card-icon">
+                        🦷
+                    </div>
+
+                    <h3>
+                        Especialidades
+                    </h3>
+
+                    <span id="totalEspecialidades">
+                        0
+                    </span>
+
+                    <small>
+                        Total cadastradas
+                    </small>
+
+                </div>
+
+
+                <div class="card dashboard-card">
+
+                    <div class="card-icon">
+                        🌎
+                    </div>
+
+                    <h3>
+                        Regiões
+                    </h3>
+
+                    <span id="totalRegioes">
+                        0
+                    </span>
+
+                    <small>
+                        Total cadastradas
+                    </small>
+
+                </div>
+
+
+                <div class="card dashboard-card">
+
+                    <div class="card-icon">
+                        📍
+                    </div>
+
+                    <h3>
+                        Estados
+                    </h3>
+
+                    <span id="totalEstados">
+                        0
+                    </span>
+
+                    <small>
+                        Total cadastrados
+                    </small>
+
+                </div>
+
+
+                <div class="card dashboard-card">
+
+                    <div class="card-icon">
+                        🏙️
+                    </div>
+
+                    <h3>
+                        Cidades
+                    </h3>
+
+                    <span id="totalCidades">
+                        0
+                    </span>
+
+                    <small>
+                        Total cadastradas
+                    </small>
+
+                </div>
+
+
+                <div class="card dashboard-card">
+
+                    <div class="card-icon">
+                        📌
+                    </div>
+
+                    <h3>
+                        Bairros
+                    </h3>
+
+                    <span id="totalBairros">
+                        0
+                    </span>
+
+                    <small>
+                        Total cadastrados
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        CLÍNICAS
+        ====================================== -->
+
+        <section
+            id="clinicas"
+            class="page hidden"
         >
-            💾 Atualizar
-        </button>
 
 
-        <button
-            id="btnExcluirClinica"
-            class="red"
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+                        Gerenciamento de Clínicas
+                    </h2>
+
+                    <p>
+                        Cadastre, edite e gerencie as clínicas.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ======================================
+            FORMULÁRIO NOVA CLÍNICA
+            ====================================== -->
+
+            <div class="card form-card">
+
+
+                <div class="card-title">
+
+                    <div>
+
+                        <h3>
+                            ➕ Nova Clínica
+                        </h3>
+
+                        <p>
+                            Preencha os dados para cadastrar uma clínica.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Nome da Clínica
+                        </label>
+
+                        <input
+                            id="clinica_nome"
+                            type="text"
+                            placeholder="Digite o nome da clínica"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Telefone
+                        </label>
+
+                        <input
+                            id="clinica_telefone"
+                            type="text"
+                            placeholder="(00) 00000-0000"
+                        >
+
+                    </div>
+
+
+                    <div class="full">
+
+                        <label>
+                            Endereço
+                        </label>
+
+                        <input
+                            id="clinica_endereco"
+                            type="text"
+                            placeholder="Rua, número"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Região
+                        </label>
+
+                        <select id="clinica_regiao">
+
+                            <option value="">
+                                Selecione a Região
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Estado
+                        </label>
+
+                        <select id="clinica_estado">
+
+                            <option value="">
+                                Selecione o Estado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Cidade
+                        </label>
+
+                        <select id="clinica_cidade">
+
+                            <option value="">
+                                Selecione a Cidade
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Bairro
+                        </label>
+
+                        <select id="clinica_bairro">
+
+                            <option value="">
+                                Selecione o Bairro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Especialidade
+                        </label>
+
+                        <select id="clinica_especialidade">
+
+                            <option value="">
+                                Selecione a Especialidade
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Rede
+                        </label>
+
+                        <select id="clinica_rede">
+
+                            <option value="especialistas">
+                                Rede Especialistas
+                            </option>
+
+                            <option value="sindilegis">
+                                Rede Sindilegis
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    id="btnSalvarClinica"
+                    class="green"
+                >
+                    💾 Salvar Clínica
+                </button>
+
+
+            </div>
+
+
+            <!-- ======================================
+            TABELA DE CLÍNICAS
+            ====================================== -->
+
+            <div class="card tabela-card">
+
+
+                <div class="table-header">
+
+
+                    <div>
+
+                        <h3>
+                            🏥 Clínicas cadastradas
+                        </h3>
+
+                        <p>
+                            Visualize, edite ou exclua clínicas cadastradas.
+                        </p>
+
+                    </div>
+
+
+                    <div class="table-actions">
+
+                        <input
+                            id="filtro_clinica_nome"
+                            type="text"
+                            placeholder="🔎 Buscar clínica..."
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="tabela">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Clínica
+                                </th>
+
+                                <th>
+                                    Telefone
+                                </th>
+
+                                <th>
+                                    Localização
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th class="col-acoes">
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="listaClinicas">
+
+                            <!-- CLÍNICAS CARREGADAS PELO JS -->
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        EDITAR CLÍNICA
+        ====================================== -->
+
+        <section
+            id="editarClinica"
+            class="page hidden"
         >
-            🗑 Excluir
-        </button>
 
 
-        <button
-            id="btnVoltarClinicas"
-            class="gray"
+            <div class="page-header">
+
+                <h2>
+                    Editar Clínica
+                </h2>
+
+                <p>
+                    Atualize as informações da clínica selecionada.
+                </p>
+
+            </div>
+
+
+            <!-- DADOS DA CLÍNICA -->
+
+            <div class="card form-card">
+
+
+                <input
+                    type="hidden"
+                    id="edit_clinica_id"
+                >
+
+
+                <h3>
+                    🏥 Dados da Clínica
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Nome da Clínica
+                        </label>
+
+                        <input
+                            id="edit_clinica_nome"
+                            type="text"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Telefone
+                        </label>
+
+                        <input
+                            id="edit_clinica_telefone"
+                            type="text"
+                        >
+
+                    </div>
+
+
+                    <div class="full">
+
+                        <label>
+                            Endereço
+                        </label>
+
+                        <input
+                            id="edit_clinica_endereco"
+                            type="text"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Região
+                        </label>
+
+                        <select id="edit_clinica_regiao">
+
+                            <option value="">
+                                Selecione Região
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Estado
+                        </label>
+
+                        <select id="edit_clinica_estado">
+
+                            <option value="">
+                                Selecione Estado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Cidade
+                        </label>
+
+                        <select id="edit_clinica_cidade">
+
+                            <option value="">
+                                Selecione Cidade
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Bairro
+                        </label>
+
+                        <select id="edit_clinica_bairro">
+
+                            <option value="">
+                                Selecione Bairro
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <label class="checkbox-area">
+
+                    <input
+                        type="checkbox"
+                        id="edit_clinica_ativo"
+                    >
+
+                    <span>
+                        Clínica ativa
+                    </span>
+
+                </label>
+
+
+                <div class="button-group">
+
+
+                    <button
+                        id="btnAtualizarClinica"
+                        class="green"
+                    >
+                        💾 Atualizar Clínica
+                    </button>
+
+
+                    <button
+                        id="btnExcluirClinica"
+                        class="red"
+                    >
+                        🗑 Excluir Clínica
+                    </button>
+
+
+                    <button
+                        id="btnVoltarClinicas"
+                        class="gray"
+                    >
+                        ← Voltar
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ======================================
+            ESPECIALIDADES VINCULADAS
+            ====================================== -->
+
+            <div class="card">
+
+
+                <h3>
+                    🦷 Especialidades vinculadas
+                </h3>
+
+
+                <p class="descricao-card">
+                    Adicione ou remova especialidades desta clínica.
+                </p>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Especialidade
+                        </label>
+
+                        <select id="edit_especialidade">
+
+                            <option value="">
+                                Selecione uma Especialidade
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Rede
+                        </label>
+
+                        <select id="edit_rede">
+
+                            <option value="especialistas">
+                                Rede Especialistas
+                            </option>
+
+                            <option value="sindilegis">
+                                Rede Sindilegis
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    id="btnAdicionarEspRede"
+                    class="blue"
+                >
+                    ➕ Adicionar Especialidade
+                </button>
+
+
+                <div
+                    id="listaEspRede"
+                    class="lista-vinculos"
+                >
+
+                    <!-- ESPECIALIDADES VINCULADAS -->
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        ESPECIALIDADES
+        ====================================== -->
+
+        <section
+            id="especialidades"
+            class="page hidden"
         >
-            ← Voltar
-        </button>
 
 
-    </div>
+            <div class="page-header">
+
+                <h2>
+                    Especialidades
+                </h2>
+
+                <p>
+                    Gerencie as especialidades disponíveis.
+                </p>
+
+            </div>
+
+
+            <div class="card form-card">
+
+
+                <h3>
+                    ➕ Nova Especialidade
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Nome da Especialidade
+                        </label>
+
+                        <input
+                            id="nova_especialidade"
+                            placeholder="Ex: Ortodontia"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Rede
+                        </label>
+
+                        <select id="especialidade_rede">
+
+                            <option value="especialistas">
+                                Rede Especialistas
+                            </option>
+
+                            <option value="sindilegis">
+                                Rede Sindilegis
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    id="btnSalvarEspecialidade"
+                    class="green"
+                >
+                    💾 Salvar Especialidade
+                </button>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <h3>
+                    📋 Especialidades cadastradas
+                </h3>
+
+
+                <div
+                    id="listaEspecialidades"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        REGIÕES
+        ====================================== -->
+
+        <section
+            id="regioes"
+            class="page hidden"
+        >
+
+
+            <div class="page-header">
+
+                <h2>
+                    Regiões
+                </h2>
+
+                <p>
+                    Gerencie as regiões cadastradas.
+                </p>
+
+            </div>
+
+
+            <div class="card form-card">
+
+
+                <h3>
+                    ➕ Nova Região
+                </h3>
+
+
+                <label>
+                    Nome da Região
+                </label>
+
+
+                <input
+                    id="nova_regiao"
+                    placeholder="Ex: Centro-Oeste"
+                >
+
+
+                <button
+                    id="btnSalvarRegiao"
+                    class="green"
+                >
+                    💾 Salvar Região
+                </button>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <h3>
+                    📋 Regiões cadastradas
+                </h3>
+
+
+                <div
+                    id="listaRegioes"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        ESTADOS
+        ====================================== -->
+
+        <section
+            id="estados"
+            class="page hidden"
+        >
+
+
+            <div class="page-header">
+
+                <h2>
+                    Estados
+                </h2>
+
+                <p>
+                    Cadastre e gerencie os estados.
+                </p>
+
+            </div>
+
+
+            <div class="card form-card">
+
+
+                <h3>
+                    ➕ Novo Estado
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Região
+                        </label>
+
+                        <select id="estado_regiao">
+
+                            <option value="">
+                                Selecione Região
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Nome do Estado
+                        </label>
+
+                        <input
+                            id="novo_estado"
+                            placeholder="Ex: Distrito Federal"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    id="btnSalvarEstado"
+                    class="green"
+                >
+                    💾 Salvar Estado
+                </button>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <h3>
+                    📋 Estados cadastrados
+                </h3>
+
+
+                <select id="filtro_estado_regiao">
+
+                    <option value="">
+                        Todas as Regiões
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="listaEstados"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        CIDADES
+        ====================================== -->
+
+        <section
+            id="cidades"
+            class="page hidden"
+        >
+
+
+            <div class="page-header">
+
+                <h2>
+                    Cidades
+                </h2>
+
+                <p>
+                    Cadastre e gerencie as cidades.
+                </p>
+
+            </div>
+
+
+            <div class="card form-card">
+
+
+                <h3>
+                    ➕ Nova Cidade
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Estado
+                        </label>
+
+                        <select id="cidade_estado">
+
+                            <option value="">
+                                Selecione Estado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Nome da Cidade
+                        </label>
+
+                        <input
+                            id="nova_cidade"
+                            placeholder="Ex: Brasília"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    id="btnSalvarCidade"
+                    class="green"
+                >
+                    💾 Salvar Cidade
+                </button>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <h3>
+                    📋 Cidades cadastradas
+                </h3>
+
+
+                <select id="filtro_cidade_estado">
+
+                    <option value="">
+                        Todos os Estados
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="listaCidades"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ======================================
+        BAIRROS
+        ====================================== -->
+
+        <section
+            id="bairros"
+            class="page hidden"
+        >
+
+
+            <div class="page-header">
+
+                <h2>
+                    Bairros
+                </h2>
+
+                <p>
+                    Cadastre e gerencie os bairros.
+                </p>
+
+            </div>
+
+
+            <div class="card form-card">
+
+
+                <h3>
+                    ➕ Novo Bairro
+                </h3>
+
+
+                <div class="form-grid">
+
+
+                    <div>
+
+                        <label>
+                            Cidade
+                        </label>
+
+                        <select id="bairro_cidade">
+
+                            <option value="">
+                                Selecione Cidade
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>
+                            Nome do Bairro
+                        </label>
+
+                        <input
+                            id="novo_bairro"
+                            placeholder="Ex: Asa Norte"
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    id="btnSalvarBairro"
+                    class="green"
+                >
+                    💾 Salvar Bairro
+                </button>
+
+
+            </div>
+
+
+            <div class="card">
+
+
+                <h3>
+                    📋 Bairros cadastrados
+                </h3>
+
+
+                <select id="filtro_bairro_cidade">
+
+                    <option value="">
+                        Todas as Cidades
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="listaBairros"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
 
 
 </div>
 
-
-
-<!-- ======================================
-ESPECIALIDADES VINCULADAS
-====================================== -->
-
-<div class="card">
-
-
-    <h3>
-        🦷 Especialidades vinculadas
-    </h3>
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Especialidade
-            </label>
-
-            <select id="edit_especialidade"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Rede
-            </label>
-
-            <select id="edit_rede">
-
-                <option value="especialistas">
-                    Rede Especialistas
-                </option>
-
-                <option value="sindilegis">
-                    Rede Sindilegis
-                </option>
-
-            </select>
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        id="btnAdicionarEspRede"
-        class="blue"
-    >
-        ➕ Adicionar Especialidade
-    </button>
-
-
-
-    <div
-        id="listaEspRede"
-        class="lista-vinculos"
-    ></div>
-
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-ESPECIALIDADES
-====================================== -->
-
-<section
-    id="especialidades"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        🦷 Especialidades
-    </h2>
-
-    <p>
-        Gerencie as especialidades.
-    </p>
-
-</div>
-
-
-
-<div class="card form-card">
-
-
-    <h3>
-        ➕ Nova Especialidade
-    </h3>
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Nome
-            </label>
-
-            <input
-                id="nova_especialidade"
-                placeholder="Ex: Ortodontia"
-            >
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Rede
-            </label>
-
-            <select id="especialidade_rede">
-
-                <option value="especialistas">
-                    Rede Especialistas
-                </option>
-
-                <option value="sindilegis">
-                    Rede Sindilegis
-                </option>
-
-            </select>
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        id="btnSalvarEspecialidade"
-        class="green"
-    >
-        💾 Salvar Especialidade
-    </button>
-
-
-</div>
-
-
-
-<div class="card">
-
-    <h3>
-        📋 Especialidades cadastradas
-    </h3>
-
-    <div id="listaEspecialidades"></div>
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-REGIÕES
-====================================== -->
-
-<section
-    id="regioes"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        🌎 Regiões
-    </h2>
-
-</div>
-
-
-<div class="card form-card">
-
-    <label>
-        Nome da Região
-    </label>
-
-    <input
-        id="nova_regiao"
-        placeholder="Ex: Sudeste"
-    >
-
-
-    <button
-        id="btnSalvarRegiao"
-        class="green"
-    >
-        💾 Salvar Região
-    </button>
-
-
-</div>
-
-
-
-<div class="card">
-
-    <div id="listaRegioes"></div>
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-ESTADOS
-====================================== -->
-
-<section
-    id="estados"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        📍 Estados
-    </h2>
-
-</div>
-
-
-
-<div class="card form-card">
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Região
-            </label>
-
-            <select id="estado_regiao"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Nome do Estado
-            </label>
-
-            <input
-                id="novo_estado"
-                placeholder="Ex: São Paulo"
-            >
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        id="btnSalvarEstado"
-        class="green"
-    >
-        💾 Salvar Estado
-    </button>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-    <select
-        id="filtro_estado_regiao"
-    ></select>
-
-
-    <div id="listaEstados"></div>
-
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-CIDADES
-====================================== -->
-
-<section
-    id="cidades"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        🏙️ Cidades
-    </h2>
-
-</div>
-
-
-
-<div class="card form-card">
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Estado
-            </label>
-
-            <select id="cidade_estado"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Nome da Cidade
-            </label>
-
-            <input
-                id="nova_cidade"
-                placeholder="Ex: Brasília"
-            >
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        id="btnSalvarCidade"
-        class="green"
-    >
-        💾 Salvar Cidade
-    </button>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-    <select
-        id="filtro_cidade_estado"
-    ></select>
-
-
-    <div id="listaCidades"></div>
-
-
-</div>
-
-
-</section>
-
-<!-- ======================================
-BAIRROS
-====================================== -->
-
-<section
-    id="bairros"
-    class="page hidden"
->
-
-
-<div class="page-header">
-
-    <h2>
-        📌 Bairros
-    </h2>
-
-</div>
-
-
-
-<div class="card form-card">
-
-
-    <div class="form-grid">
-
-
-        <div>
-
-            <label>
-                Cidade
-            </label>
-
-            <select id="bairro_cidade"></select>
-
-        </div>
-
-
-
-        <div>
-
-            <label>
-                Nome do Bairro
-            </label>
-
-            <input
-                id="novo_bairro"
-                placeholder="Ex: Centro"
-            >
-
-        </div>
-
-
-    </div>
-
-
-
-    <button
-        id="btnSalvarBairro"
-        class="green"
-    >
-        💾 Salvar Bairro
-    </button>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-    <select
-        id="filtro_bairro_cidade"
-    ></select>
-
-
-    <div id="listaBairros"></div>
-
-
-</div>
-
-
-</section>
-
-</main>
-
-</div>
 
 <!-- ======================================
 SCRIPTS
+ORDEM IMPORTANTE
 ====================================== -->
 
+
+<!-- CONFIGURAÇÃO SUPABASE -->
 <script src="js/supabase.js"></script>
 
+
+<!-- LOGIN -->
 <script src="js/login.js"></script>
 
+
+<!-- ADMINISTRATIVO -->
 <script src="js/admin.js"></script>
+
 
 </body>
 
