@@ -1,6 +1,6 @@
-/* ======================================
-RESET
-====================================== */
+/* =====================================================
+   RESET E CONFIGURAÇÕES GERAIS
+===================================================== */
 
 * {
     margin: 0;
@@ -8,156 +8,325 @@ RESET
     box-sizing: border-box;
 }
 
-html,
-body {
-    width: 100%;
+:root {
+    --sidebar: #172033;
+    --sidebar-light: #243047;
+    --sidebar-hover: #2d3b55;
+
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+
+    --success: #16a34a;
+    --success-hover: #15803d;
+
+    --danger: #dc2626;
+    --danger-hover: #b91c1c;
+
+    --warning: #d97706;
+
+    --background: #f1f5f9;
+    --card: #ffffff;
+
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+
+    --shadow-sm:
+        0 1px 3px rgba(15, 23, 42, 0.06);
+
+    --shadow:
+        0 4px 12px rgba(15, 23, 42, 0.08);
+
+    --radius: 12px;
+}
+
+html {
     min-height: 100%;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #eef2f7;
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
     overflow-x: hidden;
 }
 
+button,
+input,
+select {
+    font-family: inherit;
+}
 
-/* ======================================
-CONTROLE DE IMAGENS
-====================================== */
+button {
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.2s ease;
+}
+
+button:active {
+    transform: scale(0.98);
+}
 
 img {
     max-width: 100%;
 }
 
 
-/* ======================================
-PAINEL
-====================================== */
+/* =====================================================
+   LOGIN
+===================================================== */
 
-.painel {
-    display: flex;
-    width: 100%;
+.login-screen {
     min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1e293b,
+            #334155
+        );
+
     padding: 20px;
-    gap: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 50px
+        rgba(0, 0, 0, 0.25);
+}
+
+.login-box .logo {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    margin-bottom: 15px;
+}
+
+.login-box h1 {
+    color: var(--text);
+
+    font-size: 26px;
+
+    margin-bottom: 6px;
+}
+
+.login-box p {
+    color: var(--text-light);
+
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    margin-bottom: 12px;
+}
+
+.login-box button {
+    width: 100%;
+
+    border: none;
+
+    background: var(--primary);
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+}
+
+.login-box button:hover {
+    background: var(--primary-hover);
+}
+
+#loginMensagem {
+    margin-top: 15px;
+
+    font-size: 14px;
 }
 
 
-/* ======================================
-SIDEBAR
-====================================== */
+/* =====================================================
+   CLASSE UTILITÁRIA
+===================================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =====================================================
+   ESTRUTURA PRINCIPAL
+===================================================== */
+
+.painel {
+    display: flex;
+
+    width: 100%;
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
 .sidebar {
     width: 260px;
     min-width: 260px;
 
-    height: calc(100vh - 40px);
+    min-height: 100vh;
 
-    background: #1e293b;
+    background: var(--sidebar);
+
     color: white;
 
     display: flex;
     flex-direction: column;
 
-    border-radius: 18px;
-
     position: sticky;
-    top: 20px;
+
+    top: 0;
+
+    height: 100vh;
 
     overflow-y: auto;
 
     box-shadow:
-        0 10px 30px
-        rgba(15, 23, 42, 0.15);
+        4px 0 15px
+        rgba(15, 23, 42, 0.08);
 
-    z-index: 10;
+    z-index: 100;
 }
 
 
-/* ======================================
-LOGO SIDEBAR
-====================================== */
+/* =====================================================
+   LOGO SIDEBAR
+===================================================== */
 
 .sidebar-logo {
-    padding: 25px 20px;
+    padding: 28px 20px 24px;
+
     text-align: center;
 
     border-bottom:
         1px solid
-        rgba(255, 255, 255, 0.1);
+        rgba(255, 255, 255, 0.08);
 }
-
 
 .logo-area {
     display: flex;
+
     justify-content: center;
     align-items: center;
 
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
-
 .logo-area img {
-    width: 65px !important;
-    height: 65px !important;
+    width: 70px !important;
+    height: 70px !important;
 
     object-fit: contain;
+
     display: block;
 }
 
-
 .sidebar-logo h2 {
     font-size: 22px;
+
     line-height: 1.2;
 
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
     margin-bottom: 8px;
-
-    color: white;
 }
-
 
 .sidebar-logo span {
+    display: block;
+
     font-size: 12px;
-    color: #cbd5e1;
+
+    color: #94a3b8;
 }
 
 
-/* ======================================
-MENU
-====================================== */
+/* =====================================================
+   MENU
+===================================================== */
 
 .sidebar-menu {
     flex: 1;
-    padding: 20px 12px;
+
+    padding: 22px 12px;
 }
 
-
 .menu-title {
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
 
     color: #94a3b8;
 
-    margin: 20px 10px 8px;
-
-    letter-spacing: 1px;
+    margin:
+        18px
+        12px
+        9px;
 }
-
 
 .menu-btn {
     width: 100%;
 
     border: none;
+
     background: transparent;
 
-    color: #e2e8f0;
+    color: #cbd5e1;
 
-    padding: 13px 15px;
-    margin-bottom: 5px;
+    padding: 12px 14px;
 
-    border-radius: 10px;
+    margin-bottom: 4px;
+
+    border-radius: 8px;
 
     display: flex;
+
     align-items: center;
 
     gap: 12px;
@@ -168,226 +337,272 @@ MENU
 
     font-size: 14px;
 
-    transition:
-        background 0.2s,
-        transform 0.2s;
+    font-weight: 500;
 }
-
 
 .menu-btn:hover {
-    background: #334155;
+    background:
+        rgba(255, 255, 255, 0.07);
 
-    transform: translateX(3px);
+    color: white;
 }
 
-
 .menu-btn.active {
-    background: #2563eb;
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
     color: white;
 
     box-shadow:
-        0 5px 15px
-        rgba(37, 99, 235, 0.35);
+        0 4px 10px
+        rgba(37, 99, 235, 0.3);
 }
 
-
-.icon {
+.menu-btn .icon {
     font-size: 18px;
+
+    width: 24px;
+
+    text-align: center;
 }
 
 
-/* ======================================
-FOOTER SIDEBAR
-====================================== */
+/* =====================================================
+   FOOTER SIDEBAR
+===================================================== */
 
 .sidebar-footer {
-    padding: 15px;
+    padding: 16px;
 
     border-top:
         1px solid
-        rgba(255, 255, 255, 0.1);
+        rgba(255, 255, 255, 0.08);
 }
-
 
 .admin-info {
     display: flex;
+
     align-items: center;
 
     gap: 10px;
 
-    margin-bottom: 15px;
+    padding-bottom: 15px;
 }
 
-
 .avatar {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
 
     border-radius: 50%;
 
-    background: #334155;
+    background: var(--sidebar-light);
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    font-size: 20px;
+    font-size: 18px;
 }
-
 
 .admin-text {
     display: flex;
+
     flex-direction: column;
 }
 
-
 .admin-text strong {
-    color: white;
+    font-size: 14px;
 }
-
 
 .admin-text small {
     color: #94a3b8;
-    margin-top: 3px;
-}
 
+    margin-top: 3px;
+
+    font-size: 11px;
+}
 
 .btn-voltar-site,
 .logout {
     width: 100%;
 
     border: none;
+
     border-radius: 8px;
 
-    padding: 11px;
-
-    margin-top: 8px;
+    padding: 10px;
 
     cursor: pointer;
 
+    font-size: 13px;
+
     font-weight: 600;
 
-    transition: 0.2s;
+    margin-top: 8px;
 }
-
 
 .btn-voltar-site {
-    background: #334155;
+    background:
+        rgba(255, 255, 255, 0.08);
+
     color: white;
 }
-
 
 .btn-voltar-site:hover {
-    background: #475569;
+    background:
+        rgba(255, 255, 255, 0.15);
 }
 
-
 .logout {
-    background: #dc2626;
+    background:
+        rgba(220, 38, 38, 0.15);
+
+    color: #fca5a5;
+}
+
+.logout:hover {
+    background: var(--danger);
+
     color: white;
 }
 
 
-.logout:hover {
-    background: #b91c1c;
-}
-
-
-/* ======================================
-CONTEÚDO PRINCIPAL
-====================================== */
+/* =====================================================
+   CONTEÚDO PRINCIPAL
+===================================================== */
 
 .content {
     flex: 1;
 
     min-width: 0;
 
-    min-height: calc(100vh - 40px);
+    min-height: 100vh;
 
-    background: white;
-
-    border-radius: 18px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15, 23, 42, 0.08);
+    background: var(--background);
 }
 
 
-/* ======================================
-TOPO
-====================================== */
+/* =====================================================
+   TOPO
+===================================================== */
 
 .topbar {
     background: white;
 
-    padding: 25px 35px;
+    padding: 24px 36px;
 
     border-bottom:
-        1px solid #e5e7eb;
+        1px solid
+        var(--border);
 }
-
 
 .topbar-subtitle {
-    font-size: 13px;
-    color: #64748b;
-}
+    display: block;
 
+    font-size: 12px;
+
+    font-weight: 500;
+
+    color: var(--text-light);
+
+    margin-bottom: 4px;
+}
 
 .topbar h1 {
-    margin-top: 5px;
-
     font-size: 27px;
 
-    color: #1e293b;
+    font-weight: 700;
+
+    color: var(--text);
+
+    letter-spacing: -0.5px;
 }
 
 
-/* ======================================
-PÁGINAS
-====================================== */
+/* =====================================================
+   PÁGINAS
+===================================================== */
 
 .page {
-    padding: 35px;
+    padding: 34px 36px;
 
-    min-height: 600px;
+    max-width: 1600px;
+
+    margin: auto;
 }
 
-
-.page.hidden,
-.hidden {
+.page.hidden {
     display: none !important;
 }
 
 
-/* ======================================
-CABEÇALHO DAS PÁGINAS
-====================================== */
+/* =====================================================
+   CABEÇALHO DAS PÁGINAS
+===================================================== */
 
 .page-header {
-    margin-bottom: 25px;
+    margin-bottom: 26px;
 }
-
 
 .page-header h2 {
     font-size: 24px;
 
-    color: #1e293b;
+    color: var(--text);
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
+
+    font-weight: 700;
 }
-
 
 .page-header p {
-    color: #64748b;
+    color: var(--text-light);
+
+    font-size: 15px;
 }
 
 
-/* ======================================
-CARDS
-====================================== */
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card {
+    background: var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: var(--radius);
+
+    padding: 24px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+.card + .card {
+    margin-top: 24px;
+}
+
+.card h3 {
+    color: var(--text);
+
+    font-size: 18px;
+
+    margin-bottom: 20px;
+
+    font-weight: 650;
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
 
 .cards {
     display: grid;
@@ -395,97 +610,70 @@ CARDS
     grid-template-columns:
         repeat(
             auto-fit,
-            minmax(180px, 1fr)
+            minmax(200px, 1fr)
         );
 
-    gap: 20px;
+    gap: 18px;
 }
 
+.dashboard-card {
+    position: relative;
 
-.card {
-    background: white;
-
-    border-radius: 14px;
+    min-height: 165px;
 
     padding: 22px;
 
-    border: 1px solid #e5e7eb;
-
-    box-shadow:
-        0 4px 15px
-        rgba(0, 0, 0, 0.04);
+    overflow: hidden;
 }
-
-
-/* ======================================
-CARDS DASHBOARD
-====================================== */
-
-.dashboard-card {
-    min-height: 160px;
-
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
-}
-
 
 .dashboard-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 
-    box-shadow:
-        0 10px 25px
-        rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow);
 }
-
 
 .card-icon {
-    font-size: 30px;
-    margin-bottom: 12px;
-}
+    font-size: 27px;
 
+    margin-bottom: 14px;
+}
 
 .dashboard-card h3 {
-    font-size: 15px;
+    color: var(--text-light);
 
-    color: #64748b;
+    font-size: 14px;
 
-    margin-bottom: 10px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
 }
-
 
 .dashboard-card span {
     display: block;
 
     font-size: 32px;
-    font-weight: bold;
 
-    color: #1e293b;
+    font-weight: 700;
 
-    margin-bottom: 5px;
+    color: var(--text);
+
+    margin-bottom: 6px;
 }
-
 
 .dashboard-card small {
     color: #94a3b8;
+
+    font-size: 12px;
 }
 
 
-/* ======================================
-FORMULÁRIOS
-====================================== */
+/* =====================================================
+   FORMULÁRIOS
+===================================================== */
 
 .form-card {
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
-
-
-.form-card h3,
-.card h3 {
-    margin-bottom: 20px;
-    color: #1e293b;
-}
-
 
 .form-grid {
     display: grid;
@@ -498,24 +686,20 @@ FORMULÁRIOS
     margin-bottom: 20px;
 }
 
-
 .form-grid .full {
     grid-column: 1 / -1;
 }
 
-
 .form-grid div {
     display: flex;
+
     flex-direction: column;
 }
 
-
-/* ======================================
-LABELS
-====================================== */
-
 label {
-    font-size: 14px;
+    display: block;
+
+    font-size: 13px;
 
     font-weight: 600;
 
@@ -525,50 +709,82 @@ label {
 }
 
 
-/* ======================================
-INPUTS
-====================================== */
+/* =====================================================
+   INPUTS E SELECTS
+===================================================== */
 
 input,
 select {
     width: 100%;
 
-    padding: 12px 13px;
+    height: 44px;
 
-    border: 1px solid #cbd5e1;
+    padding: 0 13px;
+
+    background: white;
+
+    border:
+        1px solid
+        #cbd5e1;
 
     border-radius: 8px;
+
+    color: var(--text);
 
     font-size: 14px;
 
     outline: none;
 
-    background: white;
-
     transition:
-        border 0.2s,
-        box-shadow 0.2s;
+        border 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+input::placeholder {
+    color: #94a3b8;
+}
 
 input:focus,
 select:focus {
-    border-color: #2563eb;
+    border-color: var(--primary);
 
     box-shadow:
         0 0 0 3px
-        rgba(37, 99, 235, 0.1);
+        rgba(37, 99, 235, 0.12);
 }
 
 
-/* ======================================
-BOTÕES GERAIS
-====================================== */
+/* =====================================================
+   CHECKBOX
+===================================================== */
 
-button {
-    font-family: inherit;
+.checkbox-area {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 16px 0;
+
+    cursor: pointer;
 }
 
+.checkbox-area input {
+    width: 17px;
+    height: 17px;
+}
+
+.checkbox-area span {
+    font-size: 14px;
+
+    color: #475569;
+}
+
+
+/* =====================================================
+   BOTÕES PRINCIPAIS
+===================================================== */
 
 .green,
 .blue,
@@ -584,67 +800,63 @@ button {
 
     cursor: pointer;
 
+    font-size: 14px;
+
     font-weight: 600;
 
-    margin-top: 10px;
+    display: inline-flex;
 
-    transition:
-        transform 0.2s,
-        opacity 0.2s;
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
 }
-
-
-.green:hover,
-.blue:hover,
-.red:hover,
-.gray:hover {
-    transform: translateY(-1px);
-}
-
 
 .green {
-    background: #16a34a;
+    background: var(--success);
 }
 
+.green:hover {
+    background: var(--success-hover);
+
+    box-shadow:
+        0 4px 10px
+        rgba(22, 163, 74, 0.22);
+}
 
 .blue {
-    background: #2563eb;
+    background: var(--primary);
 }
 
+.blue:hover {
+    background: var(--primary-hover);
+
+    box-shadow:
+        0 4px 10px
+        rgba(37, 99, 235, 0.22);
+}
 
 .red {
-    background: #dc2626;
+    background: var(--danger);
 }
 
+.red:hover {
+    background: var(--danger-hover);
+}
 
 .gray {
     background: #64748b;
 }
-
-
-.green:hover {
-    background: #15803d;
-}
-
-
-.blue:hover {
-    background: #1d4ed8;
-}
-
-
-.red:hover {
-    background: #b91c1c;
-}
-
 
 .gray:hover {
     background: #475569;
 }
 
 
-/* ======================================
-GRUPO DE BOTÕES
-====================================== */
+/* =====================================================
+   GRUPOS DE BOTÕES
+===================================================== */
 
 .button-group {
     display: flex;
@@ -653,32 +865,25 @@ GRUPO DE BOTÕES
 
     gap: 10px;
 
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 
-/* ======================================
-CHECKBOX
-====================================== */
+/* =====================================================
+   FILTROS
+===================================================== */
 
-.checkbox-area {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-
-    margin: 15px 0;
+#filtro_clinica_nome,
+#filtro_estado_regiao,
+#filtro_cidade_estado,
+#filtro_bairro_cidade {
+    margin-bottom: 16px;
 }
 
 
-.checkbox-area input {
-    width: auto;
-}
-
-
-/* ======================================
-LISTAS
-====================================== */
+/* =====================================================
+   LISTAS
+===================================================== */
 
 #listaClinicas,
 #listaEspecialidades,
@@ -687,45 +892,83 @@ LISTAS
 #listaCidades,
 #listaBairros,
 .lista-vinculos {
-    margin-top: 20px;
-}
-
-
-/* ======================================
-TABELAS
-====================================== */
-
-.tabela-container {
     width: 100%;
 
-    overflow-x: auto;
-
-    margin-top: 20px;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 12px;
+    margin-top: 10px;
 }
 
 
-.tabela {
-    width: 100%;
+/* =====================================================
+   ITEM DE LISTA GENÉRICO
+===================================================== */
 
-    border-collapse: collapse;
+.item-lista {
+    display: flex;
 
-    min-width: 700px;
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 16px;
+
+    background: #fff;
+
+    border-bottom:
+        1px solid
+        var(--border);
 }
 
+.item-lista:first-child {
+    border-radius: 8px 8px 0 0;
+}
 
-.tabela thead {
+.item-lista:last-child {
+    border-bottom: none;
+
+    border-radius: 0 0 8px 8px;
+}
+
+.item-lista:hover {
     background: #f8fafc;
 }
 
 
-.tabela th {
+/* =====================================================
+   TABELAS
+===================================================== */
+
+.table-responsive {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+
+    min-width: 750px;
+}
+
+thead {
+    background: #f8fafc;
+}
+
+th {
     text-align: left;
 
-    padding: 15px;
+    padding: 14px 16px;
 
     font-size: 12px;
 
@@ -735,37 +978,37 @@ TABELAS
 
     color: #64748b;
 
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom:
+        1px solid
+        var(--border);
 }
 
+td {
+    padding: 15px 16px;
 
-.tabela td {
-    padding: 15px;
+    color: #475569;
 
-    color: #334155;
-
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom:
+        1px solid
+        #f1f5f9;
 }
 
-
-.tabela tbody tr {
-    transition: background 0.2s;
+tbody tr {
+    transition: background 0.15s ease;
 }
 
-
-.tabela tbody tr:hover {
+tbody tr:hover {
     background: #f8fafc;
 }
 
-
-.tabela tbody tr:last-child td {
+tbody tr:last-child td {
     border-bottom: none;
 }
 
 
-/* ======================================
-BOTÕES DA TABELA
-====================================== */
+/* =====================================================
+   BOTÕES DE AÇÃO DE TABELAS
+===================================================== */
 
 .btn-editar,
 .btn-excluir {
@@ -777,156 +1020,171 @@ BOTÕES DA TABELA
 
     cursor: pointer;
 
-    font-size: 13px;
+    font-size: 12px;
 
     font-weight: 600;
 
     margin-right: 5px;
-
-    transition: 0.2s;
 }
-
 
 .btn-editar {
     background: #dbeafe;
+
     color: #2563eb;
 }
 
-
 .btn-editar:hover {
     background: #2563eb;
+
     color: white;
 }
-
 
 .btn-excluir {
     background: #fee2e2;
+
     color: #dc2626;
 }
 
-
 .btn-excluir:hover {
     background: #dc2626;
+
     color: white;
 }
 
 
-/* ======================================
-STATUS
-====================================== */
+/* =====================================================
+   STATUS
+===================================================== */
 
 .status {
     display: inline-flex;
 
     align-items: center;
 
+    gap: 6px;
+
     padding: 5px 10px;
 
-    border-radius: 20px;
+    border-radius: 999px;
 
     font-size: 12px;
 
-    font-weight: bold;
+    font-weight: 600;
 }
-
 
 .status.ativo {
     background: #dcfce7;
+
     color: #15803d;
 }
 
-
 .status.inativo {
     background: #fee2e2;
-    color: #dc2626;
+
+    color: #b91c1c;
 }
 
 
-/* ======================================
-ITEM LISTA SIMPLES
-====================================== */
+/* =====================================================
+   VÍNCULOS DE ESPECIALIDADES
+===================================================== */
 
-.item-lista {
+.lista-vinculos {
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.lista-vinculos > div {
     display: flex;
-
-    justify-content: space-between;
 
     align-items: center;
 
+    justify-content: space-between;
+
     gap: 15px;
 
-    padding: 15px;
+    padding: 14px 16px;
 
     border-bottom:
-        1px solid #e5e7eb;
+        1px solid
+        var(--border);
 }
 
-
-.item-lista:last-child {
+.lista-vinculos > div:last-child {
     border-bottom: none;
 }
 
-
-/* ======================================
-MENSAGEM SEM RESULTADO
-====================================== */
-
-.sem-dados {
-    text-align: center;
-
-    padding: 35px;
-
-    color: #64748b;
+.lista-vinculos > div:hover {
+    background: #f8fafc;
 }
 
 
-/* ======================================
-SCROLLBAR
-====================================== */
+/* =====================================================
+   MENSAGENS VAZIAS
+===================================================== */
+
+.lista-vazia,
+.mensagem-vazia {
+    padding: 35px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    border:
+        1px dashed
+        #cbd5e1;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
 
 .sidebar::-webkit-scrollbar {
     width: 6px;
 }
 
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
 
 .sidebar::-webkit-scrollbar-thumb {
     background: #475569;
+
     border-radius: 10px;
 }
 
 
-/* ======================================
-RESPONSIVO - TABLET
-====================================== */
+/* =====================================================
+   RESPONSIVO - TABLET
+===================================================== */
 
-@media (max-width: 1100px) {
-
-    .painel {
-        padding: 15px;
-        gap: 15px;
-    }
+@media (max-width: 1000px) {
 
     .sidebar {
-        width: 230px;
-        min-width: 230px;
-
-        height: calc(100vh - 30px);
-
-        top: 15px;
+        width: 220px;
+        min-width: 220px;
     }
 
     .page {
         padding: 25px;
     }
 
-}
-
-
-/* ======================================
-RESPONSIVO
-====================================== */
-
-@media (max-width: 900px) {
+    .topbar {
+        padding: 22px 25px;
+    }
 
     .form-grid {
         grid-template-columns: 1fr;
@@ -935,61 +1193,76 @@ RESPONSIVO
 }
 
 
-/* ======================================
-CELULAR
-====================================== */
+/* =====================================================
+   RESPONSIVO - CELULAR
+===================================================== */
 
-@media (max-width: 700px) {
-
-    body {
-        background: #f4f6f9;
-    }
+@media (max-width: 750px) {
 
     .painel {
         flex-direction: column;
-
-        padding: 10px;
-
-        gap: 15px;
     }
 
     .sidebar {
         width: 100%;
+
         min-width: 100%;
 
         height: auto;
 
-        position: relative;
-        top: auto;
+        min-height: auto;
 
-        border-radius: 14px;
+        position: relative;
+
+        overflow: visible;
+    }
+
+    .sidebar-logo {
+        padding: 20px;
+    }
+
+    .logo-area img {
+        width: 55px !important;
+        height: 55px !important;
     }
 
     .sidebar-menu {
         padding: 10px;
     }
 
+    .menu-title {
+        margin-top: 15px;
+    }
+
     .sidebar-footer {
-        display: block;
+        display: none;
     }
 
     .content {
         width: 100%;
-
-        min-height: auto;
-
-        border-radius: 14px;
     }
 
     .topbar {
         padding: 20px;
     }
 
+    .topbar h1 {
+        font-size: 23px;
+    }
+
     .page {
         padding: 20px;
     }
 
+    .page-header h2 {
+        font-size: 21px;
+    }
+
     .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
         grid-template-columns: 1fr;
     }
 
@@ -999,6 +1272,27 @@ CELULAR
 
     .button-group button {
         width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   RESPONSIVO - TELAS MUITO PEQUENAS
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .page {
+        padding: 15px;
     }
 
 }
