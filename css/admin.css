@@ -10,31 +10,28 @@
 
 :root {
     --primary: #2563eb;
-    --primary-hover: #1d4ed8;
+    --primary-dark: #1d4ed8;
 
     --success: #16a34a;
-    --success-hover: #15803d;
+    --success-dark: #15803d;
 
     --danger: #dc2626;
-    --danger-hover: #b91c1c;
+    --danger-dark: #b91c1c;
 
-    --warning: #f59e0b;
+    --warning: #ea580c;
 
-    --dark: #0f172a;
-    --sidebar: #111827;
-    --sidebar-hover: #1f2937;
+    --dark: #172033;
+    --dark-light: #243047;
 
-    --background: #f1f5f9;
-    --card: #ffffff;
+    --background: #f4f7fb;
+    --white: #ffffff;
 
     --text: #1e293b;
     --text-light: #64748b;
 
     --border: #e2e8f0;
 
-    --shadow:
-        0 4px 20px
-        rgba(15, 23, 42, 0.08);
+    --sidebar-width: 270px;
 }
 
 html,
@@ -51,7 +48,6 @@ body {
 
     background: var(--background);
     color: var(--text);
-
     overflow-x: hidden;
 }
 
@@ -65,6 +61,20 @@ button {
     cursor: pointer;
 }
 
+img {
+    max-width: 100%;
+}
+
+
+/* ======================================
+   CLASSES UTILITÁRIAS
+====================================== */
+
+.hidden {
+    display: none !important;
+}
+
+
 /* ======================================
    LOGIN
 ====================================== */
@@ -77,36 +87,36 @@ button {
     align-items: center;
     justify-content: center;
 
+    padding: 20px;
+
     background:
         linear-gradient(
             135deg,
-            #0f172a,
-            #1e3a8a
+            #172033,
+            #263a63
         );
-
-    padding: 20px;
 }
 
 .login-box {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
 
     background: white;
 
-    padding: 40px;
+    border-radius: 20px;
 
-    border-radius: 18px;
+    padding: 45px 40px;
 
     text-align: center;
 
     box-shadow:
-        0 20px 50px
+        0 25px 60px
         rgba(0, 0, 0, 0.25);
 }
 
 .login-box .logo {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
 
     object-fit: contain;
 
@@ -114,8 +124,7 @@ button {
 }
 
 .login-box h1 {
-    font-size: 26px;
-
+    font-size: 27px;
     color: var(--dark);
 
     margin-bottom: 8px;
@@ -124,24 +133,28 @@ button {
 .login-box p {
     color: var(--text-light);
 
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .login-box input {
     width: 100%;
 
-    padding: 13px 15px;
-
-    margin-bottom: 15px;
+    padding: 14px 15px;
 
     border: 1px solid var(--border);
 
-    border-radius: 8px;
+    border-radius: 10px;
 
-    outline: none;
+    margin-bottom: 15px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
 }
 
 .login-box input:focus {
+    outline: none;
+
     border-color: var(--primary);
 
     box-shadow:
@@ -152,25 +165,26 @@ button {
 .login-box button {
     width: 100%;
 
-    padding: 13px;
+    padding: 14px;
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 10px;
 
     background: var(--primary);
 
     color: white;
 
-    font-weight: bold;
-
     font-size: 15px;
+    font-weight: 600;
 
     transition: 0.2s;
 }
 
 .login-box button:hover {
-    background: var(--primary-hover);
+    background: var(--primary-dark);
+
+    transform: translateY(-1px);
 }
 
 #loginMensagem {
@@ -181,20 +195,15 @@ button {
 
 
 /* ======================================
-   UTILITÁRIOS
-====================================== */
-
-.hidden {
-    display: none !important;
-}
-
-
-/* ======================================
    PAINEL PRINCIPAL
 ====================================== */
 
 .painel {
     min-height: 100vh;
+
+    display: flex;
+
+    background: var(--background);
 }
 
 
@@ -203,29 +212,33 @@ button {
 ====================================== */
 
 .sidebar {
-    width: 260px;
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
 
-    height: 100vh;
+    min-height: 100vh;
 
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    background: var(--sidebar);
+    background:
+        linear-gradient(
+            180deg,
+            #172033,
+            #111827
+        );
 
     color: white;
 
     display: flex;
     flex-direction: column;
 
-    z-index: 100;
+    position: sticky;
+    top: 0;
+
+    height: 100vh;
 
     overflow-y: auto;
 
     box-shadow:
         4px 0 20px
-        rgba(0, 0, 0, 0.08);
+        rgba(15, 23, 42, 0.08);
 }
 
 
@@ -234,7 +247,7 @@ button {
 ====================================== */
 
 .sidebar-logo {
-    padding: 28px 20px;
+    padding: 28px 20px 25px;
 
     text-align: center;
 
@@ -244,24 +257,32 @@ button {
 }
 
 .logo-area {
-    display: flex;
+    width: 75px;
+    height: 75px;
 
+    margin:
+        0 auto
+        15px;
+
+    display: flex;
+    align-items: center;
     justify-content: center;
 
-    margin-bottom: 12px;
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
 }
 
 .logo-area img {
-    width: 58px;
-
-    height: 58px;
+    width: 52px;
+    height: 52px;
 
     object-fit: contain;
 }
 
 .sidebar-logo h2 {
-    font-size: 21px;
-
+    font-size: 22px;
     line-height: 1.2;
 
     margin-bottom: 8px;
@@ -283,44 +304,43 @@ button {
 .sidebar-menu {
     flex: 1;
 
-    padding: 18px 12px;
+    padding: 20px 14px;
 }
 
 .menu-title {
-    margin:
-        18px
-        12px
-        8px;
-
     font-size: 10px;
 
-    font-weight: bold;
+    font-weight: 700;
 
     letter-spacing: 1px;
 
     color: #64748b;
+
+    margin:
+        18px
+        10px
+        8px;
 }
 
 .menu-btn {
     width: 100%;
 
-    display: flex;
+    border: none;
 
-    align-items: center;
+    background: transparent;
 
-    gap: 12px;
+    color: #cbd5e1;
 
     padding: 12px 14px;
 
     margin-bottom: 5px;
 
-    border: none;
+    border-radius: 10px;
 
-    border-radius: 9px;
+    display: flex;
+    align-items: center;
 
-    background: transparent;
-
-    color: #cbd5e1;
+    gap: 12px;
 
     text-align: left;
 
@@ -333,7 +353,8 @@ button {
 }
 
 .menu-btn:hover {
-    background: var(--sidebar-hover);
+    background:
+        rgba(255, 255, 255, 0.07);
 
     color: white;
 
@@ -341,21 +362,26 @@ button {
 }
 
 .menu-btn.active {
-    background: var(--primary);
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
 
     color: white;
 
     box-shadow:
-        0 4px 12px
-        rgba(37, 99, 235, 0.3);
+        0 6px 15px
+        rgba(37, 99, 235, 0.25);
 }
 
 .icon {
+    font-size: 18px;
+
     width: 24px;
 
     text-align: center;
-
-    font-size: 18px;
 }
 
 
@@ -373,33 +399,37 @@ button {
 
 .admin-info {
     display: flex;
-
     align-items: center;
 
     gap: 10px;
 
-    padding-bottom: 15px;
+    margin-bottom: 15px;
+
+    padding: 10px;
 }
 
 .avatar {
     width: 42px;
     height: 42px;
 
-    display: flex;
+    border-radius: 50%;
 
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 50%;
-
-    background: #1f2937;
-
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .admin-text {
     display: flex;
-
     flex-direction: column;
 }
 
@@ -408,22 +438,22 @@ button {
 }
 
 .admin-text small {
+    font-size: 11px;
+
     color: #94a3b8;
 
     margin-top: 3px;
-
-    font-size: 11px;
 }
 
 .btn-voltar-site,
 .logout {
     width: 100%;
 
-    padding: 10px 12px;
-
     border: none;
 
-    border-radius: 8px;
+    border-radius: 9px;
+
+    padding: 11px;
 
     margin-top: 8px;
 
@@ -433,19 +463,26 @@ button {
 }
 
 .btn-voltar-site {
-    background: #1f2937;
+    background:
+        rgba(255, 255, 255, 0.08);
 
     color: white;
 }
 
 .btn-voltar-site:hover {
-    background: #334155;
+    background:
+        rgba(255, 255, 255, 0.14);
 }
 
 .logout {
-    background: rgba(220, 38, 38, 0.15);
+    background:
+        rgba(220, 38, 38, 0.15);
 
     color: #fca5a5;
+
+    border:
+        1px solid
+        rgba(220, 38, 38, 0.2);
 }
 
 .logout:hover {
@@ -460,31 +497,33 @@ button {
 ====================================== */
 
 .content {
-    min-height: 100vh;
+    flex: 1;
 
-    margin-left: 260px;
+    min-width: 0;
+
+    min-height: 100vh;
 
     background: var(--background);
 }
 
 
 /* ======================================
-   TOPBAR
+   TOPO
 ====================================== */
 
 .topbar {
-    height: 85px;
-
     background: white;
 
-    display: flex;
+    min-height: 105px;
 
+    padding: 25px 35px;
+
+    display: flex;
     align-items: center;
 
-    padding: 0 35px;
-
     border-bottom:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 }
 
 .topbar-subtitle {
@@ -492,13 +531,19 @@ button {
 
     font-size: 12px;
 
-    color: var(--text-light);
+    font-weight: 600;
 
-    margin-bottom: 4px;
+    color: var(--primary);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+    margin-bottom: 5px;
 }
 
 .topbar h1 {
-    font-size: 25px;
+    font-size: 28px;
 
     color: var(--dark);
 }
@@ -510,10 +555,6 @@ button {
 
 .page {
     padding: 30px 35px;
-
-    max-width: 1600px;
-
-    margin: 0 auto;
 }
 
 .page.hidden {
@@ -534,7 +575,7 @@ button {
 
     color: var(--dark);
 
-    margin-bottom: 6px;
+    margin-bottom: 7px;
 }
 
 .page-header p {
@@ -549,18 +590,21 @@ button {
 ====================================== */
 
 .card {
-    background: var(--card);
+    background: white;
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
-    border-radius: 14px;
+    border-radius: 16px;
 
-    padding: 24px;
+    padding: 25px;
 
-    margin-bottom: 22px;
+    margin-bottom: 25px;
 
-    box-shadow: var(--shadow);
+    box-shadow:
+        0 4px 20px
+        rgba(15, 23, 42, 0.04);
 }
 
 .card h3 {
@@ -573,28 +617,27 @@ button {
 
 
 /* ======================================
-   DASHBOARD
+   CARDS DASHBOARD
 ====================================== */
 
 .cards {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(
+            auto-fit,
+            minmax(190px, 1fr)
+        );
 
-    gap: 20px;
+    gap: 18px;
 }
 
 .dashboard-card {
     position: relative;
 
-    min-height: 155px;
+    min-height: 165px;
 
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
+    padding: 22px;
 
     transition:
         transform 0.2s,
@@ -606,29 +649,42 @@ button {
 
     box-shadow:
         0 12px 30px
-        rgba(15, 23, 42, 0.12);
+        rgba(15, 23, 42, 0.08);
 }
 
 .card-icon {
-    font-size: 28px;
+    width: 45px;
+    height: 45px;
 
-    margin-bottom: 12px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    background: #eff6ff;
+
+    margin-bottom: 18px;
 }
 
 .dashboard-card h3 {
+    font-size: 13px;
+
     color: var(--text-light);
 
-    font-size: 14px;
-
-    font-weight: 500;
+    font-weight: 600;
 
     margin-bottom: 8px;
 }
 
 .dashboard-card span {
-    font-size: 32px;
+    display: block;
 
-    font-weight: bold;
+    font-size: 30px;
+
+    font-weight: 700;
 
     color: var(--dark);
 
@@ -636,9 +692,9 @@ button {
 }
 
 .dashboard-card small {
-    color: #94a3b8;
+    font-size: 11px;
 
-    font-size: 12px;
+    color: #94a3b8;
 }
 
 
@@ -656,7 +712,7 @@ button {
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 18px;
+    gap: 20px;
 
     margin-bottom: 20px;
 }
@@ -667,7 +723,6 @@ button {
 
 .form-grid div {
     display: flex;
-
     flex-direction: column;
 }
 
@@ -681,11 +736,6 @@ label {
     margin-bottom: 7px;
 }
 
-
-/* ======================================
-   INPUTS E SELECTS
-====================================== */
-
 input,
 select {
     width: 100%;
@@ -695,17 +745,16 @@ select {
     padding: 0 13px;
 
     border:
-        1px solid #cbd5e1;
+        1px solid
+        #d7dee8;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     background: white;
 
     color: var(--text);
 
     font-size: 14px;
-
-    outline: none;
 
     transition:
         border-color 0.2s,
@@ -718,6 +767,8 @@ input::placeholder {
 
 input:focus,
 select:focus {
+    outline: none;
+
     border-color: var(--primary);
 
     box-shadow:
@@ -727,26 +778,18 @@ select:focus {
 
 
 /* ======================================
-   BOTÕES PRINCIPAIS
+   BOTÕES GERAIS
 ====================================== */
 
 .green,
 .blue,
 .red,
 .gray {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    padding: 11px 18px;
-
     border: none;
 
-    border-radius: 8px;
+    border-radius: 9px;
+
+    padding: 11px 18px;
 
     color: white;
 
@@ -756,8 +799,8 @@ select:focus {
 
     transition:
         transform 0.2s,
-        background 0.2s,
-        box-shadow 0.2s;
+        box-shadow 0.2s,
+        background 0.2s;
 }
 
 .green:hover,
@@ -772,7 +815,11 @@ select:focus {
 }
 
 .green:hover {
-    background: var(--success-hover);
+    background: var(--success-dark);
+
+    box-shadow:
+        0 5px 12px
+        rgba(22, 163, 74, 0.2);
 }
 
 .blue {
@@ -780,7 +827,11 @@ select:focus {
 }
 
 .blue:hover {
-    background: var(--primary-hover);
+    background: var(--primary-dark);
+
+    box-shadow:
+        0 5px 12px
+        rgba(37, 99, 235, 0.2);
 }
 
 .red {
@@ -788,7 +839,7 @@ select:focus {
 }
 
 .red:hover {
-    background: var(--danger-hover);
+    background: var(--danger-dark);
 }
 
 .gray {
@@ -821,20 +872,16 @@ select:focus {
 
 .checkbox-area {
     display: flex;
-
     align-items: center;
 
-    gap: 9px;
+    gap: 10px;
 
-    margin: 18px 0;
+    margin: 15px 0;
 }
 
 .checkbox-area input {
     width: 18px;
-
     height: 18px;
-
-    accent-color: var(--primary);
 }
 
 
@@ -846,9 +893,24 @@ select:focus {
 #filtro_estado_regiao,
 #filtro_cidade_estado,
 #filtro_bairro_cidade {
-    max-width: 400px;
+    margin-bottom: 15px;
 
-    margin-bottom: 18px;
+    max-width: 400px;
+}
+
+
+/* ======================================
+   ÁREA DAS LISTAS
+====================================== */
+
+#listaClinicas,
+#listaEspecialidades,
+#listaRegioes,
+#listaEstados,
+#listaCidades,
+#listaBairros,
+.lista-vinculos {
+    margin-top: 15px;
 }
 
 
@@ -856,33 +918,32 @@ select:focus {
    TABELAS
 ====================================== */
 
-.tabela-container {
+.table-container {
     width: 100%;
 
     overflow-x: auto;
 
     border:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
-.tabela-admin {
+table {
     width: 100%;
 
     border-collapse: collapse;
 
-    background: white;
-
-    min-width: 750px;
+    min-width: 700px;
 }
 
-.tabela-admin thead {
+thead {
     background: #f8fafc;
 }
 
-.tabela-admin th {
-    padding: 14px 16px;
+th {
+    padding: 15px;
 
     text-align: left;
 
@@ -895,29 +956,31 @@ select:focus {
     color: #64748b;
 
     border-bottom:
-        1px solid var(--border);
+        1px solid
+        var(--border);
 }
 
-.tabela-admin td {
-    padding: 15px 16px;
+td {
+    padding: 15px;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    color: #334155;
+    color: #475569;
 
     border-bottom:
-        1px solid #f1f5f9;
+        1px solid
+        #f1f5f9;
 }
 
-.tabela-admin tbody tr {
-    transition: background 0.15s;
+tbody tr {
+    transition: background 0.2s;
 }
 
-.tabela-admin tbody tr:hover {
+tbody tr:hover {
     background: #f8fafc;
 }
 
-.tabela-admin tbody tr:last-child td {
+tbody tr:last-child td {
     border-bottom: none;
 }
 
@@ -939,24 +1002,41 @@ select:focus {
 
     font-size: 11px;
 
-    font-weight: bold;
+    font-weight: 600;
+}
+
+.status::before {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
 }
 
 .status.ativo {
-    color: #15803d;
+    background: #f0fdf4;
 
-    background: #dcfce7;
+    color: #15803d;
+}
+
+.status.ativo::before {
+    background: #22c55e;
 }
 
 .status.inativo {
-    color: #b91c1c;
+    background: #fef2f2;
 
-    background: #fee2e2;
+    color: #dc2626;
+}
+
+.status.inativo::before {
+    background: #ef4444;
 }
 
 
 /* ======================================
-   BOTÕES DAS TABELAS
+   BOTÕES DE AÇÃO DAS TABELAS
 ====================================== */
 
 .acoes {
@@ -964,67 +1044,165 @@ select:focus {
 
     align-items: center;
 
-    gap: 7px;
+    justify-content: flex-end;
 
     flex-wrap: wrap;
+
+    gap: 8px;
 }
 
-.btn-editar,
-.btn-excluir,
-.btn-ativar,
-.btn-desativar {
+
+/* BOTÃO BASE */
+
+.btn-acao {
     border: none;
 
-    padding: 8px 11px;
+    border-radius: 9px;
 
-    border-radius: 7px;
+    padding: 9px 13px;
 
     font-size: 12px;
 
     font-weight: 600;
 
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
     transition:
-        transform 0.15s,
-        opacity 0.15s;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
-.btn-editar:hover,
-.btn-excluir:hover,
-.btn-ativar:hover,
-.btn-desativar:hover {
-    transform: translateY(-1px);
-
-    opacity: 0.9;
+.btn-acao:hover {
+    transform: translateY(-2px);
 }
 
-.btn-editar {
-    background: #dbeafe;
-
-    color: #1d4ed8;
-}
-
-.btn-excluir {
-    background: #fee2e2;
-
-    color: #dc2626;
-}
-
-.btn-ativar {
-    background: #dcfce7;
-
-    color: #15803d;
-}
-
-.btn-desativar {
-    background: #fef3c7;
-
-    color: #b45309;
+.btn-acao:active {
+    transform: translateY(0);
 }
 
 
 /* ======================================
-   LISTAS SIMPLES
-   REGIÕES / ESTADOS / CIDADES / BAIRROS
+   BOTÃO EDITAR
+====================================== */
+
+.btn-editar {
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border:
+        1px solid
+        #bfdbfe;
+}
+
+.btn-editar:hover {
+    background: #2563eb;
+
+    color: white;
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 5px 14px
+        rgba(37, 99, 235, 0.25);
+}
+
+
+/* ======================================
+   BOTÃO EXCLUIR
+====================================== */
+
+.btn-excluir {
+    background: #fef2f2;
+
+    color: #dc2626;
+
+    border:
+        1px solid
+        #fecaca;
+}
+
+.btn-excluir:hover {
+    background: #dc2626;
+
+    color: white;
+
+    border-color: #dc2626;
+
+    box-shadow:
+        0 5px 14px
+        rgba(220, 38, 38, 0.25);
+}
+
+
+/* ======================================
+   BOTÃO ATIVAR
+====================================== */
+
+.btn-ativar {
+    background: #f0fdf4;
+
+    color: #16a34a;
+
+    border:
+        1px solid
+        #bbf7d0;
+}
+
+.btn-ativar:hover {
+    background: #16a34a;
+
+    color: white;
+
+    border-color: #16a34a;
+
+    box-shadow:
+        0 5px 14px
+        rgba(22, 163, 74, 0.25);
+}
+
+
+/* ======================================
+   BOTÃO DESATIVAR
+====================================== */
+
+.btn-desativar {
+    background: #fff7ed;
+
+    color: #ea580c;
+
+    border:
+        1px solid
+        #fed7aa;
+}
+
+.btn-desativar:hover {
+    background: #ea580c;
+
+    color: white;
+
+    border-color: #ea580c;
+
+    box-shadow:
+        0 5px 14px
+        rgba(234, 88, 12, 0.25);
+}
+
+
+/* ======================================
+   ITENS SIMPLES DAS LISTAS
 ====================================== */
 
 .item-lista {
@@ -1036,57 +1214,25 @@ select:focus {
 
     gap: 15px;
 
-    padding: 16px;
+    padding: 15px 5px;
 
     border-bottom:
-        1px solid var(--border);
-
-    transition: background 0.2s;
-}
-
-.item-lista:hover {
-    background: #f8fafc;
+        1px solid
+        var(--border);
 }
 
 .item-lista:last-child {
     border-bottom: none;
 }
 
-.item-lista-info {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-.item-lista-info strong {
-    font-size: 14px;
-
+.item-lista strong {
     color: var(--dark);
-}
-
-.item-lista-info span {
-    font-size: 12px;
-
-    color: var(--text-light);
 }
 
 
 /* ======================================
-   ESPECIALIDADES VINCULADAS
+   VÍNCULOS DE ESPECIALIDADES
 ====================================== */
-
-.lista-vinculos {
-    margin-top: 20px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius: 10px;
-
-    overflow: hidden;
-}
 
 .vinculo-item {
     display: flex;
@@ -1097,14 +1243,17 @@ select:focus {
 
     gap: 15px;
 
-    padding: 14px 16px;
+    padding: 14px;
 
-    border-bottom:
-        1px solid var(--border);
-}
+    background: #f8fafc;
 
-.vinculo-item:last-child {
-    border-bottom: none;
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
 }
 
 .vinculo-info {
@@ -1112,7 +1261,7 @@ select:focus {
 
     flex-direction: column;
 
-    gap: 5px;
+    gap: 4px;
 }
 
 .vinculo-info strong {
@@ -1127,52 +1276,17 @@ select:focus {
 
 
 /* ======================================
-   BADGES DE REDE
-====================================== */
-
-.badge {
-    display: inline-flex;
-
-    align-items: center;
-
-    padding: 5px 9px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
-
-    font-weight: bold;
-}
-
-.badge-especialistas {
-    color: #1d4ed8;
-
-    background: #dbeafe;
-}
-
-.badge-sindilegis {
-    color: #7c3aed;
-
-    background: #ede9fe;
-}
-
-
-/* ======================================
    MENSAGEM SEM RESULTADOS
 ====================================== */
 
-.sem-dados {
+.sem-resultados {
     padding: 40px 20px;
 
     text-align: center;
 
-    color: var(--text-light);
-}
+    color: #94a3b8;
 
-.sem-dados h3 {
-    margin-bottom: 8px;
-
-    color: var(--text);
+    font-size: 14px;
 }
 
 
@@ -1181,7 +1295,11 @@ select:focus {
 ====================================== */
 
 .sidebar::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .sidebar::-webkit-scrollbar-thumb {
@@ -1192,31 +1310,21 @@ select:focus {
 
 
 /* ======================================
-   RESPONSIVIDADE
+   RESPONSIVO - TABLET
 ====================================== */
 
-@media (max-width: 1200px) {
+@media (max-width: 1050px) {
 
-    .cards {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-}
-
-
-@media (max-width: 900px) {
-
-    .sidebar {
-        width: 220px;
-    }
-
-    .content {
-        margin-left: 220px;
+    :root {
+        --sidebar-width: 230px;
     }
 
     .page {
         padding: 25px;
+    }
+
+    .topbar {
+        padding: 22px 25px;
     }
 
     .form-grid {
@@ -1227,45 +1335,82 @@ select:focus {
         grid-column: auto;
     }
 
+    .cards {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
 }
 
 
-@media (max-width: 700px) {
+/* ======================================
+   RESPONSIVO - MOBILE
+====================================== */
 
-    .sidebar {
-        position: relative;
-
-        width: 100%;
-
-        height: auto;
-
-        min-height: auto;
-    }
-
-    .content {
-        margin-left: 0;
-    }
+@media (max-width: 750px) {
 
     .painel {
-        display: block;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+
+        height: auto;
+        min-height: auto;
+
+        position: relative;
+
+        overflow: visible;
+    }
+
+    .sidebar-logo {
+        padding: 20px;
+    }
+
+    .logo-area {
+        width: 60px;
+        height: 60px;
+    }
+
+    .logo-area img {
+        width: 42px;
+        height: 42px;
     }
 
     .sidebar-menu {
         padding: 10px;
     }
 
+    .menu-btn {
+        padding: 11px 12px;
+    }
+
     .sidebar-footer {
-        display: none;
+        padding: 15px;
+    }
+
+    .content {
+        width: 100%;
     }
 
     .topbar {
-        height: auto;
+        min-height: 80px;
 
         padding: 20px;
     }
 
+    .topbar h1 {
+        font-size: 23px;
+    }
+
     .page {
-        padding: 20px;
+        padding: 20px 15px;
+    }
+
+    .page-header h2 {
+        font-size: 21px;
     }
 
     .cards {
@@ -1274,6 +1419,8 @@ select:focus {
 
     .card {
         padding: 18px;
+
+        border-radius: 12px;
     }
 
     .button-group {
@@ -1284,8 +1431,24 @@ select:focus {
         width: 100%;
     }
 
+    .acoes {
+        justify-content: flex-start;
+    }
+
+    .btn-acao {
+        padding: 8px 11px;
+    }
+
+    .login-box {
+        padding: 35px 25px;
+    }
+
 }
 
+
+/* ======================================
+   RESPONSIVO - CELULARES PEQUENOS
+====================================== */
 
 @media (max-width: 450px) {
 
@@ -1293,12 +1456,24 @@ select:focus {
         padding: 30px 20px;
     }
 
-    .topbar h1 {
-        font-size: 21px;
+    .login-box h1 {
+        font-size: 23px;
     }
 
-    .page-header h2 {
-        font-size: 20px;
+    .sidebar-logo h2 {
+        font-size: 19px;
+    }
+
+    .page {
+        padding: 15px 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .dashboard-card span {
+        font-size: 26px;
     }
 
 }
