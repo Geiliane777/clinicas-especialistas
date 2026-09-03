@@ -15,6 +15,7 @@
     <!-- ======================================
          TELA DE LOGIN
     ======================================= -->
+
     <div id="loginScreen" class="login-screen">
 
         <div class="login-card">
@@ -65,9 +66,7 @@
     <div id="painel" class="painel hidden">
 
 
-        <!-- ======================================
-             SIDEBAR
-        ======================================= -->
+        <!-- SIDEBAR -->
 
         <aside class="sidebar">
 
@@ -86,7 +85,9 @@
 
             <nav class="sidebar-menu">
 
-                <p class="menu-title">MENU PRINCIPAL</p>
+                <p class="menu-title">
+                    MENU PRINCIPAL
+                </p>
 
                 <button class="menu-btn active" data-page="dashboard">
                     <span class="icon">📊</span>
@@ -94,7 +95,9 @@
                 </button>
 
 
-                <p class="menu-title">GERENCIAMENTO</p>
+                <p class="menu-title">
+                    GERENCIAMENTO
+                </p>
 
                 <button class="menu-btn" data-page="clinicas">
                     <span class="icon">🏥</span>
@@ -107,7 +110,9 @@
                 </button>
 
 
-                <p class="menu-title">LOCALIZAÇÃO</p>
+                <p class="menu-title">
+                    LOCALIZAÇÃO
+                </p>
 
                 <button class="menu-btn" data-page="regioes">
                     <span class="icon">🌎</span>
@@ -277,13 +282,9 @@
                         type="text"
                         id="buscarClinica"
                         placeholder="🔍 Buscar clínica..."
-                        oninput="listarClinicas()"
                     >
 
-                    <select
-                        id="filtroStatusClinica"
-                        onchange="listarClinicas()"
-                    >
+                    <select id="filtroStatusClinica">
 
                         <option value="">
                             Todos os status
@@ -370,7 +371,6 @@
                             <button
                                 id="btnSalvarEspecialidade"
                                 class="btn-primary"
-                                onclick="salvarEspecialidade()"
                             >
                                 Adicionar
                             </button>
@@ -434,7 +434,6 @@
                             <button
                                 id="btnSalvarRegiao"
                                 class="btn-primary"
-                                onclick="salvarRegiao()"
                             >
                                 Adicionar
                             </button>
@@ -484,7 +483,6 @@
 
                         <input type="hidden" id="estadoEditId">
 
-
                         <div class="form-grid">
 
                             <div>
@@ -492,11 +490,9 @@
                                 <label>Região</label>
 
                                 <select id="estadoRegiao">
-
                                     <option value="">
                                         Selecione uma região
                                     </option>
-
                                 </select>
 
                             </div>
@@ -520,7 +516,6 @@
                         <button
                             id="btnSalvarEstado"
                             class="btn-primary"
-                            onclick="salvarEstado()"
                         >
                             Adicionar Estado
                         </button>
@@ -568,7 +563,6 @@
 
                         <input type="hidden" id="cidadeEditId">
 
-
                         <div class="form-grid">
 
                             <div>
@@ -576,11 +570,9 @@
                                 <label>Estado</label>
 
                                 <select id="cidadeEstado">
-
                                     <option value="">
                                         Selecione um estado
                                     </option>
-
                                 </select>
 
                             </div>
@@ -604,7 +596,6 @@
                         <button
                             id="btnSalvarCidade"
                             class="btn-primary"
-                            onclick="salvarCidade()"
                         >
                             Adicionar Cidade
                         </button>
@@ -652,7 +643,6 @@
 
                         <input type="hidden" id="bairroEditId">
 
-
                         <div class="form-grid">
 
                             <div>
@@ -660,11 +650,9 @@
                                 <label>Cidade</label>
 
                                 <select id="bairroCidade">
-
                                     <option value="">
                                         Selecione uma cidade
                                     </option>
-
                                 </select>
 
                             </div>
@@ -688,7 +676,6 @@
                         <button
                             id="btnSalvarBairro"
                             class="btn-primary"
-                            onclick="salvarBairro()"
                         >
                             Adicionar Bairro
                         </button>
@@ -732,8 +719,9 @@
                 </div>
 
                 <button
+                    type="button"
                     class="modal-close"
-                    onclick="fecharModalClinica()"
+                    id="btnFecharModal"
                 >
                     ×
                 </button>
@@ -745,6 +733,8 @@
 
                 <input type="hidden" id="clinicaId">
 
+
+                <!-- INFORMAÇÕES -->
 
                 <div class="form-section">
 
@@ -806,10 +796,7 @@
 
                             <label>Região</label>
 
-                            <select
-                                id="clinicaRegiao"
-                                onchange="carregarEstadosClinica()"
-                            >
+                            <select id="clinicaRegiao">
                                 <option value="">Selecione</option>
                             </select>
 
@@ -820,10 +807,7 @@
 
                             <label>Estado</label>
 
-                            <select
-                                id="clinicaEstado"
-                                onchange="carregarCidadesClinica()"
-                            >
+                            <select id="clinicaEstado">
                                 <option value="">Selecione</option>
                             </select>
 
@@ -834,10 +818,7 @@
 
                             <label>Cidade</label>
 
-                            <select
-                                id="clinicaCidade"
-                                onchange="carregarBairrosClinica()"
-                            >
+                            <select id="clinicaCidade">
                                 <option value="">Selecione</option>
                             </select>
 
@@ -879,7 +860,7 @@
                         <button
                             type="button"
                             class="btn-add-specialty"
-                            onclick="adicionarLinhaEspecialidade()"
+                            id="btnAdicionarEspecialidade"
                         >
                             + Adicionar Especialidade
                         </button>
@@ -945,7 +926,7 @@
                     <button
                         type="button"
                         class="btn-secondary"
-                        onclick="fecharModalClinica()"
+                        id="btnCancelarModal"
                     >
                         Cancelar
                     </button>
@@ -967,10 +948,16 @@
     </div>
 
 
-    <!-- SCRIPTS -->
+    <!-- ======================================
+         SCRIPTS
+    ======================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script src="login.js"></script>
     <script src="supabase.js"></script>
     <script src="admin.js"></script>
 
 </body>
+
 </html>
