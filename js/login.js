@@ -6,43 +6,49 @@ const USUARIO = "admin";
 const SENHA = "123456";
 
 
-// ======================================
-// VERIFICAR SESSÃO
-// ======================================
+document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("load", () => {
+    // ======================================
+    // VERIFICAR SESSÃO
+    // ======================================
 
-    const logado = localStorage.getItem("adminLogado");
+    const logado =
+        localStorage.getItem("adminLogado");
 
     if (logado === "true") {
         mostrarPainel();
     }
 
-});
 
-// ======================================
-// EVENTOS
-// ======================================
-
-document.addEventListener("DOMContentLoaded", () => {
+    // ======================================
+    // BOTÃO LOGIN
+    // ======================================
 
     const btnLogin =
         document.getElementById("btnLogin");
 
-    const campoSenha =
-        document.getElementById("senha");
-
     if (btnLogin) {
+
         btnLogin.addEventListener(
             "click",
             fazerLogin
         );
+
     }
 
+
+    // ======================================
+    // ENTER NA SENHA
+    // ======================================
+
+    const campoSenha =
+        document.getElementById("senha");
+
     if (campoSenha) {
+
         campoSenha.addEventListener(
             "keypress",
-            function(e) {
+            function (e) {
 
                 if (e.key === "Enter") {
                     fazerLogin();
@@ -50,9 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
         );
+
     }
 
 });
+
 
 // ======================================
 // FAZER LOGIN
@@ -61,13 +69,22 @@ document.addEventListener("DOMContentLoaded", () => {
 function fazerLogin() {
 
     const usuario =
-        document.getElementById("usuario").value.trim();
+        document
+            .getElementById("usuario")
+            .value
+            .trim();
 
     const senha =
-        document.getElementById("senha").value.trim();
+        document
+            .getElementById("senha")
+            .value
+            .trim();
 
     const mensagem =
-        document.getElementById("loginMensagem");
+        document.getElementById(
+            "loginMensagem"
+        );
+
 
     if (
         usuario === USUARIO &&
@@ -79,19 +96,18 @@ function fazerLogin() {
             "true"
         );
 
-        mensagem.innerHTML = "";
-
         mostrarPainel();
 
         return;
+
     }
 
-    mensagem.innerHTML =
+
+    mensagem.textContent =
         "Usuário ou senha inválidos.";
 
-    mensagem.style.color = "#dc2626";
-
 }
+
 
 // ======================================
 // MOSTRAR PAINEL
@@ -100,20 +116,31 @@ function fazerLogin() {
 function mostrarPainel() {
 
     const loginScreen =
-        document.getElementById("loginScreen");
+        document.getElementById(
+            "loginScreen"
+        );
 
     const painel =
-        document.getElementById("painel");
+        document.getElementById(
+            "painel"
+        );
+
 
     if (loginScreen) {
-        loginScreen.classList.add("hidden");
+        loginScreen.classList.add(
+            "hidden"
+        );
     }
 
+
     if (painel) {
-        painel.classList.remove("hidden");
+        painel.classList.remove(
+            "hidden"
+        );
     }
 
 }
+
 
 // ======================================
 // LOGOUT
@@ -121,7 +148,9 @@ function mostrarPainel() {
 
 function logout() {
 
-    localStorage.removeItem("adminLogado");
+    localStorage.removeItem(
+        "adminLogado"
+    );
 
     location.reload();
 
