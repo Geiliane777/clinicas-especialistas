@@ -1442,3 +1442,226 @@ td {
     }
 
 }
+/* ==========================================
+   LOGIN
+========================================== */
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172033,
+            #2563eb
+        );
+}
+
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+
+    background: white;
+
+    padding: 40px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+.login-logo {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.login-logo img {
+    width: 80px;
+    height: 80px;
+
+    object-fit: contain;
+
+    margin-bottom: 15px;
+}
+
+
+.login-logo h1 {
+    font-size: 24px;
+
+    color: var(--text);
+
+    margin-bottom: 7px;
+}
+
+
+.login-logo p {
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+.login-field {
+    margin-bottom: 20px;
+}
+
+
+.login-field label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.login-field input {
+    width: 100%;
+}
+
+
+.btn-login {
+    width: 100%;
+
+    border: none;
+
+    background: var(--primary);
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.btn-login:hover {
+    background: var(--primary-hover);
+
+    transform: translateY(-1px);
+}
+
+
+.mensagem-login {
+    min-height: 20px;
+
+    margin-top: 15px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.mensagem-login.erro {
+    color: #dc2626;
+}
+
+
+.mensagem-login.sucesso {
+    color: #16a34a;
+}
+
+
+.voltar-login {
+    width: 100%;
+
+    margin-top: 20px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+.voltar-login:hover {
+    color: var(--primary);
+}
+
+
+/* ==========================================
+   DASHBOARD MELHORADO
+========================================== */
+
+.cards {
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+}
+
+
+.dashboard-card {
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.dashboard-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -35px;
+    bottom: -35px;
+
+    border-radius: 50%;
+
+    background: rgba(37, 99, 235, 0.05);
+}
+
+
+.dashboard-card span {
+    color: var(--text);
+}
+
+
+.sem-dados {
+    padding: 25px;
+
+    text-align: center;
+
+    color: var(--muted);
+}
+
+
+/* ==========================================
+   RESPONSIVO LOGIN
+========================================== */
+
+@media (max-width: 500px) {
+
+    .login-card {
+        padding: 30px 22px;
+    }
+
+}
