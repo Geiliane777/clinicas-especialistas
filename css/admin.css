@@ -1,6 +1,6 @@
-/* ======================================
+/* =====================================
 RESET
-====================================== */
+===================================== */
 
 * {
     margin: 0;
@@ -9,61 +9,55 @@ RESET
 }
 
 :root {
+    --sidebar: #1e293b;
+    --sidebar-dark: #162132;
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
-
-    --sidebar: #111827;
-    --sidebar-hover: #1f2937;
-
-    --background: #f3f4f6;
-    --card: #ffffff;
-
-    --text: #1f2937;
-    --text-light: #6b7280;
-
-    --border: #e5e7eb;
-
-    --success: #16a34a;
     --danger: #dc2626;
+    --danger-bg: #fef2f2;
+    --success: #16a34a;
+    --success-bg: #dcfce7;
+    --warning: #d97706;
+    --background: #f1f5f9;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #24344a;
+    --muted: #64748b;
 }
 
 body {
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     background: var(--background);
     color: var(--text);
 }
 
-.hidden {
-    display: none !important;
+button,
+input,
+select {
+    font-family: inherit;
 }
 
 
-/* ======================================
+/* =====================================
 PAINEL
-====================================== */
+===================================== */
 
 .painel {
-    display: flex;
     min-height: 100vh;
+    display: flex;
 }
 
 
-/* ======================================
+/* =====================================
 SIDEBAR
-====================================== */
+===================================== */
 
 .sidebar {
     width: 270px;
     min-width: 270px;
-
-    min-height: 100vh;
+    height: 100vh;
 
     background: var(--sidebar);
-
     color: white;
 
     display: flex;
@@ -71,149 +65,123 @@ SIDEBAR
 
     position: sticky;
     top: 0;
-
-    height: 100vh;
 }
 
-
-/* ======================================
-LOGO
-====================================== */
-
-.sidebar-logo {
-    padding: 28px 20px;
-
-    text-align: center;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.08);
-}
-
-.logo-area {
-    margin-bottom: 12px;
-}
-
-.logo-area img {
-    width: 58px;
-    height: 58px;
-
-    object-fit: contain;
-}
-
-.sidebar-logo h2 {
-    font-size: 21px;
-
-    line-height: 1.2;
-
-    margin-bottom: 8px;
-}
-
-.sidebar-logo span {
-    font-size: 12px;
-
-    color: #94a3b8;
-}
-
-
-/* ======================================
-MENU
-====================================== */
-
-.sidebar-menu {
+.sidebar-top {
     flex: 1;
-
-    padding: 20px 12px;
-
     overflow-y: auto;
 }
 
-.menu-title {
-    font-size: 10px;
+.sidebar-logo {
+    text-align: center;
+    padding: 28px 20px;
 
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logo img {
+    width: 72px;
+    height: 72px;
+
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.sidebar-logo h2 {
+    font-size: 23px;
+    line-height: 1.15;
+}
+
+.sidebar-logo span {
+    display: block;
+    margin-top: 10px;
+
+    font-size: 13px;
+    color: #a8b7ca;
+}
+
+
+/* =====================================
+MENU
+===================================== */
+
+.sidebar-menu {
+    padding: 18px 12px;
+}
+
+.menu-title {
+    color: #8ea0b7;
+
+    font-size: 11px;
     font-weight: bold;
 
     letter-spacing: 1px;
 
-    color: #64748b;
-
-    margin:
-        20px
-        12px
-        10px;
+    margin: 22px 12px 10px;
 }
 
 .menu-btn {
     width: 100%;
 
     border: none;
-
     background: transparent;
 
-    color: #cbd5e1;
+    color: #dbe5f1;
 
-    padding: 13px 15px;
+    padding: 13px 16px;
 
     border-radius: 10px;
 
-    margin-bottom: 5px;
-
     display: flex;
-
     align-items: center;
 
     gap: 12px;
 
-    font-size: 14px;
-
     cursor: pointer;
 
-    transition: .2s;
+    font-size: 14px;
+    font-weight: 600;
 
-    text-align: left;
+    transition: .2s;
 }
 
 .menu-btn:hover {
-    background: var(--sidebar-hover);
-
-    color: white;
+    background: rgba(255,255,255,.07);
 }
 
 .menu-btn.active {
-    background: var(--primary);
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #477ee0
+    );
 
     color: white;
 
     box-shadow:
-        0 5px 15px
+        0 8px 18px
         rgba(37,99,235,.25);
 }
 
-.icon {
-    font-size: 18px;
-}
 
-
-/* ======================================
-SIDEBAR FOOTER
-====================================== */
+/* =====================================
+FOOTER
+===================================== */
 
 .sidebar-footer {
-    padding: 15px;
+    padding: 16px;
 
     border-top:
-        1px solid
-        rgba(255,255,255,.08);
+        1px solid rgba(255,255,255,.08);
 }
 
 .admin-info {
     display: flex;
-
     align-items: center;
 
-    gap: 10px;
+    gap: 12px;
 
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
 .avatar {
@@ -222,223 +190,213 @@ SIDEBAR FOOTER
 
     border-radius: 50%;
 
-    background: #1f2937;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
+
+    background: #2c3a50;
 }
 
-.admin-text {
-    display: flex;
-    flex-direction: column;
+.admin-info strong {
+    display: block;
 }
 
-.admin-text small {
-    color: #94a3b8;
-
-    margin-top: 3px;
+.admin-info small {
+    color: #a8b7ca;
+    margin-top: 4px;
+    display: block;
 }
 
-.btn-voltar-site,
+.btn-site,
 .logout {
     width: 100%;
 
     border: none;
+    border-radius: 9px;
 
-    border-radius: 8px;
-
-    padding: 10px;
+    padding: 11px;
 
     cursor: pointer;
 
-    margin-top: 8px;
+    font-weight: bold;
 
-    font-weight: 600;
+    margin-top: 8px;
 }
 
-.btn-voltar-site {
-    background: #1f2937;
-
+.btn-site {
+    background: #2c3a50;
     color: white;
 }
 
 .logout {
     background: #dc2626;
-
     color: white;
 }
 
 
-/* ======================================
+/* =====================================
 CONTEÚDO
-====================================== */
+===================================== */
 
 .content {
     flex: 1;
-
     min-width: 0;
-
-    background: var(--background);
 }
 
 
-/* ======================================
-TOPBAR
-====================================== */
+/* =====================================
+TOPO
+===================================== */
 
 .topbar {
     background: white;
 
-    padding:
-        22px
-        35px;
+    min-height: 126px;
 
-    border-bottom:
-        1px solid
-        var(--border);
+    padding: 30px 38px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    border-bottom: 1px solid var(--border);
 }
 
-.topbar-subtitle {
-    font-size: 12px;
+.topbar span {
+    color: var(--muted);
+    font-size: 14px;
 
-    color: var(--text-light);
+    margin-bottom: 6px;
 }
 
 .topbar h1 {
-    font-size: 25px;
-
-    margin-top: 4px;
+    font-size: 28px;
 }
 
 
-/* ======================================
+/* =====================================
 PÁGINAS
-====================================== */
+===================================== */
 
 .page {
-    padding: 35px;
+    padding: 38px;
 }
 
-.page-header {
+.hidden {
+    display: none !important;
+}
+
+.section-header {
     margin-bottom: 25px;
 }
 
-.page-header h2 {
-    font-size: 24px;
-
-    margin-bottom: 5px;
+.section-header h2 {
+    font-size: 26px;
+    margin-bottom: 7px;
 }
 
-.page-header p {
-    color: var(--text-light);
-}
-
-
-/* ======================================
-CARDS
-====================================== */
-
-.card {
-    background: white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 14px;
-
-    padding: 24px;
-
-    margin-bottom: 25px;
-
-    box-shadow:
-        0 4px 15px
-        rgba(0,0,0,.03);
-}
-
-.card h3 {
-    margin-bottom: 20px;
-}
-
-.card-title p {
-    color: var(--text-light);
-
-    font-size: 13px;
-
-    margin-top: -14px;
-
-    margin-bottom: 20px;
+.section-header p {
+    color: var(--muted);
 }
 
 
-/* ======================================
+/* =====================================
 DASHBOARD
-====================================== */
+===================================== */
 
-.cards {
+.cards-dashboard {
     display: grid;
 
     grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(210px, 1fr)
-        );
+        repeat(auto-fit, minmax(220px, 1fr));
 
     gap: 20px;
 }
 
 .dashboard-card {
-    margin-bottom: 0;
+    background: white;
 
-    min-height: 170px;
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 25px;
+
+    min-height: 185px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(15,23,42,.05);
 
     transition: .2s;
 }
 
 .dashboard-card:hover {
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(0,0,0,.07);
+    transform: translateY(-3px);
 }
 
 .card-icon {
     font-size: 28px;
-
-    margin-bottom: 15px;
-}
-
-.dashboard-card h3 {
-    color: var(--text-light);
-
-    font-size: 14px;
-
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 
 .dashboard-card span {
     display: block;
 
-    font-size: 32px;
+    color: var(--muted);
 
     font-weight: bold;
 
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.dashboard-card strong {
+    display: block;
+
+    font-size: 32px;
+
+    margin-bottom: 8px;
 }
 
 .dashboard-card small {
-    color: #9ca3af;
+    color: #94a3b8;
 }
 
 
-/* ======================================
+/* =====================================
+CARDS
+===================================== */
+
+.panel-card {
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    padding: 26px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(15,23,42,.04);
+}
+
+.panel-card h3 {
+    font-size: 20px;
+    margin-bottom: 22px;
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+}
+
+
+/* =====================================
 FORMULÁRIOS
-====================================== */
+===================================== */
 
 .form-grid {
     display: grid;
@@ -457,37 +415,40 @@ FORMULÁRIOS
 
 .form-grid div {
     display: flex;
-
     flex-direction: column;
+}
+
+.form-single {
+    margin-bottom: 18px;
 }
 
 label {
     font-size: 13px;
 
-    font-weight: 600;
-
-    margin-bottom: 7px;
+    font-weight: bold;
 
     color: #475569;
+
+    margin-bottom: 7px;
 }
 
 input,
 select {
     width: 100%;
 
-    padding:
-        12px
-        14px;
+    height: 45px;
 
-    border:
-        1px solid
-        #d1d5db;
+    border: 1px solid #cbd5e1;
 
     border-radius: 9px;
+
+    padding: 0 14px;
 
     background: white;
 
     font-size: 14px;
+
+    color: var(--text);
 
     outline: none;
 
@@ -500,28 +461,31 @@ select:focus {
 
     box-shadow:
         0 0 0 3px
-        rgba(37,99,235,.1);
+        rgba(37,99,235,.10);
 }
 
 
-/* ======================================
-BOTÕES PRINCIPAIS
-====================================== */
+/* =====================================
+BOTÕES
+===================================== */
 
 .btn-primary {
     border: none;
 
-    background: var(--primary);
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #315fc0
+        );
 
     color: white;
 
-    padding:
-        11px
-        20px;
+    padding: 12px 20px;
 
     border-radius: 9px;
 
-    font-weight: 600;
+    font-weight: bold;
 
     cursor: pointer;
 
@@ -529,54 +493,78 @@ BOTÕES PRINCIPAIS
 }
 
 .btn-primary:hover {
-    background: var(--primary-hover);
+    transform: translateY(-1px);
 
-    transform:
-        translateY(-1px);
-}
-
-.btn-secondary {
-    border: none;
-
-    background: #e5e7eb;
-
-    color: #374151;
-
-    padding:
-        11px
-        20px;
-
-    border-radius: 9px;
-
-    font-weight: 600;
-
-    cursor: pointer;
+    box-shadow:
+        0 8px 16px
+        rgba(37,99,235,.20);
 }
 
 
-/* ======================================
-GRUPO BOTÕES
-====================================== */
+/* =====================================
+LISTA
+===================================== */
 
-.button-group {
+.list-header {
     display: flex;
+    justify-content: space-between;
 
-    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.list-header h3 {
+    margin-bottom: 6px;
+}
+
+.list-header p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+
+/* =====================================
+BUSCA
+===================================== */
+
+.search-box {
+    height: 46px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 14px;
 
     gap: 10px;
+
+    margin-bottom: 18px;
+
+    background: #f8fafc;
+}
+
+.search-box input {
+    border: none;
+
+    background: transparent;
+
+    height: 100%;
+
+    padding: 0;
+
+    box-shadow: none;
 }
 
 
-/* ======================================
-TABELA
-====================================== */
+/* =====================================
+TABELAS
+===================================== */
 
 .table-container {
     width: 100%;
-
     overflow-x: auto;
-
-    margin-top: 20px;
 }
 
 table {
@@ -584,7 +572,7 @@ table {
 
     border-collapse: collapse;
 
-    min-width: 800px;
+    min-width: 850px;
 }
 
 thead {
@@ -594,37 +582,131 @@ thead {
 th {
     text-align: left;
 
-    padding: 14px;
-
-    font-size: 12px;
-
-    text-transform: uppercase;
+    padding: 15px;
 
     color: #64748b;
 
-    border-bottom:
-        1px solid
-        var(--border);
+    font-size: 11px;
+
+    letter-spacing: .5px;
 }
 
 td {
-    padding: 16px 14px;
+    padding: 16px 15px;
 
-    border-bottom:
-        1px solid
-        var(--border);
+    border-top:
+        1px solid var(--border);
 
     font-size: 14px;
+
+    vertical-align: middle;
 }
 
-tr:hover td {
-    background: #fafafa;
+tbody tr {
+    transition: .15s;
+}
+
+tbody tr:hover {
+    background: #fafcff;
 }
 
 
-/* ======================================
-AÇÕES DA TABELA
-====================================== */
+/* =====================================
+CLÍNICA
+===================================== */
+
+.clinica-nome {
+    font-weight: bold;
+
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+.clinica-endereco {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.localizacao {
+    line-height: 1.5;
+}
+
+
+/* =====================================
+ESPECIALIDADES TAGS
+===================================== */
+
+.especialidades-lista {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    max-width: 300px;
+}
+
+.especialidade-tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 7px 10px;
+
+    border-radius: 8px;
+
+    background: #f1f5f9;
+
+    border: 1px solid #e2e8f0;
+
+    font-size: 12px;
+}
+
+.rede-especialistas {
+    color: #2563eb;
+}
+
+.rede-sindilegis {
+    color: #0891b2;
+}
+
+
+/* =====================================
+STATUS
+===================================== */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.status.ativa {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status.inativa {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/* =====================================
+AÇÕES
+===================================== */
 
 .acoes {
     display: flex;
@@ -632,240 +714,170 @@ AÇÕES DA TABELA
     align-items: center;
 
     gap: 8px;
+
+    flex-wrap: wrap;
 }
 
-
-/* EDITAR */
-
-.btn-editar {
+.btn-edit,
+.btn-delete,
+.btn-toggle {
     border: none;
 
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-edit {
     background: #eff6ff;
-
     color: #2563eb;
-
-    padding:
-        8px
-        12px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: .2s;
 }
 
-.btn-editar:hover {
-    background: #2563eb;
-
-    color: white;
-
-    transform:
-        translateY(-1px);
+.btn-edit:hover {
+    background: #dbeafe;
 }
 
-
-/* EXCLUIR */
-
-.btn-excluir {
-    border: none;
-
+.btn-delete {
     background: #fef2f2;
-
     color: #dc2626;
-
-    padding:
-        8px
-        12px;
-
-    border-radius: 8px;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: .2s;
 }
 
-.btn-excluir:hover {
-    background: #dc2626;
-
-    color: white;
-
-    transform:
-        translateY(-1px);
-}
-
-
-/* ======================================
-STATUS CLÍNICA
-====================================== */
-
-.btn-status {
-    border: none;
-
-    border-radius: 30px;
-
-    padding:
-        8px
-        14px;
-
-    min-width: 105px;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    display: inline-flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 7px;
-
-    transition:
-        .2s;
-}
-
-
-/* ATIVA */
-
-.btn-status.ativo {
-    background: #dcfce7;
-
-    color: #15803d;
-
-    border:
-        1px solid
-        #86efac;
-}
-
-.btn-status.ativo:hover {
-    background: #bbf7d0;
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 5px 12px
-        rgba(22,163,74,.15);
-}
-
-
-/* INATIVA */
-
-.btn-status.inativo {
+.btn-delete:hover {
     background: #fee2e2;
-
-    color: #dc2626;
-
-    border:
-        1px solid
-        #fca5a5;
 }
 
-.btn-status.inativo:hover {
-    background: #fecaca;
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 5px 12px
-        rgba(220,38,38,.15);
+.btn-toggle {
+    background: #f1f5f9;
+    color: #475569;
 }
 
-.status-icon {
-    font-size: 12px;
+.btn-toggle:hover {
+    background: #e2e8f0;
 }
 
-
-/* ======================================
-LISTAS SIMPLES
-====================================== */
-
-.item-lista {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 15px;
-
-    border-bottom:
-        1px solid
-        var(--border);
+.btn-toggle.desativar {
+    color: #b45309;
+    background: #fff7ed;
 }
 
-.item-lista:last-child {
-    border-bottom: none;
-}
-
-.item-acoes {
-    display: flex;
-
-    gap: 8px;
+.btn-toggle.ativar {
+    color: #15803d;
+    background: #f0fdf4;
 }
 
 
-/* ======================================
-VÍNCULOS
-====================================== */
-
-.lista-vinculos {
-    margin-top: 20px;
-}
-
-.vinculo-item {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 14px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 10px;
-
-    margin-bottom: 10px;
-}
+/* =====================================
+REDE BADGE
+===================================== */
 
 .rede-badge {
-    background: #eff6ff;
+    display: inline-flex;
 
-    color: #2563eb;
-
-    padding:
-        5px
-        10px;
+    padding: 7px 11px;
 
     border-radius: 20px;
 
-    font-size: 11px;
+    font-size: 12px;
 
     font-weight: bold;
 }
 
+.rede-badge.especialistas {
+    background: #eff6ff;
+    color: #2563eb;
+}
 
-/* ======================================
+.rede-badge.sindilegis {
+    background: #ecfeff;
+    color: #0891b2;
+}
+
+
+/* =====================================
+MODAL
+===================================== */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(15,23,42,.55);
+
+    z-index: 999;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 650px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 20px 25px;
+
+    border-bottom:
+        1px solid var(--border);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-close {
+    border: none;
+
+    background: #f1f5f9;
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 8px;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#modalBody {
+    padding: 25px;
+}
+
+
+/* =====================================
 RESPONSIVO
-====================================== */
+===================================== */
 
-@media (max-width: 950px) {
+@media (max-width: 1000px) {
 
     .sidebar {
         width: 230px;
@@ -882,35 +894,34 @@ RESPONSIVO
 @media (max-width: 750px) {
 
     .painel {
-        flex-direction: column;
+        display: block;
     }
 
     .sidebar {
         width: 100%;
-        min-width: 100%;
-
         height: auto;
-        min-height: auto;
 
         position: relative;
     }
 
+    .sidebar-footer {
+        display: none;
+    }
+
     .sidebar-menu {
         display: flex;
+        overflow-x: auto;
 
-        flex-wrap: wrap;
+        gap: 8px;
     }
 
     .menu-title {
-        width: 100%;
+        display: none;
     }
 
     .menu-btn {
         width: auto;
-    }
-
-    .sidebar-footer {
-        display: none;
+        white-space: nowrap;
     }
 
     .form-grid {
@@ -921,11 +932,12 @@ RESPONSIVO
         grid-column: auto;
     }
 
-    .page {
-        padding: 18px;
+    .topbar {
+        min-height: 100px;
+        padding: 25px;
     }
 
-    .topbar {
+    .page {
         padding: 20px;
     }
 
