@@ -1254,3 +1254,497 @@ td {
     }
 
 }
+/* ==========================================
+   DASHBOARD MODERNO
+========================================== */
+
+.dashboard-welcome {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 32px;
+
+    margin-bottom: 25px;
+
+    border-radius: 18px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 35px
+        rgba(37, 99, 235, 0.25);
+}
+
+
+.dashboard-welcome::before {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    right: -80px;
+    top: -100px;
+}
+
+
+.dashboard-welcome::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    right: 100px;
+    bottom: -120px;
+}
+
+
+.dashboard-welcome > div {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+.welcome-label {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+}
+
+
+.dashboard-welcome h2 {
+    font-size: 26px;
+
+    margin-bottom: 10px;
+}
+
+
+.dashboard-welcome p {
+    font-size: 14px;
+
+    opacity: 0.85;
+}
+
+
+.welcome-icon {
+    font-size: 70px;
+
+    animation:
+        floatIcon
+        3s ease-in-out
+        infinite;
+}
+
+
+@keyframes floatIcon {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ==========================================
+   CARDS MELHORADOS
+========================================== */
+
+.cards {
+    margin-bottom: 25px;
+}
+
+
+.dashboard-card {
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 170px;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    border: none;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.dashboard-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 50%;
+
+    right: -30px;
+    bottom: -40px;
+
+    opacity: 0.08;
+
+    background: currentColor;
+}
+
+
+.dashboard-card:hover {
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 18px 35px
+        rgba(15, 23, 42, 0.12);
+}
+
+
+.dashboard-card-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.card-label {
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+
+    color: #94a3b8;
+}
+
+
+.dashboard-card .card-icon {
+    width: 55px;
+    height: 55px;
+
+    font-size: 25px;
+
+    border-radius: 15px;
+}
+
+
+.card-content h3 {
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: #64748b;
+
+    margin-bottom: 8px;
+}
+
+
+.card-content span {
+    font-size: 34px;
+
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+
+/* ==========================================
+   CORES DOS CARDS
+========================================== */
+
+.card-clinicas .card-icon {
+    background: #dbeafe;
+}
+
+
+.card-ativas .card-icon {
+    background: #dcfce7;
+}
+
+
+.card-especialidades .card-icon {
+    background: #f3e8ff;
+}
+
+
+.card-estados .card-icon {
+    background: #fef3c7;
+}
+
+
+/* ==========================================
+   PARTE INFERIOR DASHBOARD
+========================================== */
+
+.dashboard-bottom {
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr;
+
+    gap: 22px;
+}
+
+
+.dashboard-info,
+.quick-actions {
+    padding: 25px;
+}
+
+
+.dashboard-section-header {
+    padding-bottom: 18px;
+
+    margin-bottom: 10px;
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+
+.dashboard-section-header span {
+    display: block;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+
+.dashboard-section-header p {
+    font-size: 12px;
+
+    color: var(--muted);
+}
+
+
+/* ==========================================
+   LISTA DE INFORMAÇÕES
+========================================== */
+
+.info-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.info-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px 0;
+
+    border-bottom:
+        1px solid
+        #f1f5f9;
+}
+
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+
+.info-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    font-size: 20px;
+}
+
+
+.info-item div:last-child {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.info-item strong {
+    font-size: 13px;
+}
+
+
+.info-item span {
+    font-size: 12px;
+
+    color: var(--muted);
+}
+
+
+/* ==========================================
+   AÇÕES RÁPIDAS
+========================================== */
+
+.quick-actions {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.quick-action-btn {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: var(--text);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-align: left;
+
+    transition: 0.2s;
+}
+
+
+.quick-action-btn:hover {
+    background: #f8fafc;
+
+    border-color: #bfdbfe;
+
+    transform:
+        translateX(4px);
+}
+
+
+.quick-action-btn span {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #eff6ff;
+
+    font-size: 16px;
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE DASHBOARD
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .dashboard-bottom {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .dashboard-welcome {
+        padding: 25px;
+
+        align-items: flex-start;
+    }
+
+
+    .dashboard-welcome h2 {
+        font-size: 21px;
+    }
+
+
+    .welcome-icon {
+        display: none;
+    }
+
+
+    .dashboard-card {
+        min-height: 150px;
+    }
+
+}
