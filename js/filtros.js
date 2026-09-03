@@ -1,154 +1,392 @@
 // ======================================
-// FILTROS - REGIÃO / ESTADO / CIDADE / BAIRRO / ESPECIALIDADE
+// FILTROS
+// REGIÃO / ESTADO / CIDADE / BAIRRO
+// ESPECIALIDADE
 // ======================================
-// ---------- REGIÕES ----------
+
+console.log("filtros.js carregado");
+
+// ======================================
+// REGIÕES
+// ======================================
+
 async function carregarRegioes() {
-    const { data, error } = await supabaseClient
+
+    const {
+        data,
+        error
+    } = await supabaseClient
         .from("regioes")
         .select("*")
         .order("nome");
+
     if (error) {
-        console.error(error);
+        console.error(
+            "Erro ao carregar regiões:",
+            error
+        );
         return;
     }
-    const regiao = document.getElementById("regiao");
+
+    const regiao =
+        document.getElementById("regiao");
+
     regiao.innerHTML = `
-        <option value="">Selecione a Região</option>
+        <option value="">
+            Selecione a Região
+        </option>
     `;
+
     data.forEach(item => {
+
         regiao.innerHTML += `
             <option value="${item.id}">
                 ${item.nome}
             </option>
         `;
+
     });
+
 }
-// ---------- ESTADOS ----------
-async function carregarEstados(regiaoId){
-    const estado = document.getElementById("estado");
-    const cidade = document.getElementById("cidade");
-    const bairro = document.getElementById("bairro");
+
+
+// ======================================
+// ESTADOS
+// ======================================
+
+async function carregarEstados(regiaoId) {
+
+    const estado =
+        document.getElementById("estado");
+
+    const cidade =
+        document.getElementById("cidade");
+
+    const bairro =
+        document.getElementById("bairro");
+
     estado.innerHTML = `
-        <option value="">Selecione o Estado</option>
+        <option value="">
+            Selecione o Estado
+        </option>
     `;
+
     cidade.innerHTML = `
-        <option value="">Selecione a Cidade</option>
+        <option value="">
+            Selecione a Cidade
+        </option>
     `;
+
     bairro.innerHTML = `
-        <option value="">Selecione o Bairro</option>
+        <option value="">
+            Selecione o Bairro
+        </option>
     `;
-    document.getElementById("especialidade").value = "";
-    if(!regiaoId) return;
-    const {data,error}=await supabaseClient
+
+    if (!regiaoId) return;
+
+    const {
+        data,
+        error
+    } = await supabaseClient
         .from("estados")
         .select("*")
-        .eq("regiao_id",regiaoId)
+        .eq("regiao_id", regiaoId)
         .order("nome");
-    if(error){
-        console.error(error);
+
+    if (error) {
+        console.error(
+            "Erro ao carregar estados:",
+            error
+        );
         return;
     }
-    data.forEach(item=>{
+
+    data.forEach(item => {
+
         estado.innerHTML += `
             <option value="${item.id}">
                 ${item.nome}
             </option>
         `;
+
     });
+
 }
-// ---------- CIDADES ----------
-async function carregarCidades(estadoId){
-    const cidade = document.getElementById("cidade");
-    const bairro = document.getElementById("bairro");
+
+
+// ======================================
+// CIDADES
+// ======================================
+
+async function carregarCidades(estadoId) {
+
+    const cidade =
+        document.getElementById("cidade");
+
+    const bairro =
+        document.getElementById("bairro");
+
     cidade.innerHTML = `
-        <option value="">Selecione a Cidade</option>
+        <option value="">
+            Selecione a Cidade
+        </option>
     `;
+
     bairro.innerHTML = `
-        <option value="">Selecione o Bairro</option>
+        <option value="">
+            Selecione o Bairro
+        </option>
     `;
-    document.getElementById("especialidade").value = "";
-    if(!estadoId) return;
-    const {data,error}=await supabaseClient
+
+    if (!estadoId) return;
+
+    const {
+        data,
+        error
+    } = await supabaseClient
         .from("cidades")
         .select("*")
-        .eq("estado_id",estadoId)
+        .eq("estado_id", estadoId)
         .order("nome");
-    if(error){
-        console.error(error);
+
+    if (error) {
+        console.error(
+            "Erro ao carregar cidades:",
+            error
+        );
         return;
     }
-    data.forEach(item=>{
+
+    data.forEach(item => {
+
         cidade.innerHTML += `
             <option value="${item.id}">
                 ${item.nome}
             </option>
         `;
+
     });
+
 }
-// ---------- BAIRROS ----------
-async function carregarBairros(cidadeId){
-    const bairro = document.getElementById("bairro");
+
+
+// ======================================
+// BAIRROS
+// ======================================
+
+async function carregarBairros(cidadeId) {
+
+    const bairro =
+        document.getElementById("bairro");
+
     bairro.innerHTML = `
-        <option value="">Selecione o Bairro</option>
+        <option value="">
+            Selecione o Bairro
+        </option>
     `;
-    document.getElementById("especialidade").value = "";
-    if(!cidadeId) return;
-    const {data,error}=await supabaseClient
+
+    if (!cidadeId) return;
+
+    const {
+        data,
+        error
+    } = await supabaseClient
         .from("bairros")
         .select("*")
-        .eq("cidade_id",cidadeId)
+        .eq("cidade_id", cidadeId)
         .order("nome");
-    if(error){
-        console.error(error);
+
+    if (error) {
+        console.error(
+            "Erro ao carregar bairros:",
+            error
+        );
         return;
     }
-    data.forEach(item=>{
+
+    data.forEach(item => {
+
         bairro.innerHTML += `
             <option value="${item.id}">
                 ${item.nome}
             </option>
         `;
+
     });
+
 }
-async function carregarEspecialidades(){
-    console.log("Carregando especialidades...");
-    const { data, error } = await supabaseClient
-        .from("especialidades")
-        .select("*")
-        .order("nome");
-    console.log("Erro:", error);
-    console.log("Dados:", data);
-    if(error){
-        console.error(error);
+
+
+// ======================================
+// DESCOBRIR REDE DA PÁGINA
+// ======================================
+
+function obterRedeAtual() {
+
+    if (
+        document.body.classList.contains("sindilegis")
+    ) {
+        return "sindilegis";
+    }
+
+    return "especialistas";
+
+}
+
+
+// ======================================
+// ESPECIALIDADES
+// APENAS DA REDE ATUAL
+// ======================================
+
+async function carregarEspecialidades() {
+
+    const rede = obterRedeAtual();
+
+    console.log(
+        "Carregando especialidades da rede:",
+        rede
+    );
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("clinica_especialidades")
+        .select(`
+            especialidades (
+                id,
+                nome
+            )
+        `)
+        .eq("rede", rede)
+        .eq("ativo", true);
+
+    if (error) {
+        console.error(
+            "Erro ao carregar especialidades:",
+            error
+        );
         return;
     }
-    const especialidade = document.getElementById("especialidade");
+
+    const especialidadesUnicas = [
+        ...new Map(
+            data
+                .filter(
+                    item =>
+                        item.especialidades
+                )
+                .map(item => [
+                    item.especialidades.id,
+                    item.especialidades
+                ])
+        ).values()
+    ];
+
+    especialidadesUnicas.sort(
+        (a, b) =>
+            a.nome.localeCompare(b.nome)
+    );
+
+    const especialidade =
+        document.getElementById(
+            "especialidade"
+        );
+
     especialidade.innerHTML = `
-        <option value="">Todas as Especialidades</option>
+        <option value="">
+            Todas as Especialidades
+        </option>
     `;
-    data.forEach(item=>{
+
+    especialidadesUnicas.forEach(item => {
+
         especialidade.innerHTML += `
-            <option value="${item.nome}">
+            <option value="${item.id}">
                 ${item.nome}
             </option>
         `;
+
     });
+
 }
+
+
 // ======================================
 // EVENTOS
 // ======================================
-document.getElementById("regiao").addEventListener("change",function(){
-    carregarEstados(this.value);
-});
-document.getElementById("estado").addEventListener("change",function(){
-    carregarCidades(this.value);
-});
-document.getElementById("cidade").addEventListener("change",function(){
-    carregarBairros(this.value);
-});
-// ======================================
-// INICIALIZAÇÃO
-// ======================================
-console.log("filtros.js carregado");
-carregarRegioes();
-carregarEspecialidades();
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const regiao =
+            document.getElementById("regiao");
+
+        const estado =
+            document.getElementById("estado");
+
+        const cidade =
+            document.getElementById("cidade");
+
+
+        if (regiao) {
+
+            regiao.addEventListener(
+                "change",
+                function() {
+
+                    carregarEstados(
+                        this.value
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (estado) {
+
+            estado.addEventListener(
+                "change",
+                function() {
+
+                    carregarCidades(
+                        this.value
+                    );
+
+                }
+            );
+
+        }
+
+
+        if (cidade) {
+
+            cidade.addEventListener(
+                "change",
+                function() {
+
+                    carregarBairros(
+                        this.value
+                    );
+
+                }
+            );
+
+        }
+
+
+        // ======================================
+        // INICIALIZAÇÃO
+        // ======================================
+
+        carregarRegioes();
+
+        carregarEspecialidades();
+
+    }
+);
