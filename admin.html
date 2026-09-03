@@ -21,11 +21,13 @@
         href="img/tooth.png"
     >
 
+    <!-- CSS -->
     <link
         rel="stylesheet"
         href="css/admin.css"
     >
 
+    <!-- SUPABASE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
@@ -33,11 +35,11 @@
 <body>
 
 
-    <!-- =====================================
-         TELA DE LOGIN
-    ====================================== -->
+    <!-- ======================================
+         LOGIN
+    ======================================= -->
 
-    <div id="telaLogin" class="login-page">
+    <div id="loginScreen" class="login-screen">
 
         <div class="login-card">
 
@@ -45,10 +47,12 @@
 
                 <img
                     src="img/tooth.png"
-                    alt="Rede Especialistas"
+                    alt="Logo"
                 >
 
-                <h1>Rede Especialistas</h1>
+                <h1>
+                    Rede Especialistas
+                </h1>
 
                 <p>
                     Painel Administrativo
@@ -59,15 +63,15 @@
 
             <form id="formLogin">
 
-                <div class="login-field">
+                <div class="login-group">
 
-                    <label for="usuarioLogin">
+                    <label for="loginUsuario">
                         Usuário
                     </label>
 
                     <input
                         type="text"
-                        id="usuarioLogin"
+                        id="loginUsuario"
                         placeholder="Digite seu usuário"
                         autocomplete="username"
                         required
@@ -76,15 +80,15 @@
                 </div>
 
 
-                <div class="login-field">
+                <div class="login-group">
 
-                    <label for="senhaLogin">
+                    <label for="loginSenha">
                         Senha
                     </label>
 
                     <input
                         type="password"
-                        id="senhaLogin"
+                        id="loginSenha"
                         placeholder="Digite sua senha"
                         autocomplete="current-password"
                         required
@@ -97,36 +101,35 @@
                     type="submit"
                     class="btn-login"
                 >
-                    Entrar
+                    Entrar no Painel
                 </button>
+
+
+                <p
+                    id="loginErro"
+                    class="login-erro hidden"
+                >
+                    Usuário ou senha incorretos.
+                </p>
 
             </form>
 
 
-            <p
-                id="mensagemLogin"
-                class="mensagem-login"
-            >
-            </p>
-
-
-            <button
-                type="button"
+            <a
+                href="index.html"
                 class="voltar-login"
-                onclick="location.href='index.html'"
             >
                 ← Voltar para o site
-            </button>
+            </a>
 
         </div>
 
     </div>
 
 
-
-    <!-- =====================================
+    <!-- ======================================
          PAINEL ADMINISTRATIVO
-    ====================================== -->
+    ======================================= -->
 
     <div
         id="painelAdmin"
@@ -134,10 +137,14 @@
     >
 
 
-        <!-- SIDEBAR -->
+        <!-- ======================================
+             SIDEBAR
+        ======================================= -->
 
         <aside class="sidebar">
 
+
+            <!-- LOGO -->
 
             <div class="sidebar-logo">
 
@@ -161,7 +168,6 @@
                 </span>
 
             </div>
-
 
 
             <!-- MENU -->
@@ -188,19 +194,13 @@
                 </button>
 
 
-
-                <div class="menu-title">
-                    GERENCIAMENTO
-                </div>
-
-
                 <button
                     class="menu-btn"
                     data-page="clinicas"
                 >
 
                     <span class="icon">
-                        🦷
+                        🏥
                     </span>
 
                     Clínicas
@@ -214,13 +214,12 @@
                 >
 
                     <span class="icon">
-                        🩺
+                        🦷
                     </span>
 
                     Especialidades
 
                 </button>
-
 
 
                 <div class="menu-title">
@@ -287,8 +286,7 @@
             </nav>
 
 
-
-            <!-- FOOTER -->
+            <!-- FOOTER SIDEBAR -->
 
             <div class="sidebar-footer">
 
@@ -319,7 +317,7 @@
                     class="btn-voltar-site"
                     onclick="location.href='index.html'"
                 >
-                    ← Voltar ao site
+                    ← Voltar para o site
                 </button>
 
 
@@ -337,8 +335,9 @@
         </aside>
 
 
-
-        <!-- CONTEÚDO -->
+        <!-- ======================================
+             CONTEÚDO
+        ======================================= -->
 
         <main class="content">
 
@@ -348,7 +347,7 @@
             <header class="topbar">
 
                 <span class="topbar-subtitle">
-                    Administração
+                    Painel Administrativo
                 </span>
 
                 <h1 id="tituloPagina">
@@ -358,15 +357,15 @@
             </header>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  DASHBOARD
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="dashboard"
                 class="page"
             >
+
 
                 <div class="page-header">
 
@@ -377,7 +376,7 @@
                         </h2>
 
                         <p>
-                            Acompanhe os dados da sua rede credenciada.
+                            Acompanhe os dados cadastrados na plataforma.
                         </p>
 
                     </div>
@@ -385,13 +384,15 @@
                 </div>
 
 
+                <!-- CARDS PRINCIPAIS -->
+
                 <div class="cards">
 
 
                     <div class="card dashboard-card">
 
                         <div class="card-icon">
-                            🦷
+                            🏥
                         </div>
 
                         <div>
@@ -407,7 +408,6 @@
                         </div>
 
                     </div>
-
 
 
                     <div class="card dashboard-card">
@@ -431,11 +431,10 @@
                     </div>
 
 
-
                     <div class="card dashboard-card">
 
                         <div class="card-icon">
-                            🩺
+                            🦷
                         </div>
 
                         <div>
@@ -451,7 +450,6 @@
                         </div>
 
                     </div>
-
 
 
                     <div class="card dashboard-card">
@@ -475,7 +473,6 @@
                     </div>
 
 
-
                     <div class="card dashboard-card">
 
                         <div class="card-icon">
@@ -497,7 +494,6 @@
                     </div>
 
 
-
                     <div class="card dashboard-card">
 
                         <div class="card-icon">
@@ -517,7 +513,6 @@
                         </div>
 
                     </div>
-
 
 
                     <div class="card dashboard-card">
@@ -543,18 +538,19 @@
 
                 </div>
 
+
             </section>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  CLÍNICAS
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="clinicas"
                 class="page hidden"
             >
+
 
                 <div class="page-header">
 
@@ -565,7 +561,7 @@
                         </h2>
 
                         <p>
-                            Gerencie as clínicas credenciadas.
+                            Gerencie todas as clínicas cadastradas.
                         </p>
 
                     </div>
@@ -581,6 +577,7 @@
                 </div>
 
 
+                <!-- FILTROS -->
 
                 <div class="filter-card">
 
@@ -610,6 +607,7 @@
                 </div>
 
 
+                <!-- TABELA -->
 
                 <div class="table-card">
 
@@ -660,18 +658,19 @@
 
                 </div>
 
+
             </section>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  ESPECIALIDADES
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="especialidades"
                 class="page hidden"
             >
+
 
                 <div class="page-header">
 
@@ -693,10 +692,12 @@
                 <div class="management-grid">
 
 
+                    <!-- FORM -->
+
                     <div class="card form-card">
 
                         <h3>
-                            Nova Especialidade
+                            Cadastrar Especialidade
                         </h3>
 
 
@@ -716,8 +717,9 @@
 
 
                             <button
-                                class="btn-primary"
+                                type="button"
                                 id="btnSalvarEspecialidade"
+                                class="btn-primary"
                             >
                                 Salvar
                             </button>
@@ -727,6 +729,7 @@
                     </div>
 
 
+                    <!-- LISTA -->
 
                     <div class="card">
 
@@ -747,18 +750,19 @@
 
                 </div>
 
+
             </section>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  REGIÕES
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="regioes"
                 class="page hidden"
             >
+
 
                 <div class="page-header">
 
@@ -783,7 +787,7 @@
                     <div class="card form-card">
 
                         <h3>
-                            Nova Região
+                            Cadastrar Região
                         </h3>
 
 
@@ -803,8 +807,9 @@
 
 
                             <button
-                                class="btn-primary"
+                                type="button"
                                 id="btnSalvarRegiao"
+                                class="btn-primary"
                             >
                                 Salvar
                             </button>
@@ -833,18 +838,19 @@
 
                 </div>
 
+
             </section>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  ESTADOS
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="estados"
                 class="page hidden"
             >
+
 
                 <div class="page-header">
 
@@ -869,7 +875,7 @@
                     <div class="card form-card">
 
                         <h3>
-                            Novo Estado
+                            Cadastrar Estado
                         </h3>
 
 
@@ -879,47 +885,53 @@
                         >
 
 
-                        <label>
-                            Nome do Estado
-                        </label>
+                        <div class="form-grid">
 
-                        <input
-                            type="text"
-                            id="nomeEstado"
-                            placeholder="Ex: Distrito Federal"
-                        >
+                            <div>
 
+                                <label>
+                                    Nome do Estado
+                                </label>
 
-                        <br>
-                        <br>
+                                <input
+                                    type="text"
+                                    id="nomeEstado"
+                                    placeholder="Ex: Distrito Federal"
+                                >
 
-
-                        <label>
-                            Região
-                        </label>
-
-                        <select id="estadoRegiao">
-
-                            <option value="">
-                                Selecione uma região
-                            </option>
-
-                        </select>
+                            </div>
 
 
-                        <br>
-                        <br>
+                            <div>
+
+                                <label>
+                                    Região
+                                </label>
+
+                                <select
+                                    id="estadoRegiao"
+                                >
+
+                                    <option value="">
+                                        Selecione uma região
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
 
 
                         <button
-                            class="btn-primary"
+                            type="button"
                             id="btnSalvarEstado"
+                            class="btn-primary"
                         >
                             Salvar Estado
                         </button>
 
                     </div>
-
 
 
                     <div class="card">
@@ -941,18 +953,19 @@
 
                 </div>
 
+
             </section>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  CIDADES
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="cidades"
                 class="page hidden"
             >
+
 
                 <div class="page-header">
 
@@ -977,7 +990,7 @@
                     <div class="card form-card">
 
                         <h3>
-                            Nova Cidade
+                            Cadastrar Cidade
                         </h3>
 
 
@@ -987,47 +1000,53 @@
                         >
 
 
-                        <label>
-                            Nome da Cidade
-                        </label>
+                        <div class="form-grid">
 
-                        <input
-                            type="text"
-                            id="nomeCidade"
-                            placeholder="Digite o nome"
-                        >
+                            <div>
 
+                                <label>
+                                    Nome da Cidade
+                                </label>
 
-                        <br>
-                        <br>
+                                <input
+                                    type="text"
+                                    id="nomeCidade"
+                                    placeholder="Nome da cidade"
+                                >
 
-
-                        <label>
-                            Estado
-                        </label>
-
-                        <select id="cidadeEstado">
-
-                            <option value="">
-                                Selecione um estado
-                            </option>
-
-                        </select>
+                            </div>
 
 
-                        <br>
-                        <br>
+                            <div>
+
+                                <label>
+                                    Estado
+                                </label>
+
+                                <select
+                                    id="cidadeEstado"
+                                >
+
+                                    <option value="">
+                                        Selecione um estado
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
 
 
                         <button
-                            class="btn-primary"
+                            type="button"
                             id="btnSalvarCidade"
+                            class="btn-primary"
                         >
                             Salvar Cidade
                         </button>
 
                     </div>
-
 
 
                     <div class="card">
@@ -1049,18 +1068,19 @@
 
                 </div>
 
+
             </section>
 
 
-
-            <!-- =========================
+            <!-- ======================================
                  BAIRROS
-            ========================== -->
+            ======================================= -->
 
             <section
                 id="bairros"
                 class="page hidden"
             >
+
 
                 <div class="page-header">
 
@@ -1085,7 +1105,7 @@
                     <div class="card form-card">
 
                         <h3>
-                            Novo Bairro
+                            Cadastrar Bairro
                         </h3>
 
 
@@ -1095,47 +1115,53 @@
                         >
 
 
-                        <label>
-                            Nome do Bairro
-                        </label>
+                        <div class="form-grid">
 
-                        <input
-                            type="text"
-                            id="nomeBairro"
-                            placeholder="Digite o nome"
-                        >
+                            <div>
 
+                                <label>
+                                    Nome do Bairro
+                                </label>
 
-                        <br>
-                        <br>
+                                <input
+                                    type="text"
+                                    id="nomeBairro"
+                                    placeholder="Nome do bairro"
+                                >
 
-
-                        <label>
-                            Cidade
-                        </label>
-
-                        <select id="bairroCidade">
-
-                            <option value="">
-                                Selecione uma cidade
-                            </option>
-
-                        </select>
+                            </div>
 
 
-                        <br>
-                        <br>
+                            <div>
+
+                                <label>
+                                    Cidade
+                                </label>
+
+                                <select
+                                    id="bairroCidade"
+                                >
+
+                                    <option value="">
+                                        Selecione uma cidade
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
 
 
                         <button
-                            class="btn-primary"
+                            type="button"
                             id="btnSalvarBairro"
+                            class="btn-primary"
                         >
                             Salvar Bairro
                         </button>
 
                     </div>
-
 
 
                     <div class="card">
@@ -1157,6 +1183,7 @@
 
                 </div>
 
+
             </section>
 
 
@@ -1166,18 +1193,20 @@
     </div>
 
 
-
-    <!-- =====================================
+    <!-- ======================================
          MODAL CLÍNICA
-    ====================================== -->
+    ======================================= -->
 
     <div
         id="modalClinica"
         class="modal hidden"
     >
 
+
         <div class="modal-content modal-large">
 
+
+            <!-- HEADER -->
 
             <div class="modal-header">
 
@@ -1188,7 +1217,7 @@
                     </h2>
 
                     <p>
-                        Preencha as informações da clínica.
+                        Preencha os dados da clínica.
                     </p>
 
                 </div>
@@ -1202,9 +1231,11 @@
                     ×
                 </button>
 
+
             </div>
 
 
+            <!-- FORM -->
 
             <form id="formClinica">
 
@@ -1214,6 +1245,8 @@
                     id="clinicaId"
                 >
 
+
+                <!-- DADOS -->
 
                 <div class="form-section">
 
@@ -1249,6 +1282,7 @@
                             <input
                                 type="text"
                                 id="clinicaTelefone"
+                                placeholder="(00) 00000-0000"
                             >
 
                         </div>
@@ -1271,9 +1305,11 @@
 
                     </div>
 
+
                 </div>
 
 
+                <!-- LOCALIZAÇÃO -->
 
                 <div class="form-section">
 
@@ -1291,7 +1327,9 @@
                                 Região
                             </label>
 
-                            <select id="clinicaRegiao">
+                            <select
+                                id="clinicaRegiao"
+                            >
 
                                 <option value="">
                                     Selecione
@@ -1300,7 +1338,6 @@
                             </select>
 
                         </div>
-
 
 
                         <div>
@@ -1309,7 +1346,9 @@
                                 Estado
                             </label>
 
-                            <select id="clinicaEstado">
+                            <select
+                                id="clinicaEstado"
+                            >
 
                                 <option value="">
                                     Selecione
@@ -1318,7 +1357,6 @@
                             </select>
 
                         </div>
-
 
 
                         <div>
@@ -1327,7 +1365,9 @@
                                 Cidade
                             </label>
 
-                            <select id="clinicaCidade">
+                            <select
+                                id="clinicaCidade"
+                            >
 
                                 <option value="">
                                     Selecione
@@ -1336,7 +1376,6 @@
                             </select>
 
                         </div>
-
 
 
                         <div>
@@ -1361,9 +1400,11 @@
 
                     </div>
 
+
                 </div>
 
 
+                <!-- ESPECIALIDADES -->
 
                 <div class="form-section">
 
@@ -1377,7 +1418,7 @@
                             </h3>
 
                             <p>
-                                Vincule especialidades e redes.
+                                Adicione as especialidades e redes atendidas.
                             </p>
 
                         </div>
@@ -1385,14 +1426,13 @@
 
                         <button
                             type="button"
-                            class="btn-add-specialty"
                             id="btnAdicionarEspecialidade"
+                            class="btn-add-specialty"
                         >
                             + Adicionar
                         </button>
 
                     </div>
-
 
 
                     <div class="especialidades-header">
@@ -1412,7 +1452,9 @@
                     </div>
 
 
-                    <div id="containerEspecialidades">
+                    <div
+                        id="containerEspecialidades"
+                    >
 
                     </div>
 
@@ -1420,11 +1462,13 @@
                 </div>
 
 
+                <!-- STATUS -->
 
                 <div
                     id="areaStatusClinica"
                     class="form-section hidden"
                 >
+
 
                     <div class="status-toggle-area">
 
@@ -1456,11 +1500,14 @@
 
                     </div>
 
+
                 </div>
 
 
+                <!-- AÇÕES -->
 
                 <div class="modal-actions">
+
 
                     <button
                         type="button"
@@ -1478,6 +1525,7 @@
                         Salvar Clínica
                     </button>
 
+
                 </div>
 
 
@@ -1486,16 +1534,21 @@
 
         </div>
 
+
     </div>
 
 
+    <!-- ======================================
+         JAVASCRIPT
+    ======================================= -->
 
-    <!-- JAVASCRIPT -->
-
+    <!-- Supabase -->
     <script src="js/supabase.js"></script>
 
+    <!-- Login -->
     <script src="js/login.js"></script>
 
+    <!-- Painel -->
     <script src="js/admin.js"></script>
 
 
