@@ -1,61 +1,200 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="format-detection" content="telephone=no">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="format-detection"
+        content="telephone=no"
+    >
+
     <title>Rede Especialistas</title>
+
     <!-- Ícone -->
-    <link rel="icon" href="img/tooth.png">
+
+    <link
+        rel="icon"
+        href="img/tooth.png"
+    >
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
     <!-- Supabase -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
+
+
 <body>
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
     <header class="header">
-        <img src="img/tooth.png" class="logo">
-        <h1>Rede Especialistas</h1>
+
+        <img
+            src="img/tooth.png"
+            class="logo"
+            alt="Logo"
+        >
+
+
+        <h1>
+            Rede Especialistas
+        </h1>
+
+
         <p>
             Encontre clínicas especialistas credenciadas
         </p>
+
+
         <!-- MENU SUPERIOR -->
+
         <div class="topoBotoes">
+
+
             <button class="ativo">
+
                 🦷 Rede Especialistas
+
             </button>
-            <button onclick="location.href='sindilegis.html'">
+
+
+            <button
+                onclick="location.href='sindilegis.html'"
+            >
+
                 🌐 Rede Sindilegis
+
             </button>
-            <button id="btnTema">
-                🌙 Tema Escuro
+
+
+            <button
+                id="btnTema"
+                title="Ativar tema escuro"
+            >
+                🌙
             </button>
-            <button onclick="location.href='admin.html'">
+
+
+            <button
+                onclick="location.href='admin.html'"
+            >
+
                 ⚙ Painel Administrativo
+
             </button>
+
+
         </div>
+
     </header>
+
+
+    <!-- ======================================
+         CONTEÚDO
+    ======================================= -->
+
     <main class="container">
+
+
+        <!-- FILTROS -->
+
         <section class="filtros">
-            <select id="regiao"></select>
-            <select id="estado"></select>
-            <select id="cidade"></select>
-            <select id="bairro"></select>
-            <select id="especialidade">
-                <option value="">Todas as Especialidades</option>
+
+            <select id="regiao">
+
+                <option value="">
+                    Selecione a Região
+                </option>
+
             </select>
+
+
+            <select id="estado">
+
+                <option value="">
+                    Selecione o Estado
+                </option>
+
+            </select>
+
+
+            <select id="cidade">
+
+                <option value="">
+                    Selecione a Cidade
+                </option>
+
+            </select>
+
+
+            <select id="bairro">
+
+                <option value="">
+                    Selecione o Bairro
+                </option>
+
+            </select>
+
+
+            <select id="especialidade">
+
+                <option value="">
+                    Todas as Especialidades
+                </option>
+
+            </select>
+
+
             <button id="buscar">
+
                 🔍 Buscar Clínicas
+
             </button>
+
         </section>
+
+
+        <!-- RESULTADO -->
+
         <section id="resultado"></section>
+
+
     </main>
-    <!-- JavaScript -->
+
+
+    <!-- ======================================
+         JAVASCRIPT
+    ======================================= -->
+
     <script src="js/supabase.js"></script>
+
     <script src="js/tema.js"></script>
+
     <script src="js/filtros.js"></script>
+
     <script src="js/cards.js"></script>
+
     <script src="js/especialistas.js"></script>
+
+
 </body>
+
 </html>
