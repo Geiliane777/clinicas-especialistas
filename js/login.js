@@ -1,8 +1,7 @@
 // ======================================
 // LOGIN.JS
-// Login integrado ao admin.html
+// CONTROLE DE LOGIN DO PAINEL
 // ======================================
-
 
 console.log("login.js carregado");
 
@@ -11,7 +10,6 @@ console.log("login.js carregado");
 // CONFIGURAÇÃO DO LOGIN
 // ======================================
 
-// ALTERE ESTES DADOS
 const USUARIO_ADMIN = "admin";
 const SENHA_ADMIN = "123456";
 
@@ -44,43 +42,84 @@ function verificarLogin() {
         );
 
 
-    const telaLogin =
+    const loginContainer =
         document.getElementById(
-            "telaLogin"
+            "loginContainer"
         );
 
 
-    const painelAdmin =
+    const painel =
         document.getElementById(
-            "painelAdmin"
+            "painel"
         );
 
+
+    // Evita erro caso a página não tenha
+    // os elementos de login
+
+    if (!loginContainer || !painel) {
+
+        console.warn(
+            "Elementos de login ou painel não encontrados."
+        );
+
+        return;
+
+    }
+
+
+    // ==================================
+    // USUÁRIO LOGADO
+    // ==================================
 
     if (logado === "true") {
 
         // Esconde login
-        telaLogin.classList.add(
-            "hidden"
-        );
+
+        loginContainer
+            .classList
+            .add("hidden");
 
 
         // Mostra painel
-        painelAdmin.classList.remove(
-            "hidden"
-        );
 
-    } else {
+        painel
+            .classList
+            .remove("hidden");
+
+
+        // Carrega dashboard
+
+        if (
+            typeof carregarDashboard ===
+            "function"
+        ) {
+
+            carregarDashboard();
+
+        }
+
+    }
+
+
+    // ==================================
+    // USUÁRIO NÃO LOGADO
+    // ==================================
+
+    else {
 
         // Mostra login
-        telaLogin.classList.remove(
-            "hidden"
-        );
+
+        loginContainer
+            .classList
+            .remove("hidden");
 
 
         // Esconde painel
-        painelAdmin.classList.add(
-            "hidden"
-        );
+
+        painel
+            .classList
+            .add("hidden");
 
     }
 
@@ -88,7 +127,7 @@ function verificarLogin() {
 
 
 // ======================================
-// FORMULÁRIO DE LOGIN
+// INICIAR FORMULÁRIO
 // ======================================
 
 function iniciarFormularioLogin() {
@@ -99,7 +138,15 @@ function iniciarFormularioLogin() {
         );
 
 
-    if (!form) return;
+    if (!form) {
+
+        console.warn(
+            "Formulário de login não encontrado."
+        );
+
+        return;
+
+    }
 
 
     form.addEventListener(
@@ -119,21 +166,16 @@ function fazerLogin(event) {
     event.preventDefault();
 
 
-    const usuario =
-        document
-            .getElementById(
-                "usuarioLogin"
-            )
-            .value
-            .trim();
+    const usuarioInput =
+        document.getElementById(
+            "usuarioLogin"
+        );
 
 
-    const senha =
-        document
-            .getElementById(
-                "senhaLogin"
-            )
-            .value;
+    const senhaInput =
+        document.getElementById(
+            "senhaLogin"
+        );
 
 
     const mensagem =
@@ -142,24 +184,51 @@ function fazerLogin(event) {
         );
 
 
-    // Limpa classes anteriores
+    // Verifica se os campos existem
 
-    mensagem.classList.remove(
-        "erro",
-        "sucesso"
-    );
+    if (!usuarioInput || !senhaInput) {
+
+        console.error(
+            "Campos de login não encontrados."
+        );
+
+        return;
+
+    }
 
 
-    // ======================================
-    // VALIDAÇÃO
-    // ======================================
+    const usuario =
+        usuarioInput.value.trim();
+
+
+    const senha =
+        senhaInput.value;
+
+
+    // Limpa mensagem anterior
+
+    if (mensagem) {
+
+        mensagem.textContent = "";
+
+        mensagem.classList.remove(
+            "erro",
+            "sucesso"
+        );
+
+    }
+
+
+    // ==================================
+    // LOGIN CORRETO
+    // ==================================
 
     if (
         usuario === USUARIO_ADMIN &&
         senha === SENHA_ADMIN
     ) {
 
-        // Salva login
+        // Salva sessão
 
         localStorage.setItem(
             "adminLogado",
@@ -167,16 +236,21 @@ function fazerLogin(event) {
         );
 
 
-        mensagem.textContent =
-            "Login realizado com sucesso!";
+        // Mensagem
+
+        if (mensagem) {
+
+            mensagem.textContent =
+                "Login realizado com sucesso!";
+
+            mensagem.classList.add(
+                "sucesso"
+            );
+
+        }
 
 
-        mensagem.classList.add(
-            "sucesso"
-        );
-
-
-        // Aguarda um pouco antes de abrir painel
+        // Abre painel
 
         setTimeout(
             () => {
@@ -187,22 +261,30 @@ function fazerLogin(event) {
             500
         );
 
-    } else {
-
-        mensagem.textContent =
-            "Usuário ou senha incorretos.";
+    }
 
 
-        mensagem.classList.add(
-            "erro"
-        );
+    // ==================================
+    // LOGIN INCORRETO
+    // ==================================
+
+    else {
+
+        if (mensagem) {
+
+            mensagem.textContent =
+                "Usuário ou senha incorretos.";
+
+            mensagem.classList.add(
+                "erro"
+            );
+
+        }
 
 
         // Limpa senha
 
-        document.getElementById(
-            "senhaLogin"
-        ).value = "";
+        senhaInput.value = "";
 
     }
 
@@ -215,29 +297,44 @@ function fazerLogin(event) {
 
 function mostrarPainel() {
 
-    const telaLogin =
+    const loginContainer =
         document.getElementById(
-            "telaLogin"
+            "loginContainer"
         );
 
 
-    const painelAdmin =
+    const painel =
         document.getElementById(
-            "painelAdmin"
+            "painel"
         );
 
 
-    telaLogin.classList.add(
-        "hidden"
-    );
+    if (!loginContainer || !painel) {
+
+        console.error(
+            "Login ou painel não encontrado."
+        );
+
+        return;
+
+    }
 
 
-    painelAdmin.classList.remove(
-        "hidden"
-    );
+    // Esconde login
+
+    loginContainer
+        .classList
+        .add("hidden");
 
 
-    // Carrega dashboard caso a função exista
+    // Mostra painel
+
+    painel
+        .classList
+        .remove("hidden");
+
+
+    // Carrega dashboard
 
     if (
         typeof carregarDashboard ===
@@ -257,6 +354,15 @@ function mostrarPainel() {
 
 function logout() {
 
+    const confirmar =
+        confirm(
+            "Deseja sair do painel administrativo?"
+        );
+
+
+    if (!confirmar) return;
+
+
     // Remove sessão
 
     localStorage.removeItem(
@@ -264,30 +370,38 @@ function logout() {
     );
 
 
-    const telaLogin =
+    const loginContainer =
         document.getElementById(
-            "telaLogin"
+            "loginContainer"
         );
 
 
-    const painelAdmin =
+    const painel =
         document.getElementById(
-            "painelAdmin"
+            "painel"
         );
 
 
     // Esconde painel
 
-    painelAdmin.classList.add(
-        "hidden"
-    );
+    if (painel) {
+
+        painel
+            .classList
+            .add("hidden");
+
+    }
 
 
     // Mostra login
 
-    telaLogin.classList.remove(
-        "hidden"
-    );
+    if (loginContainer) {
+
+        loginContainer
+            .classList
+            .remove("hidden");
+
+    }
 
 
     // Limpa formulário
