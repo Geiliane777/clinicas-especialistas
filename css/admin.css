@@ -1,35 +1,46 @@
 /* ======================================
-   RESET
+   ADMIN.CSS
 ====================================== */
 
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
 
-    box-sizing:
-        border-box;
+
+:root {
+
+    --roxo: #4f46e5;
+    --roxo-escuro: #312e81;
+
+    --azul: #2563eb;
+    --azul-claro: #3b82f6;
+
+    --fundo: #f5f7fb;
+
+    --texto: #1e293b;
+
+    --cinza: #64748b;
+
+    --borda: #e2e8f0;
+
 }
 
 
 body {
 
     font-family:
-        "Segoe UI",
         Arial,
+        Helvetica,
         sans-serif;
 
-    background:
-        #f6f7fb;
+    background: var(--fundo);
 
-    color:
-        #1e293b;
+    color: var(--texto);
 
 }
 
-
-/* ======================================
-   UTILITÁRIOS
-====================================== */
 
 .hidden {
 
@@ -39,10 +50,10 @@ body {
 
 
 /* ======================================
-   LAYOUT
+   PAINEL
 ====================================== */
 
-.admin-layout {
+#painelAdmin {
 
     min-height: 100vh;
 
@@ -61,31 +72,36 @@ body {
 
     min-height: 100vh;
 
-    position: fixed;
+    background:
+        linear-gradient(
+            180deg,
+            #21104a,
+            #312e81,
+            #2563eb
+        );
 
-    left: 0;
-    top: 0;
+    color: white;
 
     display: flex;
 
     flex-direction: column;
 
-    background:
-        linear-gradient(
-            180deg,
-            #1e1b4b,
-            #312e81,
-            #1d4ed8
-        );
+    position: fixed;
 
-    color: white;
+    left: 0;
+
+    top: 0;
 
 }
 
 
-/* LOGO */
+/* ======================================
+   LOGO
+====================================== */
 
-.sidebar-logo {
+.logo-sidebar {
+
+    padding: 28px 22px;
 
     display: flex;
 
@@ -93,59 +109,53 @@ body {
 
     gap: 12px;
 
-    padding: 28px 22px;
-
     border-bottom:
         1px solid
-        rgba(255,255,255,0.1);
+        rgba(255,255,255,.12);
 
 }
 
 
-.sidebar-logo-icon {
+.logo-icon {
 
     width: 42px;
+
     height: 42px;
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
 
-    font-size: 28px;
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,.15);
 
     border-radius: 12px;
 
-    background:
-        rgba(255,255,255,0.14);
+    font-size: 22px;
 
 }
 
 
-.sidebar-logo div:last-child {
+.logo-sidebar strong {
 
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
-
-}
-
-
-.sidebar-logo strong {
+    display: block;
 
     font-size: 15px;
 
 }
 
 
-.sidebar-logo span {
+.logo-sidebar span {
 
-    font-size: 11px;
+    display: block;
 
-    color:
-        rgba(255,255,255,0.6);
+    font-size: 12px;
+
+    opacity: .7;
+
+    margin-top: 3px;
 
 }
 
@@ -156,75 +166,36 @@ body {
 
 .menu {
 
-    flex: 1;
-
     padding: 20px 12px;
 
-}
+    display: flex;
 
+    flex-direction: column;
 
-.menu-label {
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    font-weight: 700;
-
-    color:
-        rgba(255,255,255,0.4);
-
-    padding:
-
-        25px 14px
-        10px;
+    gap: 7px;
 
 }
 
 
 .menu-btn {
 
-    width: 100%;
-
-    height: 46px;
-
     border: none;
 
-    border-radius: 9px;
+    background: transparent;
 
-    margin-bottom: 5px;
+    color: rgba(255,255,255,.75);
 
-    padding: 0 14px;
+    padding: 13px 15px;
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    cursor: pointer;
-
-    background:
-        transparent;
-
-    color:
-        rgba(255,255,255,0.75);
-
-    font-size: 14px;
+    border-radius: 10px;
 
     text-align: left;
 
-    transition:
-        0.2s;
+    cursor: pointer;
 
-}
+    font-size: 14px;
 
-
-.menu-btn span {
-
-    width: 20px;
-
-    text-align: center;
+    transition: .2s;
 
 }
 
@@ -232,7 +203,7 @@ body {
 .menu-btn:hover {
 
     background:
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,.10);
 
     color: white;
 
@@ -241,14 +212,18 @@ body {
 
 .menu-btn.active {
 
-    color: white;
-
     background:
         linear-gradient(
             90deg,
-            rgba(139,92,246,0.8),
-            rgba(59,130,246,0.7)
+            #4f46e5,
+            #2563eb
         );
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.2);
 
 }
 
@@ -259,11 +234,9 @@ body {
 
 .sidebar-footer {
 
-    padding: 18px;
+    margin-top: auto;
 
-    border-top:
-        1px solid
-        rgba(255,255,255,0.1);
+    padding: 20px;
 
 }
 
@@ -272,22 +245,18 @@ body {
 
     width: 100%;
 
-    height: 42px;
+    padding: 12px;
+
+    border-radius: 10px;
 
     border: none;
-
-    border-radius: 8px;
 
     cursor: pointer;
 
     background:
-        rgba(255,255,255,0.08);
+        rgba(255,255,255,.12);
 
-    color:
-        rgba(255,255,255,0.8);
-
-    transition:
-        0.2s;
+    color: white;
 
 }
 
@@ -295,9 +264,7 @@ body {
 .btn-logout:hover {
 
     background:
-        rgba(255,255,255,0.16);
-
-    color: white;
+        rgba(255,255,255,.20);
 
 }
 
@@ -308,123 +275,40 @@ body {
 
 .conteudo {
 
-    width: calc(100% - 260px);
-
     margin-left: 260px;
 
-    min-height: 100vh;
+    width: calc(100% - 260px);
+
+    padding: 35px;
 
 }
 
 
 /* ======================================
-   TOPBAR
+   TOPO
 ====================================== */
 
-.topbar {
+.topo {
 
-    height: 90px;
-
-    background: white;
-
-    border-bottom:
-        1px solid #e9edf3;
-
-    padding: 0 40px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content:
-        space-between;
+    margin-bottom: 30px;
 
 }
 
 
-.breadcrumb {
+.topo h1 {
 
-    color:
-        #94a3b8;
+    font-size: 28px;
 
-    font-size: 12px;
-
-    margin-bottom: 4px;
+    color: #1e1b4b;
 
 }
 
 
-.topbar h1 {
+.topo p {
 
-    font-size: 23px;
+    color: var(--cinza);
 
-    color:
-        #1e1b4b;
-
-}
-
-
-/* USUÁRIO */
-
-.usuario-topo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-}
-
-
-.usuario-avatar {
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: white;
-
-    font-weight: 700;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #2563eb
-        );
-
-}
-
-
-.usuario-topo div:last-child {
-
-    display: flex;
-
-    flex-direction: column;
-
-}
-
-
-.usuario-topo strong {
-
-    font-size: 13px;
-
-}
-
-
-.usuario-topo span {
-
-    font-size: 11px;
-
-    color:
-        #94a3b8;
+    margin-top: 7px;
 
 }
 
@@ -435,111 +319,31 @@ body {
 
 .page {
 
-    padding: 40px;
+    animation:
+        aparecer .25s ease;
 
 }
 
 
-/* ======================================
-   PAGE HEADER
-====================================== */
+@keyframes aparecer {
 
-.page-header {
+    from {
 
-    display: flex;
+        opacity: 0;
 
-    justify-content:
-        space-between;
+        transform:
+            translateY(5px);
 
-    align-items: center;
+    }
 
-    margin-bottom: 28px;
+    to {
 
-}
+        opacity: 1;
 
+        transform:
+            translateY(0);
 
-.page-header h2 {
-
-    font-size: 22px;
-
-    color:
-        #1e1b4b;
-
-    margin-bottom: 5px;
-
-}
-
-
-.page-header p {
-
-    color:
-        #64748b;
-
-    font-size: 14px;
-
-}
-
-
-/* ======================================
-   BOTÕES
-====================================== */
-
-.btn-primary {
-
-    border: none;
-
-    min-height: 42px;
-
-    padding: 0 20px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    color: white;
-
-    font-weight: 600;
-
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed,
-            #2563eb
-        );
-
-    transition:
-        0.2s;
-
-}
-
-
-.btn-primary:hover {
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 8px 20px
-        rgba(79,70,229,0.25);
-
-}
-
-
-.btn-outline {
-
-    border:
-        1px solid #6366f1;
-
-    padding: 9px 14px;
-
-    border-radius: 7px;
-
-    background: white;
-
-    color:
-        #4f46e5;
-
-    cursor: pointer;
+    }
 
 }
 
@@ -548,33 +352,6 @@ body {
    DASHBOARD
 ====================================== */
 
-.dashboard-header {
-
-    margin-bottom: 30px;
-
-}
-
-
-.dashboard-header h2 {
-
-    font-size: 25px;
-
-    color:
-        #1e1b4b;
-
-    margin-bottom: 6px;
-
-}
-
-
-.dashboard-header p {
-
-    color:
-        #64748b;
-
-}
-
-
 .cards-dashboard {
 
     display: grid;
@@ -582,7 +359,7 @@ body {
     grid-template-columns:
         repeat(
             auto-fit,
-            minmax(210px, 1fr)
+            minmax(200px, 1fr)
         );
 
     gap: 20px;
@@ -594,88 +371,176 @@ body {
 
     background: white;
 
-    border:
-        1px solid #edf0f5;
-
     border-radius: 14px;
 
-    padding: 22px;
+    padding: 23px;
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 16px;
-
-    transition:
-        0.2s;
-
-}
-
-
-.card-dashboard:hover {
-
-    transform:
-        translateY(-3px);
+    border:
+        1px solid var(--borda);
 
     box-shadow:
-        0 10px 25px
-        rgba(30,41,59,0.08);
-
-}
-
-
-.card-icon {
-
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    font-size: 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124,58,237,0.12),
-            rgba(37,99,235,0.12)
-        );
-
-}
-
-
-.card-dashboard div:last-child {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
+        0 5px 15px
+        rgba(15,23,42,.04);
 
 }
 
 
 .card-dashboard span {
 
-    color:
-        #64748b;
+    display: block;
 
-    font-size: 12px;
+    color: var(--cinza);
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
 
 }
 
 
 .card-dashboard strong {
 
-    color:
-        #1e1b4b;
+    font-size: 30px;
 
-    font-size: 27px;
+    color: var(--roxo);
+
+}
+
+
+/* ======================================
+   HEADER DA PÁGINA
+====================================== */
+
+.page-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.page-header h2 {
+
+    color: #1e1b4b;
+
+}
+
+
+.page-header p {
+
+    color: var(--cinza);
+
+    margin-top: 6px;
+
+}
+
+
+/* ======================================
+   BOTÕES
+====================================== */
+
+.btn-principal {
+
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--roxo),
+            var(--azul)
+        );
+
+    color: white;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+}
+
+
+.btn-principal:hover {
+
+    opacity: .9;
+
+}
+
+
+.btn-secundario {
+
+    border:
+        1px solid var(--roxo);
+
+    color: var(--roxo);
+
+    background: white;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+
+.btn-editar {
+
+    border: none;
+
+    background: #dbeafe;
+
+    color: #2563eb;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+}
+
+
+.btn-excluir,
+.btn-desativar {
+
+    border: none;
+
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+}
+
+
+.btn-ativar {
+
+    border: none;
+
+    background: #dcfce7;
+
+    color: #16a34a;
+
+    padding: 8px 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
 
 }
 
@@ -698,25 +563,21 @@ body {
 .filtros input,
 .filtros select {
 
-    height: 42px;
-
-    padding: 0 13px;
+    padding: 11px;
 
     border:
-        1px solid #dbe1ea;
+        1px solid var(--borda);
 
     border-radius: 8px;
 
     outline: none;
-
-    background: white;
 
 }
 
 
 .filtros input {
 
-    flex: 1;
+    min-width: 280px;
 
 }
 
@@ -727,14 +588,14 @@ body {
 
 .tabela-container {
 
+    overflow-x: auto;
+
     background: white;
 
     border-radius: 12px;
 
     border:
-        1px solid #edf0f5;
-
-    overflow-x: auto;
+        1px solid var(--borda);
 
 }
 
@@ -743,40 +604,34 @@ table {
 
     width: 100%;
 
-    border-collapse:
-        collapse;
+    border-collapse: collapse;
 
 }
 
 
 th {
 
-    padding: 16px;
+    background: #f8fafc;
 
     text-align: left;
 
-    font-size: 11px;
+    padding: 15px;
 
-    text-transform:
-        uppercase;
+    font-size: 13px;
 
-    color:
-        #64748b;
-
-    background:
-        #f8fafc;
+    color: #475569;
 
 }
 
 
 td {
 
-    padding: 16px;
+    padding: 15px;
 
     border-top:
-        1px solid #edf0f5;
+        1px solid var(--borda);
 
-    font-size: 13px;
+    font-size: 14px;
 
 }
 
@@ -790,161 +645,79 @@ td {
 }
 
 
-.btn-editar,
-.btn-excluir,
-.btn-ativar,
-.btn-desativar {
+.status-ativa {
 
-    border: none;
+    background: #dcfce7;
 
-    padding: 7px 10px;
+    color: #15803d;
 
-    border-radius: 6px;
+    padding: 6px 10px;
 
-    cursor: pointer;
+    border-radius: 20px;
 
     font-size: 12px;
 
 }
 
 
-.btn-editar {
-
-    background:
-        #ede9fe;
-
-    color:
-        #6d28d9;
-
-}
-
-
-.btn-excluir {
-
-    background:
-        #fee2e2;
-
-    color:
-        #dc2626;
-
-}
-
-
-.btn-ativar {
-
-    background:
-        #dcfce7;
-
-    color:
-        #16a34a;
-
-}
-
-
-.btn-desativar {
-
-    background:
-        #fef3c7;
-
-    color:
-        #d97706;
-
-}
-
-
-/* ======================================
-   STATUS
-====================================== */
-
-.status-ativa,
 .status-inativa {
 
-    display: inline-block;
+    background: #fee2e2;
 
-    padding: 5px 9px;
+    color: #dc2626;
+
+    padding: 6px 10px;
 
     border-radius: 20px;
 
-    font-size: 11px;
-
-    font-weight: 600;
+    font-size: 12px;
 
 }
 
-
-.status-ativa {
-
-    background:
-        #dcfce7;
-
-    color:
-        #16a34a;
-
-}
-
-
-.status-inativa {
-
-    background:
-        #fee2e2;
-
-    color:
-        #dc2626;
-
-}
-
-
-/* ======================================
-   TAG ESPECIALIDADE
-====================================== */
 
 .especialidade-tag {
 
     display: inline-block;
 
-    padding: 4px 7px;
+    background: #eef2ff;
+
+    color: #4338ca;
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
 
     margin: 2px;
 
-    border-radius: 5px;
-
-    background:
-        #eef2ff;
-
-    color:
-        #4338ca;
-
-    font-size: 10px;
+    font-size: 11px;
 
 }
 
 
 /* ======================================
-   FORM INLINE
+   FORMULÁRIOS
 ====================================== */
 
-.form-inline {
+.form-gerenciamento {
 
     display: flex;
 
-    gap: 12px;
+    gap: 10px;
 
-    margin-bottom: 25px;
+    margin: 20px 0;
+
+    flex-wrap: wrap;
 
 }
 
 
-.form-inline input,
-.form-inline select {
+.form-gerenciamento input,
+.form-gerenciamento select {
 
-    flex: 1;
-
-    height: 44px;
-
-    padding: 0 13px;
+    padding: 11px;
 
     border:
-        1px solid #dbe1ea;
+        1px solid var(--borda);
 
     border-radius: 8px;
 
@@ -959,40 +732,35 @@ td {
 
 .lista-gerenciamento {
 
-    display: flex;
+    background: white;
 
-    flex-direction: column;
+    border-radius: 12px;
 
-    gap: 10px;
+    border:
+        1px solid var(--borda);
 
 }
 
 
 .item-gerenciamento {
 
+    padding: 17px;
+
     display: flex;
 
     align-items: center;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    background: white;
-
-    border:
-        1px solid #edf0f5;
-
-    border-radius: 10px;
-
-    padding: 17px;
+    border-bottom:
+        1px solid var(--borda);
 
 }
 
 
 .item-subtitulo {
 
-    color:
-        #64748b;
+    color: var(--cinza);
 
     font-size: 12px;
 
@@ -1010,6 +778,17 @@ td {
 }
 
 
+.sem-dados {
+
+    padding: 30px;
+
+    text-align: center;
+
+    color: var(--cinza);
+
+}
+
+
 /* ======================================
    MODAL
 ====================================== */
@@ -1020,22 +799,23 @@ td {
 
     inset: 0;
 
-    z-index: 1000;
+    background:
+        rgba(15,23,42,.6);
 
     display: flex;
 
-    align-items: center;
     justify-content: center;
 
-    padding: 30px;
+    align-items: center;
 
-    background:
-        rgba(15,23,42,0.55);
+    padding: 20px;
+
+    z-index: 1000;
 
 }
 
 
-.modal-box {
+.modal-conteudo {
 
     width: 100%;
 
@@ -1049,60 +829,35 @@ td {
 
     border-radius: 16px;
 
-    padding: 30px;
+    padding: 25px;
 
 }
 
 
-/* HEADER MODAL */
-
-.modal-header {
+.modal-topo {
 
     display: flex;
 
-    justify-content:
-        space-between;
+    justify-content: space-between;
 
-    margin-bottom: 28px;
+    align-items: center;
 
-}
-
-
-.modal-header h2 {
-
-    color:
-        #1e1b4b;
-
-}
-
-
-.modal-header p {
-
-    margin-top: 5px;
-
-    color:
-        #64748b;
-
-    font-size: 13px;
+    margin-bottom: 25px;
 
 }
 
 
 .btn-fechar {
 
-    width: 35px;
-    height: 35px;
-
     border: none;
 
-    border-radius: 8px;
+    background: transparent;
+
+    font-size: 30px;
 
     cursor: pointer;
 
-    font-size: 24px;
-
-    background:
-        #f1f5f9;
+    color: #64748b;
 
 }
 
@@ -1111,19 +866,19 @@ td {
    FORM MODAL
 ====================================== */
 
-.form-grid {
+.grid-form {
 
     display: grid;
 
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 18px;
+    gap: 17px;
 
 }
 
 
-.campo-form {
+.campo {
 
     display: flex;
 
@@ -1134,15 +889,14 @@ td {
 }
 
 
-.campo-form.full {
+.campo-total {
 
-    grid-column:
-        span 2;
+    grid-column: span 2;
 
 }
 
 
-.campo-form label {
+.campo label {
 
     font-size: 13px;
 
@@ -1151,15 +905,13 @@ td {
 }
 
 
-.campo-form input,
-.campo-form select {
+.campo input,
+.campo select {
 
-    height: 43px;
-
-    padding: 0 12px;
+    padding: 11px;
 
     border:
-        1px solid #dbe1ea;
+        1px solid var(--borda);
 
     border-radius: 8px;
 
@@ -1168,26 +920,9 @@ td {
 }
 
 
-/* ======================================
-   STATUS
-====================================== */
-
 .area-status {
 
-    margin-top: 20px;
-
-}
-
-
-.checkbox-label {
-
-    display: flex;
-
-    gap: 8px;
-
-    align-items: center;
-
-    font-size: 13px;
+    margin: 20px 0;
 
 }
 
@@ -1196,50 +931,22 @@ td {
    ESPECIALIDADES MODAL
 ====================================== */
 
-.especialidades-area {
+.area-especialidades {
 
-    margin-top: 30px;
-
-    padding-top: 25px;
-
-    border-top:
-        1px solid #e2e8f0;
+    margin-top: 25px;
 
 }
 
 
-.especialidades-header {
+.especialidades-topo {
 
     display: flex;
 
+    justify-content: space-between;
+
     align-items: center;
 
-    justify-content:
-        space-between;
-
-    margin-bottom: 18px;
-
-}
-
-
-.especialidades-header h3 {
-
-    color:
-        #1e1b4b;
-
-    font-size: 16px;
-
-}
-
-
-.especialidades-header p {
-
-    color:
-        #64748b;
-
-    font-size: 12px;
-
-    margin-top: 4px;
+    margin-bottom: 15px;
 
 }
 
@@ -1249,7 +956,7 @@ td {
     display: grid;
 
     grid-template-columns:
-        1fr 180px 100px;
+        1fr 1fr auto;
 
     gap: 10px;
 
@@ -1260,14 +967,12 @@ td {
 
 .linha-especialidade select {
 
-    height: 42px;
-
-    padding: 0 10px;
+    padding: 10px;
 
     border:
-        1px solid #dbe1ea;
+        1px solid var(--borda);
 
-    border-radius: 7px;
+    border-radius: 8px;
 
 }
 
@@ -1276,15 +981,15 @@ td {
 
     border: none;
 
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    padding: 8px 12px;
+
     border-radius: 7px;
 
     cursor: pointer;
-
-    background:
-        #fee2e2;
-
-    color:
-        #dc2626;
 
 }
 
@@ -1299,14 +1004,9 @@ td {
 
     justify-content: flex-end;
 
-    gap: 12px;
+    gap: 10px;
 
     margin-top: 30px;
-
-    padding-top: 20px;
-
-    border-top:
-        1px solid #e2e8f0;
 
 }
 
@@ -1314,31 +1014,15 @@ td {
 .btn-cancelar {
 
     border:
-        1px solid #dbe1ea;
+        1px solid var(--borda);
 
     background: white;
 
-    padding: 0 18px;
+    padding: 11px 18px;
 
     border-radius: 8px;
 
     cursor: pointer;
-
-}
-
-
-/* ======================================
-   SEM DADOS
-====================================== */
-
-.sem-dados {
-
-    text-align: center;
-
-    padding: 30px;
-
-    color:
-        #94a3b8;
 
 }
 
@@ -1351,92 +1035,96 @@ td {
 
     .sidebar {
 
-        width: 220px;
+        width: 75px;
+
+    }
+
+
+    .logo-sidebar strong,
+    .logo-sidebar span {
+
+        display: none;
+
+    }
+
+
+    .menu-btn {
+
+        text-align: center;
+
+        font-size: 0;
+
+    }
+
+
+    .menu-btn::first-letter {
+
+        font-size: 16px;
 
     }
 
 
     .conteudo {
 
+        margin-left: 75px;
+
         width:
-            calc(100% - 220px);
-
-        margin-left:
-            220px;
-
-    }
-
-
-    .page {
-
-        padding: 25px;
+            calc(100% - 75px);
 
     }
 
 }
 
 
-@media (max-width: 700px) {
-
-    .sidebar {
-
-        display: none;
-
-    }
-
+@media (max-width: 650px) {
 
     .conteudo {
 
-        width: 100%;
-
-        margin-left: 0;
+        padding: 20px;
 
     }
 
 
-    .topbar {
-
-        padding: 0 20px;
-
-    }
-
-
-    .usuario-topo div:last-child {
-
-        display: none;
-
-    }
-
-
-    .form-inline {
-
-        flex-direction: column;
-
-    }
-
-
-    .form-grid {
+    .grid-form {
 
         grid-template-columns: 1fr;
 
     }
 
 
-    .campo-form.full {
+    .campo-total {
 
         grid-column: span 1;
 
     }
 
 
-    .linha-especialidade {
+    .page-header {
 
-        grid-template-columns: 1fr;
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
 
     }
 
 
-    .cards-dashboard {
+    .filtros {
+
+        flex-direction: column;
+
+    }
+
+
+    .filtros input {
+
+        min-width: auto;
+
+    }
+
+
+    .linha-especialidade {
 
         grid-template-columns: 1fr;
 
