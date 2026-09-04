@@ -10,12 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Login | Rede Especialistas
-    </title>
-
-
-    <!-- CSS -->
+    <title>Login | Rede Especialistas</title>
 
     <link
         rel="stylesheet"
@@ -28,82 +23,126 @@
 <body>
 
 
-    <!-- ======================================
-         FUNDO
-    ======================================= -->
-
-    <div class="background"></div>
+    <main class="login-page">
 
 
-    <!-- ======================================
-         CONTAINER LOGIN
-    ======================================= -->
+        <!-- LADO ESQUERDO -->
 
-    <main class="login-container">
+        <section class="login-apresentacao">
 
+            <div class="apresentacao-conteudo">
 
-        <!-- CARD -->
+                <div class="logo-marca">
 
-        <section class="login-card">
+                    <div class="logo-icone">
+                        +
+                    </div>
 
+                    <span>
+                        Rede Especialistas
+                    </span>
 
-            <!-- LOGO / ÍCONE -->
-
-            <div class="logo-area">
-
-                <div class="logo-icon">
-                    🦷
                 </div>
 
-                <h1>
-                    Rede Especialistas
-                </h1>
 
-                <p>
-                    Painel Administrativo
-                </p>
+                <div class="apresentacao-texto">
+
+                    <span class="badge">
+                        PAINEL ADMINISTRATIVO
+                    </span>
+
+                    <h1>
+                        Gestão inteligente para sua rede.
+                    </h1>
+
+                    <p>
+                        Gerencie clínicas, especialidades,
+                        regiões e toda a estrutura da
+                        Rede Especialistas em um só lugar.
+                    </p>
+
+                </div>
+
+
+                <div class="cards-info">
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            🏥
+                        </div>
+
+                        <div>
+                            <strong>
+                                Gestão de Clínicas
+                            </strong>
+
+                            <span>
+                                Controle completo da rede
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            📍
+                        </div>
+
+                        <div>
+                            <strong>
+                                Localização
+                            </strong>
+
+                            <span>
+                                Regiões, estados e cidades
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
 
-            <!-- DIVISOR -->
+            <div class="decoracao decoracao-1"></div>
+            <div class="decoracao decoracao-2"></div>
 
-            <div class="divider"></div>
-
-
-            <!-- TÍTULO -->
-
-            <div class="login-header">
-
-                <h2>
-                    Bem-vindo
-                </h2>
-
-                <p>
-                    Faça login para acessar o painel administrativo.
-                </p>
-
-            </div>
+        </section>
 
 
-            <!-- FORMULÁRIO -->
+        <!-- LADO DIREITO -->
 
-            <form id="formLogin">
+        <section class="login-area">
+
+            <div class="login-box">
 
 
-                <!-- USUÁRIO -->
+                <div class="login-header">
 
-                <div class="campo">
+                    <h2>
+                        Bem-vindo!
+                    </h2>
 
-                    <label for="usuarioLogin">
-                        Usuário
-                    </label>
+                    <p>
+                        Entre com suas credenciais para acessar
+                        o painel administrativo.
+                    </p>
 
-                    <div class="input-container">
+                </div>
 
-                        <span class="input-icon">
-                            👤
-                        </span>
+
+                <form id="formLogin">
+
+
+                    <div class="campo">
+
+                        <label for="usuarioLogin">
+                            Usuário
+                        </label>
 
                         <input
                             type="text"
@@ -115,22 +154,12 @@
 
                     </div>
 
-                </div>
 
+                    <div class="campo">
 
-                <!-- SENHA -->
-
-                <div class="campo">
-
-                    <label for="senhaLogin">
-                        Senha
-                    </label>
-
-                    <div class="input-container">
-
-                        <span class="input-icon">
-                            🔒
-                        </span>
+                        <label for="senhaLogin">
+                            Senha
+                        </label>
 
                         <input
                             type="password"
@@ -142,67 +171,47 @@
 
                     </div>
 
+
+                    <div
+                        id="mensagemLogin"
+                        class="mensagem-login"
+                    ></div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-login"
+                    >
+                        Entrar no painel
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+                <div class="login-rodape">
+
+                    <span>
+                        🔒
+                    </span>
+
+                    Área restrita para administradores
+
                 </div>
 
 
-                <!-- MENSAGEM -->
-
-                <div
-                    id="mensagemLogin"
-                    class="mensagem-login"
-                ></div>
-
-
-                <!-- BOTÃO -->
-
-                <button
-                    type="submit"
-                    class="btn-login"
-                >
-
-                    <span>
-                        Entrar no Painel
-                    </span>
-
-                    <span class="btn-arrow">
-                        →
-                    </span>
-
-                </button>
-
-
-            </form>
-
-
-            <!-- RODAPÉ -->
-
-            <div class="login-footer">
-
-                <p>
-                    🔐 Área restrita para administradores
-                </p>
-
             </div>
-
 
         </section>
 
 
-        <!-- TEXTO INFERIOR -->
-
-        <div class="copyright">
-
-            © 2026 Rede Especialistas
-
-        </div>
-
-
     </main>
 
-
-    <!-- ======================================
-         JAVASCRIPT
-    ======================================= -->
 
     <script src="js/login.js"></script>
 
