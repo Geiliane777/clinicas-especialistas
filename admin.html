@@ -10,17 +10,10 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="format-detection"
-        content="telephone=no"
-    >
-
     <title>
-        Login | Painel Administrativo
+        Painel Administrativo
     </title>
 
-
-    <!-- ÍCONE DA ABA -->
 
     <link
         rel="icon"
@@ -32,8 +25,14 @@
 
     <link
         rel="stylesheet"
-        href="css/login.css"
+        href="css/admin.css"
     >
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 </head>
 
@@ -42,171 +41,845 @@
 
 
     <!-- ======================================
-         FUNDO DECORATIVO
+         PAINEL
     ======================================= -->
 
-    <div class="background">
+    <div
+        id="painelAdmin"
+        class="painel-admin"
+    >
 
-        <div class="bola bola1"></div>
 
-        <div class="bola bola2"></div>
+        <!-- ======================================
+             SIDEBAR
+        ======================================= -->
 
-        <div class="bola bola3"></div>
+        <aside class="sidebar">
+
+
+            <!-- LOGO -->
+
+            <div class="sidebar-logo">
+
+                <img
+                    src="img/tooth.png"
+                    alt="Logo"
+                >
+
+                <div>
+
+                    <strong>
+                        Rede Especialistas
+                    </strong>
+
+                    <span>
+                        Painel Administrativo
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MENU -->
+
+            <nav class="menu">
+
+
+                <button
+                    class="menu-item ativo"
+                    onclick="mostrarPagina('dashboard')"
+                >
+
+                    📊 Dashboard
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    onclick="mostrarPagina('regioes')"
+                >
+
+                    🌎 Regiões
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    onclick="mostrarPagina('estados')"
+                >
+
+                    🗺️ Estados
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    onclick="mostrarPagina('cidades')"
+                >
+
+                    🏙️ Cidades
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    onclick="mostrarPagina('bairros')"
+                >
+
+                    📍 Bairros
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    onclick="mostrarPagina('especialidades')"
+                >
+
+                    🦷 Especialidades
+
+                </button>
+
+
+                <button
+                    class="menu-item"
+                    onclick="mostrarPagina('clinicas')"
+                >
+
+                    🏥 Clínicas
+
+                </button>
+
+
+            </nav>
+
+
+            <!-- AÇÕES -->
+
+            <div class="sidebar-acoes">
+
+
+                <button
+                    class="btn-voltar-site"
+                    onclick="window.location.href='index.html'"
+                >
+
+                    ← Voltar ao Site
+
+                </button>
+
+
+                <button
+                    class="btn-sair"
+                    onclick="logout()"
+                >
+
+                    Sair
+
+                </button>
+
+
+            </div>
+
+
+        </aside>
+
+
+        <!-- ======================================
+             CONTEÚDO
+        ======================================= -->
+
+        <main class="conteudo">
+
+
+            <!-- HEADER -->
+
+            <header class="topo-painel">
+
+                <div>
+
+                    <h1 id="tituloPagina">
+
+                        Dashboard
+
+                    </h1>
+
+                    <p>
+
+                        Gerencie a Rede Especialistas
+
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <!-- ======================================
+                 DASHBOARD
+            ======================================= -->
+
+            <section
+                id="pagina-dashboard"
+                class="pagina"
+            >
+
+                <div class="cards-dashboard">
+
+
+                    <div class="dashboard-card">
+
+                        <span>
+                            🏥
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Clínicas
+                            </small>
+
+                            <strong
+                                id="totalClinicas"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <span>
+                            🦷
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Especialidades
+                            </small>
+
+                            <strong
+                                id="totalEspecialidades"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <span>
+                            🌎
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Regiões
+                            </small>
+
+                            <strong
+                                id="totalRegioes"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <span>
+                            🗺️
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Estados
+                            </small>
+
+                            <strong
+                                id="totalEstados"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="dashboard-card grande">
+
+                    <h2>
+                        Bem-vindo ao Painel Administrativo
+                    </h2>
+
+                    <p>
+
+                        Utilize o menu lateral para
+                        gerenciar regiões, estados,
+                        cidades, bairros, especialidades
+                        e clínicas.
+
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ======================================
+                 REGIÕES
+            ======================================= -->
+
+            <section
+                id="pagina-regioes"
+                class="pagina hidden"
+            >
+
+                <div class="bloco-formulario">
+
+                    <input
+                        type="hidden"
+                        id="regiaoEditId"
+                    >
+
+                    <input
+                        type="text"
+                        id="nomeRegiao"
+                        placeholder="Nome da região"
+                    >
+
+                    <button
+                        onclick="salvarRegiao()"
+                    >
+
+                        Salvar Região
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaRegioes"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </section>
+
+
+            <!-- ======================================
+                 ESTADOS
+            ======================================= -->
+
+            <section
+                id="pagina-estados"
+                class="pagina hidden"
+            >
+
+                <div class="bloco-formulario">
+
+                    <input
+                        type="hidden"
+                        id="estadoEditId"
+                    >
+
+                    <input
+                        type="text"
+                        id="nomeEstado"
+                        placeholder="Nome do estado"
+                    >
+
+                    <select
+                        id="estadoRegiao"
+                    >
+
+                        <option value="">
+                            Selecione uma região
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        onclick="salvarEstado()"
+                    >
+
+                        Salvar Estado
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaEstados"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </section>
+
+
+            <!-- ======================================
+                 CIDADES
+            ======================================= -->
+
+            <section
+                id="pagina-cidades"
+                class="pagina hidden"
+            >
+
+                <div class="bloco-formulario">
+
+                    <input
+                        type="hidden"
+                        id="cidadeEditId"
+                    >
+
+                    <input
+                        type="text"
+                        id="nomeCidade"
+                        placeholder="Nome da cidade"
+                    >
+
+                    <select
+                        id="cidadeEstado"
+                    >
+
+                        <option value="">
+                            Selecione um estado
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        onclick="salvarCidade()"
+                    >
+
+                        Salvar Cidade
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaCidades"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </section>
+
+
+            <!-- ======================================
+                 BAIRROS
+            ======================================= -->
+
+            <section
+                id="pagina-bairros"
+                class="pagina hidden"
+            >
+
+                <div class="bloco-formulario">
+
+                    <input
+                        type="hidden"
+                        id="bairroEditId"
+                    >
+
+                    <input
+                        type="text"
+                        id="nomeBairro"
+                        placeholder="Nome do bairro"
+                    >
+
+                    <select
+                        id="bairroCidade"
+                    >
+
+                        <option value="">
+                            Selecione uma cidade
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        onclick="salvarBairro()"
+                    >
+
+                        Salvar Bairro
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaBairros"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </section>
+
+
+            <!-- ======================================
+                 ESPECIALIDADES
+            ======================================= -->
+
+            <section
+                id="pagina-especialidades"
+                class="pagina hidden"
+            >
+
+                <div class="bloco-formulario">
+
+                    <input
+                        type="hidden"
+                        id="especialidadeEditId"
+                    >
+
+                    <input
+                        type="text"
+                        id="nomeEspecialidade"
+                        placeholder="Nome da especialidade"
+                    >
+
+
+                    <button
+                        onclick="salvarEspecialidade()"
+                    >
+
+                        Salvar Especialidade
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="listaEspecialidades"
+                    class="lista-gerenciamento"
+                ></div>
+
+
+            </section>
+
+
+            <!-- ======================================
+                 CLÍNICAS
+            ======================================= -->
+
+            <section
+                id="pagina-clinicas"
+                class="pagina hidden"
+            >
+
+
+                <div class="topo-lista">
+
+
+                    <input
+                        type="text"
+                        id="buscarClinica"
+                        placeholder="Buscar clínica..."
+                        oninput="listarClinicas()"
+                    >
+
+
+                    <select
+                        id="filtroStatusClinica"
+                        onchange="listarClinicas()"
+                    >
+
+                        <option value="">
+                            Todos os status
+                        </option>
+
+                        <option value="true">
+                            Ativas
+                        </option>
+
+                        <option value="false">
+                            Inativas
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        onclick="abrirModalClinica()"
+                    >
+
+                        + Nova Clínica
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Clínica
+                                </th>
+
+                                <th>
+                                    Localização
+                                </th>
+
+                                <th>
+                                    Telefone
+                                </th>
+
+                                <th>
+                                    Especialidades
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="listaClinicas"
+                        ></tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
 
     </div>
 
 
     <!-- ======================================
-         CONTAINER LOGIN
+         MODAL CLÍNICA
     ======================================= -->
 
-    <main class="login-container">
+    <div
+        id="modalClinica"
+        class="modal hidden"
+    >
+
+        <div class="modal-conteudo">
 
 
-        <section class="login-card">
+            <div class="modal-topo">
 
-
-            <!-- ======================================
-                 LOGO
-            ======================================= -->
-
-            <div class="logo-container">
-
-                <img
-                    src="img/tooth.png"
-                    alt="Logo Rede Especialistas"
-                    class="login-logo"
+                <h2
+                    id="tituloModalClinica"
                 >
+
+                    Nova Clínica
+
+                </h2>
+
+
+                <button
+                    onclick="fecharModalClinica()"
+                >
+
+                    ✕
+
+                </button>
 
             </div>
 
 
-            <!-- ======================================
-                 TÍTULO
-            ======================================= -->
-
-            <h1>
-                Painel Administrativo
-            </h1>
+            <form
+                id="formClinica"
+                onsubmit="salvarClinica(event)"
+            >
 
 
-            <p class="login-subtitulo">
-
-                Gerencie clínicas, especialidades
-                e localidades da Rede Especialistas.
-
-            </p>
+                <input
+                    type="hidden"
+                    id="clinicaId"
+                >
 
 
-            <!-- LINHA DECORATIVA -->
+                <label>
+                    Nome da Clínica
+                </label>
 
-            <div class="linha"></div>
-
-
-            <!-- ======================================
-                 FORMULÁRIO
-            ======================================= -->
-
-            <form id="formLogin">
-
-
-                <!-- USUÁRIO -->
-
-                <div class="campo-login">
-
-                    <label for="usuarioLogin">
-
-                        Usuário
-
-                    </label>
+                <input
+                    type="text"
+                    id="clinicaNome"
+                    required
+                >
 
 
-                    <div class="input-container">
+                <label>
+                    Endereço
+                </label>
 
-                        <span class="icone-input">
-                            👤
-                        </span>
+                <input
+                    type="text"
+                    id="clinicaEndereco"
+                    required
+                >
 
 
-                        <input
-                            type="text"
-                            id="usuarioLogin"
-                            placeholder="Digite seu usuário"
-                            autocomplete="username"
-                            required
-                        >
+                <label>
+                    Telefone
+                </label>
 
-                    </div>
+                <input
+                    type="text"
+                    id="clinicaTelefone"
+                >
+
+
+                <div class="grid-localizacao">
+
+
+                    <select
+                        id="clinicaRegiao"
+                        onchange="carregarEstadosClinica()"
+                    >
+
+                        <option value="">
+                            Região
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="clinicaEstado"
+                        onchange="carregarCidadesClinica()"
+                    >
+
+                        <option value="">
+                            Estado
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="clinicaCidade"
+                        onchange="carregarBairrosClinica()"
+                    >
+
+                        <option value="">
+                            Cidade
+                        </option>
+
+                    </select>
+
+
+                    <select
+                        id="clinicaBairro"
+                    >
+
+                        <option value="">
+                            Bairro
+                        </option>
+
+                    </select>
+
 
                 </div>
 
-
-                <!-- SENHA -->
-
-                <div class="campo-login">
-
-                    <label for="senhaLogin">
-
-                        Senha
-
-                    </label>
-
-
-                    <div class="input-container">
-
-                        <span class="icone-input">
-                            🔒
-                        </span>
-
-
-                        <input
-                            type="password"
-                            id="senhaLogin"
-                            placeholder="Digite sua senha"
-                            autocomplete="current-password"
-                            required
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <!-- MENSAGEM -->
 
                 <div
-                    id="mensagemLogin"
-                    class="mensagem-login"
+                    id="areaStatusClinica"
+                    class="hidden"
+                >
+
+                    <label class="checkbox">
+
+                        <input
+                            type="checkbox"
+                            id="clinicaAtivo"
+                        >
+
+                        Clínica ativa
+
+                    </label>
+
+                </div>
+
+
+                <div class="especialidades-topo">
+
+                    <h3>
+                        Especialidades
+                    </h3>
+
+
+                    <button
+                        type="button"
+                        onclick="adicionarLinhaEspecialidade()"
+                    >
+
+                        + Adicionar
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="containerEspecialidades"
                 ></div>
 
 
-                <!-- BOTÃO LOGIN -->
-
                 <button
                     type="submit"
-                    class="btn-login"
+                    class="btn-salvar-clinica"
                 >
 
-                    <span>
-                        Entrar no Painel
-                    </span>
-
-                    <span class="seta">
-                        →
-                    </span>
-
-                </button>
-
-
-                <!-- BOTÃO VOLTAR -->
-
-                <button
-                    type="button"
-                    class="btn-voltar"
-                    onclick="voltarParaSite()"
-                >
-
-                    ← Voltar para Rede Especialistas
+                    Salvar Clínica
 
                 </button>
 
@@ -214,32 +887,19 @@
             </form>
 
 
-            <!-- ======================================
-                 RODAPÉ
-            ======================================= -->
-
-            <div class="login-footer">
-
-                <span>
-                    🦷
-                </span>
-
-                Sistema de gerenciamento
-
-            </div>
+        </div>
 
 
-        </section>
-
-
-    </main>
+    </div>
 
 
     <!-- ======================================
-         JAVASCRIPT
+         SCRIPTS
     ======================================= -->
 
-    <script src="js/login.js"></script>
+    <script src="js/supabase.js"></script>
+
+    <script src="js/admin.js"></script>
 
 
 </body>
