@@ -9,7 +9,6 @@ console.log("login.js carregado");
 // CONFIGURAÇÃO
 // ======================================
 
-
 const USUARIO_ADMIN = "admin";
 const SENHA_ADMIN = "123456";
 
@@ -42,13 +41,10 @@ function verificarSessao() {
         );
 
 
-    // Se já estiver logado,
-    // vai direto para o painel
-
     if (logado === "true") {
 
         window.location.href =
-            "./admin.html";
+            "admin.html";
 
     }
 
@@ -67,15 +63,7 @@ function iniciarFormularioLogin() {
         );
 
 
-    if (!form) {
-
-        console.error(
-            "Formulário de login não encontrado."
-        );
-
-        return;
-
-    }
+    if (!form) return;
 
 
     form.addEventListener(
@@ -112,32 +100,10 @@ function fazerLogin(event) {
             .value;
 
 
-    const mensagem =
-        document.getElementById(
-            "mensagemLogin"
-        );
-
-
-    // Limpa mensagem anterior
-
-    mensagem.textContent = "";
-
-    mensagem.classList.remove(
-        "erro",
-        "sucesso"
-    );
-
-
-    // ==================================
-    // VALIDA LOGIN
-    // ==================================
-
     if (
         usuario === USUARIO_ADMIN &&
         senha === SENHA_ADMIN
     ) {
-
-        // Salva sessão
 
         localStorage.setItem(
             "adminLogado",
@@ -145,46 +111,65 @@ function fazerLogin(event) {
         );
 
 
-        mensagem.textContent =
-            "Login realizado com sucesso!";
-
-
-        mensagem.classList.add(
+        mostrarMensagem(
+            "Login realizado com sucesso!",
             "sucesso"
         );
 
-
-        // Redireciona
 
         setTimeout(
             () => {
 
                 window.location.href =
-                    "./admin.html";
+                    "admin.html";
 
             },
-            500
+            700
         );
 
-    }
+    } else {
 
-    else {
-
-        mensagem.textContent =
-            "Usuário ou senha incorretos.";
-
-
-        mensagem.classList.add(
+        mostrarMensagem(
+            "Usuário ou senha incorretos.",
             "erro"
         );
 
 
-        document
-            .getElementById(
-                "senhaLogin"
-            )
-            .value = "";
+        document.getElementById(
+            "senhaLogin"
+        ).value = "";
 
     }
+
+}
+
+
+// ======================================
+// MENSAGEM
+// ======================================
+
+function mostrarMensagem(
+    texto,
+    tipo
+) {
+
+    const mensagem =
+        document.getElementById(
+            "mensagemLogin"
+        );
+
+
+    if (!mensagem) return;
+
+
+    mensagem.textContent =
+        texto;
+
+
+    mensagem.className =
+        "mensagem-login";
+
+
+    mensagem.classList.add(tipo);
 
 }
