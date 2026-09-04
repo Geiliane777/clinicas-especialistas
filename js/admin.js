@@ -44,6 +44,13 @@ async function inicializarAdmin() {
 
     await listarBairros();
 
+    // Carregar selects dos formulários
+    await carregarRegioesSelect();
+
+    await carregarEstadosSelect();
+
+    await carregarCidadesSelect();
+
 }
 
 
@@ -250,10 +257,7 @@ async function carregarDashboard() {
 // ATUALIZAR ELEMENTO
 // ======================================
 
-function atualizarElemento(
-    id,
-    valor
-) {
+function atualizarElemento(id, valor) {
 
     const elemento =
         document.getElementById(id);
@@ -437,6 +441,8 @@ async function salvarRegiao() {
 
     await listarRegioes();
 
+    await carregarRegioesSelect();
+
     await carregarDashboard();
 
 }
@@ -512,6 +518,8 @@ async function excluirRegiao(id) {
 
 
     await listarRegioes();
+
+    await carregarRegioesSelect();
 
     await carregarDashboard();
 
@@ -770,6 +778,8 @@ async function salvarEstado() {
 
     await listarEstados();
 
+    await carregarEstadosSelect();
+
     await carregarDashboard();
 
 }
@@ -853,6 +863,8 @@ async function excluirEstado(id) {
 
 
     await listarEstados();
+
+    await carregarEstadosSelect();
 
     await carregarDashboard();
 
@@ -1126,6 +1138,8 @@ async function salvarCidade() {
 
     await listarCidades();
 
+    await carregarCidadesSelect();
+
     await carregarDashboard();
 
 }
@@ -1209,6 +1223,8 @@ async function excluirCidade(id) {
 
 
     await listarCidades();
+
+    await carregarCidadesSelect();
 
     await carregarDashboard();
 
@@ -1374,15 +1390,11 @@ async function carregarCidadesSelect() {
 
         select.innerHTML += `
             <option value="${item.id}">
-
                 ${escaparTexto(item.nome)}
-
                 -
-
                 ${escaparTexto(
                     item.estados?.nome || ""
                 )}
-
             </option>
         `;
 
@@ -1925,14 +1937,12 @@ async function listarClinicas() {
 
         lista.innerHTML = `
             <tr>
-
                 <td
                     colspan="6"
                     class="sem-dados"
                 >
                     Nenhuma clínica encontrada.
                 </td>
-
             </tr>
         `;
 
@@ -1981,15 +1991,10 @@ async function listarClinicas() {
             <tr>
 
                 <td>
-
                     <strong>
-                        ${escaparTexto(
-                            clinica.nome
-                        )}
+                        ${escaparTexto(clinica.nome)}
                     </strong>
-
                 </td>
-
 
                 <td>
 
@@ -2003,22 +2008,15 @@ async function listarClinicas() {
 
                 </td>
 
-
                 <td>
-
                     ${escaparTexto(
                         clinica.telefone || "-"
                     )}
-
                 </td>
-
 
                 <td>
-
                     ${especialidades || "-"}
-
                 </td>
-
 
                 <td>
 
@@ -2044,7 +2042,6 @@ async function listarClinicas() {
 
                 </td>
 
-
                 <td>
 
                     <div class="acoes">
@@ -2056,14 +2053,12 @@ async function listarClinicas() {
                             Editar
                         </button>
 
-
                         <button
                             class="${
                                 clinica.ativo
                                     ? "btn-desativar"
                                     : "btn-ativar"
                             }"
-
                             onclick="
                                 alterarStatusClinica(
                                     ${clinica.id},
@@ -2194,13 +2189,9 @@ async function carregarRegioesClinica() {
     data?.forEach(item => {
 
         select.innerHTML += `
-
             <option value="${item.id}">
-
                 ${escaparTexto(item.nome)}
-
             </option>
-
         `;
 
     });
@@ -2272,11 +2263,9 @@ async function carregarEstadosClinica() {
     data?.forEach(item => {
 
         select.innerHTML += `
-
             <option value="${item.id}">
                 ${escaparTexto(item.nome)}
             </option>
-
         `;
 
     });
@@ -2342,11 +2331,9 @@ async function carregarCidadesClinica() {
     data?.forEach(item => {
 
         select.innerHTML += `
-
             <option value="${item.id}">
                 ${escaparTexto(item.nome)}
             </option>
-
         `;
 
     });
@@ -2406,11 +2393,9 @@ async function carregarBairrosClinica() {
     data?.forEach(item => {
 
         select.innerHTML += `
-
             <option value="${item.id}">
                 ${escaparTexto(item.nome)}
             </option>
-
         `;
 
     });
@@ -2458,14 +2443,12 @@ async function adicionarLinhaEspecialidade(
 
 
         options += `
-
             <option
                 value="${item.id}"
                 ${selected}
             >
                 ${escaparTexto(item.nome)}
             </option>
-
         `;
 
     });
@@ -2676,6 +2659,7 @@ async function salvarClinica(event) {
     }
 
 
+    // Remove vínculos antigos
     const {
         error: erroDelete
     } = await supabaseClient
@@ -2753,6 +2737,7 @@ async function salvarClinica(event) {
     });
 
 
+    // Remove duplicidades
     const especialidadesUnicas =
         especialidades.filter(
             (item, index, array) =>
