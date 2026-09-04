@@ -9,6 +9,7 @@ console.log("login.js carregado");
 // CONFIGURAÇÃO
 // ======================================
 
+
 const USUARIO_ADMIN = "admin";
 const SENHA_ADMIN = "123456";
 
