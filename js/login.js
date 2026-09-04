@@ -10,6 +10,7 @@ console.log("login.js carregado");
 // ======================================
 
 const USUARIO_ADMIN = "admin";
+
 const SENHA_ADMIN = "123456";
 
 
@@ -41,6 +42,9 @@ function verificarSessao() {
         );
 
 
+    // Se já estiver logado,
+    // vai direto para o painel
+
     if (logado === "true") {
 
         window.location.href =
@@ -52,7 +56,7 @@ function verificarSessao() {
 
 
 // ======================================
-// FORMULÁRIO
+// INICIAR FORMULÁRIO
 // ======================================
 
 function iniciarFormularioLogin() {
@@ -63,7 +67,15 @@ function iniciarFormularioLogin() {
         );
 
 
-    if (!form) return;
+    if (!form) {
+
+        console.error(
+            "Formulário de login não encontrado."
+        );
+
+        return;
+
+    }
 
 
     form.addEventListener(
@@ -83,27 +95,68 @@ function fazerLogin(event) {
     event.preventDefault();
 
 
+    const usuarioInput =
+        document.getElementById(
+            "usuarioLogin"
+        );
+
+
+    const senhaInput =
+        document.getElementById(
+            "senhaLogin"
+        );
+
+
+    const mensagem =
+        document.getElementById(
+            "mensagemLogin"
+        );
+
+
     const usuario =
-        document
-            .getElementById(
-                "usuarioLogin"
-            )
-            .value
-            .trim();
+        usuarioInput.value.trim();
 
 
     const senha =
-        document
-            .getElementById(
-                "senhaLogin"
-            )
-            .value;
+        senhaInput.value;
 
+
+    // Limpar mensagem anterior
+
+    mensagem.textContent = "";
+
+    mensagem.classList.remove(
+        "erro",
+        "sucesso"
+    );
+
+
+    // ======================================
+    // VALIDAR CAMPOS
+    // ======================================
+
+    if (!usuario || !senha) {
+
+        mostrarMensagem(
+            "Preencha usuário e senha.",
+            "erro"
+        );
+
+        return;
+
+    }
+
+
+    // ======================================
+    // VALIDAR LOGIN
+    // ======================================
 
     if (
         usuario === USUARIO_ADMIN &&
         senha === SENHA_ADMIN
     ) {
+
+        // Salvar sessão
 
         localStorage.setItem(
             "adminLogado",
@@ -111,11 +164,34 @@ function fazerLogin(event) {
         );
 
 
+        // Mostrar mensagem
+
         mostrarMensagem(
             "Login realizado com sucesso!",
             "sucesso"
         );
 
+
+        // Desabilitar botão temporariamente
+
+        const botao =
+            document.querySelector(
+                ".btn-login"
+            );
+
+
+        if (botao) {
+
+            botao.disabled = true;
+
+            botao.innerHTML = `
+                Entrando...
+            `;
+
+        }
+
+
+        // Redirecionar
 
         setTimeout(
             () => {
@@ -135,9 +211,14 @@ function fazerLogin(event) {
         );
 
 
-        document.getElementById(
-            "senhaLogin"
-        ).value = "";
+        // Limpar senha
+
+        senhaInput.value = "";
+
+
+        // Focar senha
+
+        senhaInput.focus();
 
     }
 
@@ -145,7 +226,7 @@ function fazerLogin(event) {
 
 
 // ======================================
-// MENSAGEM
+// MOSTRAR MENSAGEM
 // ======================================
 
 function mostrarMensagem(
@@ -166,10 +247,26 @@ function mostrarMensagem(
         texto;
 
 
-    mensagem.className =
-        "mensagem-login";
+    mensagem.classList.remove(
+        "erro",
+        "sucesso"
+    );
 
 
-    mensagem.classList.add(tipo);
+    mensagem.classList.add(
+        tipo
+    );
+
+}
+
+
+// ======================================
+// VOLTAR PARA O SITE
+// ======================================
+
+function voltarParaSite() {
+
+    window.location.href =
+        "index.html";
 
 }
