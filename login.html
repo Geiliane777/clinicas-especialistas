@@ -10,7 +10,25 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Login | Rede Especialistas</title>
+    <meta
+        name="format-detection"
+        content="telephone=no"
+    >
+
+    <title>
+        Login | Painel Administrativo
+    </title>
+
+
+    <!-- ÍCONE -->
+
+    <link
+        rel="icon"
+        href="img/tooth.png"
+    >
+
+
+    <!-- CSS -->
 
     <link
         rel="stylesheet"
@@ -23,126 +41,84 @@
 <body>
 
 
-    <main class="login-page">
+    <!-- ======================================
+         FUNDO DECORATIVO
+    ======================================= -->
+
+    <div class="background">
+
+        <div class="bola bola1"></div>
+        <div class="bola bola2"></div>
+        <div class="bola bola3"></div>
+
+    </div>
 
 
-        <!-- LADO ESQUERDO -->
+    <!-- ======================================
+         CONTAINER LOGIN
+    ======================================= -->
 
-        <section class="login-apresentacao">
-
-            <div class="apresentacao-conteudo">
-
-                <div class="logo-marca">
-
-                    <div class="logo-icone">
-                        +
-                    </div>
-
-                    <span>
-                        Rede Especialistas
-                    </span>
-
-                </div>
+    <main class="login-container">
 
 
-                <div class="apresentacao-texto">
-
-                    <span class="badge">
-                        PAINEL ADMINISTRATIVO
-                    </span>
-
-                    <h1>
-                        Gestão inteligente para sua rede.
-                    </h1>
-
-                    <p>
-                        Gerencie clínicas, especialidades,
-                        regiões e toda a estrutura da
-                        Rede Especialistas em um só lugar.
-                    </p>
-
-                </div>
+        <section class="login-card">
 
 
-                <div class="cards-info">
+            <!-- LOGO -->
 
-                    <div class="info-card">
+            <div class="logo-container">
 
-                        <div class="info-icon">
-                            🏥
-                        </div>
-
-                        <div>
-                            <strong>
-                                Gestão de Clínicas
-                            </strong>
-
-                            <span>
-                                Controle completo da rede
-                            </span>
-                        </div>
-
-                    </div>
-
-
-                    <div class="info-card">
-
-                        <div class="info-icon">
-                            📍
-                        </div>
-
-                        <div>
-                            <strong>
-                                Localização
-                            </strong>
-
-                            <span>
-                                Regiões, estados e cidades
-                            </span>
-                        </div>
-
-                    </div>
-
-                </div>
+                <img
+                    src="img/tooth.png"
+                    alt="Logo Rede Especialistas"
+                    class="login-logo"
+                >
 
             </div>
 
 
-            <div class="decoracao decoracao-1"></div>
-            <div class="decoracao decoracao-2"></div>
+            <!-- TÍTULO -->
 
-        </section>
-
-
-        <!-- LADO DIREITO -->
-
-        <section class="login-area">
-
-            <div class="login-box">
+            <h1>
+                Painel Administrativo
+            </h1>
 
 
-                <div class="login-header">
+            <p class="login-subtitulo">
 
-                    <h2>
-                        Bem-vindo!
-                    </h2>
+                Gerencie clínicas, especialidades
+                e localidades da Rede Especialistas.
 
-                    <p>
-                        Entre com suas credenciais para acessar
-                        o painel administrativo.
-                    </p>
-
-                </div>
+            </p>
 
 
-                <form id="formLogin">
+            <!-- LINHA -->
+
+            <div class="linha"></div>
 
 
-                    <div class="campo">
+            <!-- FORMULÁRIO -->
 
-                        <label for="usuarioLogin">
-                            Usuário
-                        </label>
+            <form id="formLogin">
+
+
+                <!-- USUÁRIO -->
+
+                <div class="campo-login">
+
+                    <label for="usuarioLogin">
+
+                        Usuário
+
+                    </label>
+
+
+                    <div class="input-container">
+
+                        <span class="icone-input">
+                            👤
+                        </span>
+
 
                         <input
                             type="text"
@@ -154,12 +130,26 @@
 
                     </div>
 
+                </div>
 
-                    <div class="campo">
 
-                        <label for="senhaLogin">
-                            Senha
-                        </label>
+                <!-- SENHA -->
+
+                <div class="campo-login">
+
+                    <label for="senhaLogin">
+
+                        Senha
+
+                    </label>
+
+
+                    <div class="input-container">
+
+                        <span class="icone-input">
+                            🔒
+                        </span>
+
 
                         <input
                             type="password"
@@ -171,53 +161,71 @@
 
                     </div>
 
-
-                    <div
-                        id="mensagemLogin"
-                        class="mensagem-login"
-                    ></div>
-
-
-                    <button
-                        type="submit"
-                        class="btn-login"
-                    >
-                        Entrar no painel
-
-                        <span>
-                            →
-                        </span>
-
-                    </button>
-<button
-    type="button"
-    class="btn-voltar"
-    onclick="location.href='index.html'"
->
-    ← Voltar para Rede Especialistas
-</button>
-
-                </form>
-
-
-                <div class="login-rodape">
-
-                    <span>
-                        🔒
-                    </span>
-
-                    Área restrita para administradores
-
                 </div>
 
 
+                <!-- MENSAGEM -->
+
+                <div
+                    id="mensagemLogin"
+                    class="mensagem-login"
+                ></div>
+
+
+                <!-- BOTÃO ENTRAR -->
+
+                <button
+                    type="submit"
+                    class="btn-login"
+                >
+
+                    <span>
+                        Entrar no Painel
+                    </span>
+
+                    <span class="seta">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- BOTÃO VOLTAR -->
+
+                <button
+                    type="button"
+                    class="btn-voltar"
+                    onclick="voltarParaSite()"
+                >
+
+                    ← Voltar para Rede Especialistas
+
+                </button>
+
+
+            </form>
+
+
+            <!-- RODAPÉ -->
+
+            <div class="login-footer">
+
+                <span>
+                    🦷
+                </span>
+
+                Sistema de gerenciamento
+
             </div>
+
 
         </section>
 
 
     </main>
 
+
+    <!-- JAVASCRIPT -->
 
     <script src="js/login.js"></script>
 
