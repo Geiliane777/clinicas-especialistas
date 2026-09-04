@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Rede Especialistas</title>
+
+    <link
+        rel="stylesheet"
+        href="./css/login.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="login-logo">
+
+                <div class="logo-icon">
+                    🦷
+                </div>
+
+                <h1>
+                    Rede Especialistas
+                </h1>
+
+                <p>
+                    Painel Administrativo
+                </p>
+
+            </div>
+
+
+            <form id="formLogin">
+
+                <div class="campo">
+
+                    <label for="usuarioLogin">
+                        Usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuarioLogin"
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="senhaLogin">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senhaLogin"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <p
+                    id="mensagemLogin"
+                    class="mensagem-login"
+                ></p>
+
+
+                <button
+                    type="submit"
+                    class="btn-login"
+                >
+                    Entrar
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script src="./js/login.js"></script>
+
+</body>
+
+</html>
