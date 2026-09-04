@@ -5,26 +5,26 @@
 * {
     margin: 0;
     padding: 0;
-
     box-sizing: border-box;
 }
 
 
-html,
 body {
-    width: 100%;
-    min-height: 100%;
-}
 
-
-body {
+    min-height: 100vh;
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    min-height: 100vh;
+    background:
+        linear-gradient(
+            135deg,
+            #150050,
+            #3f0071,
+            #0077b6
+        );
 
     display: flex;
 
@@ -32,21 +32,13 @@ body {
 
     justify-content: center;
 
-    overflow-x: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #15134a,
-            #312e81,
-            #2563eb
-        );
+    overflow: hidden;
 
 }
 
 
 /* ======================================
-   FUNDO DECORATIVO
+   FUNDO
 ====================================== */
 
 .background {
@@ -57,14 +49,10 @@ body {
 
     overflow: hidden;
 
-    pointer-events: none;
+    z-index: -1;
 
 }
 
-
-/* ======================================
-   BOLAS DECORATIVAS
-====================================== */
 
 .bola {
 
@@ -72,9 +60,9 @@ body {
 
     border-radius: 50%;
 
-    filter: blur(2px);
+    filter: blur(10px);
 
-    opacity: 0.35;
+    opacity: 0.25;
 
 }
 
@@ -84,10 +72,10 @@ body {
     width: 350px;
     height: 350px;
 
-    top: -120px;
-    left: -100px;
+    background: #00b4d8;
 
-    background: #7c3aed;
+    top: -100px;
+    left: -100px;
 
 }
 
@@ -97,25 +85,23 @@ body {
     width: 450px;
     height: 450px;
 
-    right: -180px;
-    bottom: -150px;
+    background: #7209b7;
 
-    background: #38bdf8;
+    bottom: -200px;
+    right: -100px;
 
 }
 
 
 .bola3 {
 
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
 
-    right: 20%;
-    top: 10%;
+    background: #4361ee;
 
-    background: #6366f1;
-
-    opacity: 0.2;
+    top: 40%;
+    left: 15%;
 
 }
 
@@ -128,19 +114,13 @@ body {
 
     width: 100%;
 
-    min-height: 100vh;
+    padding: 20px;
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
 
-    padding: 25px;
-
-    position: relative;
-
-    z-index: 2;
+    align-items: center;
 
 }
 
@@ -155,11 +135,6 @@ body {
 
     max-width: 440px;
 
-    padding:
-        40px
-        38px
-        30px;
-
     background:
         rgba(
             255,
@@ -170,55 +145,18 @@ body {
 
     border-radius: 24px;
 
+    padding: 42px;
+
+    text-align: center;
+
     box-shadow:
         0 25px 60px
         rgba(
             0,
             0,
             0,
-            0.30
+            0.3
         );
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.5
-        );
-
-    animation:
-        aparecer
-        0.5s
-        ease;
-
-}
-
-
-/* ======================================
-   ANIMAÇÃO
-====================================== */
-
-@keyframes aparecer {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(25px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
 
 }
 
@@ -229,108 +167,79 @@ body {
 
 .logo-container {
 
-    width: 115px;
-
-    height: 115px;
-
-    margin:
-        0
-        auto
-        18px;
-
     display: flex;
-
-    align-items: center;
 
     justify-content: center;
 
+    margin-bottom: 15px;
+
 }
 
-
-/*
-   A imagem é exibida
-   exatamente como está no arquivo.
-*/
 
 .login-logo {
 
-    width: 110px;
+    width: 85px;
 
-    height: 110px;
+    height: 85px;
 
     object-fit: contain;
 
-}
-
-
-/* ======================================
-   TÍTULO
-====================================== */
-
-.login-card h1 {
-
-    text-align: center;
-
-    color: #1e1b4b;
-
-    font-size: 27px;
-
-    margin-bottom: 10px;
-
-}
-
-
-.login-subtitulo {
-
-    text-align: center;
-
-    color: #64748b;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-}
-
-
-/* ======================================
-   LINHA DECORATIVA
-====================================== */
-
-.linha {
-
-    width: 65px;
-
-    height: 4px;
-
-    border-radius: 10px;
-
-    margin:
-        22px
-        auto
-        27px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #7c3aed,
-            #2563eb
+    filter:
+        drop-shadow(
+            0 8px 10px
+            rgba(
+                76,
+                0,
+                130,
+                0.25
+            )
         );
 
 }
 
 
 /* ======================================
-   FORMULÁRIO
+   TEXTOS
 ====================================== */
 
-form {
+.login-card h1 {
 
-    display: flex;
+    color: #2d0a63;
 
-    flex-direction: column;
+    font-size: 28px;
 
-    gap: 19px;
+    margin-bottom: 12px;
+
+}
+
+
+.login-subtitulo {
+
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+.linha {
+
+    width: 70px;
+
+    height: 4px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6a00f4,
+            #0096c7
+        );
+
+    margin: 25px auto;
 
 }
 
@@ -341,44 +250,32 @@ form {
 
 .campo-login {
 
-    display: flex;
+    text-align: left;
 
-    flex-direction: column;
-
-    gap: 8px;
+    margin-bottom: 20px;
 
 }
 
 
 .campo-login label {
 
-    color: #334155;
+    display: block;
 
-    font-size: 14px;
+    margin-bottom: 8px;
 
-    font-weight: 600;
+    font-weight: bold;
+
+    color: #333;
 
 }
 
-
-/* ======================================
-   INPUT CONTAINER
-====================================== */
 
 .input-container {
 
     position: relative;
 
-    display: flex;
-
-    align-items: center;
-
 }
 
-
-/* ======================================
-   ÍCONES
-====================================== */
 
 .icone-input {
 
@@ -386,120 +283,79 @@ form {
 
     left: 15px;
 
-    font-size: 16px;
+    top: 50%;
 
-    pointer-events: none;
+    transform:
+        translateY(-50%);
 
 }
 
-
-/* ======================================
-   INPUTS
-====================================== */
 
 .input-container input {
 
     width: 100%;
 
-    height: 50px;
-
     padding:
-        0
+        14px
         15px
-        0
-        46px;
+        14px
+        45px;
+
+    border-radius: 10px;
 
     border:
-        1px solid
-        #dbe2ea;
+        1px solid #ddd;
 
-    border-radius: 12px;
+    font-size: 15px;
 
     outline: none;
 
-    background: #f8fafc;
-
-    color: #1e293b;
-
-    font-size: 14px;
-
-    transition: 0.25s;
+    transition: 0.3s;
 
 }
 
 
 .input-container input:focus {
 
-    border-color: #6366f1;
-
-    background: #ffffff;
+    border-color: #6a00f4;
 
     box-shadow:
-        0 0 0 4px
+        0 0 0 3px
         rgba(
-            99,
-            102,
-            241,
-            0.12
+            106,
+            0,
+            244,
+            0.1
         );
 
 }
 
 
-.input-container input::placeholder {
-
-    color: #94a3b8;
-
-}
-
-
 /* ======================================
-   MENSAGENS
+   MENSAGEM
 ====================================== */
 
 .mensagem-login {
 
-    display: none;
+    min-height: 20px;
 
-    padding: 12px;
-
-    border-radius: 10px;
-
-    text-align: center;
+    margin-bottom: 15px;
 
     font-size: 14px;
-
-    font-weight: 500;
 
 }
 
 
 .mensagem-login.erro {
 
-    display: block;
-
-    color: #b91c1c;
-
-    background: #fee2e2;
-
-    border:
-        1px solid
-        #fecaca;
+    color: #d90429;
 
 }
 
 
 .mensagem-login.sucesso {
 
-    display: block;
-
-    color: #166534;
-
-    background: #dcfce7;
-
-    border:
-        1px solid
-        #bbf7d0;
+    color: #2b9348;
 
 }
 
@@ -512,45 +368,34 @@ form {
 
     width: 100%;
 
-    height: 52px;
-
     border: none;
 
-    border-radius: 12px;
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #5a189a,
+            #0077b6
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
 
     cursor: pointer;
 
-    display: flex;
+    transition: 0.3s;
 
-    align-items: center;
+    display: flex;
 
     justify-content: center;
 
     gap: 10px;
-
-    color: white;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    background:
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #2563eb
-        );
-
-    box-shadow:
-        0 10px 22px
-        rgba(
-            79,
-            70,
-            229,
-            0.3
-        );
-
-    transition: 0.25s;
 
 }
 
@@ -561,179 +406,78 @@ form {
         translateY(-2px);
 
     box-shadow:
-        0 14px 28px
+        0 10px 20px
         rgba(
-            79,
-            70,
-            229,
-            0.4
+            90,
+            24,
+            154,
+            0.3
         );
 
 }
 
 
-.btn-login:active {
-
-    transform:
-        translateY(0);
-
-}
-
-
-.seta {
-
-    font-size: 20px;
-
-    transition: 0.25s;
-
-}
-
-
-.btn-login:hover .seta {
-
-    transform:
-        translateX(4px);
-
-}
-
-
 /* ======================================
-   BOTÃO VOLTAR
+   VOLTAR
 ====================================== */
 
 .btn-voltar {
 
     width: 100%;
 
-    height: 48px;
+    margin-top: 14px;
 
-    border-radius: 12px;
+    padding: 13px;
+
+    border-radius: 10px;
 
     border:
-        1px solid
-        #c7d2fe;
+        1px solid #5a189a;
 
     background: transparent;
 
-    color: #4f46e5;
+    color: #5a189a;
 
-    font-size: 14px;
-
-    font-weight: 600;
+    font-weight: bold;
 
     cursor: pointer;
 
-    transition: 0.25s;
+    transition: 0.3s;
 
 }
 
 
 .btn-voltar:hover {
 
-    background: #eef2ff;
-
-    border-color: #818cf8;
-
-    transform:
-        translateY(-1px);
+    background: #f3edff;
 
 }
 
 
 /* ======================================
-   RODAPÉ
+   FOOTER
 ====================================== */
 
 .login-footer {
 
-    margin-top: 28px;
+    margin-top: 25px;
 
-    padding-top: 20px;
+    color: #888;
 
-    border-top:
-        1px solid
-        #e2e8f0;
-
-    text-align: center;
-
-    color: #94a3b8;
-
-    font-size: 12px;
-
-}
-
-
-.login-footer span {
-
-    margin-right: 4px;
+    font-size: 13px;
 
 }
 
 
 /* ======================================
-   RESPONSIVIDADE
+   MOBILE
 ====================================== */
 
 @media (max-width: 500px) {
 
-    .login-container {
-
-        padding: 16px;
-
-    }
-
-
     .login-card {
 
-        padding:
-            35px
-            24px
-            25px;
-
-        border-radius: 20px;
-
-    }
-
-
-    .login-card h1 {
-
-        font-size: 23px;
-
-    }
-
-
-    .login-logo {
-
-        width: 90px;
-
-        height: 90px;
-
-    }
-
-
-    .logo-container {
-
-        width: 95px;
-
-        height: 95px;
-
-    }
-
-
-    .bola1 {
-
-        width: 250px;
-
-        height: 250px;
-
-    }
-
-
-    .bola2 {
-
-        width: 300px;
-
-        height: 300px;
+        padding: 30px 22px;
 
     }
 
