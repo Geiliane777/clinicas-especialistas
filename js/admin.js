@@ -7,21 +7,6 @@ console.log("admin.js carregado");
 
 
 // ======================================
-// PROTEÇÃO DA PÁGINA
-// ======================================
-
-if (
-    localStorage.getItem("adminLogado")
-    !== "true"
-) {
-
-    window.location.href =
-        "login.html";
-
-}
-
-
-// ======================================
 // TÍTULOS
 // ======================================
 
@@ -52,6 +37,8 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+        verificarAutenticacao();
+
         iniciarMenu();
 
         iniciarEventos();
@@ -63,13 +50,37 @@ document.addEventListener(
 
 
 // ======================================
+// VERIFICAR LOGIN
+// ======================================
+
+function verificarAutenticacao() {
+
+    const logado =
+        localStorage.getItem(
+            "adminLogado"
+        );
+
+
+    if (logado !== "true") {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+// ======================================
 // EVENTOS
 // ======================================
 
 function iniciarEventos() {
 
     document
-        .getElementById("btnSalvarEspecialidade")
+        .getElementById(
+            "btnSalvarEspecialidade"
+        )
         ?.addEventListener(
             "click",
             salvarEspecialidade
@@ -77,7 +88,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnSalvarRegiao")
+        .getElementById(
+            "btnSalvarRegiao"
+        )
         ?.addEventListener(
             "click",
             salvarRegiao
@@ -85,7 +98,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnSalvarEstado")
+        .getElementById(
+            "btnSalvarEstado"
+        )
         ?.addEventListener(
             "click",
             salvarEstado
@@ -93,7 +108,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnSalvarCidade")
+        .getElementById(
+            "btnSalvarCidade"
+        )
         ?.addEventListener(
             "click",
             salvarCidade
@@ -101,7 +118,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnSalvarBairro")
+        .getElementById(
+            "btnSalvarBairro"
+        )
         ?.addEventListener(
             "click",
             salvarBairro
@@ -109,7 +128,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnNovaClinica")
+        .getElementById(
+            "btnNovaClinica"
+        )
         ?.addEventListener(
             "click",
             abrirModalClinica
@@ -117,7 +138,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnFecharModal")
+        .getElementById(
+            "btnFecharModal"
+        )
         ?.addEventListener(
             "click",
             fecharModalClinica
@@ -125,7 +148,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnCancelarModal")
+        .getElementById(
+            "btnCancelarModal"
+        )
         ?.addEventListener(
             "click",
             fecharModalClinica
@@ -133,7 +158,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("formClinica")
+        .getElementById(
+            "formClinica"
+        )
         ?.addEventListener(
             "submit",
             salvarClinica
@@ -141,7 +168,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("btnAdicionarEspecialidade")
+        .getElementById(
+            "btnAdicionarEspecialidade"
+        )
         ?.addEventListener(
             "click",
             () => adicionarLinhaEspecialidade()
@@ -149,7 +178,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("buscarClinica")
+        .getElementById(
+            "buscarClinica"
+        )
         ?.addEventListener(
             "input",
             listarClinicas
@@ -157,7 +188,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("filtroStatusClinica")
+        .getElementById(
+            "filtroStatusClinica"
+        )
         ?.addEventListener(
             "change",
             listarClinicas
@@ -165,7 +198,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("clinicaRegiao")
+        .getElementById(
+            "clinicaRegiao"
+        )
         ?.addEventListener(
             "change",
             carregarEstadosClinica
@@ -173,7 +208,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("clinicaEstado")
+        .getElementById(
+            "clinicaEstado"
+        )
         ?.addEventListener(
             "change",
             carregarCidadesClinica
@@ -181,7 +218,9 @@ function iniciarEventos() {
 
 
     document
-        .getElementById("clinicaCidade")
+        .getElementById(
+            "clinicaCidade"
+        )
         ?.addEventListener(
             "change",
             carregarBairrosClinica
@@ -197,7 +236,9 @@ function iniciarEventos() {
 function iniciarMenu() {
 
     const botoes =
-        document.querySelectorAll(".menu-btn");
+        document.querySelectorAll(
+            ".menu-btn"
+        );
 
 
     botoes.forEach(botao => {
@@ -208,10 +249,6 @@ function iniciarMenu() {
 
                 const pagina =
                     botao.dataset.page;
-
-
-                if (!pagina) return;
-
 
                 mostrarPagina(pagina);
 
@@ -229,13 +266,6 @@ function iniciarMenu() {
 
 function mostrarPagina(pagina) {
 
-    const paginaSelecionada =
-        document.getElementById(pagina);
-
-
-    if (!paginaSelecionada) return;
-
-
     document
         .querySelectorAll(".page")
         .forEach(item => {
@@ -245,9 +275,17 @@ function mostrarPagina(pagina) {
         });
 
 
-    paginaSelecionada
-        .classList
-        .remove("hidden");
+    const paginaSelecionada =
+        document.getElementById(pagina);
+
+
+    if (paginaSelecionada) {
+
+        paginaSelecionada
+            .classList
+            .remove("hidden");
+
+    }
 
 
     document
@@ -275,8 +313,8 @@ function mostrarPagina(pagina) {
     if (titulo) {
 
         titulo.textContent =
-            TITULOS_PAGINA[pagina]
-            || "Painel";
+            TITULOS_PAGINA[pagina] ||
+            "Painel";
 
     }
 
@@ -314,6 +352,7 @@ function mostrarPagina(pagina) {
         case "estados":
 
             carregarRegioesSelect();
+
             listarEstados();
 
             break;
@@ -322,6 +361,7 @@ function mostrarPagina(pagina) {
         case "cidades":
 
             carregarEstadosSelect();
+
             listarCidades();
 
             break;
@@ -330,6 +370,7 @@ function mostrarPagina(pagina) {
         case "bairros":
 
             carregarCidadesSelect();
+
             listarBairros();
 
             break;
@@ -374,8 +415,7 @@ async function contarRegistros(
     const {
         count,
         error
-    } =
-        await consulta;
+    } = await consulta;
 
 
     if (error) {
@@ -398,94 +438,87 @@ async function contarRegistros(
 
 async function carregarDashboard() {
 
+    if (
+        typeof supabaseClient ===
+        "undefined"
+    ) {
+
+        console.error(
+            "supabaseClient não está disponível."
+        );
+
+        return;
+
+    }
+
+
     try {
 
-        const [
+        const resultados =
+            await Promise.all([
 
-            totalClinicas,
-            clinicasAtivas,
-            totalEspecialidades,
-            totalRegioes,
-            totalEstados,
-            totalCidades,
-            totalBairros
+                contarRegistros("clinicas"),
 
-        ] =
-        await Promise.all([
+                contarRegistros(
+                    "clinicas",
+                    {
+                        coluna: "ativo",
+                        valor: true
+                    }
+                ),
 
-            contarRegistros(
-                "clinicas"
-            ),
+                contarRegistros(
+                    "especialidades"
+                ),
 
-            contarRegistros(
-                "clinicas",
-                {
-                    coluna: "ativo",
-                    valor: true
-                }
-            ),
+                contarRegistros("regioes"),
 
-            contarRegistros(
-                "especialidades"
-            ),
+                contarRegistros("estados"),
 
-            contarRegistros(
-                "regioes"
-            ),
+                contarRegistros("cidades"),
 
-            contarRegistros(
-                "estados"
-            ),
+                contarRegistros("bairros")
 
-            contarRegistros(
-                "cidades"
-            ),
-
-            contarRegistros(
-                "bairros"
-            )
-
-        ]);
+            ]);
 
 
         atualizarNumero(
             "totalClinicas",
-            totalClinicas
+            resultados[0]
         );
 
         atualizarNumero(
             "totalClinicasAtivas",
-            clinicasAtivas
+            resultados[1]
         );
 
         atualizarNumero(
             "totalEspecialidades",
-            totalEspecialidades
+            resultados[2]
         );
 
         atualizarNumero(
             "totalRegioes",
-            totalRegioes
+            resultados[3]
         );
 
         atualizarNumero(
             "totalEstados",
-            totalEstados
+            resultados[4]
         );
 
         atualizarNumero(
             "totalCidades",
-            totalCidades
+            resultados[5]
         );
 
         atualizarNumero(
             "totalBairros",
-            totalBairros
+            resultados[6]
         );
 
-    }
 
-    catch (error) {
+    } catch (error) {
 
         console.error(
             "Erro dashboard:",
@@ -497,19 +530,14 @@ async function carregarDashboard() {
 }
 
 
-function atualizarNumero(
-    id,
-    valor
-) {
+function atualizarNumero(id, valor) {
 
     const elemento =
         document.getElementById(id);
 
-
     if (elemento) {
 
-        elemento.textContent =
-            valor;
+        elemento.textContent = valor;
 
     }
 
@@ -522,7 +550,10 @@ function atualizarNumero(
 
 async function listarEspecialidades() {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("especialidades")
             .select("*")
@@ -532,6 +563,7 @@ async function listarEspecialidades() {
     if (error) {
 
         console.error(error);
+
         return;
 
     }
@@ -551,10 +583,11 @@ async function listarEspecialidades() {
 
     if (!data?.length) {
 
-        lista.innerHTML =
-            `<div class="sem-dados">
+        lista.innerHTML = `
+            <div class="sem-dados">
                 Nenhuma especialidade cadastrada.
-            </div>`;
+            </div>
+        `;
 
         return;
 
@@ -640,9 +673,7 @@ async function salvarEspecialidade() {
                 .update({ nome })
                 .eq("id", id);
 
-    }
-
-    else {
+    } else {
 
         resultado =
             await supabaseClient
@@ -666,6 +697,7 @@ async function salvarEspecialidade() {
 
 
     input.value = "";
+
     editId.value = "";
 
 
@@ -678,7 +710,10 @@ async function salvarEspecialidade() {
 
 async function editarEspecialidade(id) {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("especialidades")
             .select("*")
@@ -686,7 +721,13 @@ async function editarEspecialidade(id) {
             .single();
 
 
-    if (error) return;
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
 
 
     document.getElementById(
@@ -719,6 +760,8 @@ async function excluirEspecialidade(id) {
 
     if (error) {
 
+        console.error(error);
+
         alert(
             "Erro ao excluir especialidade."
         );
@@ -741,14 +784,23 @@ async function excluirEspecialidade(id) {
 
 async function listarRegioes() {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("regioes")
             .select("*")
             .order("nome");
 
 
-    if (error) return;
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
 
 
     const lista =
@@ -765,10 +817,11 @@ async function listarRegioes() {
 
     if (!data?.length) {
 
-        lista.innerHTML =
-            `<div class="sem-dados">
+        lista.innerHTML = `
+            <div class="sem-dados">
                 Nenhuma região cadastrada.
-            </div>`;
+            </div>
+        `;
 
         return;
 
@@ -854,9 +907,7 @@ async function salvarRegiao() {
                 .update({ nome })
                 .eq("id", id);
 
-    }
-
-    else {
+    } else {
 
         resultado =
             await supabaseClient
@@ -868,9 +919,7 @@ async function salvarRegiao() {
 
     if (resultado.error) {
 
-        alert(
-            "Erro ao salvar região."
-        );
+        console.error(resultado.error);
 
         return;
 
@@ -878,6 +927,7 @@ async function salvarRegiao() {
 
 
     input.value = "";
+
     editId.value = "";
 
 
@@ -890,7 +940,10 @@ async function salvarRegiao() {
 
 async function editarRegiao(id) {
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("regioes")
             .select("*")
@@ -898,7 +951,7 @@ async function editarRegiao(id) {
             .single();
 
 
-    if (!data) return;
+    if (error) return;
 
 
     document.getElementById(
@@ -931,9 +984,9 @@ async function excluirRegiao(id) {
 
     if (error) {
 
-        alert(
-            "Erro ao excluir região."
-        );
+        console.error(error);
+
+        alert("Erro ao excluir região.");
 
         return;
 
@@ -962,20 +1015,24 @@ async function carregarRegioesSelect() {
     if (!select) return;
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("regioes")
             .select("*")
             .order("nome");
 
 
+    if (error) return;
+
+
     select.innerHTML =
-        `<option value="">
-            Selecione uma região
-        </option>`;
+        `<option value="">Selecione uma região</option>`;
 
 
-    data?.forEach(item => {
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -996,7 +1053,10 @@ async function carregarRegioesSelect() {
 
 async function listarEstados() {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("estados")
             .select(`
@@ -1006,7 +1066,13 @@ async function listarEstados() {
             .order("nome");
 
 
-    if (error) return;
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
 
 
     const lista =
@@ -1079,10 +1145,12 @@ async function salvarEstado() {
             .value
             .trim();
 
+
     const regiaoId =
         document.getElementById(
             "estadoRegiao"
         ).value;
+
 
     const id =
         document.getElementById(
@@ -1092,9 +1160,7 @@ async function salvarEstado() {
 
     if (!nome || !regiaoId) {
 
-        alert(
-            "Preencha todos os campos."
-        );
+        alert("Preencha todos os campos.");
 
         return;
 
@@ -1115,9 +1181,7 @@ async function salvarEstado() {
                 })
                 .eq("id", id);
 
-    }
-
-    else {
+    } else {
 
         resultado =
             await supabaseClient
@@ -1132,9 +1196,7 @@ async function salvarEstado() {
 
     if (resultado.error) {
 
-        alert(
-            "Erro ao salvar estado."
-        );
+        console.error(resultado.error);
 
         return;
 
@@ -1145,9 +1207,6 @@ async function salvarEstado() {
         "nomeEstado"
     ).value = "";
 
-    document.getElementById(
-        "estadoRegiao"
-    ).value = "";
 
     document.getElementById(
         "estadoEditId"
@@ -1163,7 +1222,10 @@ async function salvarEstado() {
 
 async function editarEstado(id) {
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("estados")
             .select("*")
@@ -1171,7 +1233,7 @@ async function editarEstado(id) {
             .single();
 
 
-    if (!data) return;
+    if (error) return;
 
 
     await carregarRegioesSelect();
@@ -1181,9 +1243,11 @@ async function editarEstado(id) {
         "estadoEditId"
     ).value = data.id;
 
+
     document.getElementById(
         "nomeEstado"
     ).value = data.nome;
+
 
     document.getElementById(
         "estadoRegiao"
@@ -1194,11 +1258,7 @@ async function editarEstado(id) {
 
 async function excluirEstado(id) {
 
-    if (!confirm("Deseja excluir este estado?")) {
-
-        return;
-
-    }
+    if (!confirm("Deseja excluir este estado?")) return;
 
 
     const { error } =
@@ -1210,7 +1270,7 @@ async function excluirEstado(id) {
 
     if (error) {
 
-        alert("Erro ao excluir estado.");
+        console.error(error);
 
         return;
 
@@ -1239,20 +1299,24 @@ async function carregarEstadosSelect() {
     if (!select) return;
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("estados")
             .select("*")
             .order("nome");
 
 
+    if (error) return;
+
+
     select.innerHTML =
-        `<option value="">
-            Selecione um estado
-        </option>`;
+        `<option value="">Selecione um estado</option>`;
 
 
-    data?.forEach(item => {
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -1273,7 +1337,10 @@ async function carregarEstadosSelect() {
 
 async function listarCidades() {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("cidades")
             .select(`
@@ -1319,7 +1386,8 @@ async function listarCidades() {
                             item.estados?.nome || "-"
                         )}
 
-                        - Região:
+                        -
+                        Região:
 
                         ${escaparTexto(
                             item.estados?.regioes?.nome || "-"
@@ -1364,10 +1432,12 @@ async function salvarCidade() {
             .value
             .trim();
 
+
     const estadoId =
         document.getElementById(
             "cidadeEstado"
         ).value;
+
 
     const id =
         document.getElementById(
@@ -1377,9 +1447,7 @@ async function salvarCidade() {
 
     if (!nome || !estadoId) {
 
-        alert(
-            "Preencha todos os campos."
-        );
+        alert("Preencha todos os campos.");
 
         return;
 
@@ -1400,9 +1468,7 @@ async function salvarCidade() {
                 })
                 .eq("id", id);
 
-    }
-
-    else {
+    } else {
 
         resultado =
             await supabaseClient
@@ -1417,9 +1483,7 @@ async function salvarCidade() {
 
     if (resultado.error) {
 
-        alert(
-            "Erro ao salvar cidade."
-        );
+        console.error(resultado.error);
 
         return;
 
@@ -1430,9 +1494,6 @@ async function salvarCidade() {
         "nomeCidade"
     ).value = "";
 
-    document.getElementById(
-        "cidadeEstado"
-    ).value = "";
 
     document.getElementById(
         "cidadeEditId"
@@ -1448,7 +1509,10 @@ async function salvarCidade() {
 
 async function editarCidade(id) {
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("cidades")
             .select("*")
@@ -1456,7 +1520,7 @@ async function editarCidade(id) {
             .single();
 
 
-    if (!data) return;
+    if (error) return;
 
 
     await carregarEstadosSelect();
@@ -1466,9 +1530,11 @@ async function editarCidade(id) {
         "cidadeEditId"
     ).value = data.id;
 
+
     document.getElementById(
         "nomeCidade"
     ).value = data.nome;
+
 
     document.getElementById(
         "cidadeEstado"
@@ -1479,11 +1545,7 @@ async function editarCidade(id) {
 
 async function excluirCidade(id) {
 
-    if (!confirm("Deseja excluir esta cidade?")) {
-
-        return;
-
-    }
+    if (!confirm("Deseja excluir esta cidade?")) return;
 
 
     const { error } =
@@ -1495,9 +1557,7 @@ async function excluirCidade(id) {
 
     if (error) {
 
-        alert(
-            "Erro ao excluir cidade."
-        );
+        console.error(error);
 
         return;
 
@@ -1526,7 +1586,10 @@ async function carregarCidadesSelect() {
     if (!select) return;
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("cidades")
             .select(`
@@ -1536,13 +1599,14 @@ async function carregarCidadesSelect() {
             .order("nome");
 
 
+    if (error) return;
+
+
     select.innerHTML =
-        `<option value="">
-            Selecione uma cidade
-        </option>`;
+        `<option value="">Selecione uma cidade</option>`;
 
 
-    data?.forEach(item => {
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -1569,7 +1633,10 @@ async function carregarCidadesSelect() {
 
 async function listarBairros() {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("bairros")
             .select(`
@@ -1660,10 +1727,12 @@ async function salvarBairro() {
             .value
             .trim();
 
+
     const cidadeId =
         document.getElementById(
             "bairroCidade"
         ).value;
+
 
     const id =
         document.getElementById(
@@ -1673,9 +1742,7 @@ async function salvarBairro() {
 
     if (!nome || !cidadeId) {
 
-        alert(
-            "Preencha todos os campos."
-        );
+        alert("Preencha todos os campos.");
 
         return;
 
@@ -1696,9 +1763,7 @@ async function salvarBairro() {
                 })
                 .eq("id", id);
 
-    }
-
-    else {
+    } else {
 
         resultado =
             await supabaseClient
@@ -1713,9 +1778,7 @@ async function salvarBairro() {
 
     if (resultado.error) {
 
-        alert(
-            "Erro ao salvar bairro."
-        );
+        console.error(resultado.error);
 
         return;
 
@@ -1726,9 +1789,6 @@ async function salvarBairro() {
         "nomeBairro"
     ).value = "";
 
-    document.getElementById(
-        "bairroCidade"
-    ).value = "";
 
     document.getElementById(
         "bairroEditId"
@@ -1744,7 +1804,10 @@ async function salvarBairro() {
 
 async function editarBairro(id) {
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("bairros")
             .select("*")
@@ -1752,7 +1815,7 @@ async function editarBairro(id) {
             .single();
 
 
-    if (!data) return;
+    if (error) return;
 
 
     await carregarCidadesSelect();
@@ -1762,9 +1825,11 @@ async function editarBairro(id) {
         "bairroEditId"
     ).value = data.id;
 
+
     document.getElementById(
         "nomeBairro"
     ).value = data.nome;
+
 
     document.getElementById(
         "bairroCidade"
@@ -1775,11 +1840,7 @@ async function editarBairro(id) {
 
 async function excluirBairro(id) {
 
-    if (!confirm("Deseja excluir este bairro?")) {
-
-        return;
-
-    }
+    if (!confirm("Deseja excluir este bairro?")) return;
 
 
     const { error } =
@@ -1791,9 +1852,7 @@ async function excluirBairro(id) {
 
     if (error) {
 
-        alert(
-            "Erro ao excluir bairro."
-        );
+        console.error(error);
 
         return;
 
@@ -1825,7 +1884,7 @@ async function listarClinicas() {
             .getElementById(
                 "filtroStatusClinica"
             )
-            ?.value ?? "";
+            ?.value || "";
 
 
     let consulta =
@@ -1871,8 +1930,10 @@ async function listarClinicas() {
     }
 
 
-    const { data, error } =
-        await consulta;
+    const {
+        data,
+        error
+    } = await consulta;
 
 
     if (error) {
@@ -1919,8 +1980,10 @@ async function listarClinicas() {
         const bairro =
             clinica.bairros?.nome || "-";
 
+
         const cidade =
             clinica.bairros?.cidades?.nome || "-";
+
 
         const estado =
             clinica.bairros?.cidades
@@ -1930,23 +1993,19 @@ async function listarClinicas() {
         const especialidades =
             clinica.clinica_especialidades
                 ?.filter(item => item.ativo)
-                .map(item => {
+                .map(item => `
 
-                    return `
+                    <span class="especialidade-tag">
 
-                        <span class="especialidade-tag">
+                        ${escaparTexto(
+                            item.especialidades?.nome || ""
+                        )}
 
-                            ${escaparTexto(
-                                item.especialidades?.nome || ""
-                            )}
+                        (${formatarRede(item.rede)})
 
-                            (${formatarRede(item.rede)})
+                    </span>
 
-                        </span>
-
-                    `;
-
-                })
+                `)
                 .join("") || "";
 
 
@@ -1960,13 +2019,19 @@ async function listarClinicas() {
                     </strong>
                 </td>
 
+
                 <td>
+
                     ${escaparTexto(bairro)}
+
                     <br>
+
                     ${escaparTexto(cidade)}
                     -
                     ${escaparTexto(estado)}
+
                 </td>
+
 
                 <td>
                     ${escaparTexto(
@@ -1974,25 +2039,26 @@ async function listarClinicas() {
                     )}
                 </td>
 
+
                 <td>
                     ${especialidades || "-"}
                 </td>
+
 
                 <td>
 
                     ${
                         clinica.ativo
-
-                        ? `<span class="status-ativa">
-                            Ativa
-                           </span>`
-
-                        : `<span class="status-inativa">
-                            Inativa
-                           </span>`
+                            ? `<span class="status-ativa">
+                                Ativa
+                               </span>`
+                            : `<span class="status-inativa">
+                                Inativa
+                               </span>`
                     }
 
                 </td>
+
 
                 <td>
 
@@ -2005,22 +2071,25 @@ async function listarClinicas() {
                             Editar
                         </button>
 
+
                         <button
                             class="${
                                 clinica.ativo
-                                ? "btn-desativar"
-                                : "btn-ativar"
+                                    ? "btn-desativar"
+                                    : "btn-ativar"
                             }"
                             onclick="alterarStatusClinica(
                                 ${clinica.id},
                                 ${clinica.ativo}
                             )"
                         >
+
                             ${
                                 clinica.ativo
-                                ? "Desativar"
-                                : "Ativar"
+                                    ? "Desativar"
+                                    : "Ativar"
                             }
+
                         </button>
 
                     </div>
@@ -2046,9 +2115,6 @@ async function abrirModalClinica() {
         document.getElementById(
             "formClinica"
         );
-
-
-    if (!form) return;
 
 
     form.reset();
@@ -2087,9 +2153,9 @@ async function abrirModalClinica() {
 
 function fecharModalClinica() {
 
-    document
-        .getElementById("modalClinica")
-        ?.classList.add("hidden");
+    document.getElementById(
+        "modalClinica"
+    ).classList.add("hidden");
 
 }
 
@@ -2106,20 +2172,24 @@ async function carregarRegioesClinica() {
         );
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("regioes")
             .select("*")
             .order("nome");
 
 
+    if (error) return;
+
+
     select.innerHTML =
-        `<option value="">
-            Selecione uma região
-        </option>`;
+        `<option value="">Selecione uma região</option>`;
 
 
-    data?.forEach(item => {
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -2149,15 +2219,28 @@ async function carregarEstadosClinica() {
 
 
     select.innerHTML =
-        `<option value="">
-            Selecione um estado
-        </option>`;
+        `<option value="">Selecione um estado</option>`;
+
+
+    document.getElementById(
+        "clinicaCidade"
+    ).innerHTML =
+        `<option value="">Selecione uma cidade</option>`;
+
+
+    document.getElementById(
+        "clinicaBairro"
+    ).innerHTML =
+        `<option value="">Selecione um bairro</option>`;
 
 
     if (!regiaoId) return;
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("estados")
             .select("*")
@@ -2165,7 +2248,10 @@ async function carregarEstadosClinica() {
             .order("nome");
 
 
-    data?.forEach(item => {
+    if (error) return;
+
+
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -2195,15 +2281,16 @@ async function carregarCidadesClinica() {
 
 
     select.innerHTML =
-        `<option value="">
-            Selecione uma cidade
-        </option>`;
+        `<option value="">Selecione uma cidade</option>`;
 
 
     if (!estadoId) return;
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("cidades")
             .select("*")
@@ -2211,7 +2298,10 @@ async function carregarCidadesClinica() {
             .order("nome");
 
 
-    data?.forEach(item => {
+    if (error) return;
+
+
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -2241,15 +2331,16 @@ async function carregarBairrosClinica() {
 
 
     select.innerHTML =
-        `<option value="">
-            Selecione um bairro
-        </option>`;
+        `<option value="">Selecione um bairro</option>`;
 
 
     if (!cidadeId) return;
 
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("bairros")
             .select("*")
@@ -2257,7 +2348,10 @@ async function carregarBairrosClinica() {
             .order("nome");
 
 
-    data?.forEach(item => {
+    if (error) return;
+
+
+    data.forEach(item => {
 
         select.innerHTML += `
 
@@ -2281,20 +2375,24 @@ async function adicionarLinhaEspecialidade(
     redeSelecionada = "especialistas"
 ) {
 
-    const { data } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("especialidades")
             .select("*")
             .order("nome");
 
 
+    if (error) return;
+
+
     let options =
-        `<option value="">
-            Selecione uma especialidade
-        </option>`;
+        `<option value="">Selecione uma especialidade</option>`;
 
 
-    data?.forEach(item => {
+    data.forEach(item => {
 
         const selected =
             String(item.id) ===
@@ -2340,8 +2438,8 @@ async function adicionarLinhaEspecialidade(
                 value="especialistas"
                 ${
                     redeSelecionada === "especialistas"
-                    ? "selected"
-                    : ""
+                        ? "selected"
+                        : ""
                 }
             >
                 Rede Especialistas
@@ -2352,8 +2450,8 @@ async function adicionarLinhaEspecialidade(
                 value="sindilegis"
                 ${
                     redeSelecionada === "sindilegis"
-                    ? "selected"
-                    : ""
+                        ? "selected"
+                        : ""
                 }
             >
                 Rede Sindilegis
@@ -2451,7 +2549,7 @@ async function salvarClinica(event) {
             telefone || null,
 
         bairro_id:
-            bairroId
+            Number(bairroId)
 
     };
 
@@ -2476,6 +2574,8 @@ async function salvarClinica(event) {
 
         if (error) {
 
+            console.error(error);
+
             alert(
                 "Erro ao atualizar clínica."
             );
@@ -2487,11 +2587,12 @@ async function salvarClinica(event) {
 
         clinicaId = id;
 
-    }
+    } else {
 
-    else {
-
-        const { data, error } =
+        const {
+            data,
+            error
+        } =
             await supabaseClient
                 .from("clinicas")
                 .insert(dadosClinica)
@@ -2517,6 +2618,8 @@ async function salvarClinica(event) {
     }
 
 
+    // Remove especialidades antigas
+
     await supabaseClient
         .from("clinica_especialidades")
         .delete()
@@ -2538,22 +2641,18 @@ async function salvarClinica(event) {
     linhas.forEach(linha => {
 
         const especialidadeId =
-            linha
-                .querySelector(
-                    ".select-especialidade"
-                )
-                ?.value;
+            linha.querySelector(
+                ".select-especialidade"
+            ).value;
 
 
         const rede =
-            linha
-                .querySelector(
-                    ".select-rede"
-                )
-                ?.value;
+            linha.querySelector(
+                ".select-rede"
+            ).value;
 
 
-        if (especialidadeId && rede) {
+        if (especialidadeId) {
 
             especialidades.push({
 
@@ -2574,7 +2673,7 @@ async function salvarClinica(event) {
     });
 
 
-    if (especialidades.length > 0) {
+    if (especialidades.length) {
 
         const { error } =
             await supabaseClient
@@ -2619,7 +2718,10 @@ async function salvarClinica(event) {
 
 async function editarClinica(id) {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("clinicas")
             .select(`
@@ -2638,8 +2740,7 @@ async function editarClinica(id) {
                 ),
                 clinica_especialidades(
                     especialidade_id,
-                    rede,
-                    ativo
+                    rede
                 )
             `)
             .eq("id", id)
@@ -2691,25 +2792,22 @@ async function editarClinica(id) {
 
     document.getElementById(
         "clinicaAtivo"
-    ).checked =
-        data.ativo;
+    ).checked = data.ativo;
 
 
     const bairro =
         data.bairros;
 
+
     const cidade =
         bairro?.cidades;
+
 
     const estado =
         cidade?.estados;
 
 
-    if (
-        bairro &&
-        cidade &&
-        estado
-    ) {
+    if (bairro && cidade && estado) {
 
         document.getElementById(
             "clinicaRegiao"
@@ -2755,21 +2853,15 @@ async function editarClinica(id) {
     container.innerHTML = "";
 
 
-    if (
-        data.clinica_especialidades?.length
+    for (
+        const item of
+        data.clinica_especialidades || []
     ) {
 
-        for (
-            const item of
-            data.clinica_especialidades
-        ) {
-
-            await adicionarLinhaEspecialidade(
-                item.especialidade_id,
-                item.rede
-            );
-
-        }
+        await adicionarLinhaEspecialidade(
+            item.especialidade_id,
+            item.rede
+        );
 
     }
 
@@ -2789,13 +2881,13 @@ async function alterarStatusClinica(
         !statusAtual;
 
 
-    const mensagem =
-        novoStatus
-            ? "Deseja ativar esta clínica?"
-            : "Deseja desativar esta clínica?";
-
-
-    if (!confirm(mensagem)) return;
+    if (
+        !confirm(
+            novoStatus
+                ? "Deseja ativar esta clínica?"
+                : "Deseja desativar esta clínica?"
+        )
+    ) return;
 
 
     const { error } =
@@ -2809,9 +2901,7 @@ async function alterarStatusClinica(
 
     if (error) {
 
-        alert(
-            "Erro ao alterar status."
-        );
+        console.error(error);
 
         return;
 
@@ -2851,7 +2941,7 @@ function formatarRede(rede) {
 
 
 // ======================================
-// ESCAPAR TEXTO
+// ESCAPAR HTML
 // ======================================
 
 function escaparTexto(texto) {
@@ -2870,8 +2960,7 @@ function escaparTexto(texto) {
         document.createElement("div");
 
 
-    div.textContent =
-        texto;
+    div.textContent = texto;
 
 
     return div.innerHTML;
@@ -2885,11 +2974,13 @@ function escaparTexto(texto) {
 
 function logout() {
 
-    if (
-        !confirm(
+    const confirmar =
+        confirm(
             "Deseja sair do painel?"
-        )
-    ) return;
+        );
+
+
+    if (!confirmar) return;
 
 
     localStorage.removeItem(
