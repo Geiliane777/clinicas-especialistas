@@ -1,6 +1,6 @@
-/* ======================================
-   LOGIN
-====================================== */
+/* =========================================
+   RESET
+========================================= */
 
 * {
     margin: 0;
@@ -10,227 +10,591 @@
 
 
 body {
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
     min-height: 100vh;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    background:
+        #f6f7fb;
+
+    color:
+        #1e293b;
+}
+
+
+/* =========================================
+   PÁGINA
+========================================= */
+
+.login-page {
+
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr 0.9fr;
+
+}
+
+
+/* =========================================
+   APRESENTAÇÃO
+========================================= */
+
+.login-apresentacao {
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 70px;
+
+    display: flex;
+
+    align-items: center;
 
     background:
         linear-gradient(
             135deg,
-            #0f766e,
-            #134e4a
+            #312e81 0%,
+            #4338ca 45%,
+            #2563eb 100%
         );
+
+    color: white;
+
+}
+
+
+.apresentacao-conteudo {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 600px;
+
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo-marca {
 
     display: flex;
 
     align-items: center;
 
+    gap: 12px;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    margin-bottom: 90px;
+
+}
+
+
+.logo-icone {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
     justify-content: center;
+    align-items: center;
+
+    border-radius: 12px;
+
+    font-size: 28px;
+
+    font-weight: 300;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+
 }
 
 
-.login-container {
-    width: 100%;
+/* =========================================
+   TEXTO
+========================================= */
 
-    padding: 20px;
+.badge {
+
+    display: inline-block;
+
+    padding:
+        8px 14px;
+
+    margin-bottom: 22px;
+
+    border-radius: 30px;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    background:
+        rgba(255,255,255,0.15);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+
 }
 
 
-.login-card {
+.apresentacao-texto h1 {
+
+    font-size: 52px;
+
+    line-height: 1.12;
+
+    margin-bottom: 24px;
+
+    max-width: 600px;
+
+}
+
+
+.apresentacao-texto p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color:
+        rgba(255,255,255,0.78);
+
+    max-width: 520px;
+
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.cards-info {
+
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 55px;
+
+}
+
+
+.info-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 16px 20px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    backdrop-filter:
+        blur(10px);
+
+}
+
+
+.info-icon {
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.14);
+
+}
+
+
+.info-card div:last-child {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.info-card strong {
+
+    font-size: 14px;
+
+}
+
+
+.info-card span {
+
+    font-size: 11px;
+
+    color:
+        rgba(255,255,255,0.65);
+
+}
+
+
+/* =========================================
+   DECORAÇÕES
+========================================= */
+
+.decoracao {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.06);
+
+}
+
+
+.decoracao-1 {
+
+    width: 500px;
+    height: 500px;
+
+    right: -220px;
+    top: -150px;
+
+}
+
+
+.decoracao-2 {
+
+    width: 350px;
+    height: 350px;
+
+    left: -180px;
+    bottom: -150px;
+
+}
+
+
+/* =========================================
+   ÁREA LOGIN
+========================================= */
+
+.login-area {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    background:
+        #ffffff;
+
+}
+
+
+/* =========================================
+   BOX LOGIN
+========================================= */
+
+.login-box {
+
     width: 100%;
 
     max-width: 420px;
 
-    margin: auto;
-
-    background: #ffffff;
-
-    border-radius: 16px;
-
-    padding: 40px;
-
-    box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, 0.25);
 }
 
 
-/* ======================================
-   LOGO
-====================================== */
+.login-header {
 
-.login-logo {
-    text-align: center;
+    margin-bottom: 38px;
 
-    margin-bottom: 35px;
 }
 
 
-.logo-icon {
-    width: 65px;
-    height: 65px;
+.login-header h2 {
 
-    margin:
-        0 auto
-        15px;
+    font-size: 32px;
 
-    border-radius: 50%;
+    color:
+        #1e1b4b;
 
-    display: flex;
+    margin-bottom: 10px;
 
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 30px;
-
-    background: #ccfbf1;
 }
 
 
-.login-logo h1 {
-    color: #134e4a;
+.login-header p {
 
-    font-size: 26px;
+    color:
+        #64748b;
 
-    margin-bottom: 8px;
+    line-height: 1.6;
+
+    font-size: 15px;
+
 }
 
 
-.login-logo p {
-    color: #64748b;
-
-    font-size: 14px;
-}
-
-
-/* ======================================
+/* =========================================
    CAMPOS
-====================================== */
+========================================= */
 
 .campo {
-    margin-bottom: 20px;
+
+    margin-bottom: 22px;
+
 }
 
 
 .campo label {
+
     display: block;
 
-    margin-bottom: 7px;
+    margin-bottom: 8px;
+
+    font-size: 14px;
 
     font-weight: 600;
 
-    color: #334155;
+    color:
+        #334155;
+
 }
 
 
 .campo input {
+
     width: 100%;
 
-    padding: 13px 14px;
+    height: 52px;
+
+    padding: 0 16px;
 
     border:
         1px solid
-        #cbd5e1;
+        #dbe1ea;
 
-    border-radius: 8px;
-
-    font-size: 15px;
+    border-radius: 10px;
 
     outline: none;
 
+    font-size: 14px;
+
     transition: 0.2s;
+
 }
 
 
 .campo input:focus {
-    border-color: #0f766e;
+
+    border-color:
+        #6366f1;
 
     box-shadow:
-        0 0 0 3px
-        rgba(15, 118, 110, 0.12);
+        0 0 0 4px
+        rgba(99,102,241,0.12);
+
 }
 
 
-/* ======================================
+/* =========================================
    BOTÃO
-====================================== */
+========================================= */
 
 .btn-login {
+
     width: 100%;
 
-    padding: 14px;
+    height: 54px;
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 10px;
 
-    background: #0f766e;
+    margin-top: 8px;
 
-    color: white;
+    display: flex;
 
-    font-size: 16px;
+    align-items: center;
+    justify-content: center;
 
-    font-weight: 600;
+    gap: 12px;
 
     cursor: pointer;
 
-    transition: 0.2s;
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4338ca,
+            #2563eb
+        );
+
+    transition:
+        0.25s;
+
 }
 
 
 .btn-login:hover {
-    background: #115e59;
 
     transform:
-        translateY(-1px);
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(67,56,202,0.25);
+
 }
 
 
-/* ======================================
+.btn-login span {
+
+    font-size: 22px;
+
+}
+
+
+/* =========================================
    MENSAGENS
-====================================== */
+========================================= */
 
 .mensagem-login {
+
     min-height: 20px;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
 
     text-align: center;
 
-    font-size: 14px;
-
-    margin-bottom: 15px;
 }
 
 
 .mensagem-login.erro {
-    color: #dc2626;
+
+    color:
+        #dc2626;
+
 }
 
 
 .mensagem-login.sucesso {
-    color: #16a34a;
+
+    color:
+        #16a34a;
+
 }
 
 
-/* ======================================
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.login-rodape {
+
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top:
+        1px solid #e2e8f0;
+
+    text-align: center;
+
+    color:
+        #94a3b8;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================
    RESPONSIVO
-====================================== */
+========================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 900px) {
 
-    .login-card {
+    .login-page {
 
-        padding: 30px 25px;
+        grid-template-columns: 1fr;
 
     }
 
 
-    .login-logo h1 {
+    .login-apresentacao {
 
-        font-size: 22px;
+        display: none;
+
+    }
+
+
+    .login-area {
+
+        min-height: 100vh;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .login-area {
+
+        padding: 25px;
+
+    }
+
+
+    .login-header h2 {
+
+        font-size: 28px;
 
     }
 
