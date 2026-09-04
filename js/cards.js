@@ -2,40 +2,122 @@
 // EXIBIR CLÍNICAS
 // ======================================
 
+console.log("cards.js carregado");
+
+
+// ======================================
+// ESCAPAR HTML
+// ======================================
+
+function escaparTextoCard(texto) {
+
+    if (
+        texto === null ||
+        texto === undefined
+    ) {
+        return "";
+    }
+
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = texto;
+
+    return div.innerHTML;
+
+}
+
+
+// ======================================
+// EXIBIR CLÍNICAS
+// ======================================
+
 function mostrarClinicas(clinicas) {
 
     const resultado =
-        document.getElementById("resultado");
+        document.getElementById(
+            "resultado"
+        );
+
+
+    if (!resultado) return;
+
 
     resultado.innerHTML = "";
 
 
-    // ======================================
-    // REMOVER DUPLICIDADES
-    // ======================================
+    // ==================================
+    // REMOVER CLÍNICAS DUPLICADAS
+    // ==================================
 
-    const clinicasUnicas = [
-        ...new Map(
-
-            clinicas.map(item => [
-                item.id,
-                item
-            ])
-
-        ).values()
-    ];
+    const clinicasMap =
+        new Map();
 
 
-    // ======================================
-    // NENHUMA CLÍNICA
-    // ======================================
+    clinicas.forEach(clinica => {
+
+        if (
+            !clinicasMap.has(
+                clinica.id
+            )
+        ) {
+
+            clinicasMap.set(
+                clinica.id,
+                clinica
+            );
+
+        } else {
+
+            // Se a clínica aparecer mais de uma vez,
+            // junta as especialidades.
+
+            const clinicaExistente =
+                clinicasMap.get(
+                    clinica.id
+                );
+
+
+            const especialidadesExistentes =
+                clinicaExistente
+                    .clinica_especialidades ||
+                [];
+
+
+            const novasEspecialidades =
+                clinica
+                    .clinica_especialidades ||
+                [];
+
+
+            clinicaExistente.clinica_especialidades =
+                [
+                    ...especialidadesExistentes,
+                    ...novasEspecialidades
+                ];
+
+        }
+
+    });
+
+
+    const clinicasUnicas =
+        Array.from(
+            clinicasMap.values()
+        );
+
+
+    // ==================================
+    // NENHUM RESULTADO
+    // ==================================
 
     if (
-        !clinicasUnicas ||
         clinicasUnicas.length === 0
     ) {
 
         resultado.innerHTML = `
+
             <div class="semResultado">
 
                 <h2>
@@ -43,11 +125,12 @@ function mostrarClinicas(clinicas) {
                 </h2>
 
                 <p>
-                    Tente selecionar outro bairro
-                    ou especialidade.
+                    Não encontramos clínicas
+                    para os filtros selecionados.
                 </p>
 
             </div>
+
         `;
 
         return;
@@ -55,136 +138,230 @@ function mostrarClinicas(clinicas) {
     }
 
 
-    // ======================================
+    // ==================================
     // TÍTULO
-    // ======================================
+    // ==================================
 
     resultado.innerHTML = `
+
         <h2 class="tituloResultado">
 
             Clínicas Encontradas
             (${clinicasUnicas.length})
 
         </h2>
+
     `;
 
 
-    // ======================================
-    // MONTAR CARDS
-    // ======================================
+    // ==================================
+    // CRIAR CARDS
+    // ==================================
 
     clinicasUnicas.forEach(clinica => {
 
 
-        // ======================================
+        // ==================================
         // LOCALIZAÇÃO
-        // ======================================
+        // ==================================
 
         const bairro =
             clinica.bairros?.nome ||
             "Não informado";
 
+
         const cidade =
             clinica.bairros?.cidades?.nome ||
             "Não informado";
 
+
         const estado =
-            clinica.bairros?.cidades?.estados?.nome ||
+            clinica.bairros
+                ?.cidades
+                ?.estados
+                ?.nome ||
             "Não informado";
 
 
-        // ======================================
+        // ==================================
         // INFORMAÇÕES
-        // ======================================
+        // ==================================
 
         const endereco =
             clinica.endereco ||
             "Não informado";
 
+
         const telefone =
             clinica.telefone ||
-            "Não informado";
+            "";
 
 
-        // ======================================
+        // ==================================
         // ESPECIALIDADES
-        // ======================================
+        // ==================================
+
+        const especialidadesMap =
+            new Map();
+
+
+        clinica
+            .clinica_especialidades
+            ?.forEach(item => {
+
+
+                // Apenas especialidades ativas
+
+                if (
+                    !item.ativo
+                ) return;
+
+
+                // Apenas Rede Especialistas
+
+                if (
+                    item.rede !==
+                    "especialistas"
+                ) return;
+
+
+                const especialidade =
+                    item.especialidades;
+
+
+                if (
+                    especialidade &&
+                    especialidade.id
+                ) {
+
+                    especialidadesMap.set(
+                        especialidade.id,
+                        especialidade.nome
+                    );
+
+                }
+
+            });
+
 
         const especialidades =
-            clinica.clinica_especialidades
-                ?.map(
-                    item =>
-                        item.especialidades?.nome
-                )
-                .filter(nome => nome)
-            || [];
+            Array.from(
+                especialidadesMap.values()
+            );
 
 
-        // Remover especialidades duplicadas
-
-        const especialidadesUnicas =
-            [...new Set(especialidades)];
-
+        // ==================================
+        // TAGS
+        // ==================================
 
         let tags = "";
 
 
-        especialidadesUnicas.forEach(nome => {
+        if (
+            especialidades.length > 0
+        ) {
 
-            tags += `
-                <span class="tag">
-                    ${nome}
-                </span>
-            `;
+            especialidades.forEach(nome => {
 
-        });
+                tags += `
 
+                    <span class="tag">
+                        ${escaparTextoCard(nome)}
+                    </span>
 
-        if (!tags) {
+                `;
+
+            });
+
+        } else {
 
             tags = `
+
                 <span class="tag">
-                    Não informado
+                    Nenhuma especialidade informada
                 </span>
+
             `;
 
         }
 
 
-        // ======================================
+        // ==================================
         // GOOGLE MAPS
-        // ======================================
+        // ==================================
 
         const buscaMaps =
             encodeURIComponent(
-                `${clinica.nome}, ${endereco}, ${bairro}, ${cidade}, ${estado}`
+                [
+                    clinica.nome,
+                    endereco,
+                    bairro,
+                    cidade,
+                    estado
+                ]
+                    .filter(Boolean)
+                    .join(", ")
             );
 
 
-        // ======================================
+        // ==================================
         // TELEFONE
-        // ======================================
+        // ==================================
 
-        const telefoneLink =
-            telefone.replace(/\D/g, "");
+        const telefoneLimpo =
+            telefone.replace(
+                /\D/g,
+                ""
+            );
 
 
-        // ======================================
+        let telefoneHTML;
+
+
+        if (
+            telefone &&
+            telefoneLimpo
+        ) {
+
+            telefoneHTML = `
+
+                <a href="tel:${telefoneLimpo}">
+                    ${escaparTextoCard(telefone)}
+                </a>
+
+            `;
+
+        } else {
+
+            telefoneHTML =
+                "Não informado";
+
+        }
+
+
+        // ==================================
         // CARD
-        // ======================================
+        // ==================================
 
         resultado.innerHTML += `
 
             <div class="card">
 
+
+                <!-- CABEÇALHO -->
+
                 <div class="cardHeader">
 
                     <h2>
-                        ${clinica.nome}
+                        ${escaparTextoCard(
+                            clinica.nome
+                        )}
                     </h2>
 
                 </div>
 
+
+                <!-- INFORMAÇÕES -->
 
                 <div class="info">
 
@@ -199,7 +376,9 @@ function mostrarClinicas(clinicas) {
 
                         <br>
 
-                        ${endereco}
+                        ${escaparTextoCard(
+                            endereco
+                        )}
 
                     </p>
 
@@ -214,11 +393,19 @@ function mostrarClinicas(clinicas) {
 
                         <br>
 
-                        ${bairro}
+                        ${escaparTextoCard(
+                            bairro
+                        )}
 
                         <br>
 
-                        ${cidade} - ${estado}
+                        ${escaparTextoCard(
+                            cidade
+                        )}
+                        -
+                        ${escaparTextoCard(
+                            estado
+                        )}
 
                     </p>
 
@@ -233,22 +420,7 @@ function mostrarClinicas(clinicas) {
 
                         <br>
 
-                        ${
-                            telefone !== "Não informado" &&
-                            telefoneLink
-
-                            ?
-
-                            `
-                            <a href="tel:${telefoneLink}">
-                                ${telefone}
-                            </a>
-                            `
-
-                            :
-
-                            telefone
-                        }
+                        ${telefoneHTML}
 
                     </p>
 
@@ -260,6 +432,7 @@ function mostrarClinicas(clinicas) {
                         <strong>
                             Procedimentos disponíveis
                         </strong>
+
 
                         <div class="tags">
 
@@ -276,11 +449,8 @@ function mostrarClinicas(clinicas) {
 
                         <a
                             class="btnAcao"
-
                             href="https://www.google.com/maps/search/?api=1&query=${buscaMaps}"
-
                             target="_blank"
-
                             rel="noopener noreferrer"
                         >
 
@@ -292,6 +462,7 @@ function mostrarClinicas(clinicas) {
 
 
                 </div>
+
 
             </div>
 
