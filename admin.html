@@ -15,17 +15,10 @@
     </title>
 
 
-    <!-- CSS -->
-
     <link
         rel="stylesheet"
-        href="admin.css"
+        href="./admin.css"
     >
-
-
-    <!-- SUPABASE -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
@@ -33,9 +26,9 @@
 <body>
 
 
-<!-- ====================================== -->
-<!-- LOGIN -->
-<!-- ====================================== -->
+<!-- ======================================
+LOGIN
+====================================== -->
 
 <div
     id="loginContainer"
@@ -61,7 +54,8 @@
 
 
         <button
-            id="btnLogin"
+            id="btnEntrar"
+            type="button"
         >
             Entrar
         </button>
@@ -69,18 +63,19 @@
 
         <p
             id="erroLogin"
-            class="erro-login"
-        ></p>
+            class="erro-login hidden"
+        >
+            Senha incorreta.
+        </p>
 
     </div>
 
 </div>
 
 
-
-<!-- ====================================== -->
-<!-- PAINEL -->
-<!-- ====================================== -->
+<!-- ======================================
+PAINEL
+====================================== -->
 
 <div
     id="painel"
@@ -88,12 +83,9 @@
 >
 
 
-    <!-- ================================== -->
     <!-- SIDEBAR -->
-    <!-- ================================== -->
 
     <aside class="sidebar">
-
 
         <div class="logo">
 
@@ -107,8 +99,6 @@
 
         </div>
 
-
-        <!-- MENU -->
 
         <nav class="menu">
 
@@ -172,8 +162,6 @@
         </nav>
 
 
-        <!-- LOGOUT -->
-
         <button
             class="btn-logout"
             onclick="logout()"
@@ -181,25 +169,18 @@
             Sair
         </button>
 
-
     </aside>
 
 
 
-    <!-- ================================== -->
     <!-- CONTEÚDO -->
-    <!-- ================================== -->
 
     <main class="conteudo">
 
 
-        <!-- HEADER -->
-
         <header class="topo">
 
-            <h1
-                id="tituloPagina"
-            >
+            <h1 id="tituloPagina">
                 Dashboard
             </h1>
 
@@ -207,16 +188,16 @@
 
 
 
-        <!-- ================================== -->
-        <!-- DASHBOARD -->
-        <!-- ================================== -->
+        <!-- ======================================
+        DASHBOARD
+        ====================================== -->
 
         <section
             id="dashboard"
             class="page"
         >
 
-            <div class="cards-dashboard">
+            <div class="dashboard-grid">
 
 
                 <div class="card">
@@ -234,7 +215,6 @@
                 </div>
 
 
-
                 <div class="card">
 
                     <span>
@@ -248,7 +228,6 @@
                     </strong>
 
                 </div>
-
 
 
                 <div class="card">
@@ -266,7 +245,6 @@
                 </div>
 
 
-
                 <div class="card">
 
                     <span>
@@ -280,7 +258,6 @@
                     </strong>
 
                 </div>
-
 
 
                 <div class="card">
@@ -298,7 +275,6 @@
                 </div>
 
 
-
                 <div class="card">
 
                     <span>
@@ -312,7 +288,6 @@
                     </strong>
 
                 </div>
-
 
 
                 <div class="card">
@@ -336,18 +311,16 @@
 
 
 
-        <!-- ================================== -->
-        <!-- CLÍNICAS -->
-        <!-- ================================== -->
+        <!-- ======================================
+        CLÍNICAS
+        ====================================== -->
 
         <section
             id="clinicas"
             class="page hidden"
         >
 
-
-            <div class="pagina-header">
-
+            <div class="page-header">
 
                 <div>
 
@@ -369,15 +342,10 @@
                     + Nova Clínica
                 </button>
 
-
             </div>
 
 
-
-            <!-- FILTROS -->
-
             <div class="filtros">
-
 
                 <input
                     type="text"
@@ -404,45 +372,28 @@
 
                 </select>
 
-
             </div>
 
-
-
-            <!-- TABELA -->
 
             <div class="tabela-container">
 
                 <table>
 
-
                     <thead>
 
                         <tr>
 
-                            <th>
-                                Clínica
-                            </th>
+                            <th>Clínica</th>
 
-                            <th>
-                                Localização
-                            </th>
+                            <th>Localização</th>
 
-                            <th>
-                                Telefone
-                            </th>
+                            <th>Telefone</th>
 
-                            <th>
-                                Especialidades
-                            </th>
+                            <th>Especialidades</th>
 
-                            <th>
-                                Status
-                            </th>
+                            <th>Status</th>
 
-                            <th>
-                                Ações
-                            </th>
+                            <th>Ações</th>
 
                         </tr>
 
@@ -451,63 +402,37 @@
 
                     <tbody
                         id="listaClinicas"
-                    >
-
-                    </tbody>
-
+                    ></tbody>
 
                 </table>
 
             </div>
 
-
         </section>
 
 
 
-        <!-- ================================== -->
-        <!-- ESPECIALIDADES -->
-        <!-- ================================== -->
+        <!-- ======================================
+        ESPECIALIDADES
+        ====================================== -->
 
         <section
             id="especialidades"
             class="page hidden"
         >
 
-
-            <div class="pagina-header">
-
-                <div>
-
-                    <h2>
-                        Especialidades
-                    </h2>
-
-                    <p>
-                        Gerencie as especialidades disponíveis.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="form-gerenciamento">
-
+            <div class="gerenciamento-form">
 
                 <input
                     type="hidden"
                     id="especialidadeEditId"
                 >
 
-
                 <input
                     type="text"
                     id="nomeEspecialidade"
                     placeholder="Nome da especialidade"
                 >
-
 
                 <button
                     id="btnSalvarEspecialidade"
@@ -516,66 +441,39 @@
                     Salvar
                 </button>
 
-
             </div>
-
 
 
             <div
                 id="listaEspecialidades"
                 class="lista-gerenciamento"
-            >
-
-            </div>
-
+            ></div>
 
         </section>
 
 
 
-        <!-- ================================== -->
-        <!-- REGIÕES -->
-        <!-- ================================== -->
+        <!-- ======================================
+        REGIÕES
+        ====================================== -->
 
         <section
             id="regioes"
             class="page hidden"
         >
 
-
-            <div class="pagina-header">
-
-                <div>
-
-                    <h2>
-                        Regiões
-                    </h2>
-
-                    <p>
-                        Cadastre as regiões.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="form-gerenciamento">
-
+            <div class="gerenciamento-form">
 
                 <input
                     type="hidden"
                     id="regiaoEditId"
                 >
 
-
                 <input
                     type="text"
                     id="nomeRegiao"
                     placeholder="Nome da região"
                 >
-
 
                 <button
                     id="btnSalvarRegiao"
@@ -584,53 +482,28 @@
                     Salvar
                 </button>
 
-
             </div>
-
 
 
             <div
                 id="listaRegioes"
                 class="lista-gerenciamento"
-            >
-
-            </div>
-
+            ></div>
 
         </section>
 
 
 
-        <!-- ================================== -->
-        <!-- ESTADOS -->
-        <!-- ================================== -->
+        <!-- ======================================
+        ESTADOS
+        ====================================== -->
 
         <section
             id="estados"
             class="page hidden"
         >
 
-
-            <div class="pagina-header">
-
-                <div>
-
-                    <h2>
-                        Estados
-                    </h2>
-
-                    <p>
-                        Cadastre os estados por região.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="form-gerenciamento">
-
+            <div class="gerenciamento-form">
 
                 <input
                     type="hidden"
@@ -663,53 +536,28 @@
                     Salvar
                 </button>
 
-
             </div>
-
 
 
             <div
                 id="listaEstados"
                 class="lista-gerenciamento"
-            >
-
-            </div>
-
+            ></div>
 
         </section>
 
 
 
-        <!-- ================================== -->
-        <!-- CIDADES -->
-        <!-- ================================== -->
+        <!-- ======================================
+        CIDADES
+        ====================================== -->
 
         <section
             id="cidades"
             class="page hidden"
         >
 
-
-            <div class="pagina-header">
-
-                <div>
-
-                    <h2>
-                        Cidades
-                    </h2>
-
-                    <p>
-                        Cadastre as cidades.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="form-gerenciamento">
-
+            <div class="gerenciamento-form">
 
                 <input
                     type="hidden"
@@ -742,53 +590,28 @@
                     Salvar
                 </button>
 
-
             </div>
-
 
 
             <div
                 id="listaCidades"
                 class="lista-gerenciamento"
-            >
-
-            </div>
-
+            ></div>
 
         </section>
 
 
 
-        <!-- ================================== -->
-        <!-- BAIRROS -->
-        <!-- ================================== -->
+        <!-- ======================================
+        BAIRROS
+        ====================================== -->
 
         <section
             id="bairros"
             class="page hidden"
         >
 
-
-            <div class="pagina-header">
-
-                <div>
-
-                    <h2>
-                        Bairros
-                    </h2>
-
-                    <p>
-                        Cadastre os bairros.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="form-gerenciamento">
-
+            <div class="gerenciamento-form">
 
                 <input
                     type="hidden"
@@ -821,46 +644,36 @@
                     Salvar
                 </button>
 
-
             </div>
-
 
 
             <div
                 id="listaBairros"
                 class="lista-gerenciamento"
-            >
-
-            </div>
-
+            ></div>
 
         </section>
 
 
     </main>
 
-
 </div>
 
 
 
-<!-- ====================================== -->
-<!-- MODAL CLÍNICA -->
-<!-- ====================================== -->
+<!-- ======================================
+MODAL CLÍNICA
+====================================== -->
 
 <div
     id="modalClinica"
     class="modal hidden"
 >
 
+    <div class="modal-content">
 
-    <div class="modal-conteudo">
-
-
-        <!-- HEADER MODAL -->
 
         <div class="modal-header">
-
 
             <h2
                 id="tituloModalClinica"
@@ -872,21 +685,14 @@
             <button
                 id="btnFecharModal"
                 class="btn-fechar"
-                type="button"
             >
                 ×
             </button>
 
-
         </div>
 
 
-
-        <!-- FORM -->
-
-        <form
-            id="formClinica"
-        >
+        <form id="formClinica">
 
 
             <input
@@ -895,73 +701,55 @@
             >
 
 
-
-            <!-- NOME -->
-
-            <div class="form-group">
+            <div class="campo">
 
                 <label>
                     Nome da Clínica *
                 </label>
 
                 <input
-                    type="text"
                     id="clinicaNome"
+                    type="text"
                     required
                 >
 
             </div>
 
 
-
-            <!-- ENDEREÇO -->
-
-            <div class="form-group">
+            <div class="campo">
 
                 <label>
                     Endereço *
                 </label>
 
                 <input
-                    type="text"
                     id="clinicaEndereco"
+                    type="text"
                     required
                 >
 
             </div>
 
 
-
-            <!-- TELEFONE -->
-
-            <div class="form-group">
+            <div class="campo">
 
                 <label>
                     Telefone
                 </label>
 
                 <input
-                    type="text"
                     id="clinicaTelefone"
+                    type="text"
                 >
 
             </div>
 
 
 
-            <!-- LOCALIZAÇÃO -->
-
-            <h3>
-                Localização
-            </h3>
+            <div class="localizacao-grid">
 
 
-            <div class="grid-localizacao">
-
-
-                <!-- REGIÃO -->
-
-                <div class="form-group">
+                <div class="campo">
 
                     <label>
                         Região
@@ -972,7 +760,7 @@
                     >
 
                         <option value="">
-                            Selecione uma região
+                            Selecione
                         </option>
 
                     </select>
@@ -980,10 +768,7 @@
                 </div>
 
 
-
-                <!-- ESTADO -->
-
-                <div class="form-group">
+                <div class="campo">
 
                     <label>
                         Estado
@@ -994,7 +779,7 @@
                     >
 
                         <option value="">
-                            Selecione um estado
+                            Selecione
                         </option>
 
                     </select>
@@ -1002,10 +787,7 @@
                 </div>
 
 
-
-                <!-- CIDADE -->
-
-                <div class="form-group">
+                <div class="campo">
 
                     <label>
                         Cidade
@@ -1016,7 +798,7 @@
                     >
 
                         <option value="">
-                            Selecione uma cidade
+                            Selecione
                         </option>
 
                     </select>
@@ -1024,10 +806,7 @@
                 </div>
 
 
-
-                <!-- BAIRRO -->
-
-                <div class="form-group">
+                <div class="campo">
 
                     <label>
                         Bairro *
@@ -1039,87 +818,71 @@
                     >
 
                         <option value="">
-                            Selecione um bairro
+                            Selecione
                         </option>
 
                     </select>
 
                 </div>
 
-
             </div>
 
 
 
-            <!-- STATUS -->
-
             <div
                 id="areaStatusClinica"
-                class="area-status hidden"
+                class="campo hidden"
             >
 
-
                 <label class="checkbox-label">
-
 
                     <input
                         type="checkbox"
                         id="clinicaAtivo"
-                        checked
                     >
-
 
                     Clínica ativa
 
-
                 </label>
 
-
             </div>
 
 
 
-            <!-- ESPECIALIDADES -->
+            <div class="especialidades-area">
 
-            <div class="especialidades-header">
+                <div class="especialidades-topo">
 
-
-                <h3>
-                    Especialidades
-                </h3>
-
-
-                <button
-                    type="button"
-                    id="btnAdicionarEspecialidade"
-                    class="btn-secundario"
-                >
-                    + Adicionar Especialidade
-                </button>
+                    <h3>
+                        Especialidades
+                    </h3>
 
 
-            </div>
+                    <button
+                        type="button"
+                        id="btnAdicionarEspecialidade"
+                        class="btn-secondary"
+                    >
+                        + Adicionar
+                    </button>
+
+                </div>
 
 
-
-            <div
-                id="containerEspecialidades"
-                class="container-especialidades"
-            >
+                <div
+                    id="containerEspecialidades"
+                ></div>
 
             </div>
 
 
-
-            <!-- BOTÕES -->
 
             <div class="modal-acoes">
-
 
                 <button
                     type="button"
                     id="btnCancelarModal"
-                    class="btn-cancelar"
+                    class="btn-secondary"
                 >
                     Cancelar
                 </button>
@@ -1132,38 +895,25 @@
                     Salvar Clínica
                 </button>
 
-
             </div>
 
 
         </form>
 
-
     </div>
-
 
 </div>
 
 
 
-<!-- ====================================== -->
-<!-- SCRIPTS -->
-<!-- ====================================== -->
+<!-- SUPABASE -->
 
-
-<!-- CONFIGURAÇÃO SUPABASE -->
-
-<script src="supabase.js"></script>
-
-
-<!-- LOGIN -->
-
-<script src="login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <!-- ADMIN -->
 
-<script src="admin.js"></script>
+<script src="./admin.js"></script>
 
 
 </body>
