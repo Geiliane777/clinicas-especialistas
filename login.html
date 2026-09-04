@@ -10,11 +10,16 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Login | Rede Especialistas</title>
+    <title>
+        Login | Rede Especialistas
+    </title>
+
+
+    <!-- CSS -->
 
     <link
         rel="stylesheet"
-        href="./css/login.css"
+        href="css/login.css"
     >
 
 </head>
@@ -22,11 +27,29 @@
 
 <body>
 
+
+    <!-- ======================================
+         FUNDO
+    ======================================= -->
+
+    <div class="background"></div>
+
+
+    <!-- ======================================
+         CONTAINER LOGIN
+    ======================================= -->
+
     <main class="login-container">
+
+
+        <!-- CARD -->
 
         <section class="login-card">
 
-            <div class="login-logo">
+
+            <!-- LOGO / ÍCONE -->
+
+            <div class="logo-area">
 
                 <div class="logo-icon">
                     🦷
@@ -43,7 +66,32 @@
             </div>
 
 
+            <!-- DIVISOR -->
+
+            <div class="divider"></div>
+
+
+            <!-- TÍTULO -->
+
+            <div class="login-header">
+
+                <h2>
+                    Bem-vindo
+                </h2>
+
+                <p>
+                    Faça login para acessar o painel administrativo.
+                </p>
+
+            </div>
+
+
+            <!-- FORMULÁRIO -->
+
             <form id="formLogin">
+
+
+                <!-- USUÁRIO -->
 
                 <div class="campo">
 
@@ -51,16 +99,26 @@
                         Usuário
                     </label>
 
-                    <input
-                        type="text"
-                        id="usuarioLogin"
-                        placeholder="Digite seu usuário"
-                        autocomplete="username"
-                        required
-                    >
+                    <div class="input-container">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            id="usuarioLogin"
+                            placeholder="Digite seu usuário"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
 
                 </div>
 
+
+                <!-- SENHA -->
 
                 <div class="campo">
 
@@ -68,38 +126,86 @@
                         Senha
                     </label>
 
-                    <input
-                        type="password"
-                        id="senhaLogin"
-                        placeholder="Digite sua senha"
-                        autocomplete="current-password"
-                        required
-                    >
+                    <div class="input-container">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="senhaLogin"
+                            placeholder="Digite sua senha"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
 
                 </div>
 
 
-                <p
+                <!-- MENSAGEM -->
+
+                <div
                     id="mensagemLogin"
                     class="mensagem-login"
-                ></p>
+                ></div>
 
+
+                <!-- BOTÃO -->
 
                 <button
                     type="submit"
                     class="btn-login"
                 >
-                    Entrar
+
+                    <span>
+                        Entrar no Painel
+                    </span>
+
+                    <span class="btn-arrow">
+                        →
+                    </span>
+
                 </button>
+
 
             </form>
 
+
+            <!-- RODAPÉ -->
+
+            <div class="login-footer">
+
+                <p>
+                    🔐 Área restrita para administradores
+                </p>
+
+            </div>
+
+
         </section>
+
+
+        <!-- TEXTO INFERIOR -->
+
+        <div class="copyright">
+
+            © 2026 Rede Especialistas
+
+        </div>
+
 
     </main>
 
 
-    <script src="./js/login.js"></script>
+    <!-- ======================================
+         JAVASCRIPT
+    ======================================= -->
+
+    <script src="js/login.js"></script>
+
 
 </body>
 
