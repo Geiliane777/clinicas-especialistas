@@ -2991,4 +2991,16 @@ function logout() {
     window.location.href =
         "login.html";
 
+
+}
+function logout() {
+
+    if (!confirm("Deseja sair do painel administrativo?")) {
+        return;
+    }
+
+    localStorage.removeItem("adminLogado");
+
+    window.location.href = "login.html";
+
 }
