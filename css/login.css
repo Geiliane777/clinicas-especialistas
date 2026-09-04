@@ -46,7 +46,7 @@ body {
 
 
 /* ======================================
-   FUNDO
+   FUNDO DECORATIVO
 ====================================== */
 
 .background {
@@ -87,8 +87,7 @@ body {
     top: -120px;
     left: -100px;
 
-    background:
-        #7c3aed;
+    background: #7c3aed;
 
 }
 
@@ -101,8 +100,7 @@ body {
     right: -180px;
     bottom: -150px;
 
-    background:
-        #38bdf8;
+    background: #38bdf8;
 
 }
 
@@ -115,8 +113,7 @@ body {
     right: 20%;
     top: 10%;
 
-    background:
-        #6366f1;
+    background: #6366f1;
 
     opacity: 0.2;
 
@@ -159,34 +156,30 @@ body {
     max-width: 440px;
 
     padding:
-
-        42px
+        40px
         38px
         30px;
 
     background:
-
         rgba(
             255,
             255,
             255,
-            0.96
+            0.97
         );
 
     border-radius: 24px;
 
     box-shadow:
-
         0 25px 60px
         rgba(
             0,
             0,
             0,
-            0.3
+            0.30
         );
 
     border:
-
         1px solid
         rgba(
             255,
@@ -236,14 +229,14 @@ body {
 
 .logo-container {
 
-    width: 82px;
-    height: 82px;
+    width: 115px;
+
+    height: 115px;
 
     margin:
-
         0
         auto
-        20px;
+        18px;
 
     display: flex;
 
@@ -251,41 +244,21 @@ body {
 
     justify-content: center;
 
-    border-radius: 22px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #2563eb
-        );
-
-    box-shadow:
-
-        0 10px 25px
-        rgba(
-            79,
-            70,
-            229,
-            0.35
-        );
-
 }
 
 
+/*
+   A imagem é exibida
+   exatamente como está no arquivo.
+*/
+
 .login-logo {
 
-    width: 55px;
+    width: 110px;
 
-    height: 55px;
+    height: 110px;
 
     object-fit: contain;
-
-    filter:
-
-        brightness(0)
-        invert(1);
 
 }
 
@@ -300,7 +273,7 @@ body {
 
     color: #1e1b4b;
 
-    font-size: 26px;
+    font-size: 27px;
 
     margin-bottom: 10px;
 
@@ -321,7 +294,7 @@ body {
 
 
 /* ======================================
-   LINHA
+   LINHA DECORATIVA
 ====================================== */
 
 .linha {
@@ -333,13 +306,11 @@ body {
     border-radius: 10px;
 
     margin:
-
-        24px
+        22px
         auto
-        28px;
+        27px;
 
     background:
-
         linear-gradient(
             90deg,
             #7c3aed,
@@ -359,7 +330,7 @@ form {
 
     flex-direction: column;
 
-    gap: 20px;
+    gap: 19px;
 
 }
 
@@ -390,6 +361,10 @@ form {
 }
 
 
+/* ======================================
+   INPUT CONTAINER
+====================================== */
+
 .input-container {
 
     position: relative;
@@ -400,6 +375,10 @@ form {
 
 }
 
+
+/* ======================================
+   ÍCONES
+====================================== */
 
 .icone-input {
 
@@ -414,21 +393,23 @@ form {
 }
 
 
+/* ======================================
+   INPUTS
+====================================== */
+
 .input-container input {
 
     width: 100%;
 
-    height: 48px;
+    height: 50px;
 
     padding:
-
         0
         15px
         0
-        45px;
+        46px;
 
     border:
-
         1px solid
         #dbe2ea;
 
@@ -454,7 +435,6 @@ form {
     background: #ffffff;
 
     box-shadow:
-
         0 0 0 4px
         rgba(
             99,
@@ -532,7 +512,7 @@ form {
 
     width: 100%;
 
-    height: 50px;
+    height: 52px;
 
     border: none;
 
@@ -555,7 +535,6 @@ form {
     font-weight: 700;
 
     background:
-
         linear-gradient(
             135deg,
             #6d28d9,
@@ -563,7 +542,6 @@ form {
         );
 
     box-shadow:
-
         0 10px 22px
         rgba(
             79,
@@ -583,7 +561,6 @@ form {
         translateY(-2px);
 
     box-shadow:
-
         0 14px 28px
         rgba(
             79,
@@ -628,12 +605,11 @@ form {
 
     width: 100%;
 
-    height: 46px;
+    height: 48px;
 
     border-radius: 12px;
 
     border:
-
         1px solid
         #c7d2fe;
 
@@ -675,7 +651,6 @@ form {
     padding-top: 20px;
 
     border-top:
-
         1px solid
         #e2e8f0;
 
@@ -711,7 +686,6 @@ form {
     .login-card {
 
         padding:
-
             35px
             24px
             25px;
@@ -728,9 +702,28 @@ form {
     }
 
 
+    .login-logo {
+
+        width: 90px;
+
+        height: 90px;
+
+    }
+
+
+    .logo-container {
+
+        width: 95px;
+
+        height: 95px;
+
+    }
+
+
     .bola1 {
 
         width: 250px;
+
         height: 250px;
 
     }
@@ -739,6 +732,7 @@ form {
     .bola2 {
 
         width: 300px;
+
         height: 300px;
 
     }
