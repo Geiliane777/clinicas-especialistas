@@ -20,46 +20,15 @@ const SENHA_ADMIN = "123456";
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
-
-        verificarSessao();
-
-        iniciarFormularioLogin();
-
-    }
+    iniciarLogin
 );
 
 
-// ======================================
-// VERIFICAR SESSÃO
-// ======================================
-
-function verificarSessao() {
-
-    const logado =
-        localStorage.getItem(
-            "adminLogado"
-        );
-
+function iniciarLogin() {
 
     // Se já estiver logado,
-    // vai direto para o painel
-
-    if (logado === "true") {
-
-        window.location.href =
-            "admin.html";
-
-    }
-
-}
-
-
-// ======================================
-// INICIAR FORMULÁRIO
-// ======================================
-
-function iniciarFormularioLogin() {
+    // não faz reload, apenas permite
+    // que a pessoa permaneça na página.
 
     const form =
         document.getElementById(
@@ -68,10 +37,6 @@ function iniciarFormularioLogin() {
 
 
     if (!form) {
-
-        console.error(
-            "Formulário de login não encontrado."
-        );
 
         return;
 
@@ -95,16 +60,21 @@ function fazerLogin(event) {
     event.preventDefault();
 
 
-    const usuarioInput =
-        document.getElementById(
-            "usuarioLogin"
-        );
+    const usuario =
+        document
+            .getElementById(
+                "usuarioLogin"
+            )
+            .value
+            .trim();
 
 
-    const senhaInput =
-        document.getElementById(
-            "senhaLogin"
-        );
+    const senha =
+        document
+            .getElementById(
+                "senhaLogin"
+            )
+            .value;
 
 
     const mensagem =
@@ -113,34 +83,33 @@ function fazerLogin(event) {
         );
 
 
-    const usuario =
-        usuarioInput.value.trim();
-
-
-    const senha =
-        senhaInput.value;
-
-
-    // Limpar mensagem anterior
-
     mensagem.textContent = "";
 
-    mensagem.classList.remove(
-        "erro",
-        "sucesso"
-    );
+    mensagem.className =
+        "mensagem-login";
 
 
     // ======================================
-    // VALIDAR CAMPOS
+    // VALIDAÇÃO
     // ======================================
 
-    if (!usuario || !senha) {
+    if (
+        usuario !== USUARIO_ADMIN ||
+        senha !== SENHA_ADMIN
+    ) {
 
-        mostrarMensagem(
-            "Preencha usuário e senha.",
+        mensagem.textContent =
+            "Usuário ou senha incorretos.";
+
+        mensagem.classList.add(
             "erro"
         );
+
+
+        document.getElementById(
+            "senhaLogin"
+        ).value = "";
+
 
         return;
 
@@ -148,120 +117,43 @@ function fazerLogin(event) {
 
 
     // ======================================
-    // VALIDAR LOGIN
+    // SALVAR SESSÃO
     // ======================================
 
-    if (
-        usuario === USUARIO_ADMIN &&
-        senha === SENHA_ADMIN
-    ) {
-
-        // Salvar sessão
-
-        localStorage.setItem(
-            "adminLogado",
-            "true"
-        );
-
-
-        // Mostrar mensagem
-
-        mostrarMensagem(
-            "Login realizado com sucesso!",
-            "sucesso"
-        );
-
-
-        // Desabilitar botão temporariamente
-
-        const botao =
-            document.querySelector(
-                ".btn-login"
-            );
-
-
-        if (botao) {
-
-            botao.disabled = true;
-
-            botao.innerHTML = `
-                Entrando...
-            `;
-
-        }
-
-
-        // Redirecionar
-
-        setTimeout(
-            () => {
-
-                window.location.href =
-                    "admin.html";
-
-            },
-            700
-        );
-
-    } else {
-
-        mostrarMensagem(
-            "Usuário ou senha incorretos.",
-            "erro"
-        );
-
-
-        // Limpar senha
-
-        senhaInput.value = "";
-
-
-        // Focar senha
-
-        senhaInput.focus();
-
-    }
-
-}
-
-
-// ======================================
-// MOSTRAR MENSAGEM
-// ======================================
-
-function mostrarMensagem(
-    texto,
-    tipo
-) {
-
-    const mensagem =
-        document.getElementById(
-            "mensagemLogin"
-        );
-
-
-    if (!mensagem) return;
+    localStorage.setItem(
+        "adminLogado",
+        "true"
+    );
 
 
     mensagem.textContent =
-        texto;
+        "Login realizado com sucesso!";
 
 
-    mensagem.classList.remove(
-        "erro",
+    mensagem.classList.add(
         "sucesso"
     );
 
 
-    mensagem.classList.add(
-        tipo
+    // ======================================
+    // REDIRECIONAMENTO
+    // ======================================
+
+    setTimeout(
+        () => {
+
+            window.location.href =
+                "admin.html";
+
+        },
+        500
     );
 
 }
 
 
 // ======================================
-// VOLTAR PARA O SITE
+// VOLTAR PARA SITE
 // ======================================
 
 function voltarParaSite() {
