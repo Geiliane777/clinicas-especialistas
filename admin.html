@@ -1338,27 +1338,46 @@
 
                 <div class="especialidades-area">
 
+    <div class="titulo-especialidades">
 
-                    <h3 class="titulo-secao-form">
-                        🦷 Especialidades
-                    </h3>
+        <div>
+            <h3 class="titulo-secao-form">
+                🦷 Especialidades
+            </h3>
 
+            <p>
+                Adicione as especialidades atendidas pela clínica.
+            </p>
+        </div>
 
-                    <div
-                        id="containerEspecialidades"
-                    ></div>
+        <button
+            type="button"
+            class="btn-adicionar-especialidade"
+            onclick="adicionarLinhaEspecialidade()"
+        >
+            ＋ Adicionar especialidade
+        </button>
 
+    </div>
 
-                    <button
-                        type="button"
-                        class="btn-adicionar-especialidade"
-                        onclick="adicionarLinhaEspecialidade()"
-                    >
-                        + Adicionar Especialidade
-                    </button>
+    <div
+        id="containerEspecialidades"
+        class="container-especialidades"
+    >
+        <div class="especialidades-vazio">
+            <span>🦷</span>
 
+            <p>
+                Nenhuma especialidade adicionada.
+            </p>
 
-                </div>
+            <small>
+                Clique em "Adicionar especialidade" para começar.
+            </small>
+        </div>
+    </div>
+
+</div>
 
 
 
