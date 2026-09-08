@@ -854,20 +854,23 @@ async function listarClinicas() {
 
                     <td>
 
-                        <button
-                            class="btn-tabela editar"
-                            onclick="editarClinica(${clinica.id})"
-                        >
-                            Editar
-                        </button>
+                        <div class="acoes-tabela">
 
+    <button
+        class="btn-editar"
+        onclick="editarClinica('${clinica.id}')"
+    >
+        ✏️ Editar
+    </button>
 
-                        <button
-                            class="btn-tabela excluir"
-                            onclick="excluirClinica(${clinica.id})"
-                        >
-                            Excluir
-                        </button>
+    <button
+        class="btn-excluir"
+        onclick="excluirClinica('${clinica.id}')"
+    >
+        🗑️ Excluir
+    </button>
+
+</div>
 
                     </td>
 
@@ -1951,21 +1954,23 @@ async function listarEspecialidades() {
                         🦷 ${item.nome}
                     </span>
 
-                    <div>
+                    <div class="acoes-tabela">
 
-                        <button
-                            onclick="editarEspecialidade(${item.id}, '${escaparTexto(item.nome)}')"
-                        >
-                            Editar
-                        </button>
+    <button
+        class="btn-editar"
+        onclick="editarClinica('${clinica.id}')"
+    >
+        ✏️ Editar
+    </button>
 
-                        <button
-                            onclick="excluirEspecialidade(${item.id})"
-                        >
-                            Excluir
-                        </button>
+    <button
+        class="btn-excluir"
+        onclick="excluirClinica('${clinica.id}')"
+    >
+        🗑️ Excluir
+    </button>
 
-                    </div>
+</div>
 
                 </div>
 
@@ -2222,22 +2227,23 @@ async function listarRegioes() {
                         🌎 ${item.nome}
                     </span>
 
-                    <div>
+                   <div class="acoes-tabela">
 
-                        <button
-                            onclick="editarRegiao(${item.id}, '${escaparTexto(item.nome)}')"
-                        >
-                            Editar
-                        </button>
+    <button
+        class="btn-editar"
+        onclick="editarClinica('${clinica.id}')"
+    >
+        ✏️ Editar
+    </button>
 
-                        <button
-                            onclick="excluirRegiao(${item.id})"
-                        >
-                            Excluir
-                        </button>
+    <button
+        class="btn-excluir"
+        onclick="excluirClinica('${clinica.id}')"
+    >
+        🗑️ Excluir
+    </button>
 
-                    </div>
-
+</div>
                 </div>
 
             `;
@@ -2462,27 +2468,23 @@ async function listarEstados() {
                             (${item.regioes?.nome || "Sem região"})
                         </small>
                     </span>
+<div class="acoes-tabela">
 
-                    <div>
+    <button
+        class="btn-editar"
+        onclick="editarClinica('${clinica.id}')"
+    >
+        ✏️ Editar
+    </button>
 
-                        <button
-                            onclick="editarEstado(
-                                ${item.id},
-                                '${escaparTexto(item.nome)}',
-                                ${item.regiao_id}
-                            )"
-                        >
-                            Editar
-                        </button>
+    <button
+        class="btn-excluir"
+        onclick="excluirClinica('${clinica.id}')"
+    >
+        🗑️ Excluir
+    </button>
 
-                        <button
-                            onclick="excluirEstado(${item.id})"
-                        >
-                            Excluir
-                        </button>
-
-                    </div>
-
+</div>
                 </div>
 
             `;
@@ -2742,25 +2744,23 @@ async function listarCidades() {
                         </small>
                     </span>
 
-                    <div>
+                   <div class="acoes-tabela">
 
-                        <button
-                            onclick="editarCidade(
-                                ${item.id},
-                                '${escaparTexto(item.nome)}',
-                                ${item.estado_id}
-                            )"
-                        >
-                            Editar
-                        </button>
+    <button
+        class="btn-editar"
+        onclick="editarClinica('${clinica.id}')"
+    >
+        ✏️ Editar
+    </button>
 
-                        <button
-                            onclick="excluirCidade(${item.id})"
-                        >
-                            Excluir
-                        </button>
+    <button
+        class="btn-excluir"
+        onclick="excluirClinica('${clinica.id}')"
+    >
+        🗑️ Excluir
+    </button>
 
-                    </div>
+</div>
 
                 </div>
 
@@ -3021,26 +3021,23 @@ async function listarBairros() {
                         </small>
                     </span>
 
-                    <div>
+                    <div class="acoes-tabela">
 
-                        <button
-                            onclick="editarBairro(
-                                ${item.id},
-                                '${escaparTexto(item.nome)}',
-                                ${item.cidade_id}
-                            )"
-                        >
-                            Editar
-                        </button>
+    <button
+        class="btn-editar"
+        onclick="editarClinica('${clinica.id}')"
+    >
+        ✏️ Editar
+    </button>
 
-                        <button
-                            onclick="excluirBairro(${item.id})"
-                        >
-                            Excluir
-                        </button>
+    <button
+        class="btn-excluir"
+        onclick="excluirClinica('${clinica.id}')"
+    >
+        🗑️ Excluir
+    </button>
 
-                    </div>
-
+</div>
                 </div>
 
             `;
