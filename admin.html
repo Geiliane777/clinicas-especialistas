@@ -31,9 +31,9 @@
 <body>
 
 
-    <!-- ==============================
+    <!-- =====================================
          MENU LATERAL
-    =============================== -->
+    ====================================== -->
 
     <aside class="menu">
 
@@ -48,7 +48,7 @@
                 class="logo-admin"
             >
 
-            <div>
+            <div class="logo-texto">
 
                 <h2>Rede Especialistas</h2>
 
@@ -74,8 +74,8 @@
                 data-pagina="dashboard"
                 onclick="mostrarPagina('dashboard')"
             >
-                <span>▦</span>
-                Dashboard
+                <span class="menu-icone">▦</span>
+                <span>Dashboard</span>
             </button>
 
 
@@ -89,8 +89,8 @@
                 data-pagina="clinicas"
                 onclick="mostrarPagina('clinicas')"
             >
-                <span>🏥</span>
-                Clínicas
+                <span class="menu-icone">🏥</span>
+                <span>Clínicas</span>
             </button>
 
 
@@ -99,8 +99,8 @@
                 data-pagina="especialidades"
                 onclick="mostrarPagina('especialidades')"
             >
-                <span>🦷</span>
-                Especialidades
+                <span class="menu-icone">🦷</span>
+                <span>Especialidades</span>
             </button>
 
 
@@ -114,8 +114,8 @@
                 data-pagina="regioes"
                 onclick="mostrarPagina('regioes')"
             >
-                <span>🌎</span>
-                Regiões
+                <span class="menu-icone">🌎</span>
+                <span>Regiões</span>
             </button>
 
 
@@ -124,8 +124,8 @@
                 data-pagina="estados"
                 onclick="mostrarPagina('estados')"
             >
-                <span>📍</span>
-                Estados
+                <span class="menu-icone">📍</span>
+                <span>Estados</span>
             </button>
 
 
@@ -134,8 +134,8 @@
                 data-pagina="cidades"
                 onclick="mostrarPagina('cidades')"
             >
-                <span>🏙️</span>
-                Cidades
+                <span class="menu-icone">🏙️</span>
+                <span>Cidades</span>
             </button>
 
 
@@ -144,8 +144,8 @@
                 data-pagina="bairros"
                 onclick="mostrarPagina('bairros')"
             >
-                <span>🏘️</span>
-                Bairros
+                <span class="menu-icone">🏘️</span>
+                <span>Bairros</span>
             </button>
 
 
@@ -159,8 +159,8 @@
                 type="button"
                 onclick="alternarTema()"
             >
-                <span>◐</span>
-                Alternar tema
+                <span class="menu-icone">◐</span>
+                <span>Alternar tema</span>
             </button>
 
 
@@ -169,8 +169,8 @@
                 type="button"
                 onclick="voltarAoSite()"
             >
-                <span>←</span>
-                Voltar ao site
+                <span class="menu-icone">←</span>
+                <span>Voltar ao site</span>
             </button>
 
 
@@ -179,27 +179,39 @@
                 type="button"
                 onclick="sair()"
             >
-                <span>↪</span>
-                Sair
+                <span class="menu-icone">↪</span>
+                <span>Sair</span>
             </button>
 
 
         </nav>
 
 
+        <!-- RODAPÉ -->
+
+        <div class="menu-rodape">
+
+            <span>Rede Especialistas</span>
+
+            <small>© 2026</small>
+
+        </div>
+
+
     </aside>
 
 
-    <!-- ==============================
-         CONTEÚDO PRINCIPAL
-    =============================== -->
+
+    <!-- =====================================
+         CONTEÚDO
+    ====================================== -->
 
     <main class="conteudo">
 
 
-        <!-- ==============================
+        <!-- =====================================
              DASHBOARD
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-dashboard"
@@ -207,7 +219,7 @@
         >
 
 
-            <!-- CABEÇALHO -->
+            <!-- TOPO -->
 
             <div class="topo-dashboard">
 
@@ -232,7 +244,7 @@
 
                 <div class="data-dashboard">
 
-                    <span>📅</span>
+                    <span class="data-icone">📅</span>
 
                     <div>
 
@@ -250,9 +262,8 @@
             </div>
 
 
-            <!-- ==============================
-                 CARDS
-            =============================== -->
+
+            <!-- CARDS -->
 
             <div class="dashboard-cards">
 
@@ -263,7 +274,7 @@
                         🏥
                     </div>
 
-                    <div>
+                    <div class="card-conteudo">
 
                         <span>Total de Clínicas</span>
 
@@ -276,13 +287,14 @@
                 </div>
 
 
+
                 <div class="card card-verde">
 
                     <div class="card-icone">
                         ✓
                     </div>
 
-                    <div>
+                    <div class="card-conteudo">
 
                         <span>Clínicas Ativas</span>
 
@@ -295,13 +307,14 @@
                 </div>
 
 
+
                 <div class="card card-vermelho">
 
                     <div class="card-icone">
                         !
                     </div>
 
-                    <div>
+                    <div class="card-conteudo">
 
                         <span>Clínicas Inativas</span>
 
@@ -314,13 +327,14 @@
                 </div>
 
 
+
                 <div class="card card-roxo">
 
                     <div class="card-icone">
                         🦷
                     </div>
 
-                    <div>
+                    <div class="card-conteudo">
 
                         <span>Especialidades</span>
 
@@ -336,14 +350,13 @@
             </div>
 
 
-            <!-- ==============================
-                 STATUS E AÇÕES
-            =============================== -->
+
+            <!-- STATUS E AÇÕES -->
 
             <div class="dashboard-grid">
 
 
-                <!-- STATUS DA REDE -->
+                <!-- STATUS -->
 
                 <div class="painel-dashboard">
 
@@ -368,7 +381,9 @@
 
                     <div class="status-rede">
 
+
                         <div class="status-info">
+
 
                             <div class="status-info-topo">
 
@@ -392,16 +407,19 @@
 
                             </div>
 
+
                         </div>
 
 
                         <div class="status-legenda">
+
 
                             <div>
 
                                 <span class="bolinha verde"></span>
 
                                 Ativas:
+
                                 <strong id="legendaAtivas">
                                     0
                                 </strong>
@@ -414,18 +432,22 @@
                                 <span class="bolinha vermelho"></span>
 
                                 Inativas:
+
                                 <strong id="legendaInativas">
                                     0
                                 </strong>
 
                             </div>
 
+
                         </div>
+
 
                     </div>
 
 
                 </div>
+
 
 
                 <!-- AÇÕES RÁPIDAS -->
@@ -490,9 +512,8 @@
             </div>
 
 
-            <!-- ==============================
-                 COBERTURA DA REDE
-            =============================== -->
+
+            <!-- COBERTURA -->
 
             <div class="painel-dashboard cobertura">
 
@@ -532,6 +553,7 @@
                     </div>
 
 
+
                     <div class="cobertura-item">
 
                         <span>📍</span>
@@ -549,6 +571,7 @@
                     </div>
 
 
+
                     <div class="cobertura-item">
 
                         <span>🏙️</span>
@@ -564,6 +587,7 @@
                         </div>
 
                     </div>
+
 
 
                     <div class="cobertura-item">
@@ -589,9 +613,8 @@
             </div>
 
 
-            <!-- ==============================
-                 ÚLTIMAS CLÍNICAS
-            =============================== -->
+
+            <!-- ÚLTIMAS CLÍNICAS -->
 
             <div class="painel-dashboard ultimas-clinicas">
 
@@ -638,9 +661,10 @@
         </section>
 
 
-        <!-- ==============================
+
+        <!-- =====================================
              CLÍNICAS
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-clinicas"
@@ -672,7 +696,9 @@
             </div>
 
 
+
             <div class="painel">
+
 
                 <div class="filtros">
 
@@ -710,7 +736,9 @@
 
                 </div>
 
+
             </div>
+
 
 
             <div class="tabela-container">
@@ -733,8 +761,7 @@
                     </thead>
 
 
-                    <tbody id="listaClinicas">
-                    </tbody>
+                    <tbody id="listaClinicas"></tbody>
 
                 </table>
 
@@ -744,14 +771,16 @@
         </section>
 
 
-        <!-- ==============================
+
+        <!-- =====================================
              ESPECIALIDADES
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-especialidades"
             class="pagina"
         >
+
 
             <div class="titulo-pagina">
 
@@ -769,6 +798,7 @@
 
 
             <div class="painel">
+
 
                 <input
                     type="hidden"
@@ -801,19 +831,23 @@
                     class="lista-gerenciamento"
                 ></div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- ==============================
+
+        <!-- =====================================
              REGIÕES
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-regioes"
             class="pagina"
         >
+
 
             <div class="titulo-pagina">
 
@@ -831,6 +865,7 @@
 
 
             <div class="painel">
+
 
                 <input
                     type="hidden"
@@ -863,19 +898,23 @@
                     class="lista-gerenciamento"
                 ></div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- ==============================
+
+        <!-- =====================================
              ESTADOS
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-estados"
             class="pagina"
         >
+
 
             <div class="titulo-pagina">
 
@@ -893,6 +932,7 @@
 
 
             <div class="painel">
+
 
                 <input
                     type="hidden"
@@ -934,19 +974,23 @@
                     class="lista-gerenciamento"
                 ></div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- ==============================
+
+        <!-- =====================================
              CIDADES
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-cidades"
             class="pagina"
         >
+
 
             <div class="titulo-pagina">
 
@@ -964,6 +1008,7 @@
 
 
             <div class="painel">
+
 
                 <input
                     type="hidden"
@@ -1005,19 +1050,23 @@
                     class="lista-gerenciamento"
                 ></div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- ==============================
+
+        <!-- =====================================
              BAIRROS
-        =============================== -->
+        ====================================== -->
 
         <section
             id="pagina-bairros"
             class="pagina"
         >
+
 
             <div class="titulo-pagina">
 
@@ -1035,6 +1084,7 @@
 
 
             <div class="painel">
+
 
                 <input
                     type="hidden"
@@ -1076,7 +1126,9 @@
                     class="lista-gerenciamento"
                 ></div>
 
+
             </div>
+
 
         </section>
 
@@ -1084,19 +1136,19 @@
     </main>
 
 
-    <!-- ==============================
+
+    <!-- =====================================
          MODAL CLÍNICA
-    =============================== -->
+    ====================================== -->
 
     <div
         id="modalClinica"
         class="modal hidden"
     >
 
+
         <div class="modal-conteudo">
 
-
-            <!-- CABEÇALHO DO MODAL -->
 
             <div class="modal-cabecalho">
 
@@ -1124,13 +1176,13 @@
             </div>
 
 
-            <!-- FORMULÁRIO -->
 
             <form
                 id="formClinica"
                 class="formulario"
                 onsubmit="salvarClinica(event)"
             >
+
 
                 <input
                     type="hidden"
@@ -1140,9 +1192,7 @@
 
                 <div class="form-grupo">
 
-                    <label>
-                        Nome da Clínica *
-                    </label>
+                    <label>Nome da Clínica *</label>
 
                     <input
                         type="text"
@@ -1155,9 +1205,7 @@
 
                 <div class="form-grupo">
 
-                    <label>
-                        Endereço *
-                    </label>
+                    <label>Endereço *</label>
 
                     <input
                         type="text"
@@ -1170,9 +1218,7 @@
 
                 <div class="form-grupo">
 
-                    <label>
-                        Telefone
-                    </label>
+                    <label>Telefone</label>
 
                     <input
                         type="text"
@@ -1182,7 +1228,6 @@
                 </div>
 
 
-                <!-- LOCALIZAÇÃO -->
 
                 <h3 class="titulo-secao-form">
                     📍 Localização
@@ -1210,6 +1255,7 @@
                     </div>
 
 
+
                     <div class="form-grupo">
 
                         <label>Estado</label>
@@ -1226,6 +1272,7 @@
                         </select>
 
                     </div>
+
 
 
                     <div class="form-grupo">
@@ -1246,11 +1293,10 @@
                     </div>
 
 
+
                     <div class="form-grupo">
 
-                        <label>
-                            Bairro *
-                        </label>
+                        <label>Bairro *</label>
 
                         <select
                             id="clinicaBairro"
@@ -1269,7 +1315,6 @@
                 </div>
 
 
-                <!-- STATUS -->
 
                 <div
                     id="areaStatusClinica"
@@ -1290,9 +1335,9 @@
                 </div>
 
 
-                <!-- ESPECIALIDADES -->
 
                 <div class="especialidades-area">
+
 
                     <h3 class="titulo-secao-form">
                         🦷 Especialidades
@@ -1312,12 +1357,13 @@
                         + Adicionar Especialidade
                     </button>
 
+
                 </div>
 
 
-                <!-- BOTÕES -->
 
                 <div class="form-acoes">
+
 
                     <button
                         type="button"
@@ -1335,6 +1381,7 @@
                         Salvar Clínica
                     </button>
 
+
                 </div>
 
 
@@ -1343,20 +1390,19 @@
 
         </div>
 
+
     </div>
 
 
-    <!-- ==============================
-         SCRIPTS
-    =============================== -->
 
-    <!-- Biblioteca Supabase -->
+    <!-- =====================================
+         SCRIPTS
+    ====================================== -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <!-- Configuração do Supabase -->
     <script src="js/supabase.js"></script>
 
-    <!-- JavaScript do painel -->
     <script src="js/admin.js"></script>
 
 
