@@ -1694,7 +1694,8 @@ async function carregarEspecialidadesClinicaNoModal(
 // ============================================================
 
 function adicionarLinhaEspecialidade(
-    especialidadeId = ""
+    especialidadeSelecionada = "",
+    redeSelecionada = ""
 ) {
 
     const container =
@@ -1702,127 +1703,132 @@ function adicionarLinhaEspecialidade(
             "containerEspecialidades"
         );
 
-
     if (!container) return;
 
-
     const linha =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("div");
 
     linha.className =
         "linha-especialidade";
 
+    // ====================================================
+    // SELECT DE ESPECIALIDADE
+    // ====================================================
 
-    const select =
-        document.createElement(
-            "select"
-        );
+    const selectEspecialidade =
+        document.createElement("select");
 
-
-    select.className =
+    selectEspecialidade.className =
         "select-especialidade";
 
-
-    select.innerHTML = `
+    selectEspecialidade.innerHTML = `
         <option value="">
             Selecione uma especialidade
         </option>
     `;
 
+    const lista =
+        window.listaEspecialidades || [];
 
-    const opcoes =
-        window.listaEspecialidades ||
-        [];
+    lista.forEach(function (especialidade) {
 
+        const option =
+            document.createElement("option");
 
-    opcoes.forEach(
-        function (especialidade) {
+        option.value =
+            especialidade.id;
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+        option.textContent =
+            especialidade.nome;
 
-
-            option.value =
-                especialidade.id;
-
-
-            option.textContent =
-                especialidade.nome;
-
-
-            if (
-                String(
-                    especialidade.id
-                ) === String(
-                    especialidadeId
-                )
-            ) {
-
-                option.selected =
-                    true;
-
-            }
-
-
-            select.appendChild(
-                option
-            );
-
+        if (
+            String(especialidade.id) ===
+            String(especialidadeSelecionada)
+        ) {
+            option.selected = true;
         }
-    );
 
+        selectEspecialidade.appendChild(
+            option
+        );
+    });
+
+
+    // ====================================================
+    // SELECT DA REDE
+    // ====================================================
+
+    const selectRede =
+        document.createElement("select");
+
+    selectRede.className =
+        "select-rede-especialidade";
+
+    selectRede.innerHTML = `
+        <option value="">
+            Selecione a rede
+        </option>
+
+        <option value="Sindilegis">
+            Sindilegis
+        </option>
+
+        <option value="Especialistas">
+            Especialistas
+        </option>
+    `;
+
+    if (redeSelecionada) {
+
+        selectRede.value =
+            redeSelecionada;
+    }
+
+
+    // ====================================================
+    // BOTÃO REMOVER
+    // ====================================================
 
     const botao =
-        document.createElement(
-            "button"
-        );
+        document.createElement("button");
 
-
-    botao.type =
-        "button";
-
+    botao.type = "button";
 
     botao.className =
         "btn-remover-especialidade";
 
+    botao.innerHTML =
+        "🗑️";
 
     botao.title =
         "Remover especialidade";
 
+    botao.onclick = function () {
 
-    botao.innerHTML =
-        "🗑️";
+        linha.remove();
+    };
 
 
-    botao.onclick =
-        function () {
-
-            linha.remove();
-
-        };
-
+    // ====================================================
+    // ADICIONAR ELEMENTOS
+    // ====================================================
 
     linha.appendChild(
-        select
+        selectEspecialidade
     );
 
+    linha.appendChild(
+        selectRede
+    );
 
     linha.appendChild(
         botao
     );
 
-
     container.appendChild(
         linha
     );
-
 }
-
 
 // ============================================================
 // SALVAR CLÍNICA
