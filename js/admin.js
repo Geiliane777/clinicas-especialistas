@@ -1142,8 +1142,6 @@ function escapeHTML(valor) {
                 clinica.id
             );
 
-        });
-
 
     } catch (erro) {
 
