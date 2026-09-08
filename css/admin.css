@@ -9,9 +9,14 @@
 }
 
 
+/* ======================================
+   VARIÁVEIS
+====================================== */
+
 :root {
     --cor-primaria: #1f4e78;
     --cor-secundaria: #2f75b5;
+
     --cor-sucesso: #198754;
     --cor-perigo: #dc3545;
     --cor-alerta: #f59e0b;
@@ -24,11 +29,16 @@
 
     --cor-borda: #e5e7eb;
 
-    --sombra: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --sombra:
+        0 4px 15px rgba(0, 0, 0, 0.08);
 
     --raio: 10px;
 }
 
+
+/* ======================================
+   CONFIGURAÇÕES GERAIS
+====================================== */
 
 html {
     scroll-behavior: smooth;
@@ -41,21 +51,21 @@ body {
         Helvetica,
         sans-serif;
 
-    background: var(--cor-fundo);
+    background:
+        var(--cor-fundo);
 
-    color: var(--cor-texto);
+    color:
+        var(--cor-texto);
 
     min-height: 100vh;
 }
 
 
-/* ======================================
-   LAYOUT PRINCIPAL
-====================================== */
-
-.admin-layout {
-    display: flex;
-    min-height: 100vh;
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
 }
 
 
@@ -90,7 +100,9 @@ body {
 }
 
 
-/* LOGO */
+/* ======================================
+   LOGO MENU
+====================================== */
 
 .menu-logo {
     text-align: center;
@@ -106,6 +118,7 @@ body {
 
 .menu-logo h2 {
     font-size: 22px;
+
     font-weight: 700;
 }
 
@@ -119,7 +132,18 @@ body {
 }
 
 
-/* BOTÕES MENU */
+/* ======================================
+   BOTÕES MENU
+====================================== */
+
+.menu nav {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
 
 .menu button {
     width: 100%;
@@ -128,11 +152,10 @@ body {
 
     background: transparent;
 
-    color: rgba(255, 255, 255, 0.8);
+    color:
+        rgba(255, 255, 255, 0.8);
 
     padding: 13px 15px;
-
-    margin-bottom: 6px;
 
     border-radius: 8px;
 
@@ -155,14 +178,16 @@ body {
 
     color: white;
 
-    transform: translateX(3px);
+    transform:
+        translateX(3px);
 }
 
 
 .menu button.ativo {
     background: white;
 
-    color: var(--cor-primaria);
+    color:
+        var(--cor-primaria);
 
     font-weight: bold;
 
@@ -171,7 +196,9 @@ body {
 }
 
 
-/* BOTÃO LOGOUT */
+/* ======================================
+   BOTÃO LOGOUT
+====================================== */
 
 .menu .btn-logout {
     margin-top: 30px;
@@ -179,7 +206,8 @@ body {
     background:
         rgba(220, 53, 69, 0.15);
 
-    color: #ffb3ba;
+    color:
+        #ffb3ba;
 }
 
 
@@ -198,7 +226,8 @@ body {
 .conteudo {
     margin-left: 250px;
 
-    width: calc(100% - 250px);
+    width:
+        calc(100% - 250px);
 
     padding: 35px;
 
@@ -213,7 +242,8 @@ body {
 .pagina {
     display: none;
 
-    animation: aparecer 0.3s ease;
+    animation:
+        aparecer 0.3s ease;
 }
 
 
@@ -226,12 +256,16 @@ body {
 
     from {
         opacity: 0;
-        transform: translateY(10px);
+
+        transform:
+            translateY(10px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 
 }
@@ -249,19 +283,23 @@ body {
 .titulo-pagina h1 {
     font-size: 28px;
 
-    color: var(--cor-texto);
+    color:
+        var(--cor-texto);
 
     margin-bottom: 8px;
 }
 
 
 .titulo-pagina p {
-    color: var(--cor-texto-secundario);
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 14px;
 }
 
 
 /* ======================================
-   DASHBOARD - CARDS
+   DASHBOARD
 ====================================== */
 
 .dashboard-cards {
@@ -280,13 +318,16 @@ body {
 
 
 .card {
-    background: var(--cor-branca);
+    background:
+        var(--cor-branca);
 
-    border-radius: var(--raio);
+    border-radius:
+        var(--raio);
 
     padding: 25px;
 
-    box-shadow: var(--sombra);
+    box-shadow:
+        var(--sombra);
 
     border:
         1px solid var(--cor-borda);
@@ -298,7 +339,8 @@ body {
 
 
 .card:hover {
-    transform: translateY(-4px);
+    transform:
+        translateY(-4px);
 
     box-shadow:
         0 8px 25px rgba(0, 0, 0, 0.12);
@@ -308,7 +350,8 @@ body {
 .card h3 {
     font-size: 14px;
 
-    color: var(--cor-texto-secundario);
+    color:
+        var(--cor-texto-secundario);
 
     font-weight: 500;
 
@@ -321,7 +364,8 @@ body {
 
     font-weight: bold;
 
-    color: var(--cor-primaria);
+    color:
+        var(--cor-primaria);
 }
 
 
@@ -347,9 +391,11 @@ body {
 
     padding: 25px;
 
-    border-radius: var(--raio);
+    border-radius:
+        var(--raio);
 
-    box-shadow: var(--sombra);
+    box-shadow:
+        var(--sombra);
 
     border:
         1px solid var(--cor-borda);
@@ -357,7 +403,8 @@ body {
 
 
 .resumo-card h3 {
-    color: var(--cor-texto-secundario);
+    color:
+        var(--cor-texto-secundario);
 
     font-size: 15px;
 
@@ -368,7 +415,8 @@ body {
 .resumo-card strong {
     font-size: 30px;
 
-    color: var(--cor-primaria);
+    color:
+        var(--cor-primaria);
 }
 
 
@@ -379,11 +427,13 @@ body {
 .painel {
     background: white;
 
-    border-radius: var(--raio);
+    border-radius:
+        var(--raio);
 
     padding: 25px;
 
-    box-shadow: var(--sombra);
+    box-shadow:
+        var(--sombra);
 
     border:
         1px solid var(--cor-borda);
@@ -426,6 +476,10 @@ body {
 }
 
 
+/* ======================================
+   INPUTS
+====================================== */
+
 input,
 select,
 textarea {
@@ -443,6 +497,9 @@ textarea {
     outline: none;
 
     background: white;
+
+    color:
+        var(--cor-texto);
 
     transition:
         border 0.2s,
@@ -462,7 +519,43 @@ textarea:focus {
 }
 
 
-/* GRID FORMULÁRIOS */
+/* ======================================
+   FORM INLINE
+====================================== */
+
+.form-inline {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+.form-inline input {
+    flex: 1;
+
+    min-width: 200px;
+}
+
+
+.form-inline select {
+    flex: 1;
+
+    min-width: 200px;
+}
+
+
+.form-inline button {
+    white-space: nowrap;
+}
+
+
+/* ======================================
+   GRID FORMULÁRIOS
+====================================== */
 
 .form-grid {
     display: grid;
@@ -485,13 +578,8 @@ textarea:focus {
 
 
 /* ======================================
-   BOTÕES
+   BOTÕES GERAIS
 ====================================== */
-
-button {
-    font-family: inherit;
-}
-
 
 .btn {
     border: none;
@@ -513,7 +601,8 @@ button {
 .btn:hover {
     opacity: 0.9;
 
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 }
 
 
@@ -563,7 +652,8 @@ button {
 .btn-desativar:hover {
     opacity: 0.85;
 
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 }
 
 
@@ -599,7 +689,7 @@ button {
 
 
 /* ======================================
-   LISTAS GERENCIAMENTO
+   LISTAS DE GERENCIAMENTO
 ====================================== */
 
 .lista-gerenciamento {
@@ -641,14 +731,16 @@ button {
     box-shadow:
         0 4px 15px rgba(0, 0, 0, 0.07);
 
-    transform: translateY(-1px);
+    transform:
+        translateY(-1px);
 }
 
 
 .item-subtitulo {
     font-size: 13px;
 
-    color: var(--cor-texto-secundario);
+    color:
+        var(--cor-texto-secundario);
 
     margin-top: 5px;
 }
@@ -674,9 +766,11 @@ button {
 
     background: white;
 
-    border-radius: var(--raio);
+    border-radius:
+        var(--raio);
 
-    box-shadow: var(--sombra);
+    box-shadow:
+        var(--sombra);
 
     border:
         1px solid var(--cor-borda);
@@ -705,7 +799,8 @@ th {
 
     font-size: 13px;
 
-    color: var(--cor-texto-secundario);
+    color:
+        var(--cor-texto-secundario);
 
     border-bottom:
         1px solid var(--cor-borda);
@@ -731,7 +826,7 @@ tbody tr:hover {
 
 
 /* ======================================
-   AÇÕES DA TABELA
+   AÇÕES TABELA
 ====================================== */
 
 .acoes {
@@ -800,8 +895,7 @@ tbody tr:hover {
 
     font-size: 11px;
 
-    margin:
-        2px;
+    margin: 2px;
 }
 
 
@@ -814,9 +908,9 @@ tbody tr:hover {
 
     gap: 12px;
 
-    flex-wrap: wrap;
+    align-items: center;
 
-    margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 
@@ -898,12 +992,16 @@ tbody tr:hover {
 
     from {
         opacity: 0;
-        transform: scale(0.96);
+
+        transform:
+            scale(0.96);
     }
 
     to {
         opacity: 1;
-        transform: scale(1);
+
+        transform:
+            scale(1);
     }
 
 }
@@ -947,12 +1045,19 @@ tbody tr:hover {
 
     color:
         var(--cor-texto-secundario);
+
+    transition:
+        color 0.2s,
+        transform 0.2s;
 }
 
 
 .btn-fechar:hover {
     color:
         var(--cor-perigo);
+
+    transform:
+        scale(1.1);
 }
 
 
@@ -1010,6 +1115,9 @@ tbody tr:hover {
     cursor: pointer;
 
     font-size: 13px;
+
+    transition:
+        opacity 0.2s;
 }
 
 
@@ -1019,7 +1127,7 @@ tbody tr:hover {
 
 
 /* ======================================
-   BOTÃO ADICIONAR ESPECIALIDADE
+   ADICIONAR ESPECIALIDADE
 ====================================== */
 
 .btn-adicionar-especialidade {
@@ -1043,6 +1151,9 @@ tbody tr:hover {
     cursor: pointer;
 
     font-weight: 600;
+
+    transition:
+        background 0.2s;
 }
 
 
@@ -1067,11 +1178,15 @@ tbody tr:hover {
     align-items: center;
 
     gap: 8px;
+
+    cursor: pointer;
 }
 
 
 .checkbox-grupo input {
     width: auto;
+
+    cursor: pointer;
 }
 
 
@@ -1130,6 +1245,8 @@ tbody tr:hover {
 
 ::-webkit-scrollbar {
     width: 8px;
+
+    height: 8px;
 }
 
 
@@ -1188,11 +1305,6 @@ tbody tr:hover {
 
 @media (max-width: 700px) {
 
-    .admin-layout {
-        display: block;
-    }
-
-
     .menu {
         position: relative;
 
@@ -1202,18 +1314,23 @@ tbody tr:hover {
 
         padding: 15px;
 
-        display: flex;
-
-        flex-wrap: wrap;
-
-        gap: 5px;
+        display: block;
     }
 
 
     .menu-logo {
-        width: 100%;
+        margin-bottom: 15px;
+    }
 
-        margin-bottom: 10px;
+
+    .menu nav {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        flex-direction: row;
+
+        gap: 5px;
     }
 
 
@@ -1270,6 +1387,24 @@ tbody tr:hover {
     }
 
 
+    .form-inline {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .form-inline input,
+    .form-inline select {
+        min-width: 0;
+    }
+
+
+    .form-inline button {
+        width: 100%;
+    }
+
+
     .item-gerenciamento {
         flex-direction: column;
 
@@ -1279,6 +1414,11 @@ tbody tr:hover {
 
     .item-acoes {
         width: 100%;
+    }
+
+
+    .item-acoes button {
+        flex: 1;
     }
 
 
@@ -1317,12 +1457,19 @@ tbody tr:hover {
 
     .filtros {
         flex-direction: column;
+
+        align-items: stretch;
     }
 
 
     .filtros input,
     .filtros select {
         max-width: none;
+    }
+
+
+    .filtros button {
+        width: 100%;
     }
 
 }
