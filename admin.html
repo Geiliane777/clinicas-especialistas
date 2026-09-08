@@ -79,7 +79,6 @@
             </button>
 
 
-
             <span class="menu-titulo">
                 GERENCIAMENTO
             </span>
@@ -103,7 +102,6 @@
                 <span>🦷</span>
                 Especialidades
             </button>
-
 
 
             <span class="menu-titulo">
@@ -136,7 +134,7 @@
                 data-pagina="cidades"
                 onclick="mostrarPagina('cidades')"
             >
-                <span>🏙</span>
+                <span>🏙️</span>
                 Cidades
             </button>
 
@@ -146,7 +144,7 @@
                 data-pagina="bairros"
                 onclick="mostrarPagina('bairros')"
             >
-                <span>🏘</span>
+                <span>🏘️</span>
                 Bairros
             </button>
 
@@ -158,6 +156,7 @@
 
             <button
                 class="menu-btn"
+                type="button"
                 onclick="alternarTema()"
             >
                 <span>◐</span>
@@ -167,6 +166,7 @@
 
             <button
                 class="menu-btn"
+                type="button"
                 onclick="voltarAoSite()"
             >
                 <span>←</span>
@@ -176,6 +176,7 @@
 
             <button
                 class="menu-btn btn-sair"
+                type="button"
                 onclick="sair()"
             >
                 <span>↪</span>
@@ -187,7 +188,6 @@
 
 
     </aside>
-
 
 
     <!-- ==============================
@@ -223,8 +223,8 @@
                     </h1>
 
                     <p class="subtitulo-dashboard">
-                        Gerencie sua rede de clínicas e acompanhe
-                        todas as informações em um único lugar.
+                        Gerencie sua rede de clínicas e acompanhe todas
+                        as informações em um único lugar.
                     </p>
 
                 </div>
@@ -250,8 +250,9 @@
             </div>
 
 
-
-            <!-- CARDS -->
+            <!-- ==============================
+                 CARDS
+            =============================== -->
 
             <div class="dashboard-cards">
 
@@ -266,16 +267,13 @@
 
                         <span>Total de Clínicas</span>
 
-                        <strong
-                            id="totalClinicas"
-                        >
+                        <strong id="totalClinicas">
                             0
                         </strong>
 
                     </div>
 
                 </div>
-
 
 
                 <div class="card card-verde">
@@ -288,16 +286,13 @@
 
                         <span>Clínicas Ativas</span>
 
-                        <strong
-                            id="totalClinicasAtivas"
-                        >
+                        <strong id="totalClinicasAtivas">
                             0
                         </strong>
 
                     </div>
 
                 </div>
-
 
 
                 <div class="card card-vermelho">
@@ -310,16 +305,13 @@
 
                         <span>Clínicas Inativas</span>
 
-                        <strong
-                            id="totalClinicasInativas"
-                        >
+                        <strong id="totalClinicasInativas">
                             0
                         </strong>
 
                     </div>
 
                 </div>
-
 
 
                 <div class="card card-roxo">
@@ -332,9 +324,7 @@
 
                         <span>Especialidades</span>
 
-                        <strong
-                            id="totalEspecialidades"
-                        >
+                        <strong id="totalEspecialidades">
                             0
                         </strong>
 
@@ -346,8 +336,9 @@
             </div>
 
 
-
-            <!-- PAINEL PRINCIPAL -->
+            <!-- ==============================
+                 STATUS E AÇÕES
+            =============================== -->
 
             <div class="dashboard-grid">
 
@@ -363,8 +354,7 @@
                             <h2>Status da Rede</h2>
 
                             <p>
-                                Acompanhe a situação das clínicas
-                                cadastradas.
+                                Acompanhe a situação das clínicas cadastradas.
                             </p>
 
                         </div>
@@ -380,15 +370,13 @@
 
                         <div class="status-info">
 
-                            <div>
+                            <div class="status-info-topo">
 
                                 <strong>
                                     Clínicas Ativas
                                 </strong>
 
-                                <span
-                                    id="porcentagemAtivas"
-                                >
+                                <span id="porcentagemAtivas">
                                     0%
                                 </span>
 
@@ -440,7 +428,6 @@
                 </div>
 
 
-
                 <!-- AÇÕES RÁPIDAS -->
 
                 <div class="painel-dashboard">
@@ -468,28 +455,28 @@
 
 
                         <button
+                            type="button"
                             onclick="abrirModalClinica()"
                         >
                             <span>＋</span>
-
                             Nova Clínica
                         </button>
 
 
                         <button
+                            type="button"
                             onclick="mostrarPagina('especialidades')"
                         >
                             <span>🦷</span>
-
                             Especialidades
                         </button>
 
 
                         <button
+                            type="button"
                             onclick="mostrarPagina('regioes')"
                         >
                             <span>📍</span>
-
                             Localizações
                         </button>
 
@@ -503,8 +490,9 @@
             </div>
 
 
-
-            <!-- COBERTURA -->
+            <!-- ==============================
+                 COBERTURA DA REDE
+            =============================== -->
 
             <div class="painel-dashboard cobertura">
 
@@ -533,9 +521,7 @@
 
                         <div>
 
-                            <strong
-                                id="totalRegioes"
-                            >
+                            <strong id="totalRegioes">
                                 0
                             </strong>
 
@@ -546,16 +532,13 @@
                     </div>
 
 
-
                     <div class="cobertura-item">
 
                         <span>📍</span>
 
                         <div>
 
-                            <strong
-                                id="totalEstados"
-                            >
+                            <strong id="totalEstados">
                                 0
                             </strong>
 
@@ -566,16 +549,13 @@
                     </div>
 
 
-
                     <div class="cobertura-item">
 
-                        <span>🏙</span>
+                        <span>🏙️</span>
 
                         <div>
 
-                            <strong
-                                id="totalCidades"
-                            >
+                            <strong id="totalCidades">
                                 0
                             </strong>
 
@@ -586,16 +566,13 @@
                     </div>
 
 
-
                     <div class="cobertura-item">
 
-                        <span>🏘</span>
+                        <span>🏘️</span>
 
                         <div>
 
-                            <strong
-                                id="totalBairros"
-                            >
+                            <strong id="totalBairros">
                                 0
                             </strong>
 
@@ -612,8 +589,9 @@
             </div>
 
 
-
-            <!-- ÚLTIMAS CLÍNICAS -->
+            <!-- ==============================
+                 ÚLTIMAS CLÍNICAS
+            =============================== -->
 
             <div class="painel-dashboard ultimas-clinicas">
 
@@ -632,6 +610,7 @@
 
 
                     <button
+                        type="button"
                         class="btn-ver-todas"
                         onclick="mostrarPagina('clinicas')"
                     >
@@ -659,7 +638,6 @@
         </section>
 
 
-
         <!-- ==============================
              CLÍNICAS
         =============================== -->
@@ -684,6 +662,7 @@
 
 
                 <button
+                    type="button"
                     class="btn btn-primario"
                     onclick="abrirModalClinica()"
                 >
@@ -693,9 +672,7 @@
             </div>
 
 
-
             <div class="painel">
-
 
                 <div class="filtros">
 
@@ -724,6 +701,7 @@
 
 
                     <button
+                        type="button"
                         class="btn btn-secundario"
                         onclick="listarClinicas()"
                     >
@@ -732,9 +710,7 @@
 
                 </div>
 
-
             </div>
-
 
 
             <div class="tabela-container">
@@ -758,7 +734,6 @@
 
 
                     <tbody id="listaClinicas">
-
                     </tbody>
 
                 </table>
@@ -769,7 +744,6 @@
         </section>
 
 
-
         <!-- ==============================
              ESPECIALIDADES
         =============================== -->
@@ -778,7 +752,6 @@
             id="pagina-especialidades"
             class="pagina"
         >
-
 
             <div class="titulo-pagina">
 
@@ -797,7 +770,6 @@
 
             <div class="painel">
 
-
                 <input
                     type="hidden"
                     id="especialidadeEditId"
@@ -814,6 +786,7 @@
 
 
                     <button
+                        type="button"
                         class="btn btn-primario"
                         onclick="salvarEspecialidade()"
                     >
@@ -828,12 +801,9 @@
                     class="lista-gerenciamento"
                 ></div>
 
-
             </div>
 
-
         </section>
-
 
 
         <!-- ==============================
@@ -844,7 +814,6 @@
             id="pagina-regioes"
             class="pagina"
         >
-
 
             <div class="titulo-pagina">
 
@@ -863,7 +832,6 @@
 
             <div class="painel">
 
-
                 <input
                     type="hidden"
                     id="regiaoEditId"
@@ -880,6 +848,7 @@
 
 
                     <button
+                        type="button"
                         class="btn btn-primario"
                         onclick="salvarRegiao()"
                     >
@@ -894,12 +863,9 @@
                     class="lista-gerenciamento"
                 ></div>
 
-
             </div>
 
-
         </section>
-
 
 
         <!-- ==============================
@@ -910,7 +876,6 @@
             id="pagina-estados"
             class="pagina"
         >
-
 
             <div class="titulo-pagina">
 
@@ -928,7 +893,6 @@
 
 
             <div class="painel">
-
 
                 <input
                     type="hidden"
@@ -955,6 +919,7 @@
 
 
                     <button
+                        type="button"
                         class="btn btn-primario"
                         onclick="salvarEstado()"
                     >
@@ -969,12 +934,9 @@
                     class="lista-gerenciamento"
                 ></div>
 
-
             </div>
 
-
         </section>
-
 
 
         <!-- ==============================
@@ -985,7 +947,6 @@
             id="pagina-cidades"
             class="pagina"
         >
-
 
             <div class="titulo-pagina">
 
@@ -1003,7 +964,6 @@
 
 
             <div class="painel">
-
 
                 <input
                     type="hidden"
@@ -1030,6 +990,7 @@
 
 
                     <button
+                        type="button"
                         class="btn btn-primario"
                         onclick="salvarCidade()"
                     >
@@ -1044,12 +1005,9 @@
                     class="lista-gerenciamento"
                 ></div>
 
-
             </div>
 
-
         </section>
-
 
 
         <!-- ==============================
@@ -1060,7 +1018,6 @@
             id="pagina-bairros"
             class="pagina"
         >
-
 
             <div class="titulo-pagina">
 
@@ -1078,7 +1035,6 @@
 
 
             <div class="painel">
-
 
                 <input
                     type="hidden"
@@ -1105,6 +1061,7 @@
 
 
                     <button
+                        type="button"
                         class="btn btn-primario"
                         onclick="salvarBairro()"
                     >
@@ -1119,15 +1076,12 @@
                     class="lista-gerenciamento"
                 ></div>
 
-
             </div>
-
 
         </section>
 
 
     </main>
-
 
 
     <!-- ==============================
@@ -1139,9 +1093,10 @@
         class="modal hidden"
     >
 
-
         <div class="modal-conteudo">
 
+
+            <!-- CABEÇALHO DO MODAL -->
 
             <div class="modal-cabecalho">
 
@@ -1166,10 +1121,10 @@
                     ×
                 </button>
 
-
             </div>
 
 
+            <!-- FORMULÁRIO -->
 
             <form
                 id="formClinica"
@@ -1177,12 +1132,10 @@
                 onsubmit="salvarClinica(event)"
             >
 
-
                 <input
                     type="hidden"
                     id="clinicaId"
                 >
-
 
 
                 <div class="form-grupo">
@@ -1200,7 +1153,6 @@
                 </div>
 
 
-
                 <div class="form-grupo">
 
                     <label>
@@ -1214,7 +1166,6 @@
                     >
 
                 </div>
-
 
 
                 <div class="form-grupo">
@@ -1231,6 +1182,7 @@
                 </div>
 
 
+                <!-- LOCALIZAÇÃO -->
 
                 <h3 class="titulo-secao-form">
                     📍 Localização
@@ -1258,7 +1210,6 @@
                     </div>
 
 
-
                     <div class="form-grupo">
 
                         <label>Estado</label>
@@ -1277,7 +1228,6 @@
                     </div>
 
 
-
                     <div class="form-grupo">
 
                         <label>Cidade</label>
@@ -1294,7 +1244,6 @@
                         </select>
 
                     </div>
-
 
 
                     <div class="form-grupo">
@@ -1320,6 +1269,7 @@
                 </div>
 
 
+                <!-- STATUS -->
 
                 <div
                     id="areaStatusClinica"
@@ -1340,9 +1290,9 @@
                 </div>
 
 
+                <!-- ESPECIALIDADES -->
 
                 <div class="especialidades-area">
-
 
                     <h3 class="titulo-secao-form">
                         🦷 Especialidades
@@ -1362,13 +1312,12 @@
                         + Adicionar Especialidade
                     </button>
 
-
                 </div>
 
 
+                <!-- BOTÕES -->
 
                 <div class="form-acoes">
-
 
                     <button
                         type="button"
@@ -1386,7 +1335,6 @@
                         Salvar Clínica
                     </button>
 
-
                 </div>
 
 
@@ -1395,19 +1343,20 @@
 
         </div>
 
-
     </div>
-
 
 
     <!-- ==============================
          SCRIPTS
     =============================== -->
 
+    <!-- Biblioteca Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Configuração do Supabase -->
     <script src="js/supabase.js"></script>
 
+    <!-- JavaScript do painel -->
     <script src="js/admin.js"></script>
 
 
