@@ -76,11 +76,13 @@ function mostrarPagina(pagina) {
     const botoes =
         document.querySelectorAll(".menu-btn");
 
+
     paginas.forEach(function (item) {
 
         item.classList.remove("ativa");
 
     });
+
 
     botoes.forEach(function (botao) {
 
@@ -94,6 +96,7 @@ function mostrarPagina(pagina) {
             "pagina-" + pagina
         );
 
+
     if (paginaSelecionada) {
 
         paginaSelecionada.classList.add("ativa");
@@ -106,6 +109,7 @@ function mostrarPagina(pagina) {
             `.menu-btn[data-pagina="${pagina}"]`
         );
 
+
     if (botaoSelecionado) {
 
         botaoSelecionado.classList.add("ativo");
@@ -113,7 +117,9 @@ function mostrarPagina(pagina) {
     }
 
 
-    // Carregar dados quando abrir a página
+    // --------------------------------------------------------
+    // CARREGAR DADOS DA PÁGINA
+    // --------------------------------------------------------
 
     if (pagina === "dashboard") {
 
@@ -121,11 +127,13 @@ function mostrarPagina(pagina) {
 
     }
 
+
     if (pagina === "clinicas") {
 
         listarClinicas();
 
     }
+
 
     if (pagina === "especialidades") {
 
@@ -133,11 +141,13 @@ function mostrarPagina(pagina) {
 
     }
 
+
     if (pagina === "regioes") {
 
         listarRegioes();
 
     }
+
 
     if (pagina === "estados") {
 
@@ -145,11 +155,13 @@ function mostrarPagina(pagina) {
 
     }
 
+
     if (pagina === "cidades") {
 
         listarCidades();
 
     }
+
 
     if (pagina === "bairros") {
 
@@ -169,10 +181,12 @@ function atualizarData() {
     const elemento =
         document.getElementById("dataAtual");
 
+
     if (!elemento) return;
 
 
     const agora = new Date();
+
 
     const data =
         agora.toLocaleDateString(
@@ -204,9 +218,9 @@ async function carregarDashboard() {
         console.log("Carregando dashboard...");
 
 
-        // ----------------------------------------------------
-        // CLÍNICAS
-        // ----------------------------------------------------
+        // ====================================================
+        // TOTAL DE CLÍNICAS
+        // ====================================================
 
         const {
             count: totalClinicas,
@@ -226,9 +240,9 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // CLÍNICAS ATIVAS
-        // ----------------------------------------------------
+        // ====================================================
 
         const {
             count: totalAtivas,
@@ -249,9 +263,9 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // ESPECIALIDADES
-        // ----------------------------------------------------
+        // ====================================================
 
         const {
             count: totalEspecialidades,
@@ -271,9 +285,9 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // REGIÕES
-        // ----------------------------------------------------
+        // ====================================================
 
         const {
             count: totalRegioes,
@@ -293,9 +307,9 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // ESTADOS
-        // ----------------------------------------------------
+        // ====================================================
 
         const {
             count: totalEstados,
@@ -315,9 +329,9 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // CIDADES
-        // ----------------------------------------------------
+        // ====================================================
 
         const {
             count: totalCidades,
@@ -337,9 +351,9 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // BAIRROS
-        // ----------------------------------------------------
+        // ====================================================
 
         const {
             count: totalBairros,
@@ -359,19 +373,21 @@ async function carregarDashboard() {
         }
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // ATUALIZAR CARDS
-        // ----------------------------------------------------
+        // ====================================================
 
         definirTexto(
             "totalClinicas",
             totalClinicas || 0
         );
 
+
         definirTexto(
             "totalClinicasAtivas",
             totalAtivas || 0
         );
+
 
         definirTexto(
             "totalClinicasInativas",
@@ -379,25 +395,30 @@ async function carregarDashboard() {
             (totalAtivas || 0)
         );
 
+
         definirTexto(
             "totalEspecialidades",
             totalEspecialidades || 0
         );
+
 
         definirTexto(
             "totalRegioes",
             totalRegioes || 0
         );
 
+
         definirTexto(
             "totalEstados",
             totalEstados || 0
         );
 
+
         definirTexto(
             "totalCidades",
             totalCidades || 0
         );
+
 
         definirTexto(
             "totalBairros",
@@ -405,9 +426,9 @@ async function carregarDashboard() {
         );
 
 
-        // ----------------------------------------------------
-        // PERCENTUAL
-        // ----------------------------------------------------
+        // ====================================================
+        // PERCENTUAL DE CLÍNICAS ATIVAS
+        // ====================================================
 
         const inativas =
             (totalClinicas || 0) -
@@ -415,6 +436,7 @@ async function carregarDashboard() {
 
 
         let porcentagem = 0;
+
 
         if (totalClinicas > 0) {
 
@@ -438,6 +460,7 @@ async function carregarDashboard() {
                 "barraAtivas"
             );
 
+
         if (barra) {
 
             barra.style.width =
@@ -451,15 +474,16 @@ async function carregarDashboard() {
             totalAtivas || 0
         );
 
+
         definirTexto(
             "legendaInativas",
             inativas
         );
 
 
-        // ----------------------------------------------------
+        // ====================================================
         // ÚLTIMAS CLÍNICAS
-        // ----------------------------------------------------
+        // ====================================================
 
         await carregarUltimasClinicas();
 
@@ -489,6 +513,7 @@ function definirTexto(id, valor) {
     const elemento =
         document.getElementById(id);
 
+
     if (elemento) {
 
         elemento.textContent = valor;
@@ -509,10 +534,22 @@ async function carregarUltimasClinicas() {
             "ultimasClinicas"
         );
 
+
     if (!container) return;
 
 
     try {
+
+        /*
+         * IMPORTANTE:
+         *
+         * Removemos "created_at" porque essa coluna
+         * não existe na tabela "clinicas".
+         *
+         * Também removemos o .order("created_at"),
+         * que estava causando o erro 42703.
+         */
+
 
         const {
             data,
@@ -524,13 +561,12 @@ async function carregarUltimasClinicas() {
                 nome,
                 endereco,
                 telefone,
-                ativo,
-                created_at
+                ativo
             `)
             .order(
-                "created_at",
+                "nome",
                 {
-                    ascending: false
+                    ascending: true
                 }
             )
             .limit(5);
@@ -542,6 +578,10 @@ async function carregarUltimasClinicas() {
 
         }
 
+
+        // ====================================================
+        // NENHUMA CLÍNICA
+        // ====================================================
 
         if (!data || data.length === 0) {
 
@@ -556,13 +596,22 @@ async function carregarUltimasClinicas() {
         }
 
 
+        // ====================================================
+        // LIMPAR CONTAINER
+        // ====================================================
+
         container.innerHTML = "";
 
+
+        // ====================================================
+        // MOSTRAR CLÍNICAS
+        // ====================================================
 
         data.forEach(function (clinica) {
 
             const item =
                 document.createElement("div");
+
 
             item.className =
                 "item-ultima-clinica";
@@ -574,6 +623,7 @@ async function carregarUltimasClinicas() {
                     🏥
                 </div>
 
+
                 <div class="ultima-clinica-info">
 
                     <strong>
@@ -582,6 +632,7 @@ async function carregarUltimasClinicas() {
                         )}
                     </strong>
 
+
                     <span>
                         ${escapeHTML(
                             clinica.endereco || "-"
@@ -589,6 +640,7 @@ async function carregarUltimasClinicas() {
                     </span>
 
                 </div>
+
 
                 <span class="status-mini ${
                     clinica.ativo
@@ -642,6 +694,7 @@ async function listarClinicas() {
             "listaClinicas"
         );
 
+
     if (!tabela) return;
 
 
@@ -656,17 +709,29 @@ async function listarClinicas() {
 
     try {
 
+        // ====================================================
+        // BUSCA
+        // ====================================================
+
         const busca =
             document.getElementById(
                 "buscarClinica"
             )?.value.trim();
 
 
+        // ====================================================
+        // FILTRO DE STATUS
+        // ====================================================
+
         const filtroStatus =
             document.getElementById(
                 "filtroStatusClinica"
             )?.value;
 
+
+        // ====================================================
+        // CONSULTA
+        // ====================================================
 
         let query =
             supabaseClient
@@ -678,12 +743,15 @@ async function listarClinicas() {
                     telefone,
                     ativo,
                     bairro_id,
+
                     bairros (
                         id,
                         nome,
+
                         cidades (
                             id,
                             nome,
+
                             estados (
                                 id,
                                 nome
@@ -699,6 +767,10 @@ async function listarClinicas() {
                 );
 
 
+        // ====================================================
+        // FILTRO POR NOME
+        // ====================================================
+
         if (busca) {
 
             query =
@@ -710,7 +782,14 @@ async function listarClinicas() {
         }
 
 
-        if (filtroStatus !== "") {
+        // ====================================================
+        // FILTRO POR STATUS
+        // ====================================================
+
+        if (
+            filtroStatus !== undefined &&
+            filtroStatus !== ""
+        ) {
 
             query =
                 query.eq(
@@ -720,6 +799,10 @@ async function listarClinicas() {
 
         }
 
+
+        // ====================================================
+        // EXECUTAR CONSULTA
+        // ====================================================
 
         const {
             data,
@@ -734,14 +817,25 @@ async function listarClinicas() {
         }
 
 
+        // ====================================================
+        // LIMPAR TABELA
+        // ====================================================
+
         tabela.innerHTML = "";
 
+
+        // ====================================================
+        // NENHUM RESULTADO
+        // ====================================================
 
         if (!data || data.length === 0) {
 
             tabela.innerHTML = `
                 <tr>
-                    <td colspan="6" class="sem-dados">
+                    <td
+                        colspan="6"
+                        class="sem-dados"
+                    >
                         Nenhuma clínica encontrada.
                     </td>
                 </tr>
@@ -752,11 +846,19 @@ async function listarClinicas() {
         }
 
 
+        // ====================================================
+        // MONTAR TABELA
+        // ====================================================
+
         data.forEach(function (clinica) {
 
             const linha =
                 document.createElement("tr");
 
+
+            // ------------------------------------------------
+            // LOCALIZAÇÃO
+            // ------------------------------------------------
 
             let localizacao = "-";
 
@@ -766,8 +868,10 @@ async function listarClinicas() {
                 const bairro =
                     clinica.bairros;
 
+
                 const cidade =
                     bairro.cidades;
+
 
                 const estado =
                     cidade?.estados;
@@ -784,6 +888,7 @@ async function listarClinicas() {
 
                 }
 
+
                 if (cidade?.nome) {
 
                     partes.push(
@@ -791,6 +896,7 @@ async function listarClinicas() {
                     );
 
                 }
+
 
                 if (estado?.nome) {
 
@@ -810,6 +916,146 @@ async function listarClinicas() {
 
             }
 
+
+            // ------------------------------------------------
+            // STATUS
+            // ------------------------------------------------
+
+            const status =
+                clinica.ativo
+                    ? "Ativa"
+                    : "Inativa";
+
+
+            const classeStatus =
+                clinica.ativo
+                    ? "status-ativa"
+                    : "status-inativa";
+
+
+            // ------------------------------------------------
+            // LINHA
+            // ------------------------------------------------
+
+            linha.innerHTML = `
+
+                <td>
+                    <strong>
+                        ${escapeHTML(
+                            clinica.nome || "-"
+                        )}
+                    </strong>
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        localizacao
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        clinica.telefone || "-"
+                    )}
+                </td>
+
+
+                <td>
+                    <span class="sem-especialidades">
+                        -
+                    </span>
+                </td>
+
+
+                <td>
+                    <span class="status-mini ${classeStatus}">
+                        ${status}
+                    </span>
+                </td>
+
+
+                <td>
+
+                    <div class="acoes-tabela">
+
+                        <button
+                            type="button"
+                            class="btn-acao btn-editar"
+                            onclick="editarClinica('${clinica.id}')"
+                            title="Editar clínica"
+                        >
+                            ✏️
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="btn-acao btn-excluir"
+                            onclick="excluirClinica('${clinica.id}')"
+                            title="Excluir clínica"
+                        >
+                            🗑️
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tabela.appendChild(linha);
+
+        });
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao listar clínicas:",
+            erro
+        );
+
+
+        tabela.innerHTML = `
+            <tr>
+                <td
+                    colspan="6"
+                    class="erro"
+                >
+                    Não foi possível carregar as clínicas.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+// ============================================================
+// ESCAPAR HTML
+// ============================================================
+
+function escapeHTML(valor) {
+
+    if (valor === null || valor === undefined) {
+
+        return "";
+
+    }
+
+
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
 
             linha.innerHTML = `
 
