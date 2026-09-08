@@ -4496,7 +4496,7 @@ function sair() {
     // adicionar signOut aqui.
 
     window.location.href =
-        "index.html";
+        "login.html";
 
 }
 
