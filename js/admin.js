@@ -1313,13 +1313,10 @@ async function carregarEspecialidadesClinicaNoModal(
 }
 
 
-// ============================================================
-// ADICIONAR LINHA DE ESPECIALIDADE
-// ============================================================
-
-function adicionarLinhaEspecialidade(
-    especialidade = null,
-    redes = {}
+async function adicionarLinhaEspecialidade(
+    especialidadeId = "",
+    redeEspecialistas = false,
+    redeSindilegis = false
 ) {
 
     const container =
@@ -1327,27 +1324,41 @@ function adicionarLinhaEspecialidade(
             "containerEspecialidades"
         );
 
-
     if (!container) {
         return;
     }
 
 
+    // Remove a mensagem de "nenhuma especialidade"
     const vazio =
         container.querySelector(
             ".especialidades-vazio"
         );
-
 
     if (vazio) {
         vazio.remove();
     }
 
 
-    if (!especialidade) {
+    // Buscar especialidades
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("especialidades")
+        .select("id, nome")
+        .order("nome");
+
+
+    if (error) {
+
+        console.error(
+            "Erro ao carregar especialidades:",
+            error
+        );
 
         mostrarMensagem(
-            "Selecione uma especialidade válida.",
+            "Não foi possível carregar as especialidades.",
             "erro"
         );
 
@@ -1355,84 +1366,240 @@ function adicionarLinhaEspecialidade(
     }
 
 
-    const linha =
+    // Criar o bloco da especialidade
+    const item =
         document.createElement("div");
 
-
-    linha.className =
-        "linha-especialidade";
-
-
-    const especialistas =
-        redes.Especialistas;
+    item.className =
+        "especialidade-item";
 
 
-    const sindilegis =
-        redes.Sindilegis;
+    // Select da especialidade
+    const select =
+        document.createElement("select");
+
+    select.className =
+        "select-especialidade";
+
+    select.required =
+        true;
+
+    select.innerHTML =
+        `<option value="">
+            Selecione a Especialidade
+        </option>`;
 
 
-    linha.innerHTML = `
+    (data || []).forEach(
+        especialidade => {
 
-        <div class="especialidade-nome">
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-            <strong>
-                ${escapeHTML(
-                    especialidade.nome
-                )}
-            </strong>
+            option.value =
+                especialidade.id;
 
-        </div>
+            option.textContent =
+                especialidade.nome;
 
+            if (
+                String(
+                    especialidade.id
+                ) ===
+                String(
+                    especialidadeId
+                )
+            ) {
 
-        <div class="especialidade-redes">
+                option.selected =
+                    true;
 
-            <label>
+            }
 
-                <input
-                    type="checkbox"
-                    class="checkbox-especialidade"
-                    data-especialidade-id="${especialidade.id}"
-                    data-rede="Especialistas"
-                    ${
-                        especialistas?.ativo
-                            ? "checked"
-                            : ""
-                    }
-                >
+            select.appendChild(
+                option
+            );
 
-                Especialistas
-
-            </label>
-
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    class="checkbox-especialidade"
-                    data-especialidade-id="${especialidade.id}"
-                    data-rede="Sindilegis"
-                    ${
-                        sindilegis?.ativo
-                            ? "checked"
-                            : ""
-                    }
-                >
-
-                Sindilegis
-
-            </label>
-
-        </div>
-
-    `;
+        }
+    );
 
 
-    container.appendChild(linha);
+    // Área principal
+    const principal =
+        document.createElement("div");
+
+    principal.className =
+        "especialidade-principal";
+
+
+    // Nome da especialidade
+    const nome =
+        document.createElement("div");
+
+    nome.className =
+        "especialidade-nome";
+
+
+    // Enquanto não escolher, mostra o select
+    principal.appendChild(
+        select
+    );
+
+
+    // Botão remover
+    const remover =
+        document.createElement("button");
+
+    remover.type =
+        "button";
+
+    remover.className =
+        "btn-remover-especialidade";
+
+    remover.textContent =
+        "Remover";
+
+    remover.onclick = function () {
+
+        item.remove();
+
+
+        // Se não existir mais nenhuma
+        // especialidade, mostra mensagem
+        if (
+            container.children.length ===
+            0
+        ) {
+
+            container.innerHTML =
+                `<div class="especialidades-vazio">
+                    Nenhuma especialidade adicionada.
+                </div>`;
+
+        }
+
+    };
+
+
+    principal.appendChild(
+        remover
+    );
+
+
+    // Redes
+    const redes =
+        document.createElement("div");
+
+    redes.className =
+        "especialidade-redes";
+
+
+    // Especialistas
+    const labelEspecialistas =
+        document.createElement("label");
+
+    labelEspecialistas.className =
+        "rede-opcao";
+
+
+    const checkboxEspecialistas =
+        document.createElement("input");
+
+    checkboxEspecialistas.type =
+        "checkbox";
+
+    checkboxEspecialistas.className =
+        "checkbox-rede";
+
+    checkboxEspecialistas.value =
+        "Especialistas";
+
+    checkboxEspecialistas.checked =
+        redeEspecialistas;
+
+
+    const textoEspecialistas =
+        document.createElement("span");
+
+    textoEspecialistas.textContent =
+        "Especialistas";
+
+
+    labelEspecialistas.appendChild(
+        checkboxEspecialistas
+    );
+
+    labelEspecialistas.appendChild(
+        textoEspecialistas
+    );
+
+
+    // Sindilegis
+    const labelSindilegis =
+        document.createElement("label");
+
+    labelSindilegis.className =
+        "rede-opcao";
+
+
+    const checkboxSindilegis =
+        document.createElement("input");
+
+    checkboxSindilegis.type =
+        "checkbox";
+
+    checkboxSindilegis.className =
+        "checkbox-rede";
+
+    checkboxSindilegis.value =
+        "Sindilegis";
+
+    checkboxSindilegis.checked =
+        redeSindilegis;
+
+
+    const textoSindilegis =
+        document.createElement("span");
+
+    textoSindilegis.textContent =
+        "Sindilegis";
+
+
+    labelSindilegis.appendChild(
+        checkboxSindilegis
+    );
+
+    labelSindilegis.appendChild(
+        textoSindilegis
+    );
+
+
+    redes.appendChild(
+        labelEspecialistas
+    );
+
+    redes.appendChild(
+        labelSindilegis
+    );
+
+
+    // Montagem final
+    item.appendChild(
+        principal
+    );
+
+    item.appendChild(
+        redes
+    );
+
+
+    container.appendChild(
+        item
+    );
 
 }
-
-
 // ============================================================
 // SALVAR CLÍNICA
 // ============================================================
