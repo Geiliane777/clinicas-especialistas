@@ -4155,6 +4155,109 @@ async function carregarBairrosClinica() {
 
 }
 
+// ============================================================
+// POPULAR ESPECIALIDADES
+// ============================================================
+
+async function popularEspecialidades(selectId = null) {
+
+    let selects;
+
+    if (selectId) {
+
+        selects = [
+            document.getElementById(selectId)
+        ];
+
+    } else {
+
+        selects = Array.from(
+            document.querySelectorAll(
+                ".select-especialidade"
+            )
+        );
+
+    }
+
+    // Se não encontrou nenhum select, não faz nada
+    if (!selects.length) {
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("especialidades")
+        .select("id, nome")
+        .order("nome");
+
+    if (error) {
+
+        console.error(
+            "Erro ao carregar especialidades:",
+            error
+        );
+
+        return;
+    }
+
+    selects.forEach(select => {
+
+        if (!select) {
+            return;
+        }
+
+        const valorAtual =
+            select.value;
+
+        select.innerHTML =
+            `<option value="">
+                Selecione a Especialidade
+            </option>`;
+
+        (data || []).forEach(
+            especialidade => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    especialidade.id;
+
+                option.textContent =
+                    especialidade.nome;
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+        if (valorAtual) {
+
+            const existe =
+                Array.from(
+                    select.options
+                ).some(
+                    option =>
+                        String(option.value) ===
+                        String(valorAtual)
+                );
+
+            if (existe) {
+                select.value =
+                    valorAtual;
+            }
+
+        }
+
+    });
+
+}
 
 // ============================================================
 // MODAL
@@ -4804,6 +4907,9 @@ function configurarEventosGerais() {
 
 window.mostrarPagina =
     mostrarPagina;
+
+window.popularEspecialidades =
+    popularEspecialidades;
 
 window.atualizarDashboard =
     atualizarDashboard;
