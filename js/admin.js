@@ -2565,8 +2565,6 @@ async function excluirClinica(id) {
     }
 
 }
-
-javascript
 // ============================================================
 // ESPECIALIDADES
 // ============================================================
@@ -4998,7 +4996,61 @@ async function popularCidades(selectId = "bairroCidade") {
     });
 }
 
+// ============================================================
+// POPULAR BAIRROS
+// ============================================================
 
+async function popularBairros(selectId = "clinicaBairro") {
+
+    const select = document.getElementById(selectId);
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML =
+        '<option value="">Selecione o Bairro</option>';
+
+    const { data, error } = await supabaseClient
+        .from("bairros")
+        .select(`
+            id,
+            nome,
+            cidade_id,
+            cidades (
+                id,
+                nome
+            )
+        `)
+        .order("nome");
+
+    if (error) {
+
+        console.error(
+            "Erro ao carregar bairros:",
+            error
+        );
+
+        return;
+    }
+
+    (data || []).forEach(bairro => {
+
+        const option = document.createElement("option");
+
+        option.value = bairro.id;
+
+        const nomeCidade =
+            bairro.cidades?.nome
+                ? ` - ${bairro.cidades.nome}`
+                : "";
+
+        option.textContent =
+            `${bairro.nome}${nomeCidade}`;
+
+        select.appendChild(option);
+    });
+}
 // ============================================================
 // LISTAR BAIRROS
 // ============================================================
@@ -6006,7 +6058,7 @@ window.carregarTema = carregarTema;
 window.voltarAoSite = voltarAoSite;
 window.sair = sair;
 window.logout = logout;
-
+window.popularBairros = popularBairros;
 
 // ============================================================
 // INICIALIZAÇÃO FINAL
