@@ -20,7 +20,7 @@ document.addEventListener(
 
             botao.addEventListener(
                 "click",
-                buscarClinicas
+                buscarClinicasSindilegis
             );
 
         }
@@ -33,15 +33,18 @@ document.addEventListener(
 // BUSCAR CLÍNICAS
 // ======================================
 
-async function buscarClinicas() {
+async function buscarClinicasSindilegis() {
 
     const bairro =
-        document.getElementById("bairro").value;
+        document.getElementById("bairro")?.value;
 
     const especialidadeId =
-        document.getElementById(
-            "especialidade"
-        ).value;
+        document.getElementById("especialidade")?.value;
+
+    const resultado =
+        document.getElementById("resultado");
+
+    if (!resultado) return;
 
 
     // ======================================
@@ -63,108 +66,106 @@ async function buscarClinicas() {
     // CARREGAMENTO
     // ======================================
 
-    const resultado =
-        document.getElementById("resultado");
-
     resultado.innerHTML = `
         <div class="semResultado">
-            <h2>
-                Buscando clínicas...
-            </h2>
+            <h2>🔍 Buscando clínicas...</h2>
+            <p>Aguarde um momento.</p>
         </div>
     `;
 
 
-    // ======================================
-    // CONSULTA
-    // ======================================
+    try {
 
-    let consulta =
-        supabaseClient
-            .from("clinicas")
-            .select(`
-                id,
-                nome,
-                endereco,
-                telefone,
-                ativo,
-
-                bairros(
+        let consulta =
+            supabaseClient
+                .from("clinicas")
+                .select(`
+                    id,
                     nome,
+                    endereco,
+                    telefone,
+                    ativo,
 
-                    cidades(
+                    bairros!inner(
+                        id,
                         nome,
 
-                        estados(
+                        cidades(
+                            id,
+                            nome,
+
+                            estados(
+                                id,
+                                nome
+                            )
+                        )
+                    ),
+
+                    clinica_especialidades!inner(
+                        ativo,
+                        rede,
+                        especialidade_id,
+
+                        especialidades(
+                            id,
                             nome
                         )
                     )
-                ),
-
-                clinica_especialidades!inner(
-
-                    ativo,
-                    rede,
-                    especialidade_id,
-
-                    especialidades(
-                        id,
-                        nome
-                    )
-
+                `)
+                .eq("ativo", true)
+                .eq("bairro_id", bairro)
+                .eq(
+                    "clinica_especialidades.rede",
+                    "Sindilegis"
                 )
-            `)
-
-            .eq(
-                "ativo",
-                true
-            )
-
-            .eq(
-                "bairro_id",
-                bairro
-            )
-
-            .eq(
-                "clinica_especialidades.rede",
-                "sindilegis"
-            )
-
-            .eq(
-                "clinica_especialidades.ativo",
-                true
-            );
+                .eq(
+                    "clinica_especialidades.ativo",
+                    true
+                )
+                .order("nome");
 
 
-    // ======================================
-    // FILTRO ESPECIALIDADE
-    // ======================================
+        // ======================================
+        // FILTRO ESPECIALIDADE
+        // ======================================
 
-    if (especialidadeId) {
+        if (especialidadeId) {
 
-        consulta =
-            consulta.eq(
-                "clinica_especialidades.especialidade_id",
-                especialidadeId
-            );
+            consulta =
+                consulta.eq(
+                    "clinica_especialidades.especialidade_id",
+                    especialidadeId
+                );
 
-    }
-
-
-    // ======================================
-    // EXECUTAR CONSULTA
-    // ======================================
-
-    const {
-        data,
-        error
-    } = await consulta;
+        }
 
 
-    if (error) {
+        // ======================================
+        // EXECUTAR
+        // ======================================
+
+        const {
+            data,
+            error
+        } = await consulta;
+
+        if (error) {
+            throw error;
+        }
+
+        console.log(
+            "Clínicas Sindilegis encontradas:",
+            data
+        );
+
+        mostrarClinicas(
+            data || []
+        );
+
+    } catch (error) {
 
         console.error(
-            "Erro ao buscar clínicas:",
+            "Erro ao buscar clínicas Sindilegis:",
             error
         );
 
@@ -182,21 +183,6 @@ async function buscarClinicas() {
             </div>
         `;
 
-        return;
-
     }
-
-
-    console.log(
-        "Clínicas encontradas:",
-        data
-    );
-
-
-    // ======================================
-    // EXIBIR
-    // ======================================
-
-    mostrarClinicas(data);
 
 }
