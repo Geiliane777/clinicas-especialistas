@@ -20,13 +20,11 @@ function escaparTexto(texto) {
         return "";
     }
 
-    const div =
-        document.createElement("div");
+    const div = document.createElement("div");
 
     div.textContent = texto;
 
     return div.innerHTML;
-
 }
 
 
@@ -37,15 +35,48 @@ function escaparTexto(texto) {
 function obterRedeAtual() {
 
     if (
-        document.body.classList.contains(
-            "sindilegis"
-        )
+        document.body.classList.contains("sindilegis")
     ) {
-        return "sindilegis";
+
+        return "Sindilegis";
+
     }
 
-    return "especialistas";
+    return "Especialistas";
+}
 
+
+// ======================================
+// NORMALIZAR REDE
+// ======================================
+
+function normalizarRede(valor) {
+
+    const rede =
+        String(valor ?? "")
+            .trim()
+            .toLowerCase();
+
+    if (
+        rede === "sindilegis" ||
+        rede === "rede sindilegis"
+    ) {
+
+        return "Sindilegis";
+
+    }
+
+    if (
+        rede === "especialista" ||
+        rede === "especialistas" ||
+        rede === "rede especialistas"
+    ) {
+
+        return "Especialistas";
+
+    }
+
+    return "";
 }
 
 
@@ -53,10 +84,7 @@ function obterRedeAtual() {
 // LIMPAR SELECT
 // ======================================
 
-function limparSelect(
-    id,
-    mensagem
-) {
+function limparSelect(id, mensagem) {
 
     const select =
         document.getElementById(id);
@@ -68,7 +96,6 @@ function limparSelect(
             ${mensagem}
         </option>
     `;
-
 }
 
 
@@ -83,7 +110,6 @@ async function carregarRegioes() {
 
     if (!regiao) return;
 
-
     try {
 
         const {
@@ -94,38 +120,29 @@ async function carregarRegioes() {
             .select("id, nome")
             .order("nome");
 
-
         if (error) {
-
             throw error;
-
         }
-
 
         limparSelect(
             "regiao",
             "Selecione a Região"
         );
 
-
         data?.forEach(item => {
 
             regiao.innerHTML += `
-
                 <option value="${item.id}">
                     ${escaparTexto(item.nome)}
                 </option>
-
             `;
 
         });
-
 
         console.log(
             "Regiões carregadas:",
             data
         );
-
 
     } catch (error) {
 
@@ -135,7 +152,6 @@ async function carregarRegioes() {
         );
 
     }
-
 }
 
 
@@ -149,7 +165,6 @@ async function carregarEstados(regiaoId) {
         document.getElementById("estado");
 
     if (!estado) return;
-
 
     limparSelect(
         "estado",
@@ -166,9 +181,7 @@ async function carregarEstados(regiaoId) {
         "Selecione o Bairro"
     );
 
-
     if (!regiaoId) return;
-
 
     try {
 
@@ -178,32 +191,22 @@ async function carregarEstados(regiaoId) {
         } = await supabaseClient
             .from("estados")
             .select("id, nome")
-            .eq(
-                "regiao_id",
-                regiaoId
-            )
+            .eq("regiao_id", regiaoId)
             .order("nome");
 
-
         if (error) {
-
             throw error;
-
         }
-
 
         data?.forEach(item => {
 
             estado.innerHTML += `
-
                 <option value="${item.id}">
                     ${escaparTexto(item.nome)}
                 </option>
-
             `;
 
         });
-
 
     } catch (error) {
 
@@ -213,7 +216,6 @@ async function carregarEstados(regiaoId) {
         );
 
     }
-
 }
 
 
@@ -228,7 +230,6 @@ async function carregarCidades(estadoId) {
 
     if (!cidade) return;
 
-
     limparSelect(
         "cidade",
         "Selecione a Cidade"
@@ -239,9 +240,7 @@ async function carregarCidades(estadoId) {
         "Selecione o Bairro"
     );
 
-
     if (!estadoId) return;
-
 
     try {
 
@@ -251,32 +250,22 @@ async function carregarCidades(estadoId) {
         } = await supabaseClient
             .from("cidades")
             .select("id, nome")
-            .eq(
-                "estado_id",
-                estadoId
-            )
+            .eq("estado_id", estadoId)
             .order("nome");
 
-
         if (error) {
-
             throw error;
-
         }
-
 
         data?.forEach(item => {
 
             cidade.innerHTML += `
-
                 <option value="${item.id}">
                     ${escaparTexto(item.nome)}
                 </option>
-
             `;
 
         });
-
 
     } catch (error) {
 
@@ -286,7 +275,6 @@ async function carregarCidades(estadoId) {
         );
 
     }
-
 }
 
 
@@ -301,15 +289,12 @@ async function carregarBairros(cidadeId) {
 
     if (!bairro) return;
 
-
     limparSelect(
         "bairro",
         "Selecione o Bairro"
     );
 
-
     if (!cidadeId) return;
-
 
     try {
 
@@ -319,32 +304,22 @@ async function carregarBairros(cidadeId) {
         } = await supabaseClient
             .from("bairros")
             .select("id, nome")
-            .eq(
-                "cidade_id",
-                cidadeId
-            )
+            .eq("cidade_id", cidadeId)
             .order("nome");
 
-
         if (error) {
-
             throw error;
-
         }
-
 
         data?.forEach(item => {
 
             bairro.innerHTML += `
-
                 <option value="${item.id}">
                     ${escaparTexto(item.nome)}
                 </option>
-
             `;
 
         });
-
 
     } catch (error) {
 
@@ -354,30 +329,22 @@ async function carregarBairros(cidadeId) {
         );
 
     }
-
 }
 
 
 // ======================================
 // CARREGAR ESPECIALIDADES
-//
-// Busca apenas especialidades vinculadas
-// a clínicas ATIVAS da rede atual.
 // ======================================
 
 async function carregarEspecialidades() {
 
     const especialidade =
-        document.getElementById(
-            "especialidade"
-        );
+        document.getElementById("especialidade");
 
     if (!especialidade) return;
 
-
     const rede =
         obterRedeAtual();
-
 
     try {
 
@@ -398,44 +365,26 @@ async function carregarEspecialidades() {
                     ativo
                 )
             `)
-            .eq(
-                "rede",
-                rede
-            )
-            .eq(
-                "ativo",
-                true
-            )
-            .eq(
-                "clinicas.ativo",
-                true
-            );
-
+            .eq("rede", rede)
+            .eq("ativo", true)
+            .eq("clinicas.ativo", true);
 
         if (error) {
-
             throw error;
-
         }
-
 
         limparSelect(
             "especialidade",
             "Todas as Especialidades"
         );
 
-
-        // Remove especialidades repetidas
-
         const especialidadesMap =
             new Map();
-
 
         data?.forEach(item => {
 
             const especialidadeData =
                 item.especialidades;
-
 
             if (
                 especialidadeData &&
@@ -453,12 +402,10 @@ async function carregarEspecialidades() {
 
         });
 
-
         const especialidades =
             Array.from(
                 especialidadesMap.values()
             );
-
 
         especialidades.sort(
             (a, b) =>
@@ -468,25 +415,20 @@ async function carregarEspecialidades() {
                 )
         );
 
-
         especialidades.forEach(item => {
 
             especialidade.innerHTML += `
-
                 <option value="${item.id}">
                     ${escaparTexto(item.nome)}
                 </option>
-
             `;
 
         });
 
-
         console.log(
-            "Especialidades carregadas:",
+            `Especialidades da rede ${rede}:`,
             especialidades
         );
-
 
     } catch (error) {
 
@@ -496,12 +438,11 @@ async function carregarEspecialidades() {
         );
 
     }
-
 }
 
 
 // ======================================
-// INICIALIZAÇÃO DOS FILTROS
+// INICIALIZAÇÃO
 // ======================================
 
 document.addEventListener(
@@ -517,14 +458,9 @@ document.addEventListener(
         const cidade =
             document.getElementById("cidade");
 
-
-        // ==================================
-        // REGIÃO → ESTADO
-        // ==================================
-
         regiao?.addEventListener(
             "change",
-            function() {
+            function () {
 
                 carregarEstados(
                     this.value
@@ -533,14 +469,9 @@ document.addEventListener(
             }
         );
 
-
-        // ==================================
-        // ESTADO → CIDADE
-        // ==================================
-
         estado?.addEventListener(
             "change",
-            function() {
+            function () {
 
                 carregarCidades(
                     this.value
@@ -549,14 +480,9 @@ document.addEventListener(
             }
         );
 
-
-        // ==================================
-        // CIDADE → BAIRRO
-        // ==================================
-
         cidade?.addEventListener(
             "change",
-            function() {
+            function () {
 
                 carregarBairros(
                     this.value
@@ -564,11 +490,6 @@ document.addEventListener(
 
             }
         );
-
-
-        // ==================================
-        // CARREGAMENTO INICIAL
-        // ==================================
 
         carregarRegioes();
 
