@@ -1591,12 +1591,9 @@ async function editarClinica(id) {
     }
 
 }
-
-
 // ============================================================
 // CARREGAR ESPECIALIDADES DA CLÍNICA NO MODAL
 // ============================================================
-
 async function carregarEspecialidadesClinicaNoModal(
     clinicaId
 ) {
@@ -1626,9 +1623,11 @@ async function carregarEspecialidadesClinicaNoModal(
             .from(
                 "clinica_especialidades"
             )
-            .select(
-                "especialidade_id"
-            )
+            .select(`
+                especialidade_id,
+                rede,
+                ativo
+            `)
             .eq(
                 "clinica_id",
                 clinicaId
@@ -1659,7 +1658,8 @@ async function carregarEspecialidadesClinicaNoModal(
             ) {
 
                 adicionarLinhaEspecialidade(
-                    item.especialidade_id
+                    item.especialidade_id,
+                    item.rede
                 );
 
             }
@@ -1688,8 +1688,7 @@ async function carregarEspecialidadesClinicaNoModal(
 
 }
 
-
-// ============================================================
+   // ============================================================
 // ADICIONAR LINHA DE ESPECIALIDADE
 // ============================================================
 
@@ -1703,23 +1702,33 @@ function adicionarLinhaEspecialidade(
             "containerEspecialidades"
         );
 
+
     if (!container) return;
 
+
     const linha =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     linha.className =
         "linha-especialidade";
 
-    // ====================================================
+
+    // ========================================================
     // SELECT DE ESPECIALIDADE
-    // ====================================================
+    // ========================================================
 
     const selectEspecialidade =
-        document.createElement("select");
+        document.createElement(
+            "select"
+        );
+
 
     selectEspecialidade.className =
         "select-especialidade";
+
 
     selectEspecialidade.innerHTML = `
         <option value="">
@@ -1727,42 +1736,60 @@ function adicionarLinhaEspecialidade(
         </option>
     `;
 
+
     const lista =
         window.listaEspecialidades || [];
 
-    lista.forEach(function (especialidade) {
 
-        const option =
-            document.createElement("option");
+    lista.forEach(
+        function (especialidade) {
 
-        option.value =
-            especialidade.id;
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        option.textContent =
-            especialidade.nome;
 
-        if (
-            String(especialidade.id) ===
-            String(especialidadeSelecionada)
-        ) {
-            option.selected = true;
+            option.value =
+                especialidade.id;
+
+
+            option.textContent =
+                especialidade.nome;
+
+
+            if (
+                String(especialidade.id) ===
+                String(especialidadeSelecionada)
+            ) {
+
+                option.selected =
+                    true;
+
+            }
+
+
+            selectEspecialidade.appendChild(
+                option
+            );
+
         }
-
-        selectEspecialidade.appendChild(
-            option
-        );
-    });
+    );
 
 
-    // ====================================================
+    // ========================================================
     // SELECT DA REDE
-    // ====================================================
+    // ========================================================
 
     const selectRede =
-        document.createElement("select");
+        document.createElement(
+            "select"
+        );
+
 
     selectRede.className =
         "select-rede-especialidade";
+
 
     selectRede.innerHTML = `
         <option value="">
@@ -1778,58 +1805,124 @@ function adicionarLinhaEspecialidade(
         </option>
     `;
 
+
+    // --------------------------------------------------------
+    // MANTER A REDE QUE JÁ ESTÁ NO BANCO
+    // --------------------------------------------------------
+
     if (redeSelecionada) {
 
-        selectRede.value =
-            redeSelecionada;
+        const rede =
+            String(
+                redeSelecionada
+            ).trim();
+
+
+        if (
+            rede === "Sindilegis"
+        ) {
+
+            selectRede.value =
+                "Sindilegis";
+
+        }
+
+
+        else if (
+            rede === "Especialistas"
+        ) {
+
+            selectRede.value =
+                "Especialistas";
+
+        }
+
+
+        // Compatibilidade caso existam
+        // registros antigos em minúsculo
+
+        else if (
+            rede.toLowerCase() ===
+            "sindilegis"
+        ) {
+
+            selectRede.value =
+                "Sindilegis";
+
+        }
+
+
+        else if (
+            rede.toLowerCase() ===
+            "especialistas"
+        ) {
+
+            selectRede.value =
+                "Especialistas";
+
+        }
+
     }
 
 
-    // ====================================================
+    // ========================================================
     // BOTÃO REMOVER
-    // ====================================================
+    // ========================================================
 
     const botao =
-        document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
-    botao.type = "button";
+
+    botao.type =
+        "button";
+
 
     botao.className =
         "btn-remover-especialidade";
 
+
     botao.innerHTML =
         "🗑️";
+
 
     botao.title =
         "Remover especialidade";
 
-    botao.onclick = function () {
 
-        linha.remove();
-    };
+    botao.onclick =
+        function () {
+
+            linha.remove();
+
+        };
 
 
-    // ====================================================
+    // ========================================================
     // ADICIONAR ELEMENTOS
-    // ====================================================
+    // ========================================================
 
     linha.appendChild(
         selectEspecialidade
     );
 
+
     linha.appendChild(
         selectRede
     );
+
 
     linha.appendChild(
         botao
     );
 
+
     container.appendChild(
         linha
     );
-}
 
+}
 // ============================================================
 // SALVAR CLÍNICA
 // ============================================================
@@ -2027,7 +2120,6 @@ async function salvarClinica(event) {
 
 }
 
-
 // ============================================================
 // SALVAR ESPECIALIDADES DA CLÍNICA
 // ============================================================
@@ -2036,9 +2128,9 @@ async function salvarEspecialidadesClinica(
     clinicaId
 ) {
 
-    // --------------------------------------------------------
+    // ========================================================
     // APAGAR RELACIONAMENTOS ATUAIS
-    // --------------------------------------------------------
+    // ========================================================
 
     const {
         error: erroDelete
@@ -2060,65 +2152,139 @@ async function salvarEspecialidadesClinica(
     }
 
 
-    const selects =
+    // ========================================================
+    // PEGAR TODAS AS LINHAS DO FORMULÁRIO
+    // ========================================================
+
+    const linhas =
         document.querySelectorAll(
-            "#containerEspecialidades .select-especialidade"
+            "#containerEspecialidades .linha-especialidade"
         );
 
 
-    const ids = [];
+    const registros = [];
 
 
-    selects.forEach(
-        function (select) {
+    // ========================================================
+    // MONTAR OS NOVOS RELACIONAMENTOS
+    // ========================================================
 
-            if (
-                select.value &&
-                !ids.includes(
-                    select.value
-                )
-            ) {
+    linhas.forEach(
+        function (linha) {
 
-                ids.push(
-                    select.value
+            const selectEspecialidade =
+                linha.querySelector(
+                    ".select-especialidade"
                 );
 
+
+            const selectRede =
+                linha.querySelector(
+                    ".select-rede-especialidade"
+                );
+
+
+            if (
+                !selectEspecialidade ||
+                !selectRede
+            ) {
+
+                return;
+
             }
+
+
+            const especialidadeId =
+                selectEspecialidade.value;
+
+
+            const rede =
+                selectRede.value;
+
+
+            // ------------------------------------------------
+            // Só salva se os dois estiverem preenchidos
+            // ------------------------------------------------
+
+            if (
+                !especialidadeId ||
+                !rede
+            ) {
+
+                return;
+
+            }
+
+
+            // ------------------------------------------------
+            // Evitar duplicação
+            // ------------------------------------------------
+
+            const jaExiste =
+                registros.some(
+                    function (item) {
+
+                        return (
+                            String(
+                                item.especialidade_id
+                            ) ===
+                            String(
+                                especialidadeId
+                            )
+                            &&
+                            item.rede ===
+                            rede
+                        );
+
+                    }
+                );
+
+
+            if (jaExiste) {
+
+                return;
+
+            }
+
+
+            registros.push({
+
+                clinica_id:
+                    clinicaId,
+
+                especialidade_id:
+                    Number(
+                        especialidadeId
+                    ),
+
+                rede:
+                    rede,
+
+                ativo:
+                    true
+
+            });
 
         }
     );
 
 
-    if (!ids.length) {
+    // ========================================================
+    // SE NÃO HOUVER ESPECIALIDADES
+    // ========================================================
+
+    if (
+        !registros.length
+    ) {
 
         return;
 
     }
 
 
-    const registros =
-        ids.map(
-            function (id) {
-
-                return {
-
-                    clinica_id:
-                        clinicaId,
-
-                    especialidade_id:
-                        id,
-
-                    rede:
-                        NOME_REDE,
-
-                    ativo:
-                        true
-
-                };
-
-            }
-        );
-
+    // ========================================================
+    // INSERIR NOVOS RELACIONAMENTOS
+    // ========================================================
 
     const {
         error
@@ -2137,9 +2303,13 @@ async function salvarEspecialidadesClinica(
 
     }
 
+
+    console.log(
+        "Especialidades da clínica salvas:",
+        registros
+    );
+
 }
-
-
 // ============================================================
 // EXCLUIR CLÍNICA
 // ============================================================
