@@ -2084,3 +2084,80 @@ button,
     }
 
 }
+/* ============================================================
+   ESPECIALIDADES DENTRO DO MODAL DA CLÍNICA
+   ============================================================ */
+
+.container-especialidades {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.especialidade-item {
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: var(--card);
+}
+
+.especialidade-principal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.especialidade-nome {
+    font-weight: 600;
+    color: var(--texto-forte);
+    line-height: 1.4;
+}
+
+.especialidade-redes {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    padding-left: 2px;
+}
+
+.rede-opcao {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    color: var(--texto);
+    font-size: 14px;
+}
+
+.rede-opcao input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.btn-remover-especialidade {
+    flex-shrink: 0;
+}
+
+.especialidades-vazio {
+    text-align: center;
+    padding: 18px;
+    color: var(--texto-claro);
+    border: 1px dashed var(--borda);
+    border-radius: 10px;
+}
+
+
+/* Tema escuro */
+body.dark .especialidade-item {
+    background: var(--card);
+}
+
+body.dark .especialidade-nome {
+    color: var(--texto-forte);
+}
