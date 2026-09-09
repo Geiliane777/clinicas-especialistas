@@ -15,17 +15,13 @@ document.addEventListener(
     () => {
 
         const botao =
-            document.getElementById(
-                "buscar"
-            );
-
+            document.getElementById("buscar");
 
         if (!botao) return;
 
-
         botao.addEventListener(
             "click",
-            buscarClinicas
+            buscarClinicasEspecialistas
         );
 
     }
@@ -36,50 +32,23 @@ document.addEventListener(
 // BUSCAR CLÍNICAS
 // ======================================
 
-async function buscarClinicas() {
-
-    const regiao =
-        document.getElementById(
-            "regiao"
-        )?.value;
-
-
-    const estado =
-        document.getElementById(
-            "estado"
-        )?.value;
-
-
-    const cidade =
-        document.getElementById(
-            "cidade"
-        )?.value;
-
+async function buscarClinicasEspecialistas() {
 
     const bairro =
-        document.getElementById(
-            "bairro"
-        )?.value;
-
+        document.getElementById("bairro")?.value;
 
     const especialidadeId =
-        document.getElementById(
-            "especialidade"
-        )?.value;
-
+        document.getElementById("especialidade")?.value;
 
     const resultado =
-        document.getElementById(
-            "resultado"
-        );
-
+        document.getElementById("resultado");
 
     if (!resultado) return;
 
 
-    // ==================================
-    // VALIDAÇÃO
-    // ==================================
+    // ======================================
+    // VALIDAR BAIRRO
+    // ======================================
 
     if (!bairro) {
 
@@ -92,32 +61,19 @@ async function buscarClinicas() {
     }
 
 
-    // ==================================
+    // ======================================
     // CARREGAMENTO
-    // ==================================
+    // ======================================
 
     resultado.innerHTML = `
-
         <div class="semResultado">
-
-            <h2>
-                🔍 Buscando clínicas...
-            </h2>
-
-            <p>
-                Aguarde um momento.
-            </p>
-
+            <h2>🔍 Buscando clínicas...</h2>
+            <p>Aguarde um momento.</p>
         </div>
-
     `;
 
 
     try {
-
-        // ==================================
-        // CONSULTA
-        // ==================================
 
         let consulta =
             supabaseClient
@@ -160,30 +116,22 @@ async function buscarClinicas() {
                         )
                     )
                 `)
-                .eq(
-                    "ativo",
-                    true
-                )
-                .eq(
-                    "bairro_id",
-                    bairro
-                )
+                .eq("ativo", true)
+                .eq("bairro_id", bairro)
                 .eq(
                     "clinica_especialidades.rede",
-                    "especialistas"
+                    "Especialistas"
                 )
                 .eq(
                     "clinica_especialidades.ativo",
                     true
                 )
-                .order(
-                    "nome"
-                );
+                .order("nome");
 
 
-        // ==================================
+        // ======================================
         // FILTRO ESPECIALIDADE
-        // ==================================
+        // ======================================
 
         if (especialidadeId) {
 
@@ -196,61 +144,44 @@ async function buscarClinicas() {
         }
 
 
-        // ==================================
+        // ======================================
         // EXECUTAR
-        // ==================================
+        // ======================================
 
         const {
             data,
             error
         } = await consulta;
 
-
         if (error) {
-
             throw error;
-
         }
 
-
         console.log(
-            "Clínicas encontradas:",
+            "Clínicas Especialistas encontradas:",
             data
         );
-
-
-        // ==================================
-        // EXIBIR
-        // ==================================
 
         mostrarClinicas(
             data || []
         );
 
-
     } catch (error) {
 
         console.error(
-            "Erro ao buscar clínicas:",
+            "Erro ao buscar clínicas Especialistas:",
             error
         );
 
-
         resultado.innerHTML = `
-
             <div class="semResultado">
-
-                <h2>
-                    Erro ao buscar clínicas
-                </h2>
+                <h2>Erro ao buscar clínicas</h2>
 
                 <p>
                     Não foi possível carregar
                     as clínicas no momento.
                 </p>
-
             </div>
-
         `;
 
     }
