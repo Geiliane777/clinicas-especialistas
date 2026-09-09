@@ -2161,3 +2161,136 @@ body.dark .especialidade-item {
 body.dark .especialidade-nome {
     color: var(--texto-forte);
 }
+/* ============================================================
+   ESPECIALIDADES DA CLÍNICA
+   ============================================================ */
+
+.container-especialidades {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.especialidade-item {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: var(--card);
+}
+
+.especialidade-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.especialidade-nome {
+    flex: 1;
+    font-weight: 600;
+    color: var(--texto-forte);
+    line-height: 1.4;
+}
+
+.especialidade-acoes {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.especialidade-redes {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.rede-opcao {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--texto);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.rede-opcao input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.btn-editar-especialidade,
+.btn-excluir-especialidade,
+.btn-salvar-especialidade {
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-editar-especialidade {
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--azul);
+}
+
+.btn-editar-especialidade:hover {
+    background: rgba(37, 99, 235, 0.20);
+}
+
+.btn-excluir-especialidade {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--vermelho);
+}
+
+.btn-excluir-especialidade:hover {
+    background: rgba(239, 68, 68, 0.20);
+}
+
+.btn-salvar-especialidade {
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--verde);
+}
+
+.btn-salvar-especialidade:hover {
+    background: rgba(16, 185, 129, 0.20);
+}
+
+.especialidade-nova {
+    border-style: dashed;
+}
+
+.especialidade-nova .especialidade-linha {
+    align-items: center;
+}
+
+.especialidade-nova .select-especialidade {
+    flex: 1;
+}
+
+.especialidade-nova .especialidade-redes {
+    margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+
+    .especialidade-linha {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .especialidade-acoes {
+        justify-content: flex-end;
+    }
+
+    .especialidade-redes {
+        gap: 15px;
+    }
+}
