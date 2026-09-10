@@ -3,21 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Rede Especialistas</title>
 
     <link rel="icon" type="image/png" href="img/tooth.png">
-
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- =========================================================
-         CABEÇALHO
-    ========================================================== -->
     <header class="header">
 
         <div class="header-left">
@@ -29,21 +24,12 @@
             >
 
             <div class="titulo-site">
-
                 <h1>Rede Especialistas</h1>
-
-                <p>
-                    Encontre clínicas e especialistas
-                </p>
-
+                <p>Encontre clínicas e especialistas</p>
             </div>
 
         </div>
 
-
-        <!-- =====================================================
-             MENU SUPERIOR
-        ====================================================== -->
         <nav class="menu-topo">
 
             <a
@@ -53,14 +39,12 @@
                 🦷 Rede Especialistas
             </a>
 
-
             <a
                 href="sindilegis.html"
                 class="menu-link"
             >
                 🏥 Sindilegis
             </a>
-
 
             <button
                 type="button"
@@ -71,7 +55,6 @@
             >
                 🌙
             </button>
-
 
             <a
                 href="login.html"
@@ -85,21 +68,11 @@
     </header>
 
 
-
-    <!-- =========================================================
-         CONTEÚDO PRINCIPAL
-    ========================================================== -->
     <main class="container">
 
-
-        <!-- =====================================================
-             TÍTULO
-        ====================================================== -->
         <section class="titulo-principal">
 
-            <h2>
-                Encontre uma clínica
-            </h2>
+            <h2>Encontre uma clínica</h2>
 
             <p>
                 Pesquise por localização e especialidade.
@@ -108,14 +81,8 @@
         </section>
 
 
-
-        <!-- =====================================================
-             FILTROS
-        ====================================================== -->
         <section class="filtros">
 
-
-            <!-- REGIÃO -->
             <div class="filtro">
 
                 <label for="regiao">
@@ -123,18 +90,14 @@
                 </label>
 
                 <select id="regiao">
-
                     <option value="">
                         Selecione a Região
                     </option>
-
                 </select>
 
             </div>
 
 
-
-            <!-- ESTADO -->
             <div class="filtro">
 
                 <label for="estado">
@@ -142,18 +105,14 @@
                 </label>
 
                 <select id="estado">
-
                     <option value="">
                         Selecione o Estado
                     </option>
-
                 </select>
 
             </div>
 
 
-
-            <!-- CIDADE -->
             <div class="filtro">
 
                 <label for="cidade">
@@ -161,18 +120,14 @@
                 </label>
 
                 <select id="cidade">
-
                     <option value="">
                         Selecione a Cidade
                     </option>
-
                 </select>
 
             </div>
 
 
-
-            <!-- BAIRRO -->
             <div class="filtro">
 
                 <label for="bairro">
@@ -180,18 +135,14 @@
                 </label>
 
                 <select id="bairro">
-
                     <option value="">
                         Selecione o Bairro
                     </option>
-
                 </select>
 
             </div>
 
 
-
-            <!-- ESPECIALIDADE -->
             <div class="filtro">
 
                 <label for="especialidade">
@@ -199,18 +150,14 @@
                 </label>
 
                 <select id="especialidade">
-
                     <option value="">
                         Todas as Especialidades
                     </option>
-
                 </select>
 
             </div>
 
 
-
-            <!-- BOTÃO -->
             <div class="filtro filtro-botao">
 
                 <button
@@ -226,16 +173,16 @@
         </section>
 
 
-
-        <!-- =====================================================
-             RESULTADOS
-        ====================================================== -->
         <section
             id="resultado"
             aria-live="polite"
         >
 
             <div class="semResultado">
+
+                <div class="icone-vazio">
+                    🦷
+                </div>
 
                 <h2>
                     Encontre uma clínica
@@ -253,32 +200,12 @@
     </main>
 
 
-
-    <!-- =========================================================
-         SCRIPTS
-    ========================================================== -->
-
-    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-    <!-- Configuração do Supabase -->
     <script src="js/supabase.js"></script>
-
-
-    <!-- Tema claro/escuro -->
     <script src="js/tema.js"></script>
-
-
-    <!-- Filtros de localização e especialidade -->
     <script src="js/filtros.js"></script>
-
-
-    <!-- Cards das clínicas -->
     <script src="js/cards.js"></script>
-
-
-    <!-- Busca da Rede Especialistas -->
     <script src="js/especialistas.js"></script>
 
 </body>
