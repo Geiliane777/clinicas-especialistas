@@ -2,20 +2,41 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Encontre clínicas e especialistas da Rede Sindilegis."
+    >
 
     <title>Rede Sindilegis</title>
 
-    <link rel="icon" type="image/png" href="img/tooth.png">
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="icon"
+        type="image/png"
+        href="img/tooth.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body class="sindilegis">
 
-    <!-- =========================================================
+
+    <!-- =====================================================
          CABEÇALHO
-    ========================================================== -->
+         ===================================================== -->
 
     <header class="header">
 
@@ -27,17 +48,30 @@
                 class="logo"
             >
 
+
             <div class="titulo-site">
-                <h1>Rede Sindilegis</h1>
-                <p>Encontre clínicas credenciadas</p>
+
+                <h1>
+                    Rede Sindilegis
+                </h1>
+
+                <p>
+                    Encontre clínicas e especialistas
+                </p>
+
             </div>
 
         </div>
 
 
-        <!-- MENU SUPERIOR -->
+        <!-- =================================================
+             MENU SUPERIOR
+             ================================================= -->
 
-        <nav class="menu-topo">
+        <nav
+            class="menu-topo"
+            aria-label="Menu principal"
+        >
 
             <a
                 href="index.html"
@@ -46,12 +80,14 @@
                 🦷 Rede Especialistas
             </a>
 
+
             <a
                 href="sindilegis.html"
                 class="menu-link ativo"
             >
                 🏥 Sindilegis
             </a>
+
 
             <button
                 type="button"
@@ -62,6 +98,7 @@
             >
                 🌙
             </button>
+
 
             <a
                 href="login.html"
@@ -75,33 +112,106 @@
     </header>
 
 
-    <!-- =========================================================
+
+    <!-- =====================================================
          CONTEÚDO PRINCIPAL
-    ========================================================== -->
+         ===================================================== -->
 
     <main class="container">
 
 
-        <!-- =====================================================
-             TÍTULO
-        ====================================================== -->
+        <!-- =================================================
+             HERO
+             ================================================= -->
 
-        <section class="titulo-principal">
+        <section class="hero-site">
 
-            <h2>Encontre uma clínica</h2>
+            <div class="hero-texto">
 
-            <p>
-                Pesquise por localização e especialidade.
-            </p>
+                <span class="hero-badge">
+                    🏥 REDE SINDILEGIS
+                </span>
+
+
+                <h2>
+                    Encontre a clínica
+                    <span>ideal para você</span>
+                </h2>
+
+
+                <p>
+                    Consulte a rede credenciada Sindilegis
+                    e encontre clínicas e profissionais
+                    por localização ou especialidade.
+                </p>
+
+            </div>
+
+
+            <div class="hero-destaque">
+
+                <div class="hero-icone">
+                    🏥
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Rede Sindilegis
+                    </strong>
+
+                    <span>
+                        Clínicas e especialistas
+                        credenciados
+                    </span>
+
+                </div>
+
+            </div>
 
         </section>
 
 
-        <!-- =====================================================
-             FILTROS
-        ====================================================== -->
 
-        <section class="filtros">
+        <!-- =================================================
+             TÍTULO DA BUSCA
+             ================================================= -->
+
+        <section class="titulo-principal">
+
+            <div>
+
+                <span class="section-label">
+                    PESQUISA DE CLÍNICAS
+                </span>
+
+
+                <h2>
+                    Encontre uma clínica
+                </h2>
+
+
+                <p>
+                    Utilize os filtros abaixo para encontrar
+                    uma clínica ou especialista da rede Sindilegis.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FILTROS
+             ================================================= -->
+
+        <section
+            class="filtros"
+            aria-label="Filtros de busca"
+        >
+
 
             <!-- REGIÃO -->
 
@@ -112,12 +222,15 @@
                 </label>
 
                 <select id="regiao">
+
                     <option value="">
                         Selecione a Região
                     </option>
+
                 </select>
 
             </div>
+
 
 
             <!-- ESTADO -->
@@ -128,13 +241,16 @@
                     Estado
                 </label>
 
-                <select id="estado" disabled>
+                <select id="estado">
+
                     <option value="">
                         Selecione o Estado
                     </option>
+
                 </select>
 
             </div>
+
 
 
             <!-- CIDADE -->
@@ -145,13 +261,16 @@
                     Cidade
                 </label>
 
-                <select id="cidade" disabled>
+                <select id="cidade">
+
                     <option value="">
                         Selecione a Cidade
                     </option>
+
                 </select>
 
             </div>
+
 
 
             <!-- BAIRRO -->
@@ -162,13 +281,16 @@
                     Bairro
                 </label>
 
-                <select id="bairro" disabled>
+                <select id="bairro">
+
                     <option value="">
                         Selecione o Bairro
                     </option>
+
                 </select>
 
             </div>
+
 
 
             <!-- ESPECIALIDADE -->
@@ -190,6 +312,7 @@
             </div>
 
 
+
             <!-- BOTÃO -->
 
             <div class="filtro filtro-botao">
@@ -207,9 +330,10 @@
         </section>
 
 
-        <!-- =====================================================
+
+        <!-- =================================================
              RESULTADOS
-        ====================================================== -->
+             ================================================= -->
 
         <section
             id="resultado"
@@ -218,18 +342,93 @@
 
             <div class="semResultado">
 
-                <div class="semResultado-icone">
-                    🏥
-                </div>
-
                 <h2>
                     Encontre uma clínica
                 </h2>
 
                 <p>
                     Selecione os filtros desejados e clique em
-                    <strong>Buscar Clínicas</strong>.
+                    <strong>Buscar Clínicas</strong>
+                    para visualizar as clínicas disponíveis.
                 </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             INFORMAÇÕES DA REDE
+             ================================================= -->
+
+        <section class="informacoes-site">
+
+
+            <div class="info-site-item">
+
+                <div class="info-site-icone">
+                    🔎
+                </div>
+
+                <div>
+
+                    <strong>
+                        Pesquisa rápida
+                    </strong>
+
+                    <p>
+                        Encontre clínicas utilizando
+                        os filtros de pesquisa.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="info-site-item">
+
+                <div class="info-site-icone">
+                    📍
+                </div>
+
+                <div>
+
+                    <strong>
+                        Localização
+                    </strong>
+
+                    <p>
+                        Consulte clínicas por região,
+                        cidade ou bairro.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="info-site-item">
+
+                <div class="info-site-icone">
+                    🦷
+                </div>
+
+                <div>
+
+                    <strong>
+                        Especialidades
+                    </strong>
+
+                    <p>
+                        Encontre profissionais e serviços
+                        disponíveis na rede.
+                    </p>
+
+                </div>
 
             </div>
 
@@ -238,40 +437,68 @@
     </main>
 
 
-    <!-- =========================================================
+
+    <!-- =====================================================
+         RODAPÉ
+         ===================================================== -->
+
+    <footer class="rodape">
+
+        <div class="rodape-conteudo">
+
+
+            <div class="rodape-marca">
+
+                <img
+                    src="img/tooth.png"
+                    alt="Rede Sindilegis"
+                >
+
+
+                <div>
+
+                    <strong>
+                        Rede Sindilegis
+                    </strong>
+
+                    <span>
+                        Encontre clínicas e especialistas
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="rodape-direitos">
+
+                © 2026 Rede Sindilegis.
+                Todos os direitos reservados.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
          SCRIPTS
-    ========================================================== -->
+         ===================================================== -->
 
-    <!-- Supabase -->
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
-
-
-    <!-- Configuração Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="js/supabase.js"></script>
 
-
-    <!-- Tema -->
-
     <script src="js/tema.js"></script>
-
-
-    <!-- Filtros -->
 
     <script src="js/filtros.js"></script>
 
-
-    <!-- Cards -->
-
     <script src="js/cards.js"></script>
 
-
-    <!-- Rede Sindilegis -->
-
     <script src="js/sindilegis.js"></script>
+
 
 </body>
 
