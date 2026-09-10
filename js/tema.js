@@ -1,8 +1,7 @@
-// ============================================================
-// TEMA CLARO / ESCURO
-// ============================================================
-
 console.log("tema.js carregado");
+
+
+const CHAVE_TEMA = "tema";
 
 
 // ============================================================
@@ -11,55 +10,56 @@ console.log("tema.js carregado");
 
 function aplicarTema(tema) {
 
-    const botaoTema =
+    const body =
+        document.body;
+
+    const botao =
         document.getElementById("btnTema");
 
 
-    // --------------------------------------------------------
-    // TEMA ESCURO
-    // --------------------------------------------------------
-
-    if (tema === "dark") {
-
-        document.body.classList.add("dark");
-
-
-        if (botaoTema) {
-
-            botaoTema.textContent = "☀️";
-
-            botaoTema.title =
-                "Ativar tema claro";
-
-            botaoTema.setAttribute(
-                "aria-label",
-                "Ativar tema claro"
-            );
-
-        }
-
+    if (!body) {
         return;
     }
 
 
-    // --------------------------------------------------------
-    // TEMA CLARO
-    // --------------------------------------------------------
+    if (tema === "dark") {
 
-    document.body.classList.remove("dark");
+        body.classList.add("dark");
+
+    } else {
+
+        body.classList.remove("dark");
+
+    }
 
 
-    if (botaoTema) {
+    if (botao) {
 
-        botaoTema.textContent = "🌙";
+        if (tema === "dark") {
 
-        botaoTema.title =
-            "Ativar tema escuro";
+            botao.textContent = "☀️";
 
-        botaoTema.setAttribute(
-            "aria-label",
-            "Ativar tema escuro"
-        );
+            botao.title =
+                "Ativar tema claro";
+
+            botao.setAttribute(
+                "aria-label",
+                "Ativar tema claro"
+            );
+
+        } else {
+
+            botao.textContent = "🌙";
+
+            botao.title =
+                "Ativar tema escuro";
+
+            botao.setAttribute(
+                "aria-label",
+                "Ativar tema escuro"
+            );
+
+        }
 
     }
 
@@ -67,13 +67,15 @@ function aplicarTema(tema) {
 
 
 // ============================================================
-// OBTER TEMA SALVO
+// TEMA SALVO
 // ============================================================
 
 function obterTemaSalvo() {
 
     const tema =
-        localStorage.getItem("tema");
+        localStorage.getItem(
+            CHAVE_TEMA
+        );
 
 
     if (
@@ -87,30 +89,27 @@ function obterTemaSalvo() {
 
 
     return "light";
-
 }
 
 
 // ============================================================
-// ALTERAR TEMA
+// ALTERNAR
 // ============================================================
 
 function alternarTema() {
 
-    const estaEscuro =
-        document.body.classList.contains(
-            "dark"
-        );
+    const atual =
+        obterTemaSalvo();
 
 
     const novoTema =
-        estaEscuro
+        atual === "dark"
             ? "light"
             : "dark";
 
 
     localStorage.setItem(
-        "tema",
+        CHAVE_TEMA,
         novoTema
     );
 
@@ -118,7 +117,6 @@ function alternarTema() {
     aplicarTema(
         novoTema
     );
-
 }
 
 
@@ -130,36 +128,29 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        const temaInicial =
+        const tema =
             obterTemaSalvo();
 
 
         aplicarTema(
-            temaInicial
+            tema
         );
 
 
-        const botaoTema =
+        const botao =
             document.getElementById(
                 "btnTema"
             );
 
 
-        if (!botaoTema) {
+        if (botao) {
 
-            console.warn(
-                "Botão #btnTema não encontrado."
+            botao.addEventListener(
+                "click",
+                alternarTema
             );
 
-            return;
-
         }
-
-
-        botaoTema.addEventListener(
-            "click",
-            alternarTema
-        );
 
 
         console.log(
@@ -171,7 +162,7 @@ document.addEventListener(
 
 
 // ============================================================
-// DISPONIBILIZAR FUNÇÕES
+// EXPORTAR
 // ============================================================
 
 window.aplicarTema =
