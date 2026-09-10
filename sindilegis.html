@@ -2,32 +2,16 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Rede Sindilegis</title>
 
-    <title>Redes Credenciadas Sindilegis</title>
-
-    <link
-        rel="icon"
-        type="image/png"
-        href="img/tooth.png"
-    >
-
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
-
+    <link rel="icon" type="image/png" href="img/tooth.png">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-
 <body class="sindilegis">
-
 
     <!-- =========================================================
          CABEÇALHO
@@ -43,25 +27,15 @@
                 class="logo"
             >
 
-
             <div class="titulo-site">
-
-                <h1>
-                    Rede Sindilegis
-                </h1>
-
-                <p>
-                    Encontre clínicas credenciadas
-                </p>
-
+                <h1>Rede Sindilegis</h1>
+                <p>Encontre clínicas credenciadas</p>
             </div>
 
         </div>
 
 
-        <!-- =====================================================
-             MENU SUPERIOR
-        ====================================================== -->
+        <!-- MENU SUPERIOR -->
 
         <nav class="menu-topo">
 
@@ -72,14 +46,12 @@
                 🦷 Rede Especialistas
             </a>
 
-
             <a
                 href="sindilegis.html"
                 class="menu-link ativo"
             >
                 🏥 Sindilegis
             </a>
-
 
             <button
                 type="button"
@@ -90,7 +62,6 @@
             >
                 🌙
             </button>
-
 
             <a
                 href="login.html"
@@ -117,10 +88,7 @@
 
         <section class="titulo-principal">
 
-            <h2>
-                Encontre uma clínica
-            </h2>
-
+            <h2>Encontre uma clínica</h2>
 
             <p>
                 Pesquise por localização e especialidade.
@@ -135,10 +103,7 @@
 
         <section class="filtros">
 
-
-            <!-- =================================================
-                 REGIÃO
-            ================================================== -->
+            <!-- REGIÃO -->
 
             <div class="filtro">
 
@@ -146,21 +111,16 @@
                     Região
                 </label>
 
-
                 <select id="regiao">
-
                     <option value="">
                         Selecione a Região
                     </option>
-
                 </select>
 
             </div>
 
 
-            <!-- =================================================
-                 ESTADO
-            ================================================== -->
+            <!-- ESTADO -->
 
             <div class="filtro">
 
@@ -168,21 +128,16 @@
                     Estado
                 </label>
 
-
-                <select id="estado">
-
+                <select id="estado" disabled>
                     <option value="">
                         Selecione o Estado
                     </option>
-
                 </select>
 
             </div>
 
 
-            <!-- =================================================
-                 CIDADE
-            ================================================== -->
+            <!-- CIDADE -->
 
             <div class="filtro">
 
@@ -190,21 +145,16 @@
                     Cidade
                 </label>
 
-
-                <select id="cidade">
-
+                <select id="cidade" disabled>
                     <option value="">
                         Selecione a Cidade
                     </option>
-
                 </select>
 
             </div>
 
 
-            <!-- =================================================
-                 BAIRRO
-            ================================================== -->
+            <!-- BAIRRO -->
 
             <div class="filtro">
 
@@ -212,28 +162,22 @@
                     Bairro
                 </label>
 
-
-                <select id="bairro">
-
+                <select id="bairro" disabled>
                     <option value="">
                         Selecione o Bairro
                     </option>
-
                 </select>
 
             </div>
 
 
-            <!-- =================================================
-                 ESPECIALIDADE
-            ================================================== -->
+            <!-- ESPECIALIDADE -->
 
             <div class="filtro">
 
                 <label for="especialidade">
                     Especialidade
                 </label>
-
 
                 <select id="especialidade">
 
@@ -246,9 +190,7 @@
             </div>
 
 
-            <!-- =================================================
-                 BOTÃO BUSCAR
-            ================================================== -->
+            <!-- BOTÃO -->
 
             <div class="filtro filtro-botao">
 
@@ -276,10 +218,13 @@
 
             <div class="semResultado">
 
+                <div class="semResultado-icone">
+                    🏥
+                </div>
+
                 <h2>
                     Encontre uma clínica
                 </h2>
-
 
                 <p>
                     Selecione os filtros desejados e clique em
@@ -295,23 +240,21 @@
 
     <!-- =========================================================
          SCRIPTS
-         
-         A ordem é importante.
     ========================================================== -->
 
-    <!-- Biblioteca Supabase -->
+    <!-- Supabase -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
     ></script>
 
 
-    <!-- Configuração do Supabase -->
+    <!-- Configuração Supabase -->
 
     <script src="js/supabase.js"></script>
 
 
-    <!-- Tema claro / escuro -->
+    <!-- Tema -->
 
     <script src="js/tema.js"></script>
 
@@ -326,7 +269,7 @@
     <script src="js/cards.js"></script>
 
 
-    <!-- Busca Sindilegis -->
+    <!-- Rede Sindilegis -->
 
     <script src="js/sindilegis.js"></script>
 
