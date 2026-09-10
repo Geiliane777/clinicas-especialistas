@@ -1,15 +1,11 @@
+// ============================================================
+// FILTROS - REGIÃO / ESTADO / CIDADE / BAIRRO / ESPECIALIDADE
+// ============================================================
+
 console.log("filtros.js carregado");
 
-
-// ============================================================
-// UTILITÁRIOS
-// ============================================================
-
 function escaparTexto(texto) {
-
-    if (texto === null || texto === undefined) {
-        return "";
-    }
+    if (texto === null || texto === undefined) return "";
 
     return String(texto)
         .replace(/&/g, "&amp;")
@@ -20,16 +16,18 @@ function escaparTexto(texto) {
 }
 
 
-function limparSelect(select, texto) {
+// ============================================================
+// LIMPAR SELECT
+// ============================================================
 
-    if (!select) {
-        return;
-    }
+function limparSelect(id, texto) {
+    const select = document.getElementById(id);
+
+    if (!select) return;
 
     select.innerHTML = "";
 
     const option = document.createElement("option");
-
     option.value = "";
     option.textContent = texto;
 
@@ -37,453 +35,260 @@ function limparSelect(select, texto) {
 }
 
 
-function adicionarOpcao(select, id, nome) {
+// ============================================================
+// ADICIONAR OPÇÃO
+// ============================================================
 
-    if (!select) {
-        return;
-    }
+function adicionarOpcao(select, valor, texto) {
+
+    if (!select) return;
 
     const option = document.createElement("option");
 
-    option.value = id;
-    option.textContent = nome;
+    option.value = valor;
+    option.textContent = texto;
 
     select.appendChild(option);
 }
 
 
 // ============================================================
-// REGIÕES
+// CARREGAR REGIÕES
 // ============================================================
 
 async function carregarRegioes() {
 
     const select = document.getElementById("regiao");
 
-    if (!select) {
+    if (!select) return;
+
+    limparSelect("regiao", "Selecione a Região");
+
+    const { data, error } = await supabaseClient
+        .from("regioes")
+        .select("id, nome")
+        .order("nome");
+
+    if (error) {
+        console.error("Erro ao carregar regiões:", error);
         return;
     }
 
-    limparSelect(
-        select,
-        "Carregando regiões..."
-    );
-
-    try {
-
-        const { data, error } = await supabaseClient
-            .from("regioes")
-            .select("id, nome")
-            .order("nome", { ascending: true });
-
-        if (error) {
-            throw error;
-        }
-
-        limparSelect(
+    data.forEach(regiao => {
+        adicionarOpcao(
             select,
-            "Selecione a Região"
+            regiao.id,
+            regiao.nome
         );
-
-        if (!data || data.length === 0) {
-
-            console.warn(
-                "Nenhuma região encontrada."
-            );
-
-            return;
-        }
-
-        data.forEach(regiao => {
-
-            adicionarOpcao(
-                select,
-                regiao.id,
-                regiao.nome
-            );
-
-        });
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar regiões:",
-            erro
-        );
-
-        limparSelect(
-            select,
-            "Erro ao carregar regiões"
-        );
-    }
+    });
 }
 
 
 // ============================================================
-// ESTADOS
+// CARREGAR ESTADOS
 // ============================================================
 
 async function carregarEstados(regiaoId = "") {
 
     const select = document.getElementById("estado");
 
-    if (!select) {
+    if (!select) return;
+
+    limparSelect("estado", "Selecione o Estado");
+    limparSelect("cidade", "Selecione a Cidade");
+    limparSelect("bairro", "Selecione o Bairro");
+
+    if (!regiaoId) return;
+
+    const { data, error } = await supabaseClient
+        .from("estados")
+        .select("id, nome, regiao_id")
+        .eq("regiao_id", regiaoId)
+        .order("nome");
+
+    if (error) {
+        console.error("Erro ao carregar estados:", error);
         return;
     }
 
-    limparSelect(
-        select,
-        "Carregando estados..."
-    );
+    data.forEach(estado => {
 
-    try {
-
-        let consulta = supabaseClient
-            .from("estados")
-            .select("id, nome, regiao_id")
-            .order("nome", { ascending: true });
-
-
-        if (regiaoId) {
-
-            consulta = consulta.eq(
-                "regiao_id",
-                regiaoId
-            );
-
-        }
-
-
-        const { data, error } = await consulta;
-
-        if (error) {
-            throw error;
-        }
-
-
-        limparSelect(
+        adicionarOpcao(
             select,
-            "Selecione o Estado"
+            estado.id,
+            estado.nome
         );
 
-
-        if (!data || data.length === 0) {
-            return;
-        }
-
-
-        data.forEach(estado => {
-
-            adicionarOpcao(
-                select,
-                estado.id,
-                estado.nome
-            );
-
-        });
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar estados:",
-            erro
-        );
-
-        limparSelect(
-            select,
-            "Erro ao carregar estados"
-        );
-    }
+    });
 }
 
 
 // ============================================================
-// CIDADES
+// CARREGAR CIDADES
 // ============================================================
 
 async function carregarCidades(estadoId = "") {
 
     const select = document.getElementById("cidade");
 
-    if (!select) {
+    if (!select) return;
+
+    limparSelect("cidade", "Selecione a Cidade");
+    limparSelect("bairro", "Selecione o Bairro");
+
+    if (!estadoId) return;
+
+    const { data, error } = await supabaseClient
+        .from("cidades")
+        .select("id, nome, estado_id")
+        .eq("estado_id", estadoId)
+        .order("nome");
+
+    if (error) {
+        console.error("Erro ao carregar cidades:", error);
         return;
     }
 
-    limparSelect(
-        select,
-        "Carregando cidades..."
-    );
+    data.forEach(cidade => {
 
-
-    try {
-
-        let consulta = supabaseClient
-            .from("cidades")
-            .select("id, nome, estado_id")
-            .order("nome", { ascending: true });
-
-
-        if (estadoId) {
-
-            consulta = consulta.eq(
-                "estado_id",
-                estadoId
-            );
-
-        }
-
-
-        const { data, error } = await consulta;
-
-
-        if (error) {
-            throw error;
-        }
-
-
-        limparSelect(
+        adicionarOpcao(
             select,
-            "Selecione a Cidade"
+            cidade.id,
+            cidade.nome
         );
 
-
-        if (!data || data.length === 0) {
-            return;
-        }
-
-
-        data.forEach(cidade => {
-
-            adicionarOpcao(
-                select,
-                cidade.id,
-                cidade.nome
-            );
-
-        });
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar cidades:",
-            erro
-        );
-
-        limparSelect(
-            select,
-            "Erro ao carregar cidades"
-        );
-    }
+    });
 }
 
 
 // ============================================================
-// BAIRROS
+// CARREGAR BAIRROS
 // ============================================================
 
 async function carregarBairros(cidadeId = "") {
 
     const select = document.getElementById("bairro");
 
-    if (!select) {
+    if (!select) return;
+
+    limparSelect("bairro", "Selecione o Bairro");
+
+    if (!cidadeId) return;
+
+    const { data, error } = await supabaseClient
+        .from("bairros")
+        .select("id, nome, cidade_id")
+        .eq("cidade_id", cidadeId)
+        .order("nome");
+
+    if (error) {
+        console.error("Erro ao carregar bairros:", error);
         return;
     }
 
-    limparSelect(
-        select,
-        "Carregando bairros..."
-    );
+    data.forEach(bairro => {
 
-
-    try {
-
-        let consulta = supabaseClient
-            .from("bairros")
-            .select("id, nome, cidade_id")
-            .order("nome", { ascending: true });
-
-
-        if (cidadeId) {
-
-            consulta = consulta.eq(
-                "cidade_id",
-                cidadeId
-            );
-
-        }
-
-
-        const { data, error } = await consulta;
-
-
-        if (error) {
-            throw error;
-        }
-
-
-        limparSelect(
+        adicionarOpcao(
             select,
-            "Selecione o Bairro"
+            bairro.id,
+            bairro.nome
         );
 
-
-        if (!data || data.length === 0) {
-            return;
-        }
-
-
-        data.forEach(bairro => {
-
-            adicionarOpcao(
-                select,
-                bairro.id,
-                bairro.nome
-            );
-
-        });
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar bairros:",
-            erro
-        );
-
-        limparSelect(
-            select,
-            "Erro ao carregar bairros"
-        );
-    }
+    });
 }
 
 
 // ============================================================
-// ESPECIALIDADES
+// CARREGAR ESPECIALIDADES
 // ============================================================
 
 async function carregarEspecialidades() {
 
-    const select = document.getElementById(
-        "especialidade"
+    const select = document.getElementById("especialidade");
+
+    if (!select) return;
+
+    limparSelect(
+        "especialidade",
+        "Todas as Especialidades"
     );
 
-    if (!select) {
-        return;
-    }
-
-
-    const corpo = document.body;
-
-    const rede = corpo.classList.contains("sindilegis")
+    const rede = document.body.classList.contains("sindilegis")
         ? "sindilegis"
         : "especialistas";
 
+    console.log("Carregando especialidades da rede:", rede);
 
-    limparSelect(
-        select,
-        "Carregando especialidades..."
-    );
-
-
-    try {
-
-        /*
-         * IMPORTANTE:
-         * Não usamos mais clinicas!inner aqui.
-         * Buscamos somente os vínculos.
-         */
-
-        const { data, error } = await supabaseClient
+    // Primeiro buscamos os vínculos
+    const { data: vinculos, error: erroVinculos } =
+        await supabaseClient
             .from("clinica_especialidades")
-            .select(`
-                especialidade_id,
-                rede,
-                ativo,
-                especialidades (
-                    id,
-                    nome
-                )
-            `)
+            .select("especialidade_id")
             .eq("rede", rede)
             .eq("ativo", true);
 
+    if (erroVinculos) {
 
-        if (error) {
-            throw error;
-        }
-
-
-        limparSelect(
-            select,
-            "Todas as Especialidades"
+        console.error(
+            "Erro ao carregar vínculos de especialidades:",
+            erroVinculos
         );
 
+        return;
+    }
 
-        if (!data || data.length === 0) {
+    if (!vinculos || vinculos.length === 0) {
 
-            console.warn(
-                "Nenhuma especialidade encontrada para a rede:",
-                rede
-            );
+        console.log(
+            "Nenhuma especialidade encontrada para a rede:",
+            rede
+        );
 
-            return;
-        }
+        return;
+    }
 
+    const ids = [
+        ...new Set(
+            vinculos
+                .map(item => item.especialidade_id)
+                .filter(Boolean)
+        )
+    ];
 
-        const especialidades = new Map();
+    if (ids.length === 0) return;
 
+    // Depois buscamos as especialidades
+    const { data: especialidades, error: erroEspecialidades } =
+        await supabaseClient
+            .from("especialidades")
+            .select("id, nome")
+            .in("id", ids)
+            .order("nome");
 
-        data.forEach(item => {
-
-            if (
-                !item.especialidades ||
-                !item.especialidades.id
-            ) {
-                return;
-            }
-
-
-            especialidades.set(
-                item.especialidades.id,
-                item.especialidades.nome
-            );
-
-        });
-
-
-        Array.from(especialidades.entries())
-            .sort((a, b) =>
-                a[1].localeCompare(
-                    b[1],
-                    "pt-BR"
-                )
-            )
-            .forEach(([id, nome]) => {
-
-                adicionarOpcao(
-                    select,
-                    id,
-                    nome
-                );
-
-            });
-
-
-    } catch (erro) {
+    if (erroEspecialidades) {
 
         console.error(
             "Erro ao carregar especialidades:",
-            erro
+            erroEspecialidades
         );
 
-        limparSelect(
-            select,
-            "Erro ao carregar especialidades"
-        );
+        return;
     }
+
+    especialidades.forEach(especialidade => {
+
+        adicionarOpcao(
+            select,
+            especialidade.id,
+            especialidade.nome
+        );
+
+    });
+
+    console.log(
+        "Especialidades carregadas:",
+        especialidades.length
+    );
 }
 
 
@@ -493,39 +298,25 @@ async function carregarEspecialidades() {
 
 function obterFiltros() {
 
-    const regiao =
-        document.getElementById("regiao");
-
-    const estado =
-        document.getElementById("estado");
-
-    const cidade =
-        document.getElementById("cidade");
-
-    const bairro =
-        document.getElementById("bairro");
-
-    const especialidade =
-        document.getElementById("especialidade");
-
+    const regiao = document.getElementById("regiao");
+    const estado = document.getElementById("estado");
+    const cidade = document.getElementById("cidade");
+    const bairro = document.getElementById("bairro");
+    const especialidade = document.getElementById("especialidade");
 
     return {
 
-        regiaoId:
-            regiao?.value || "",
+        regiaoId: regiao ? regiao.value : "",
 
-        estadoId:
-            estado?.value || "",
+        estadoId: estado ? estado.value : "",
 
-        cidadeId:
-            cidade?.value || "",
+        cidadeId: cidade ? cidade.value : "",
 
-        bairroId:
-            bairro?.value || "",
+        bairroId: bairro ? bairro.value : "",
 
-        especialidadeId:
-            especialidade?.value || ""
-
+        especialidadeId: especialidade
+            ? especialidade.value
+            : ""
     };
 }
 
@@ -536,30 +327,33 @@ function obterFiltros() {
 
 function limparFiltros() {
 
-    const estado =
-        document.getElementById("estado");
+    const regiao = document.getElementById("regiao");
 
-    const cidade =
-        document.getElementById("cidade");
-
-    const bairro =
-        document.getElementById("bairro");
-
+    if (regiao) {
+        regiao.value = "";
+    }
 
     limparSelect(
-        estado,
+        "estado",
         "Selecione o Estado"
     );
 
     limparSelect(
-        cidade,
+        "cidade",
         "Selecione a Cidade"
     );
 
     limparSelect(
-        bairro,
+        "bairro",
         "Selecione o Bairro"
     );
+
+    const especialidade =
+        document.getElementById("especialidade");
+
+    if (especialidade) {
+        especialidade.value = "";
+    }
 }
 
 
@@ -567,121 +361,60 @@ function limparFiltros() {
 // INICIALIZAÇÃO
 // ============================================================
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-        const regiao =
-            document.getElementById("regiao");
+    console.log("Inicializando filtros...");
 
-        const estado =
-            document.getElementById("estado");
+    const regiao = document.getElementById("regiao");
+    const estado = document.getElementById("estado");
+    const cidade = document.getElementById("cidade");
 
-        const cidade =
-            document.getElementById("cidade");
+    if (regiao) {
 
+        regiao.addEventListener("change", async () => {
 
-        if (regiao) {
+            await carregarEstados(regiao.value);
 
-            regiao.addEventListener(
-                "change",
-                async () => {
-
-                    const regiaoId =
-                        regiao.value;
-
-                    await carregarEstados(
-                        regiaoId
-                    );
-
-                    limparSelect(
-                        cidade,
-                        "Selecione a Cidade"
-                    );
-
-                    limparSelect(
-                        document.getElementById("bairro"),
-                        "Selecione o Bairro"
-                    );
-
-                }
-            );
-
-        }
-
-
-        if (estado) {
-
-            estado.addEventListener(
-                "change",
-                async () => {
-
-                    const estadoId =
-                        estado.value;
-
-                    await carregarCidades(
-                        estadoId
-                    );
-
-                    limparSelect(
-                        document.getElementById("bairro"),
-                        "Selecione o Bairro"
-                    );
-
-                }
-            );
-
-        }
-
-
-        if (cidade) {
-
-            cidade.addEventListener(
-                "change",
-                async () => {
-
-                    const cidadeId =
-                        cidade.value;
-
-                    await carregarBairros(
-                        cidadeId
-                    );
-
-                }
-            );
-
-        }
-
-
-        carregarRegioes();
-
-        carregarEspecialidades();
+        });
 
     }
-);
+
+    if (estado) {
+
+        estado.addEventListener("change", async () => {
+
+            await carregarCidades(estado.value);
+
+        });
+
+    }
+
+    if (cidade) {
+
+        cidade.addEventListener("change", async () => {
+
+            await carregarBairros(cidade.value);
+
+        });
+
+    }
+
+    await carregarRegioes();
+
+    await carregarEspecialidades();
+
+    console.log("Filtros inicializados.");
+});
 
 
 // ============================================================
-// EXPORTAÇÕES
+// EXPORTAR
 // ============================================================
 
-window.carregarRegioes =
-    carregarRegioes;
-
-window.carregarEstados =
-    carregarEstados;
-
-window.carregarCidades =
-    carregarCidades;
-
-window.carregarBairros =
-    carregarBairros;
-
-window.carregarEspecialidades =
-    carregarEspecialidades;
-
-window.obterFiltros =
-    obterFiltros;
-
-window.limparFiltros =
-    limparFiltros;
+window.carregarRegioes = carregarRegioes;
+window.carregarEstados = carregarEstados;
+window.carregarCidades = carregarCidades;
+window.carregarBairros = carregarBairros;
+window.carregarEspecialidades = carregarEspecialidades;
+window.obterFiltros = obterFiltros;
+window.limparFiltros = limparFiltros;
