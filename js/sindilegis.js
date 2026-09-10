@@ -1,638 +1,650 @@
 // ============================================================
-// SINDILEGIS.JS
-// REDE SINDILEGIS
+// BUSCA - REDE SINDILEGIS
 // ============================================================
 
 console.log("sindilegis.js carregado");
 
 
 // ============================================================
-// CARREGAR REGIÕES
+// CONFIGURAÇÃO
 // ============================================================
 
-async function carregarRegioes() {
-
-    const select =
-        document.getElementById("regiao");
-
-    if (!select) return;
-
-    select.innerHTML = `
-        <option value="">
-            Selecione a Região
-        </option>
-    `;
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("regioes")
-        .select("id, nome")
-        .order("nome");
-
-    if (error) {
-
-        console.error(
-            "Erro ao carregar regiões:",
-            error
-        );
-
-        return;
-    }
-
-    (data || []).forEach(regiao => {
-
-        select.innerHTML += `
-            <option value="${regiao.id}">
-                ${escaparTexto(regiao.nome)}
-            </option>
-        `;
-
-    });
-}
+const REDE_SINDILEGIS = "sindilegis";
 
 
 // ============================================================
-// CARREGAR ESTADOS
+// OBTER BAIRROS PELA LOCALIZAÇÃO
 // ============================================================
 
-async function carregarEstados() {
+async function obterBairrosPorLocalizacaoSindilegis(filtros) {
 
-    const regiaoId =
-        document.getElementById("regiao")?.value;
+    // --------------------------------------------------------
+    // BAIRRO SELECIONADO
+    // --------------------------------------------------------
 
-    const estado =
-        document.getElementById("estado");
+    if (filtros.bairroId) {
 
-    const cidade =
-        document.getElementById("cidade");
-
-    if (!estado) return;
-
-    estado.innerHTML = `
-        <option value="">
-            Selecione o Estado
-        </option>
-    `;
-
-    if (cidade) {
-
-        cidade.innerHTML = `
-            <option value="">
-                Selecione a Cidade
-            </option>
-        `;
+        return [filtros.bairroId];
 
     }
-
-    if (!regiaoId) return;
-
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("estados")
-        .select("id, nome")
-        .eq("regiao_id", regiaoId)
-        .order("nome");
-
-
-    if (error) {
-
-        console.error(
-            "Erro ao carregar estados:",
-            error
-        );
-
-        return;
-    }
-
-
-    (data || []).forEach(item => {
-
-        estado.innerHTML += `
-            <option value="${item.id}">
-                ${escaparTexto(item.nome)}
-            </option>
-        `;
-
-    });
-}
-
-
-// ============================================================
-// CARREGAR CIDADES
-// ============================================================
-
-async function carregarCidades() {
-
-    const estadoId =
-        document.getElementById("estado")?.value;
-
-    const cidade =
-        document.getElementById("cidade");
-
-    if (!cidade) return;
-
-    cidade.innerHTML = `
-        <option value="">
-            Selecione a Cidade
-        </option>
-    `;
-
-    if (!estadoId) return;
-
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("cidades")
-        .select("id, nome")
-        .eq("estado_id", estadoId)
-        .order("nome");
-
-
-    if (error) {
-
-        console.error(
-            "Erro ao carregar cidades:",
-            error
-        );
-
-        return;
-    }
-
-
-    (data || []).forEach(item => {
-
-        cidade.innerHTML += `
-            <option value="${item.id}">
-                ${escaparTexto(item.nome)}
-            </option>
-        `;
-
-    });
-}
-
-
-// ============================================================
-// BUSCAR CLÍNICAS
-// ============================================================
-
-async function buscarClinicas() {
-
-    const cidadeId =
-        document.getElementById("cidade")?.value;
-
-    const resultados =
-        document.getElementById("resultados");
-
-
-    if (!resultados) return;
-
-
-    if (!cidadeId) {
-
-        alert(
-            "Selecione uma cidade."
-        );
-
-        return;
-    }
-
-
-    resultados.innerHTML = `
-        <h2 class="results-title">
-            Carregando clínicas...
-        </h2>
-    `;
 
 
     // --------------------------------------------------------
-    // BAIRROS
+    // CIDADE SELECIONADA
     // --------------------------------------------------------
 
-    const {
-        data: bairros,
-        error: erroBairros
-    } = await supabaseClient
-        .from("bairros")
-        .select("id, nome")
-        .eq("cidade_id", cidadeId);
+    if (filtros.cidadeId) {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("bairros")
+
+            .select("id")
+
+            .eq(
+                "cidade_id",
+                filtros.cidadeId
+            );
 
 
-    if (erroBairros) {
-
-        console.error(
-            "Erro ao carregar bairros:",
-            erroBairros
-        );
-
-        resultados.innerHTML = `
-            <div class="no-result">
-                Erro ao carregar bairros.
-            </div>
-        `;
-
-        return;
-    }
+        if (error) {
+            throw error;
+        }
 
 
-    if (!bairros ||
-        bairros.length === 0) {
-
-        resultados.innerHTML = `
-            <div class="no-result">
-                Nenhum bairro cadastrado nesta cidade.
-            </div>
-        `;
-
-        return;
-    }
-
-
-    const bairrosIds =
-        bairros.map(
+        return (data || []).map(
             bairro => bairro.id
         );
 
+    }
+
 
     // --------------------------------------------------------
-    // CLÍNICAS SINDILEGIS
+    // ESTADO SELECIONADO
     // --------------------------------------------------------
 
-    const {
-        data: clinicas,
-        error
-    } = await supabaseClient
-        .from("clinicas")
-        .select(`
-            id,
-            nome,
-            telefone,
-            whatsapp,
-            email,
-            endereco,
-            numero,
-            complemento,
-            cep,
-            ativo,
+    if (filtros.estadoId) {
 
-            bairros (
-                id,
-                nome,
+        const {
+            data: cidades,
+            error: erroCidades
+        } = await supabaseClient
 
-                cidades (
+            .from("cidades")
+
+            .select("id")
+
+            .eq(
+                "estado_id",
+                filtros.estadoId
+            );
+
+
+        if (erroCidades) {
+            throw erroCidades;
+        }
+
+
+        const cidadeIds =
+            (cidades || []).map(
+                cidade => cidade.id
+            );
+
+
+        if (cidadeIds.length === 0) {
+            return [];
+        }
+
+
+        const {
+            data: bairros,
+            error: erroBairros
+        } = await supabaseClient
+
+            .from("bairros")
+
+            .select("id")
+
+            .in(
+                "cidade_id",
+                cidadeIds
+            );
+
+
+        if (erroBairros) {
+            throw erroBairros;
+        }
+
+
+        return (bairros || []).map(
+            bairro => bairro.id
+        );
+
+    }
+
+
+    // --------------------------------------------------------
+    // REGIÃO SELECIONADA
+    // --------------------------------------------------------
+
+    if (filtros.regiaoId) {
+
+        // Buscar estados da região
+
+        const {
+            data: estados,
+            error: erroEstados
+        } = await supabaseClient
+
+            .from("estados")
+
+            .select("id")
+
+            .eq(
+                "regiao_id",
+                filtros.regiaoId
+            );
+
+
+        if (erroEstados) {
+            throw erroEstados;
+        }
+
+
+        const estadoIds =
+            (estados || []).map(
+                estado => estado.id
+            );
+
+
+        if (estadoIds.length === 0) {
+            return [];
+        }
+
+
+        // Buscar cidades dos estados
+
+        const {
+            data: cidades,
+            error: erroCidades
+        } = await supabaseClient
+
+            .from("cidades")
+
+            .select("id")
+
+            .in(
+                "estado_id",
+                estadoIds
+            );
+
+
+        if (erroCidades) {
+            throw erroCidades;
+        }
+
+
+        const cidadeIds =
+            (cidades || []).map(
+                cidade => cidade.id
+            );
+
+
+        if (cidadeIds.length === 0) {
+            return [];
+        }
+
+
+        // Buscar bairros das cidades
+
+        const {
+            data: bairros,
+            error: erroBairros
+        } = await supabaseClient
+
+            .from("bairros")
+
+            .select("id")
+
+            .in(
+                "cidade_id",
+                cidadeIds
+            );
+
+
+        if (erroBairros) {
+            throw erroBairros;
+        }
+
+
+        return (bairros || []).map(
+            bairro => bairro.id
+        );
+
+    }
+
+
+    // --------------------------------------------------------
+    // NENHUM FILTRO DE LOCALIZAÇÃO
+    // --------------------------------------------------------
+
+    return null;
+
+}
+
+
+// ============================================================
+// BUSCAR CLÍNICAS SINDILEGIS
+// ============================================================
+
+async function buscarClinicasSindilegis() {
+
+    const resultado =
+        document.getElementById("resultado");
+
+
+    if (!resultado) {
+
+        console.error(
+            "Elemento #resultado não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    // ========================================================
+    // MENSAGEM DE CARREGAMENTO
+    // ========================================================
+
+    resultado.innerHTML = `
+
+        <div class="semResultado">
+
+            <h2>
+                Buscando clínicas...
+            </h2>
+
+            <p>
+                Aguarde enquanto consultamos a rede Sindilegis.
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        // ====================================================
+        // OBTER FILTROS
+        // ====================================================
+
+        const filtros =
+            obterFiltros();
+
+
+        console.log(
+            "Filtros Sindilegis:",
+            filtros
+        );
+
+
+        // ====================================================
+        // OBTER BAIRROS
+        // ====================================================
+
+        const bairroIds =
+            await obterBairrosPorLocalizacaoSindilegis(
+                filtros
+            );
+
+
+        // ====================================================
+        // NENHUM BAIRRO ENCONTRADO
+        // ====================================================
+
+        if (
+            bairroIds !== null &&
+            bairroIds.length === 0
+        ) {
+
+            mostrarNenhumResultadoSindilegis();
+
+            return;
+
+        }
+
+
+        // ====================================================
+        // CONSULTA DAS CLÍNICAS
+        // ====================================================
+
+        let consulta =
+            supabaseClient
+
+                .from("clinicas")
+
+                .select(`
                     id,
                     nome,
+                    telefone,
+                    whatsapp,
+                    email,
+                    endereco,
+                    numero,
+                    complemento,
+                    cep,
+                    bairro_id,
+                    ativo,
 
-                    estados (
+                    bairros (
                         id,
                         nome,
 
-                        regioes (
+                        cidades (
+                            id,
+                            nome,
+
+                            estados (
+                                id,
+                                nome,
+
+                                regioes (
+                                    id,
+                                    nome
+                                )
+                            )
+                        )
+                    ),
+
+                    clinica_especialidades!inner (
+                        id,
+                        clinica_id,
+                        especialidade_id,
+                        rede,
+                        ativo,
+
+                        especialidades (
                             id,
                             nome
                         )
                     )
-                )
-            ),
+                `)
 
-            clinica_especialidades!inner (
-                id,
-                especialidade_id,
-                rede,
-                ativo,
-
-                especialidades (
-                    id,
-                    nome
+                .eq(
+                    "ativo",
+                    true
                 )
-            )
-        `)
-        .in(
-            "bairro_id",
-            bairrosIds
-        )
-        .eq(
-            "ativo",
-            true
-        )
-        .eq(
-            "clinica_especialidades.rede",
-            "sindilegis"
-        )
-        .eq(
-            "clinica_especialidades.ativo",
-            true
+
+                .eq(
+                    "clinica_especialidades.rede",
+                    REDE_SINDILEGIS
+                )
+
+                .eq(
+                    "clinica_especialidades.ativo",
+                    true
+                );
+
+
+        // ====================================================
+        // FILTRO POR BAIRRO
+        // ====================================================
+
+        if (bairroIds !== null) {
+
+            consulta =
+                consulta.in(
+                    "bairro_id",
+                    bairroIds
+                );
+
+        }
+
+
+        // ====================================================
+        // EXECUTAR CONSULTA
+        // ====================================================
+
+        const {
+            data: clinicas,
+            error
+        } = await consulta;
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        console.log(
+            "Clínicas Sindilegis encontradas:",
+            clinicas
         );
 
 
-    if (error) {
+        // ====================================================
+        // FILTRO POR ESPECIALIDADE
+        // ====================================================
+
+        let clinicasFiltradas =
+            clinicas || [];
+
+
+        if (filtros.especialidadeId) {
+
+            clinicasFiltradas =
+                clinicasFiltradas.filter(
+                    clinica => {
+
+                        const especialidades =
+                            Array.isArray(
+                                clinica.clinica_especialidades
+                            )
+                                ? clinica.clinica_especialidades
+                                : [];
+
+
+                        return especialidades.some(
+                            item => {
+
+                                return (
+                                    item.ativo === true &&
+                                    item.rede ===
+                                        REDE_SINDILEGIS &&
+                                    String(
+                                        item.especialidade_id
+                                    ) ===
+                                        String(
+                                            filtros.especialidadeId
+                                        )
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        // ====================================================
+        // REMOVER CLÍNICAS DUPLICADAS
+        // ====================================================
+
+        const mapaClinicas =
+            new Map();
+
+
+        clinicasFiltradas.forEach(
+            clinica => {
+
+                if (
+                    !mapaClinicas.has(
+                        clinica.id
+                    )
+                ) {
+
+                    mapaClinicas.set(
+                        clinica.id,
+                        clinica
+                    );
+
+                }
+
+            }
+        );
+
+
+        const resultadoFinal =
+            Array.from(
+                mapaClinicas.values()
+            );
+
+
+        // ====================================================
+        // NENHUM RESULTADO
+        // ====================================================
+
+        if (
+            resultadoFinal.length === 0
+        ) {
+
+            mostrarNenhumResultadoSindilegis();
+
+            return;
+
+        }
+
+
+        // ====================================================
+        // MOSTRAR CARDS
+        // ====================================================
+
+        mostrarClinicas(
+            resultadoFinal
+        );
+
+
+    } catch (error) {
 
         console.error(
             "Erro ao buscar clínicas Sindilegis:",
             error
         );
 
-        resultados.innerHTML = `
-            <div class="no-result">
-                Erro ao carregar clínicas.
+
+        resultado.innerHTML = `
+
+            <div class="semResultado">
+
+                <h2>
+                    Não foi possível realizar a busca.
+                </h2>
+
+                <p>
+                    Ocorreu um erro ao consultar as clínicas
+                    da rede Sindilegis.
+                </p>
+
+                <p>
+                    Tente novamente em alguns instantes.
+                </p>
+
             </div>
+
         `;
 
+    }
+
+}
+
+
+// ============================================================
+// MENSAGEM DE NENHUM RESULTADO
+// ============================================================
+
+function mostrarNenhumResultadoSindilegis() {
+
+    const resultado =
+        document.getElementById("resultado");
+
+
+    if (!resultado) {
         return;
     }
 
 
-    resultados.innerHTML = "";
+    resultado.innerHTML = `
 
+        <div class="semResultado">
 
-    if (!clinicas ||
-        clinicas.length === 0) {
+            <h2>
+                Nenhuma clínica encontrada.
+            </h2>
 
-        resultados.innerHTML = `
-            <div class="no-result">
-                Nenhuma clínica da Rede Sindilegis
-                encontrada nesta cidade.
-            </div>
-        `;
+            <p>
+                Não encontramos clínicas da
+                <strong>rede Sindilegis</strong>
+                para os filtros selecionados.
+            </p>
 
-        return;
-    }
+        </div>
 
-
-    resultados.innerHTML = `
-        <h2 class="results-title">
-            Clínicas Encontradas
-        </h2>
     `;
 
-
-    clinicas.forEach(clinica => {
-
-        const bairro =
-            clinica.bairros;
-
-        const cidade =
-            bairro?.cidades;
-
-        const estado =
-            cidade?.estados;
-
-
-        const especialidades =
-            (clinica.clinica_especialidades || [])
-                .filter(item =>
-                    item.ativo === true &&
-                    item.rede === "sindilegis" &&
-                    item.especialidades
-                )
-                .map(item =>
-                    item.especialidades.nome
-                )
-                .filter(Boolean);
-
-
-        const especialidadesTexto =
-            [...new Set(especialidades)]
-                .join(", ");
-
-
-        const enderecoCompleto = [
-            clinica.endereco,
-            clinica.numero,
-            clinica.complemento
-        ]
-            .filter(Boolean)
-            .join(", ");
-
-
-        resultados.innerHTML += `
-
-            <div class="card">
-
-                <h3>
-                    ${escaparTexto(
-                        clinica.nome ||
-                        "Clínica sem nome"
-                    )}
-                </h3>
-
-                <p>
-                    <strong>📍 Endereço:</strong>
-                    ${escaparTexto(
-                        enderecoCompleto ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>📞 Telefone:</strong>
-                    ${escaparTexto(
-                        clinica.telefone ||
-                        clinica.whatsapp ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🏙 Bairro:</strong>
-                    ${escaparTexto(
-                        bairro?.nome ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🏙 Cidade:</strong>
-                    ${escaparTexto(
-                        cidade?.nome ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🗺 Estado:</strong>
-                    ${escaparTexto(
-                        estado?.nome ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🦷 Especialidades:</strong>
-                    ${escaparTexto(
-                        especialidadesTexto ||
-                        "Não informado"
-                    )}
-                </p>
-
-            </div>
-
-        `;
-
-    });
 }
 
 
 // ============================================================
-// ESCAPAR TEXTO
-// ============================================================
-
-function escaparTexto(valor) {
-
-    if (
-        valor === null ||
-        valor === undefined
-    ) {
-        return "";
-    }
-
-    return String(valor)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-// ============================================================
-// REDIRECIONAR PARA ADMIN
-// ============================================================
-
-function irParaAdmin() {
-
-    window.location.href =
-        "admin.html";
-
-}
-
-
-// ============================================================
-// REDIRECIONAR PARA ESPECIALISTAS
-// ============================================================
-
-function irParaEspecialistas() {
-
-    window.location.href =
-        "index.html";
-
-}
-
-
-// ============================================================
-// TEMA
-// ============================================================
-
-function setTheme(mode) {
-
-    document.body.classList.toggle(
-        "dark",
-        mode === "dark"
-    );
-
-    localStorage.setItem(
-        "theme",
-        mode
-    );
-}
-
-
-function toggleTheme() {
-
-    const dark =
-        document.body.classList.contains(
-            "dark"
-        );
-
-    setTheme(
-        dark
-            ? "light"
-            : "dark"
-    );
-}
-
-
-setTheme(
-    localStorage.getItem("theme") ||
-    "light"
-);
-
-
-// ============================================================
-// INICIALIZAÇÃO
+// CONFIGURAR BOTÃO DE BUSCA
 // ============================================================
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    () => {
 
-        carregarRegioes();
+        const botaoBuscar =
+            document.getElementById("buscar");
 
-        const regiao =
-            document.getElementById(
-                "regiao"
+
+        if (!botaoBuscar) {
+
+            console.error(
+                "Botão #buscar não encontrado."
             );
 
-        const estado =
-            document.getElementById(
-                "estado"
-            );
-
-
-        if (regiao) {
-
-            regiao.addEventListener(
-                "change",
-                carregarEstados
-            );
+            return;
 
         }
 
 
-        if (estado) {
+        botaoBuscar.addEventListener(
+            "click",
+            buscarClinicasSindilegis
+        );
 
-            estado.addEventListener(
-                "change",
-                carregarCidades
-            );
 
-        }
+        console.log(
+            "Botão de busca Sindilegis configurado."
+        );
 
     }
 );
 
 
 // ============================================================
-// EXPORTAR
+// DISPONIBILIZAR FUNÇÕES
 // ============================================================
 
-window.buscarClinicas =
-    buscarClinicas;
+window.buscarClinicasSindilegis =
+    buscarClinicasSindilegis;
 
-window.carregarRegioes =
-    carregarRegioes;
-
-window.carregarEstados =
-    carregarEstados;
-
-window.carregarCidades =
-    carregarCidades;
-
-window.irParaAdmin =
-    irParaAdmin;
-
-window.irParaEspecialistas =
-    irParaEspecialistas;
-
-window.toggleTheme =
-    toggleTheme;
-
-console.log(
-    "Rede Sindilegis inicializada."
-);
+window.obterBairrosPorLocalizacaoSindilegis =
+    obterBairrosPorLocalizacaoSindilegis;
