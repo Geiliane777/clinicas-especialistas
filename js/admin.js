@@ -284,7 +284,24 @@ function escaparHTML(valor) {
         .replace(/'/g, "&#039;");
 }
 
+// ============================================================
+// AUXILIAR — DEFINIR TEXTO
+// ============================================================
 
+function definirTexto(id, texto) {
+
+    const elemento =
+        document.getElementById(id);
+
+    if (!elemento) {
+        console.warn(
+            `Elemento #${id} não encontrado no HTML.`
+        );
+        return;
+    }
+
+    elemento.textContent = texto;
+}
 // ============================================================
 // DASHBOARD
 // ============================================================
