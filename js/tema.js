@@ -1,102 +1,181 @@
-// ======================================
+// ============================================================
 // TEMA CLARO / ESCURO
-// ======================================
+// ============================================================
 
 console.log("tema.js carregado");
+
+
+// ============================================================
+// APLICAR TEMA
+// ============================================================
+
+function aplicarTema(tema) {
+
+    const botaoTema =
+        document.getElementById("btnTema");
+
+
+    // --------------------------------------------------------
+    // TEMA ESCURO
+    // --------------------------------------------------------
+
+    if (tema === "dark") {
+
+        document.body.classList.add("dark");
+
+
+        if (botaoTema) {
+
+            botaoTema.textContent = "☀️";
+
+            botaoTema.title =
+                "Ativar tema claro";
+
+            botaoTema.setAttribute(
+                "aria-label",
+                "Ativar tema claro"
+            );
+
+        }
+
+        return;
+    }
+
+
+    // --------------------------------------------------------
+    // TEMA CLARO
+    // --------------------------------------------------------
+
+    document.body.classList.remove("dark");
+
+
+    if (botaoTema) {
+
+        botaoTema.textContent = "🌙";
+
+        botaoTema.title =
+            "Ativar tema escuro";
+
+        botaoTema.setAttribute(
+            "aria-label",
+            "Ativar tema escuro"
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// OBTER TEMA SALVO
+// ============================================================
+
+function obterTemaSalvo() {
+
+    const tema =
+        localStorage.getItem("tema");
+
+
+    if (
+        tema === "dark" ||
+        tema === "light"
+    ) {
+
+        return tema;
+
+    }
+
+
+    return "light";
+
+}
+
+
+// ============================================================
+// ALTERAR TEMA
+// ============================================================
+
+function alternarTema() {
+
+    const estaEscuro =
+        document.body.classList.contains(
+            "dark"
+        );
+
+
+    const novoTema =
+        estaEscuro
+            ? "light"
+            : "dark";
+
+
+    localStorage.setItem(
+        "tema",
+        novoTema
+    );
+
+
+    aplicarTema(
+        novoTema
+    );
+
+}
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
-        const btnTema =
-            document.getElementById("btnTema");
-
-        if (!btnTema) return;
+        const temaInicial =
+            obterTemaSalvo();
 
 
-        // ======================================
-        // APLICAR TEMA
-        // ======================================
+        aplicarTema(
+            temaInicial
+        );
 
-        function aplicarTema(tema) {
 
-            if (tema === "dark") {
+        const botaoTema =
+            document.getElementById(
+                "btnTema"
+            );
 
-                document.body.classList.add(
-                    "dark"
-                );
 
-                btnTema.innerHTML = "☀️";
+        if (!botaoTema) {
 
-                btnTema.title =
-                    "Ativar tema claro";
+            console.warn(
+                "Botão #btnTema não encontrado."
+            );
 
-            } else {
-
-                document.body.classList.remove(
-                    "dark"
-                );
-
-                btnTema.innerHTML = "🌙";
-
-                btnTema.title =
-                    "Ativar tema escuro";
-
-            }
+            return;
 
         }
 
 
-        // ======================================
-        // CARREGAR TEMA SALVO
-        // ======================================
-
-        const temaSalvo =
-            localStorage.getItem("tema");
-
-        if (temaSalvo === "dark") {
-
-            aplicarTema("dark");
-
-        } else {
-
-            aplicarTema("light");
-
-        }
-
-
-        // ======================================
-        // ALTERAR TEMA
-        // ======================================
-
-        btnTema.addEventListener(
+        botaoTema.addEventListener(
             "click",
-            () => {
-
-                const estaEscuro =
-                    document.body.classList.toggle(
-                        "dark"
-                    );
+            alternarTema
+        );
 
 
-                const novoTema =
-                    estaEscuro
-                        ? "dark"
-                        : "light";
-
-
-                localStorage.setItem(
-                    "tema",
-                    novoTema
-                );
-
-
-                aplicarTema(
-                    novoTema
-                );
-
-            }
+        console.log(
+            "Sistema de tema configurado."
         );
 
     }
 );
+
+
+// ============================================================
+// DISPONIBILIZAR FUNÇÕES
+// ============================================================
+
+window.aplicarTema =
+    aplicarTema;
+
+window.alternarTema =
+    alternarTema;
