@@ -1,17 +1,20 @@
 const REDE_SINDILEGIS = "sindilegis";
-const REDE_ESPECIALISTAS = "especialistas";
 
 
-/* =========================================================
-   VERIFICA LOCALIZAÇÃO
-========================================================= */
+// =====================================================
+// VERIFICA LOCALIZAÇÃO
+// =====================================================
 
-function clinicaPertenceAoLocalSindilegis(clinica, filtros) {
+function clinicaPertenceAoLocalSindilegis(
+    clinica,
+    filtros
+) {
 
     const bairro = clinica.bairros;
     const cidade = bairro?.cidades;
     const estado = cidade?.estados;
     const regiao = estado?.regioes;
+
 
     if (
         filtros.regiaoId &&
@@ -20,12 +23,14 @@ function clinicaPertenceAoLocalSindilegis(clinica, filtros) {
         return false;
     }
 
+
     if (
         filtros.estadoId &&
         String(estado?.id) !== String(filtros.estadoId)
     ) {
         return false;
     }
+
 
     if (
         filtros.cidadeId &&
@@ -34,6 +39,7 @@ function clinicaPertenceAoLocalSindilegis(clinica, filtros) {
         return false;
     }
 
+
     if (
         filtros.bairroId &&
         String(bairro?.id) !== String(filtros.bairroId)
@@ -41,29 +47,31 @@ function clinicaPertenceAoLocalSindilegis(clinica, filtros) {
         return false;
     }
 
+
     return true;
 }
 
 
-/* =========================================================
-   BUSCAR CLÍNICAS SINDILEGIS
-========================================================= */
+// =====================================================
+// BUSCAR CLÍNICAS DA REDE SINDILEGIS
+// =====================================================
 
-async function buscarClinicasSindilegis(filtros = {}) {
+async function buscarClinicasSindilegis(
+    filtros = {}
+) {
 
     console.log("==============================");
     console.log("BUSCANDO REDE SINDILEGIS");
     console.log("==============================");
 
 
-    /* =====================================================
-       1. BUSCA TODOS OS VÍNCULOS ATIVOS
-       PARA SABER A QUAL REDE CADA CLÍNICA PERTENCE
-    ===================================================== */
+    // -------------------------------------------------
+    // BUSCA SOMENTE VÍNCULOS SINDILEGIS
+    // -------------------------------------------------
 
     const {
-        data: todosVinculos,
-        error: erroTodosVinculos
+        data: vinculos,
+        error: erroVinculos
     } = await supabaseClient
         .from("clinica_especialidades")
         .select(`
@@ -76,14 +84,15 @@ async function buscarClinicasSindilegis(filtros = {}) {
                 nome
             )
         `)
+        .eq("rede", REDE_SINDILEGIS)
         .eq("ativo", true);
 
 
-    if (erroTodosVinculos) {
+    if (erroVinculos) {
 
         console.error(
-            "Erro ao buscar vínculos das clínicas:",
-            erroTodosVinculos
+            "Erro ao buscar vínculos Sindilegis:",
+            erroVinculos
         );
 
         mostrarClinicasSindilegis([]);
@@ -92,13 +101,10 @@ async function buscarClinicasSindilegis(filtros = {}) {
     }
 
 
-    if (
-        !todosVinculos ||
-        todosVinculos.length === 0
-    ) {
+    if (!vinculos || vinculos.length === 0) {
 
         console.log(
-            "Nenhum vínculo encontrado."
+            "Nenhum vínculo encontrado para Sindilegis."
         );
 
         mostrarClinicasSindilegis([]);
@@ -107,98 +113,36 @@ async function buscarClinicasSindilegis(filtros = {}) {
     }
 
 
-    /* =====================================================
-       2. SEPARA AS CLÍNICAS POR REDE
-    ===================================================== */
+    // -------------------------------------------------
+    // FILTRO POR ESPECIALIDADE
+    // -------------------------------------------------
 
-    const redesPorClinica = {};
+    let vinculosFiltrados =
+        vinculos;
 
-
-    todosVinculos.forEach(vinculo => {
-
-        const idClinica = vinculo.clinica_id;
-
-        if (!idClinica) {
-            return;
-        }
-
-        if (!redesPorClinica[idClinica]) {
-            redesPorClinica[idClinica] = new Set();
-        }
-
-        redesPorClinica[idClinica].add(
-            String(vinculo.rede || "").toLowerCase()
-        );
-    });
-
-
-    /* =====================================================
-       3. PEGA SOMENTE CLÍNICAS QUE SÃO SINDILEGIS
-       
-       IMPORTANTE:
-       SE A CLÍNICA TAMBÉM ESTIVER COMO ESPECIALISTAS,
-       ELA NÃO ENTRA AQUI.
-    ===================================================== */
-
-    let vinculosSindilegis = todosVinculos.filter(vinculo => {
-
-        const idClinica = vinculo.clinica_id;
-
-        const redes =
-            redesPorClinica[idClinica];
-
-        if (!redes) {
-            return false;
-        }
-
-        const pertenceSindilegis =
-            redes.has(REDE_SINDILEGIS);
-
-        const pertenceEspecialistas =
-            redes.has(REDE_ESPECIALISTAS);
-
-
-        /*
-         * A clínica só entra no Sindilegis
-         * se NÃO estiver vinculada à Especialistas.
-         */
-
-        if (
-            pertenceSindilegis &&
-            !pertenceEspecialistas
-        ) {
-            return true;
-        }
-
-        return false;
-    });
-
-
-    /* =====================================================
-       4. FILTRA POR ESPECIALIDADE
-    ===================================================== */
 
     if (filtros.especialidadeId) {
 
-        vinculosSindilegis =
-            vinculosSindilegis.filter(vinculo =>
-                String(vinculo.especialidade_id) ===
-                String(filtros.especialidadeId)
-            );
+        vinculosFiltrados =
+            vinculos.filter(vinculo => {
+
+                return (
+                    String(
+                        vinculo.especialidade_id
+                    ) ===
+                    String(
+                        filtros.especialidadeId
+                    )
+                );
+
+            });
     }
 
 
-    /* =====================================================
-       5. SE NÃO HOUVER CLÍNICAS
-    ===================================================== */
-
-    if (
-        !vinculosSindilegis ||
-        vinculosSindilegis.length === 0
-    ) {
+    if (vinculosFiltrados.length === 0) {
 
         console.log(
-            "Nenhuma clínica exclusiva da rede Sindilegis encontrada."
+            "Nenhuma clínica possui a especialidade selecionada na rede Sindilegis."
         );
 
         mostrarClinicasSindilegis([]);
@@ -207,14 +151,14 @@ async function buscarClinicasSindilegis(filtros = {}) {
     }
 
 
-    /* =====================================================
-       6. IDS DAS CLÍNICAS SINDILEGIS
-    ===================================================== */
+    // -------------------------------------------------
+    // OBTÉM IDS DAS CLÍNICAS
+    // -------------------------------------------------
 
     const idsClinicas = [
         ...new Set(
-            vinculosSindilegis
-                .map(item => item.clinica_id)
+            vinculosFiltrados
+                .map(vinculo => vinculo.clinica_id)
                 .filter(Boolean)
         )
     ];
@@ -226,9 +170,9 @@ async function buscarClinicasSindilegis(filtros = {}) {
     );
 
 
-    /* =====================================================
-       7. BUSCA OS DADOS DAS CLÍNICAS
-    ===================================================== */
+    // -------------------------------------------------
+    // BUSCA AS CLÍNICAS
+    // -------------------------------------------------
 
     const {
         data: clinicas,
@@ -276,10 +220,7 @@ async function buscarClinicasSindilegis(filtros = {}) {
     }
 
 
-    if (
-        !clinicas ||
-        clinicas.length === 0
-    ) {
+    if (!clinicas || clinicas.length === 0) {
 
         console.log(
             "Nenhuma clínica encontrada na tabela clinicas."
@@ -291,68 +232,80 @@ async function buscarClinicasSindilegis(filtros = {}) {
     }
 
 
-    /* =====================================================
-       8. MONTA AS ESPECIALIDADES
-    ===================================================== */
+    // -------------------------------------------------
+    // MONTA ESPECIALIDADES DA REDE SINDILEGIS
+    // -------------------------------------------------
 
     const mapaEspecialidades = {};
 
 
-    vinculosSindilegis.forEach(vinculo => {
+    vinculosFiltrados.forEach(vinculo => {
 
         const idClinica =
             vinculo.clinica_id;
 
+
         if (!mapaEspecialidades[idClinica]) {
+
             mapaEspecialidades[idClinica] = [];
         }
 
 
         if (vinculo.especialidades) {
 
-            const jaExiste =
+            const existe =
                 mapaEspecialidades[idClinica].some(
                     especialidade =>
-                        String(especialidade.id) ===
-                        String(vinculo.especialidades.id)
+                        String(
+                            especialidade.id
+                        ) ===
+                        String(
+                            vinculo.especialidades.id
+                        )
                 );
 
 
-            if (!jaExiste) {
+            if (!existe) {
 
                 mapaEspecialidades[idClinica].push(
                     vinculo.especialidades
                 );
             }
         }
+
     });
 
 
-    /* =====================================================
-       9. JUNTA CLÍNICAS + ESPECIALIDADES
-    ===================================================== */
+    // -------------------------------------------------
+    // JUNTA CLÍNICA + ESPECIALIDADES
+    // -------------------------------------------------
 
-    let resultado = clinicas.map(clinica => {
+    let resultado =
+        clinicas.map(clinica => {
 
-        return {
-            ...clinica,
+            return {
 
-            especialidades:
-                mapaEspecialidades[clinica.id] || []
-        };
-    });
+                ...clinica,
+
+                especialidades:
+                    mapaEspecialidades[clinica.id] || []
+
+            };
+
+        });
 
 
-    /* =====================================================
-       10. FILTRA LOCALIZAÇÃO
-    ===================================================== */
+    // -------------------------------------------------
+    // FILTRO DE LOCALIZAÇÃO
+    // -------------------------------------------------
 
-    resultado = resultado.filter(clinica =>
-        clinicaPertenceAoLocalSindilegis(
-            clinica,
-            filtros
-        )
-    );
+    resultado =
+        resultado.filter(clinica =>
+            clinicaPertenceAoLocalSindilegis(
+                clinica,
+                filtros
+            )
+        );
 
 
     console.log(
@@ -360,42 +313,46 @@ async function buscarClinicasSindilegis(filtros = {}) {
         resultado.length
     );
 
+
     console.log(
         "Resultado Sindilegis:",
         resultado
     );
 
 
-    /* =====================================================
-       11. MOSTRA OS CARDS
-    ===================================================== */
-
     mostrarClinicasSindilegis(resultado);
 }
 
 
-/* =========================================================
-   MOSTRAR CLÍNICAS
-========================================================= */
+// =====================================================
+// MOSTRAR CLÍNICAS
+// =====================================================
 
 function mostrarClinicasSindilegis(clinicas) {
 
     const resultado =
         document.getElementById("resultado");
 
+
     if (!resultado) {
         return;
     }
 
 
-    /* =====================================================
-       REMOVE DUPLICADOS
-    ===================================================== */
+    // -------------------------------------------------
+    // REMOVE DUPLICIDADES
+    // -------------------------------------------------
 
-    const mapa = new Map();
+    const mapa =
+        new Map();
 
 
     (clinicas || []).forEach(clinica => {
+
+        if (!clinica || !clinica.id) {
+            return;
+        }
+
 
         if (!mapa.has(clinica.id)) {
 
@@ -404,17 +361,17 @@ function mostrarClinicasSindilegis(clinicas) {
                 clinica
             );
         }
+
     });
 
 
-    const lista = [
-        ...mapa.values()
-    ];
+    const lista =
+        [...mapa.values()];
 
 
-    /* =====================================================
-       RENDERIZA OS CARDS
-    ===================================================== */
+    // -------------------------------------------------
+    // RENDERIZA
+    // -------------------------------------------------
 
     if (
         typeof window.renderizarCardsClinicas ===
@@ -427,40 +384,39 @@ function mostrarClinicasSindilegis(clinicas) {
     }
 
 
-    /* =====================================================
-       SEM RESULTADOS
-    ===================================================== */
+    // -------------------------------------------------
+    // SEM RESULTADO
+    // -------------------------------------------------
 
-    if (lista.length === 0) {
+    resultado.innerHTML = `
 
-        resultado.innerHTML = `
-            <div class="semResultado">
+        <div class="semResultado">
 
-                <div class="semResultado-icone">
-                    🏥
-                </div>
-
-                <h2>
-                    Nenhuma clínica encontrada
-                </h2>
-
-                <p>
-                    Não encontramos clínicas da
-                    <strong>Rede Sindilegis</strong>
-                    com os filtros selecionados.
-                </p>
-
+            <div class="semResultado-icone">
+                🏥
             </div>
-        `;
 
-        return;
-    }
+            <h2>
+                Nenhuma clínica encontrada
+            </h2>
+
+            <p>
+                Não encontramos clínicas da
+                <strong>
+                    Rede Sindilegis
+                </strong>
+                com os filtros selecionados.
+            </p>
+
+        </div>
+
+    `;
 }
 
 
-/* =========================================================
-   BOTÃO BUSCAR
-========================================================= */
+// =====================================================
+// BOTÃO BUSCAR
+// =====================================================
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -468,6 +424,7 @@ document.addEventListener(
 
         const botao =
             document.getElementById("buscar");
+
 
         if (!botao) {
             return;
@@ -488,18 +445,21 @@ document.addEventListener(
                 buscarClinicasSindilegis(
                     filtros
                 );
+
             }
         );
+
     }
 );
 
 
-/* =========================================================
-   DISPONIBILIZA GLOBALMENTE
-========================================================= */
+// =====================================================
+// DISPONIBILIZA GLOBALMENTE
+// =====================================================
 
 window.buscarClinicasSindilegis =
     buscarClinicasSindilegis;
+
 
 window.mostrarClinicasSindilegis =
     mostrarClinicasSindilegis;
