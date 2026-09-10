@@ -1,22 +1,15 @@
-// ============================================================
-// CARDS.JS
-// Cards das clínicas - Rede Especialistas / Sindilegis
-// ============================================================
-
 console.log("cards.js carregado");
 
+// ======================================================
+// UTILITÁRIOS
+// ======================================================
 
-// ============================================================
-// SEGURANÇA - ESCAPAR TEXTO
-// ============================================================
-
-function escaparTextoCard(texto) {
-
-    if (texto === null || texto === undefined) {
+function escaparTexto(valor) {
+    if (valor === null || valor === undefined) {
         return "";
     }
 
-    return String(texto)
+    return String(valor)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -25,51 +18,28 @@ function escaparTextoCard(texto) {
 }
 
 
-// ============================================================
-// IDENTIFICAR A REDE
-// ============================================================
+// ======================================================
+// REDE ATUAL
+// ======================================================
 
-function normalizarRedeCard(rede) {
+function obterRedeAtual() {
+    return document.body.classList.contains("sindilegis")
+        ? "sindilegis"
+        : "especialistas";
+}
 
-    if (!rede) {
-        return "";
-    }
-
-    const valor = String(rede)
-        .trim()
-        .toLowerCase();
-
-    if (valor === "especialistas") {
-        return "especialistas";
-    }
-
-    if (valor === "sindilegis") {
-        return "sindilegis";
-    }
-
-    return valor;
+function obterNomeRede() {
+    return obterRedeAtual() === "sindilegis"
+        ? "Rede Sindilegis"
+        : "Rede Especialistas";
 }
 
 
-function obterRedeCard() {
+// ======================================================
+// TELEFONE
+// ======================================================
 
-    if (
-        document.body &&
-        document.body.classList.contains("sindilegis")
-    ) {
-        return "sindilegis";
-    }
-
-    return "especialistas";
-}
-
-
-// ============================================================
-// FORMATAR TELEFONE
-// ============================================================
-
-function formatarTelefoneCard(telefone) {
-
+function formatarTelefone(telefone) {
     if (!telefone) {
         return "";
     }
@@ -77,504 +47,268 @@ function formatarTelefoneCard(telefone) {
     const numeros = String(telefone).replace(/\D/g, "");
 
     if (numeros.length === 11) {
-
         return `(${numeros.substring(0, 2)}) ${numeros.substring(2, 7)}-${numeros.substring(7)}`;
-
     }
 
     if (numeros.length === 10) {
-
         return `(${numeros.substring(0, 2)}) ${numeros.substring(2, 6)}-${numeros.substring(6)}`;
-
     }
 
     return telefone;
 }
 
 
-// ============================================================
-// LINK TELEFONE
-// ============================================================
+// ======================================================
+// WHATSAPP
+// ======================================================
 
-function criarLinkTelefoneCard(telefone) {
-
+function obterLinkWhatsApp(telefone) {
     if (!telefone) {
-        return "";
+        return null;
     }
 
-    const numeros = String(telefone).replace(/\D/g, "");
+    let numero = String(telefone).replace(/\D/g, "");
 
-    if (!numeros) {
-        return "";
+    if (!numero) {
+        return null;
     }
 
-    return `tel:${numeros}`;
+    // Adiciona Brasil quando o número ainda não possui DDI
+    if (!numero.startsWith("55")) {
+        numero = "55" + numero;
+    }
+
+    return `https://wa.me/${numero}`;
 }
 
 
-// ============================================================
-// LINK WHATSAPP
-// ============================================================
+// ======================================================
+// GOOGLE MAPS
+// ======================================================
 
-function criarLinkWhatsAppCard(whatsapp) {
-
-    if (!whatsapp) {
-        return "";
-    }
-
-    let numeros = String(whatsapp).replace(/\D/g, "");
-
-    if (!numeros) {
-        return "";
-    }
-
-    // Se tiver 10 ou 11 números e não tiver código do Brasil
-    if (
-        numeros.length === 10 ||
-        numeros.length === 11
-    ) {
-        numeros = "55" + numeros;
-    }
-
-    return `https://wa.me/${numeros}`;
-}
-
-
-// ============================================================
-// OBTÉM LOCALIZAÇÃO
-// ============================================================
-
-function obterLocalizacaoCard(clinica) {
-
-    const bairro = clinica?.bairros;
-
-    if (!bairro) {
-        return "";
-    }
-
-    const cidade = bairro.cidades;
-
-    if (!cidade) {
-        return bairro.nome || "";
-    }
-
-    const estado = cidade.estados;
-
-    if (!estado) {
-        return `${bairro.nome || ""} • ${cidade.nome || ""}`;
-    }
-
-    return [
-        bairro.nome,
-        cidade.nome,
-        estado.nome
-    ]
-        .filter(Boolean)
-        .join(" • ");
-}
-
-
-// ============================================================
-// OBTÉM ENDEREÇO
-// ============================================================
-
-function obterEnderecoCard(clinica) {
-
-    const partes = [];
-
-    if (clinica.endereco) {
-        partes.push(clinica.endereco);
-    }
-
-    if (clinica.numero) {
-        partes.push(`nº ${clinica.numero}`);
-    }
-
-    if (clinica.complemento) {
-        partes.push(clinica.complemento);
-    }
-
-    if (clinica.cep) {
-        partes.push(`CEP ${clinica.cep}`);
-    }
-
-    return partes.join(" • ");
-}
-
-
-// ============================================================
-// LINK GOOGLE MAPS
-// ============================================================
-
-function criarLinkMapaCard(clinica) {
-
-    const partes = [];
-
-    if (clinica.nome) {
-        partes.push(clinica.nome);
-    }
-
-    if (clinica.endereco) {
-        partes.push(clinica.endereco);
-    }
-
-    if (clinica.numero) {
-        partes.push(clinica.numero);
-    }
-
-    if (clinica.bairros?.nome) {
-        partes.push(clinica.bairros.nome);
-    }
-
-    if (clinica.bairros?.cidades?.nome) {
-        partes.push(clinica.bairros.cidades.nome);
-    }
-
-    if (clinica.bairros?.cidades?.estados?.nome) {
-        partes.push(clinica.bairros.cidades.estados.nome);
-    }
-
-    const endereco = partes
-        .filter(Boolean)
-        .join(", ");
-
+function obterLinkMapa(endereco) {
     if (!endereco) {
-        return "";
+        return null;
     }
 
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco)}`;
+    const texto = encodeURIComponent(endereco);
+
+    return `https://www.google.com/maps/search/?api=1&query=${texto}`;
 }
 
 
-// ============================================================
-// ESPECIALIDADES DA REDE
-// ============================================================
+// ======================================================
+// ENDEREÇO
+// ======================================================
 
-function obterEspecialidadesDaRede(clinica) {
+function montarEndereco(clinica) {
+    const partes = [];
 
-    const redeAtual = obterRedeCard();
+    if (clinica.endereco) {
+        partes.push(clinica.endereco);
+    }
 
-    if (!Array.isArray(clinica?.clinica_especialidades)) {
+    if (clinica.bairro?.nome) {
+        partes.push(clinica.bairro.nome);
+    }
+
+    return partes.join(" - ");
+}
+
+
+// ======================================================
+// LOCALIZAÇÃO COMPLETA
+// ======================================================
+
+function montarLocalizacao(clinica) {
+    const localizacao = [];
+
+    const bairro = clinica.bairro;
+    const cidade = bairro?.cidades;
+    const estado = cidade?.estados;
+    const regiao = estado?.regioes;
+
+    if (bairro?.nome) {
+        localizacao.push(bairro.nome);
+    }
+
+    if (cidade?.nome) {
+        localizacao.push(cidade.nome);
+    }
+
+    if (estado?.nome) {
+        localizacao.push(estado.nome);
+    }
+
+    return localizacao.join(" • ");
+}
+
+
+// ======================================================
+// ESPECIALIDADES
+// ======================================================
+
+function obterEspecialidadesClinica(clinica) {
+    if (!Array.isArray(clinica.especialidades)) {
         return [];
     }
 
-    const especialidades = clinica.clinica_especialidades
-        .filter(item => {
-
-            const rede = normalizarRedeCard(item.rede);
-
-            return (
-                item.ativo === true &&
-                rede === redeAtual &&
-                item.especialidades
-            );
-        })
+    const nomes = clinica.especialidades
         .map(item => {
+            if (typeof item === "string") {
+                return item;
+            }
 
-            return {
-                id: item.especialidades.id,
-                nome: item.especialidades.nome
-            };
-
+            return item?.nome || "";
         })
-        .filter(item => item.nome);
+        .filter(Boolean);
 
     // Remove duplicadas
-    const mapa = new Map();
-
-    especialidades.forEach(item => {
-        mapa.set(item.id, item);
-    });
-
-    return Array.from(mapa.values())
-        .sort((a, b) =>
-            a.nome.localeCompare(
-                b.nome,
-                "pt-BR"
-            )
-        );
+    return [...new Set(nomes)];
 }
 
 
-// ============================================================
-// RENDERIZAR ESPECIALIDADES
-// ============================================================
+// ======================================================
+// CARD DA CLÍNICA
+// ======================================================
 
-function renderizarEspecialidadesCard(clinica) {
+function criarCardClinica(clinica) {
 
-    const especialidades =
-        obterEspecialidadesDaRede(clinica);
+    const nome = escaparTexto(
+        clinica.nome || "Clínica sem nome"
+    );
 
-    if (!especialidades.length) {
+    const telefone = clinica.telefone
+        ? formatarTelefone(clinica.telefone)
+        : "";
 
-        return `
-            <div class="especialidades-box">
-                <div class="especialidades-titulo">
-                    <span>🦷</span>
-                    <strong>Especialidades</strong>
+    const telefoneSeguro = escaparTexto(telefone);
+
+    const endereco = montarEndereco(clinica);
+    const enderecoSeguro = escaparTexto(endereco);
+
+    const localizacao = montarLocalizacao(clinica);
+    const localizacaoSegura = escaparTexto(localizacao);
+
+    const especialidades = obterEspecialidadesClinica(clinica);
+
+    const redeAtual = obterRedeAtual();
+    const nomeRede = obterNomeRede();
+
+    const linkMapa = obterLinkMapa(endereco);
+    const linkWhatsApp = obterLinkWhatsApp(clinica.telefone);
+
+
+    // ==================================================
+    // ESPECIALIDADES
+    // ==================================================
+
+    let especialidadesHTML = "";
+
+    if (especialidades.length > 0) {
+
+        especialidadesHTML = `
+            <div class="card-secao especialidades-card">
+                <div class="card-secao-titulo">
+                    <span class="card-secao-icone">🦷</span>
+                    <span>Especialidades</span>
                 </div>
 
-                <span class="sem-especialidades">
-                    Não informado
-                </span>
+                <div class="tags">
+                    ${especialidades.map(especialidade => `
+                        <span class="tag">
+                            ${escaparTexto(especialidade)}
+                        </span>
+                    `).join("")}
+                </div>
+            </div>
+        `;
+
+    } else {
+
+        especialidadesHTML = `
+            <div class="card-secao especialidades-card">
+                <div class="card-secao-titulo">
+                    <span class="card-secao-icone">🦷</span>
+                    <span>Especialidades</span>
+                </div>
+
+                <p class="sem-especialidades">
+                    Especialidades não informadas.
+                </p>
             </div>
         `;
     }
 
-    return `
-        <div class="especialidades-box">
 
-            <div class="especialidades-titulo">
-                <span>🦷</span>
-                <strong>Especialidades</strong>
-            </div>
-
-            <div class="tags">
-
-                ${especialidades
-                    .map(especialidade => `
-                        <span class="tag">
-                            ${escaparTextoCard(especialidade.nome)}
-                        </span>
-                    `)
-                    .join("")}
-
-            </div>
-
-        </div>
-    `;
-}
-
-
-// ============================================================
-// RENDERIZAR UMA CLÍNICA
-// ============================================================
-
-function renderizarCardClinica(clinica) {
-
-    const redeAtual = obterRedeCard();
-
-    const nome =
-        escaparTextoCard(
-            clinica.nome || "Clínica sem nome"
-        );
-
-    const endereco =
-        escaparTextoCard(
-            obterEnderecoCard(clinica)
-        );
-
-    const localizacao =
-        escaparTextoCard(
-            obterLocalizacaoCard(clinica)
-        );
-
-    const telefoneFormatado =
-        formatarTelefoneCard(
-            clinica.telefone
-        );
-
-    const telefone =
-        escaparTextoCard(
-            telefoneFormatado
-        );
-
-    const email =
-        escaparTextoCard(
-            clinica.email
-        );
-
-    const linkTelefone =
-        criarLinkTelefoneCard(
-            clinica.telefone
-        );
-
-    const linkWhatsApp =
-        criarLinkWhatsAppCard(
-            clinica.whatsapp
-        );
-
-    const linkMapa =
-        criarLinkMapaCard(
-            clinica
-        );
-
-
-    // --------------------------------------------------------
-    // REDE
-    // --------------------------------------------------------
-
-    const nomeRede =
-        redeAtual === "sindilegis"
-            ? "Sindilegis"
-            : "Rede Especialistas";
-
-
-    // --------------------------------------------------------
-    // CLASSE DO CARD
-    // --------------------------------------------------------
-
-    const classeRede =
-        redeAtual === "sindilegis"
-            ? "card-rede-sindilegis"
-            : "card-rede-especialistas";
-
-
-    // --------------------------------------------------------
-    // ENDEREÇO
-    // --------------------------------------------------------
-
-    const blocoEndereco = endereco
-        ? `
-            <div class="card-info-item">
-
-                <div class="card-info-icone">
-                    📍
-                </div>
-
-                <div class="card-info-conteudo">
-
-                    <span class="card-info-label">
-                        Endereço
-                    </span>
-
-                    <span class="card-info-valor">
-                        ${endereco}
-                    </span>
-
-                </div>
-
-            </div>
-        `
-        : "";
-
-
-    // --------------------------------------------------------
+    // ==================================================
     // LOCALIZAÇÃO
-    // --------------------------------------------------------
+    // ==================================================
 
-    const blocoLocalizacao = localizacao
-        ? `
+    let localizacaoHTML = "";
+
+    if (localizacao) {
+        localizacaoHTML = `
             <div class="card-info-item">
-
-                <div class="card-info-icone">
-                    📌
-                </div>
+                <span class="card-info-icone">📍</span>
 
                 <div class="card-info-conteudo">
-
-                    <span class="card-info-label">
-                        Localização
-                    </span>
-
-                    <span class="card-info-valor">
-                        ${localizacao}
-                    </span>
-
+                    <span class="card-info-label">Localização</span>
+                    <strong>${localizacaoSegura}</strong>
                 </div>
-
             </div>
-        `
-        : "";
+        `;
+    }
 
 
-    // --------------------------------------------------------
+    // ==================================================
+    // ENDEREÇO
+    // ==================================================
+
+    let enderecoHTML = "";
+
+    if (endereco) {
+        enderecoHTML = `
+            <div class="card-info-item">
+                <span class="card-info-icone">🏠</span>
+
+                <div class="card-info-conteudo">
+                    <span class="card-info-label">Endereço</span>
+                    <strong>${enderecoSeguro}</strong>
+                </div>
+            </div>
+        `;
+    }
+
+
+    // ==================================================
     // TELEFONE
-    // --------------------------------------------------------
+    // ==================================================
 
-    const blocoTelefone = telefone
-        ? `
+    let telefoneHTML = "";
+
+    if (telefone) {
+        telefoneHTML = `
             <div class="card-info-item">
-
-                <div class="card-info-icone">
-                    📞
-                </div>
+                <span class="card-info-icone">📞</span>
 
                 <div class="card-info-conteudo">
-
-                    <span class="card-info-label">
-                        Telefone
-                    </span>
-
-                    <span class="card-info-valor">
-
-                        <a
-                            href="${linkTelefone}"
-                            class="card-link-telefone"
-                        >
-                            ${telefone}
-                        </a>
-
-                    </span>
-
+                    <span class="card-info-label">Telefone</span>
+                    <strong>${telefoneSeguro}</strong>
                 </div>
-
             </div>
-        `
-        : "";
+        `;
+    }
 
 
-    // --------------------------------------------------------
-    // EMAIL
-    // --------------------------------------------------------
+    // ==================================================
+    // BOTÕES
+    // ==================================================
 
-    const blocoEmail = email
-        ? `
-            <div class="card-info-item">
+    let botoesHTML = "";
 
-                <div class="card-info-icone">
-                    ✉️
-                </div>
-
-                <div class="card-info-conteudo">
-
-                    <span class="card-info-label">
-                        E-mail
-                    </span>
-
-                    <span class="card-info-valor">
-
-                        <a
-                            href="mailto:${email}"
-                            class="card-link-email"
-                        >
-                            ${email}
-                        </a>
-
-                    </span>
-
-                </div>
-
-            </div>
-        `
-        : "";
-
-
-    // --------------------------------------------------------
-    // WHATSAPP
-    // --------------------------------------------------------
-
-    const botaoWhatsApp = linkWhatsApp
-        ? `
-            <a
-                href="${linkWhatsApp}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btnAcao btn-whatsapp"
-            >
-                <span>💬</span>
-                WhatsApp
-            </a>
-        `
-        : "";
-
-
-    // --------------------------------------------------------
-    // MAPA
-    // --------------------------------------------------------
-
-    const botaoMapa = linkMapa
-        ? `
+    if (linkMapa) {
+        botoesHTML += `
             <a
                 href="${linkMapa}"
                 target="_blank"
@@ -582,64 +316,50 @@ function renderizarCardClinica(clinica) {
                 class="btnAcao btn-mapa"
             >
                 <span>📍</span>
-                Ver no mapa
+                <span>Ver no mapa</span>
             </a>
-        `
-        : "";
+        `;
+    }
 
-
-    // --------------------------------------------------------
-    // BOTÃO LIGAR
-    // --------------------------------------------------------
-
-    const botaoLigar = linkTelefone
-        ? `
+    if (linkWhatsApp) {
+        botoesHTML += `
             <a
-                href="${linkTelefone}"
-                class="btnAcao btn-ligar"
+                href="${linkWhatsApp}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btnAcao btn-whatsapp"
             >
-                <span>📞</span>
-                Ligar
+                <span>💬</span>
+                <span>WhatsApp</span>
             </a>
-        `
-        : "";
+        `;
+    }
 
 
-    // --------------------------------------------------------
+    // ==================================================
     // CARD COMPLETO
-    // --------------------------------------------------------
+    // ==================================================
 
     return `
-
-        <article class="card ${classeRede}">
-
-            <!-- CABEÇALHO -->
+        <article class="card">
 
             <div class="cardHeader">
 
-                <div class="cardHeader-esquerda">
+                <div class="cardHeader-principal">
 
                     <div class="card-icone-clinica">
-                        🦷
+                        🏥
                     </div>
 
-                    <div class="card-identificacao">
+                    <div class="card-titulo">
 
-                        <h3 class="card-nome">
+                        <span class="card-rede">
+                            ${escaparTexto(nomeRede)}
+                        </span>
+
+                        <h3>
                             ${nome}
                         </h3>
-
-                        <div class="card-rede">
-
-                            <span class="card-rede-icone">
-                                ${redeAtual === "sindilegis" ? "🏥" : "🦷"}
-                            </span>
-
-                            <span>
-                                ${nomeRede}
-                            </span>
-
-                        </div>
 
                     </div>
 
@@ -653,132 +373,64 @@ function renderizarCardClinica(clinica) {
             </div>
 
 
-            <!-- CORPO -->
-
             <div class="card-corpo">
 
                 <div class="card-informacoes">
 
-                    ${blocoEndereco}
+                    ${localizacaoHTML}
 
-                    ${blocoLocalizacao}
+                    ${enderecoHTML}
 
-                    ${blocoTelefone}
-
-                    ${blocoEmail}
+                    ${telefoneHTML}
 
                 </div>
 
 
-                <!-- ESPECIALIDADES -->
-
-                ${renderizarEspecialidadesCard(clinica)}
-
-            </div>
+                ${especialidadesHTML}
 
 
-            <!-- RODAPÉ -->
-
-            <div class="card-footer">
-
-                <div class="card-acoes">
-
-                    ${botaoMapa}
-
-                    ${botaoLigar}
-
-                    ${botaoWhatsApp}
-
-                </div>
+                ${
+                    botoesHTML
+                        ? `
+                            <div class="acoes">
+                                ${botoesHTML}
+                            </div>
+                        `
+                        : ""
+                }
 
             </div>
 
         </article>
-
     `;
 }
 
 
-// ============================================================
+// ======================================================
 // MOSTRAR CLÍNICAS
-// ============================================================
+// ======================================================
 
 function mostrarClinicas(clinicas) {
 
-    const resultado =
-        document.getElementById("resultado");
+    const resultado = document.getElementById("resultado");
 
     if (!resultado) {
-
-        console.error(
-            "Elemento #resultado não encontrado."
-        );
-
+        console.error("Elemento #resultado não encontrado.");
         return;
     }
 
 
-    // --------------------------------------------------------
-    // GARANTIR ARRAY
-    // --------------------------------------------------------
+    // --------------------------------------------------
+    // Verifica resultados
+    // --------------------------------------------------
 
-    if (!Array.isArray(clinicas)) {
-        clinicas = [];
-    }
-
-
-    // --------------------------------------------------------
-    // REMOVER DUPLICADAS
-    // --------------------------------------------------------
-
-    const mapaClinicas = new Map();
-
-    clinicas.forEach(clinica => {
-
-        if (
-            clinica &&
-            clinica.id !== undefined &&
-            clinica.id !== null
-        ) {
-
-            mapaClinicas.set(
-                clinica.id,
-                clinica
-            );
-
-        }
-
-    });
-
-    const listaClinicas =
-        Array.from(mapaClinicas.values());
-
-
-    // --------------------------------------------------------
-    // NOME DA REDE
-    // --------------------------------------------------------
-
-    const redeAtual =
-        obterRedeCard();
-
-    const nomeRede =
-        redeAtual === "sindilegis"
-            ? "Sindilegis"
-            : "Rede Especialistas";
-
-
-    // --------------------------------------------------------
-    // NENHUMA CLÍNICA
-    // --------------------------------------------------------
-
-    if (!listaClinicas.length) {
+    if (!Array.isArray(clinicas) || clinicas.length === 0) {
 
         resultado.innerHTML = `
-
             <div class="semResultado">
 
                 <div class="semResultado-icone">
-                    🔍
+                    🔎
                 </div>
 
                 <h2>
@@ -786,98 +438,108 @@ function mostrarClinicas(clinicas) {
                 </h2>
 
                 <p>
-                    Não encontramos clínicas
-                    para os filtros selecionados.
+                    Não encontramos clínicas para os filtros selecionados.
+                    Tente alterar os filtros e realizar uma nova busca.
                 </p>
 
-                <span>
-                    Tente alterar os filtros
-                    e realizar uma nova busca.
-                </span>
-
             </div>
-
         `;
 
         return;
     }
 
 
-    // --------------------------------------------------------
-    // TÍTULO DOS RESULTADOS
-    // --------------------------------------------------------
+    // --------------------------------------------------
+    // Remove clínicas duplicadas
+    // --------------------------------------------------
 
-    const quantidade =
-        listaClinicas.length;
+    const mapaClinicas = new Map();
+
+    clinicas.forEach(clinica => {
+
+        if (!clinica || !clinica.id) {
+            return;
+        }
+
+        if (!mapaClinicas.has(clinica.id)) {
+            mapaClinicas.set(clinica.id, clinica);
+        }
+
+    });
+
+    const listaFinal = [...mapaClinicas.values()];
+
+
+    // --------------------------------------------------
+    // Cabeçalho dos resultados
+    // --------------------------------------------------
+
+    const redeAtual = obterRedeAtual();
+
+    const nomeRede =
+        redeAtual === "sindilegis"
+            ? "Rede Sindilegis"
+            : "Rede Especialistas";
 
 
     resultado.innerHTML = `
 
         <div class="resultado-topo">
 
-            <div class="resultado-titulo">
-
-                <span class="resultado-quantidade">
-                    ${quantidade}
+            <div>
+                <span class="section-label">
+                    ${escaparTexto(nomeRede)}
                 </span>
 
-                <div>
+                <h2>
+                    Clínicas encontradas
+                </h2>
 
-                    <h2>
-                        ${quantidade === 1
-                            ? "clínica encontrada"
-                            : "clínicas encontradas"}
-                    </h2>
-
-                    <p>
-                        Confira as clínicas disponíveis
-                    </p>
-
-                </div>
-
+                <p>
+                    Encontramos
+                    <strong>${listaFinal.length}</strong>
+                    ${
+                        listaFinal.length === 1
+                            ? "clínica disponível"
+                            : "clínicas disponíveis"
+                    }.
+                </p>
             </div>
 
-
-            <div class="resultado-rede">
-
-                <span>
-                    ${redeAtual === "sindilegis"
-                        ? "🏥"
-                        : "🦷"}
-                </span>
-
-                ${nomeRede}
-
+            <div class="resultado-contador">
+                <strong>${listaFinal.length}</strong>
+                <span>${
+                    listaFinal.length === 1
+                        ? "clínica"
+                        : "clínicas"
+                }</span>
             </div>
 
         </div>
 
+        <div class="cards">
 
-        <div class="lista-clinicas">
-
-            ${listaClinicas
-                .map(renderizarCardClinica)
+            ${listaFinal
+                .map(clinica => criarCardClinica(clinica))
                 .join("")}
 
         </div>
-
     `;
 }
 
 
-// ============================================================
-// EXPORTAR FUNÇÃO
-// ============================================================
+// ======================================================
+// EXPOSIÇÃO GLOBAL
+// ======================================================
 
-window.mostrarClinicas =
-    mostrarClinicas;
+window.escaparTexto = escaparTexto;
+window.formatarTelefone = formatarTelefone;
+window.obterLinkWhatsApp = obterLinkWhatsApp;
+window.obterLinkMapa = obterLinkMapa;
+window.montarEndereco = montarEndereco;
+window.montarLocalizacao = montarLocalizacao;
+window.criarCardClinica = criarCardClinica;
+window.mostrarClinicas = mostrarClinicas;
+window.obterRedeAtual = obterRedeAtual;
 
-window.renderizarCardClinica =
-    renderizarCardClinica;
-
-window.obterEspecialidadesDaRede =
-    obterEspecialidadesDaRede;
-
-console.log(
-    "Sistema de cards das clínicas configurado."
-);
+console.log("Funções dos cards disponíveis.");
