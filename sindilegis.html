@@ -10,201 +10,325 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <meta
-        name="format-detection"
-        content="telephone=no"
-    >
-
-    <title>
-        Redes Credenciadas Sindilegis
-    </title>
-
-
-    <!-- ÍCONE -->
+    <title>Redes Credenciadas Sindilegis</title>
 
     <link
         rel="icon"
+        type="image/png"
         href="img/tooth.png"
     >
-
-
-    <!-- CSS -->
 
     <link
         rel="stylesheet"
         href="css/style.css"
     >
 
-
-    <!-- SUPABASE -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
 
-
-<!-- CLASSE SINDILEGIS -->
 
 <body class="sindilegis">
 
 
-    <!-- ======================================
-         HEADER
-    ======================================= -->
+    <!-- =========================================================
+         CABEÇALHO
+    ========================================================== -->
 
     <header class="header">
 
+        <div class="header-left">
 
-        <img
-            src="img/tooth.png"
-            class="logo"
-            alt="Logo"
-        >
-
-
-        <h1>
-            Redes Credenciadas Sindilegis
-        </h1>
-
-
-        <p>
-            Encontre clínicas credenciadas do Sindilegis
-        </p>
-
-
-        <!-- MENU -->
-
-        <div class="topoBotoes">
-
-
-            <button
-                onclick="location.href='index.html'"
+            <img
+                src="img/tooth.png"
+                alt="Logo Rede Sindilegis"
+                class="logo"
             >
 
+
+            <div class="titulo-site">
+
+                <h1>
+                    Rede Sindilegis
+                </h1>
+
+                <p>
+                    Encontre clínicas credenciadas
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             MENU SUPERIOR
+        ====================================================== -->
+
+        <nav class="menu-topo">
+
+            <a
+                href="index.html"
+                class="menu-link"
+            >
                 🦷 Rede Especialistas
+            </a>
 
-            </button>
 
-
-            <button class="ativo">
-
-                🌐 Rede Sindilegis
-
-            </button>
+            <a
+                href="sindilegis.html"
+                class="menu-link ativo"
+            >
+                🏥 Sindilegis
+            </a>
 
 
             <button
+                type="button"
                 id="btnTema"
+                class="btn-tema"
                 title="Ativar tema escuro"
+                aria-label="Alternar tema"
             >
                 🌙
             </button>
 
 
-            <button
-                onclick="location.href='login.html'"
+            <a
+                href="login.html"
+                class="menu-link login-link"
             >
+                🔐 Login
+            </a>
 
-                ⚙ Painel Administrativo
-
-            </button>
-
-
-        </div>
-
+        </nav>
 
     </header>
 
 
-    <!-- ======================================
-         CONTEÚDO
-    ======================================= -->
+    <!-- =========================================================
+         CONTEÚDO PRINCIPAL
+    ========================================================== -->
 
     <main class="container">
 
 
-        <!-- FILTROS -->
+        <!-- =====================================================
+             TÍTULO
+        ====================================================== -->
 
-        <section class="filtros">
+        <section class="titulo-principal">
 
-
-            <select id="regiao">
-
-                <option value="">
-                    Selecione a Região
-                </option>
-
-            </select>
+            <h2>
+                Encontre uma clínica
+            </h2>
 
 
-            <select id="estado">
-
-                <option value="">
-                    Selecione o Estado
-                </option>
-
-            </select>
-
-
-            <select id="cidade">
-
-                <option value="">
-                    Selecione a Cidade
-                </option>
-
-            </select>
-
-
-            <select id="bairro">
-
-                <option value="">
-                    Selecione o Bairro
-                </option>
-
-            </select>
-
-
-            <select id="especialidade">
-
-                <option value="">
-                    Todas as Especialidades
-                </option>
-
-            </select>
-
-
-            <button id="buscar">
-
-                🔍 Buscar Clínicas
-
-            </button>
-
+            <p>
+                Pesquise por localização e especialidade.
+            </p>
 
         </section>
 
 
-        <!-- RESULTADOS -->
+        <!-- =====================================================
+             FILTROS
+        ====================================================== -->
 
-        <section id="resultado"></section>
+        <section class="filtros">
 
+
+            <!-- =================================================
+                 REGIÃO
+            ================================================== -->
+
+            <div class="filtro">
+
+                <label for="regiao">
+                    Região
+                </label>
+
+
+                <select id="regiao">
+
+                    <option value="">
+                        Selecione a Região
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 ESTADO
+            ================================================== -->
+
+            <div class="filtro">
+
+                <label for="estado">
+                    Estado
+                </label>
+
+
+                <select id="estado">
+
+                    <option value="">
+                        Selecione o Estado
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 CIDADE
+            ================================================== -->
+
+            <div class="filtro">
+
+                <label for="cidade">
+                    Cidade
+                </label>
+
+
+                <select id="cidade">
+
+                    <option value="">
+                        Selecione a Cidade
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 BAIRRO
+            ================================================== -->
+
+            <div class="filtro">
+
+                <label for="bairro">
+                    Bairro
+                </label>
+
+
+                <select id="bairro">
+
+                    <option value="">
+                        Selecione o Bairro
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 ESPECIALIDADE
+            ================================================== -->
+
+            <div class="filtro">
+
+                <label for="especialidade">
+                    Especialidade
+                </label>
+
+
+                <select id="especialidade">
+
+                    <option value="">
+                        Todas as Especialidades
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOTÃO BUSCAR
+            ================================================== -->
+
+            <div class="filtro filtro-botao">
+
+                <button
+                    type="button"
+                    id="buscar"
+                    class="btn-buscar"
+                >
+                    🔎 Buscar Clínicas
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             RESULTADOS
+        ====================================================== -->
+
+        <section
+            id="resultado"
+            aria-live="polite"
+        >
+
+            <div class="semResultado">
+
+                <h2>
+                    Encontre uma clínica
+                </h2>
+
+
+                <p>
+                    Selecione os filtros desejados e clique em
+                    <strong>Buscar Clínicas</strong>.
+                </p>
+
+            </div>
+
+        </section>
 
     </main>
 
 
-    <!-- ======================================
-         JAVASCRIPT
-    ======================================= -->
+    <!-- =========================================================
+         SCRIPTS
+         
+         A ordem é importante.
+    ========================================================== -->
+
+    <!-- Biblioteca Supabase -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <!-- Configuração do Supabase -->
 
     <script src="js/supabase.js"></script>
 
+
+    <!-- Tema claro / escuro -->
+
     <script src="js/tema.js"></script>
+
+
+    <!-- Filtros -->
 
     <script src="js/filtros.js"></script>
 
+
+    <!-- Cards -->
+
     <script src="js/cards.js"></script>
 
-    <script src="js/sindilegis.js"></script>
 
+    <!-- Busca Sindilegis -->
+
+    <script src="js/sindilegis.js"></script>
 
 </body>
 
