@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Rede Especialistas</title>
+    <title>Rede Sindilegis</title>
 
     <link rel="icon" type="image/png" href="img/tooth.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="sindilegis">
+
+    <!-- =========================================================
+         CABEÇALHO
+    ========================================================== -->
 
     <header class="header">
 
@@ -19,29 +23,32 @@
 
             <img
                 src="img/tooth.png"
-                alt="Logo Rede Especialistas"
+                alt="Logo Rede Sindilegis"
                 class="logo"
             >
 
             <div class="titulo-site">
-                <h1>Rede Especialistas</h1>
-                <p>Encontre clínicas e especialistas</p>
+                <h1>Rede Sindilegis</h1>
+                <p>Encontre clínicas credenciadas</p>
             </div>
 
         </div>
+
+
+        <!-- MENU SUPERIOR -->
 
         <nav class="menu-topo">
 
             <a
                 href="index.html"
-                class="menu-link ativo"
+                class="menu-link"
             >
                 🦷 Rede Especialistas
             </a>
 
             <a
                 href="sindilegis.html"
-                class="menu-link"
+                class="menu-link ativo"
             >
                 🏥 Sindilegis
             </a>
@@ -68,7 +75,16 @@
     </header>
 
 
+    <!-- =========================================================
+         CONTEÚDO PRINCIPAL
+    ========================================================== -->
+
     <main class="container">
+
+
+        <!-- =====================================================
+             TÍTULO
+        ====================================================== -->
 
         <section class="titulo-principal">
 
@@ -81,7 +97,13 @@
         </section>
 
 
+        <!-- =====================================================
+             FILTROS
+        ====================================================== -->
+
         <section class="filtros">
+
+            <!-- REGIÃO -->
 
             <div class="filtro">
 
@@ -98,13 +120,15 @@
             </div>
 
 
+            <!-- ESTADO -->
+
             <div class="filtro">
 
                 <label for="estado">
                     Estado
                 </label>
 
-                <select id="estado">
+                <select id="estado" disabled>
                     <option value="">
                         Selecione o Estado
                     </option>
@@ -113,13 +137,15 @@
             </div>
 
 
+            <!-- CIDADE -->
+
             <div class="filtro">
 
                 <label for="cidade">
                     Cidade
                 </label>
 
-                <select id="cidade">
+                <select id="cidade" disabled>
                     <option value="">
                         Selecione a Cidade
                     </option>
@@ -128,13 +154,15 @@
             </div>
 
 
+            <!-- BAIRRO -->
+
             <div class="filtro">
 
                 <label for="bairro">
                     Bairro
                 </label>
 
-                <select id="bairro">
+                <select id="bairro" disabled>
                     <option value="">
                         Selecione o Bairro
                     </option>
@@ -143,6 +171,8 @@
             </div>
 
 
+            <!-- ESPECIALIDADE -->
+
             <div class="filtro">
 
                 <label for="especialidade">
@@ -150,13 +180,17 @@
                 </label>
 
                 <select id="especialidade">
+
                     <option value="">
                         Todas as Especialidades
                     </option>
+
                 </select>
 
             </div>
 
+
+            <!-- BOTÃO -->
 
             <div class="filtro filtro-botao">
 
@@ -173,6 +207,10 @@
         </section>
 
 
+        <!-- =====================================================
+             RESULTADOS
+        ====================================================== -->
+
         <section
             id="resultado"
             aria-live="polite"
@@ -180,8 +218,8 @@
 
             <div class="semResultado">
 
-                <div class="icone-vazio">
-                    🦷
+                <div class="semResultado-icone">
+                    🏥
                 </div>
 
                 <h2>
@@ -200,13 +238,40 @@
     </main>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- =========================================================
+         SCRIPTS
+    ========================================================== -->
+
+    <!-- Supabase -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <!-- Configuração Supabase -->
 
     <script src="js/supabase.js"></script>
+
+
+    <!-- Tema -->
+
     <script src="js/tema.js"></script>
+
+
+    <!-- Filtros -->
+
     <script src="js/filtros.js"></script>
+
+
+    <!-- Cards -->
+
     <script src="js/cards.js"></script>
-    <script src="js/especialistas.js"></script>
+
+
+    <!-- Rede Sindilegis -->
+
+    <script src="js/sindilegis.js"></script>
 
 </body>
 
