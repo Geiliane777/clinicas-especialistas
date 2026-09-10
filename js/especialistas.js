@@ -1,158 +1,225 @@
 // ============================================================
-// ESPECIALISTAS.JS
-// REDE ESPECIALISTAS
+// BUSCA - REDE ESPECIALISTAS
 // ============================================================
 
 console.log("especialistas.js carregado");
 
 
 // ============================================================
-// CARREGAR REGIÕES
+// CONFIGURAÇÃO
 // ============================================================
 
-async function carregarRegioes() {
+const REDE_ESPECIALISTAS = "especialistas";
 
-    const select = document.getElementById("regiao");
 
-    if (!select) return;
+// ============================================================
+// BUSCAR IDs DOS BAIRROS
+// A partir da localização escolhida.
+// ============================================================
 
-    select.innerHTML = `
-        <option value="">Selecione a Região</option>
-    `;
+async function obterBairrosPorLocalizacao(filtros) {
 
-    const { data, error } = await supabaseClient
-        .from("regioes")
-        .select("id, nome")
-        .order("nome");
+    // --------------------------------------------------------
+    // Se o usuário escolheu um bairro diretamente
+    // --------------------------------------------------------
 
-    if (error) {
+    if (filtros.bairroId) {
 
-        console.error(
-            "Erro ao carregar regiões:",
-            error
+        return [filtros.bairroId];
+
+    }
+
+
+    // --------------------------------------------------------
+    // Se escolheu uma cidade
+    // --------------------------------------------------------
+
+    if (filtros.cidadeId) {
+
+        const { data, error } = await supabaseClient
+
+            .from("bairros")
+
+            .select("id")
+
+            .eq(
+                "cidade_id",
+                filtros.cidadeId
+            );
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        return (data || []).map(
+            bairro => bairro.id
         );
 
-        return;
     }
 
-    (data || []).forEach(regiao => {
 
-        select.innerHTML += `
-            <option value="${regiao.id}">
-                ${escaparTexto(regiao.nome)}
-            </option>
-        `;
+    // --------------------------------------------------------
+    // Se escolheu um estado
+    // --------------------------------------------------------
 
-    });
-}
+    if (filtros.estadoId) {
+
+        const { data: cidades, error: erroCidades } =
+            await supabaseClient
+
+                .from("cidades")
+
+                .select("id")
+
+                .eq(
+                    "estado_id",
+                    filtros.estadoId
+                );
 
 
-// ============================================================
-// CARREGAR ESTADOS
-// ============================================================
+        if (erroCidades) {
+            throw erroCidades;
+        }
 
-async function carregarEstados() {
 
-    const regiaoId =
-        document.getElementById("regiao")?.value;
-
-    const select =
-        document.getElementById("estado");
-
-    const cidade =
-        document.getElementById("cidade");
-
-    if (!select) return;
-
-    select.innerHTML = `
-        <option value="">Selecione o Estado</option>
-    `;
-
-    if (cidade) {
-
-        cidade.innerHTML = `
-            <option value="">Selecione a Cidade</option>
-        `;
-
-    }
-
-    if (!regiaoId) return;
-
-    const { data, error } =
-        await supabaseClient
-            .from("estados")
-            .select("id, nome")
-            .eq("regiao_id", regiaoId)
-            .order("nome");
-
-    if (error) {
-
-        console.error(
-            "Erro ao carregar estados:",
-            error
+        const cidadeIds = (cidades || []).map(
+            cidade => cidade.id
         );
 
-        return;
-    }
 
-    (data || []).forEach(estado => {
-
-        select.innerHTML += `
-            <option value="${estado.id}">
-                ${escaparTexto(estado.nome)}
-            </option>
-        `;
-
-    });
-}
+        if (cidadeIds.length === 0) {
+            return [];
+        }
 
 
-// ============================================================
-// CARREGAR CIDADES
-// ============================================================
+        const { data: bairros, error: erroBairros } =
+            await supabaseClient
 
-async function carregarCidades() {
+                .from("bairros")
 
-    const estadoId =
-        document.getElementById("estado")?.value;
+                .select("id")
 
-    const select =
-        document.getElementById("cidade");
+                .in(
+                    "cidade_id",
+                    cidadeIds
+                );
 
-    if (!select) return;
 
-    select.innerHTML = `
-        <option value="">Selecione a Cidade</option>
-    `;
+        if (erroBairros) {
+            throw erroBairros;
+        }
 
-    if (!estadoId) return;
 
-    const { data, error } =
-        await supabaseClient
-            .from("cidades")
-            .select("id, nome")
-            .eq("estado_id", estadoId)
-            .order("nome");
-
-    if (error) {
-
-        console.error(
-            "Erro ao carregar cidades:",
-            error
+        return (bairros || []).map(
+            bairro => bairro.id
         );
 
-        return;
     }
 
-    (data || []).forEach(cidade => {
 
-        select.innerHTML += `
-            <option value="${cidade.id}">
-                ${escaparTexto(cidade.nome)}
-            </option>
-        `;
+    // --------------------------------------------------------
+    // Se escolheu uma região
+    // --------------------------------------------------------
 
-    });
+    if (filtros.regiaoId) {
+
+        // Primeiro buscamos os estados da região.
+
+        const { data: estados, error: erroEstados } =
+            await supabaseClient
+
+                .from("estados")
+
+                .select("id")
+
+                .eq(
+                    "regiao_id",
+                    filtros.regiaoId
+                );
+
+
+        if (erroEstados) {
+            throw erroEstados;
+        }
+
+
+        const estadoIds = (estados || []).map(
+            estado => estado.id
+        );
+
+
+        if (estadoIds.length === 0) {
+            return [];
+        }
+
+
+        // Depois buscamos as cidades desses estados.
+
+        const { data: cidades, error: erroCidades } =
+            await supabaseClient
+
+                .from("cidades")
+
+                .select("id")
+
+                .in(
+                    "estado_id",
+                    estadoIds
+                );
+
+
+        if (erroCidades) {
+            throw erroCidades;
+        }
+
+
+        const cidadeIds = (cidades || []).map(
+            cidade => cidade.id
+        );
+
+
+        if (cidadeIds.length === 0) {
+            return [];
+        }
+
+
+        // Finalmente buscamos os bairros.
+
+        const { data: bairros, error: erroBairros } =
+            await supabaseClient
+
+                .from("bairros")
+
+                .select("id")
+
+                .in(
+                    "cidade_id",
+                    cidadeIds
+                );
+
+
+        if (erroBairros) {
+            throw erroBairros;
+        }
+
+
+        return (bairros || []).map(
+            bairro => bairro.id
+        );
+
+    }
+
+
+    // --------------------------------------------------------
+    // Nenhum filtro de localização
+    //
+    // Retornamos null para informar que não devemos aplicar
+    // filtro por bairro na consulta.
+    // --------------------------------------------------------
+
+    return null;
 }
 
 
@@ -162,376 +229,393 @@ async function carregarCidades() {
 
 async function buscarClinicas() {
 
-    const cidadeId =
-        document.getElementById("cidade")?.value;
+    const resultado =
+        document.getElementById("resultado");
 
-    const resultados =
-        document.getElementById("resultados");
 
-    if (!resultados) return;
-
-    if (!cidadeId) {
-
-        alert("Selecione uma cidade.");
+    if (!resultado) {
+        console.error(
+            "Elemento #resultado não encontrado."
+        );
 
         return;
     }
 
-    resultados.innerHTML = `
-        <h2 class="results-title">
-            Carregando clínicas...
-        </h2>
+
+    // --------------------------------------------------------
+    // Mostra mensagem enquanto pesquisa
+    // --------------------------------------------------------
+
+    resultado.innerHTML = `
+        <div class="semResultado">
+
+            <h2>Buscando clínicas...</h2>
+
+            <p>
+                Aguarde enquanto consultamos nossa rede.
+            </p>
+
+        </div>
     `;
 
 
-    // --------------------------------------------------------
-    // BUSCAR BAIRROS DA CIDADE
-    // --------------------------------------------------------
+    try {
 
-    const {
-        data: bairros,
-        error: erroBairros
-    } = await supabaseClient
-        .from("bairros")
-        .select("id, nome")
-        .eq("cidade_id", cidadeId);
+        // ====================================================
+        // OBTÉM OS FILTROS
+        // ====================================================
 
-    if (erroBairros) {
+        const filtros =
+            obterFiltros();
 
-        console.error(
-            "Erro ao carregar bairros:",
-            erroBairros
+
+        console.log(
+            "Filtros selecionados:",
+            filtros
         );
 
-        resultados.innerHTML = `
-            <div class="no-result">
-                Erro ao carregar bairros.
-            </div>
-        `;
 
-        return;
-    }
+        // ====================================================
+        // OBTÉM BAIRROS DE ACORDO COM A LOCALIZAÇÃO
+        // ====================================================
 
-
-    if (!bairros || bairros.length === 0) {
-
-        resultados.innerHTML = `
-            <div class="no-result">
-                Nenhum bairro cadastrado nesta cidade.
-            </div>
-        `;
-
-        return;
-    }
+        const bairroIds =
+            await obterBairrosPorLocalizacao(
+                filtros
+            );
 
 
-    const bairrosIds =
-        bairros.map(bairro => bairro.id);
+        // ----------------------------------------------------
+        // Se foi escolhido algum local, mas não existem
+        // bairros correspondentes, não haverá resultados.
+        // ----------------------------------------------------
+
+        if (
+            bairroIds !== null &&
+            bairroIds.length === 0
+        ) {
+
+            mostrarNenhumResultado();
+
+            return;
+
+        }
 
 
-    // --------------------------------------------------------
-    // BUSCAR CLÍNICAS DA REDE ESPECIALISTAS
-    // --------------------------------------------------------
+        // ====================================================
+        // CONSULTA PRINCIPAL
+        // ====================================================
 
-    const {
-        data: clinicas,
-        error
-    } = await supabaseClient
-        .from("clinicas")
-        .select(`
-            id,
-            nome,
-            telefone,
-            whatsapp,
-            email,
-            endereco,
-            numero,
-            complemento,
-            cep,
-            ativo,
+        let consulta =
+            supabaseClient
 
-            bairros (
-                id,
-                nome,
+                .from("clinicas")
 
-                cidades (
+                .select(`
                     id,
                     nome,
+                    telefone,
+                    whatsapp,
+                    email,
+                    endereco,
+                    numero,
+                    complemento,
+                    cep,
+                    bairro_id,
+                    ativo,
 
-                    estados (
+                    bairros (
                         id,
                         nome,
 
-                        regioes (
+                        cidades (
+                            id,
+                            nome,
+
+                            estados (
+                                id,
+                                nome,
+
+                                regioes (
+                                    id,
+                                    nome
+                                )
+                            )
+                        )
+                    ),
+
+                    clinica_especialidades!inner (
+                        id,
+                        clinica_id,
+                        especialidade_id,
+                        rede,
+                        ativo,
+
+                        especialidades (
                             id,
                             nome
                         )
                     )
-                )
-            ),
+                `)
 
-            clinica_especialidades!inner (
-                id,
-                especialidade_id,
-                rede,
-                ativo,
-
-                especialidades (
-                    id,
-                    nome
+                .eq(
+                    "ativo",
+                    true
                 )
-            )
-        `)
-        .in("bairro_id", bairrosIds)
-        .eq("ativo", true)
-        .eq(
-            "clinica_especialidades.rede",
-            "especialistas"
-        )
-        .eq(
-            "clinica_especialidades.ativo",
-            true
+
+                .eq(
+                    "clinica_especialidades.rede",
+                    REDE_ESPECIALISTAS
+                )
+
+                .eq(
+                    "clinica_especialidades.ativo",
+                    true
+                );
+
+
+        // ====================================================
+        // FILTRO DE BAIRRO
+        // ====================================================
+
+        if (bairroIds !== null) {
+
+            consulta = consulta.in(
+                "bairro_id",
+                bairroIds
+            );
+
+        }
+
+
+        // ====================================================
+        // EXECUTA CONSULTA
+        // ====================================================
+
+        const {
+            data: clinicas,
+            error
+        } = await consulta;
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        console.log(
+            "Clínicas encontradas:",
+            clinicas
         );
 
 
-    if (error) {
+        // ====================================================
+        // FILTRO DE ESPECIALIDADE
+        //
+        // Fazemos também no JavaScript para garantir que a
+        // clínica exibida realmente tenha a especialidade
+        // selecionada.
+        // ====================================================
+
+        let clinicasFiltradas =
+            clinicas || [];
+
+
+        if (filtros.especialidadeId) {
+
+            clinicasFiltradas =
+                clinicasFiltradas.filter(
+                    clinica => {
+
+                        const especialidades =
+                            Array.isArray(
+                                clinica.clinica_especialidades
+                            )
+                                ? clinica.clinica_especialidades
+                                : [];
+
+
+                        return especialidades.some(
+                            item => {
+
+                                return (
+                                    item.ativo === true &&
+                                    item.rede ===
+                                        REDE_ESPECIALISTAS &&
+                                    String(
+                                        item.especialidade_id
+                                    ) === String(
+                                        filtros.especialidadeId
+                                    )
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        // ====================================================
+        // GARANTE QUE CADA CLÍNICA APAREÇA APENAS UMA VEZ
+        // ====================================================
+
+        const mapaClinicas =
+            new Map();
+
+
+        clinicasFiltradas.forEach(
+            clinica => {
+
+                if (!mapaClinicas.has(clinica.id)) {
+
+                    mapaClinicas.set(
+                        clinica.id,
+                        clinica
+                    );
+
+                }
+
+            }
+        );
+
+
+        const resultadoFinal =
+            Array.from(
+                mapaClinicas.values()
+            );
+
+
+        // ====================================================
+        // MOSTRA OS RESULTADOS
+        // ====================================================
+
+        if (resultadoFinal.length === 0) {
+
+            mostrarNenhumResultado();
+
+            return;
+
+        }
+
+
+        mostrarClinicas(
+            resultadoFinal
+        );
+
+
+    } catch (error) {
 
         console.error(
             "Erro ao buscar clínicas:",
             error
         );
 
-        resultados.innerHTML = `
-            <div class="no-result">
-                Erro ao carregar clínicas.
+
+        resultado.innerHTML = `
+            <div class="semResultado">
+
+                <h2>Não foi possível realizar a busca.</h2>
+
+                <p>
+                    Ocorreu um erro ao consultar as clínicas.
+                </p>
+
+                <p>
+                    Tente novamente em alguns instantes.
+                </p>
+
             </div>
         `;
 
+    }
+
+}
+
+
+// ============================================================
+// NENHUM RESULTADO
+// ============================================================
+
+function mostrarNenhumResultado() {
+
+    const resultado =
+        document.getElementById("resultado");
+
+
+    if (!resultado) {
         return;
     }
 
 
-    resultados.innerHTML = "";
+    resultado.innerHTML = `
 
+        <div class="semResultado">
 
-    if (!clinicas || clinicas.length === 0) {
+            <h2>
+                Nenhuma clínica encontrada.
+            </h2>
 
-        resultados.innerHTML = `
-            <div class="no-result">
-                Nenhuma clínica da Rede Especialistas
-                encontrada nesta cidade.
-            </div>
-        `;
+            <p>
+                Não encontramos clínicas da
+                <strong>Rede Especialistas</strong>
+                para os filtros selecionados.
+            </p>
 
-        return;
-    }
+        </div>
 
-
-    resultados.innerHTML = `
-        <h2 class="results-title">
-            Clínicas Encontradas
-        </h2>
     `;
 
-
-    // --------------------------------------------------------
-    // MONTAR CARDS
-    // --------------------------------------------------------
-
-    clinicas.forEach(clinica => {
-
-        const bairro =
-            clinica.bairros;
-
-        const cidade =
-            bairro?.cidades;
-
-        const estado =
-            cidade?.estados;
-
-
-        const especialidades =
-            (clinica.clinica_especialidades || [])
-                .filter(item =>
-                    item.ativo === true &&
-                    item.rede === "especialistas" &&
-                    item.especialidades
-                )
-                .map(item =>
-                    item.especialidades.nome
-                )
-                .filter(Boolean);
-
-
-        const especialidadesTexto =
-            [...new Set(especialidades)]
-                .join(", ");
-
-
-        const enderecoCompleto = [
-            clinica.endereco,
-            clinica.numero,
-            clinica.complemento
-        ]
-            .filter(Boolean)
-            .join(", ");
-
-
-        resultados.innerHTML += `
-
-            <div class="card">
-
-                <h3>
-                    ${escaparTexto(
-                        clinica.nome ||
-                        "Clínica sem nome"
-                    )}
-                </h3>
-
-                <p>
-                    <strong>📍 Endereço:</strong>
-                    ${escaparTexto(
-                        enderecoCompleto ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>📞 Telefone:</strong>
-                    ${escaparTexto(
-                        clinica.telefone ||
-                        clinica.whatsapp ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🏙 Bairro:</strong>
-                    ${escaparTexto(
-                        bairro?.nome ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🏙 Cidade:</strong>
-                    ${escaparTexto(
-                        cidade?.nome ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🗺 Estado:</strong>
-                    ${escaparTexto(
-                        estado?.nome ||
-                        "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>🦷 Especialidades:</strong>
-                    ${escaparTexto(
-                        especialidadesTexto ||
-                        "Não informado"
-                    )}
-                </p>
-
-            </div>
-
-        `;
-
-    });
 }
 
 
 // ============================================================
-// ESCAPAR TEXTO
-// ============================================================
-
-function escaparTexto(valor) {
-
-    if (valor === null ||
-        valor === undefined) {
-
-        return "";
-
-    }
-
-    return String(valor)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-// ============================================================
-// REDIRECIONAMENTOS
-// ============================================================
-
-function irParaAdmin() {
-
-    window.location.href =
-        "admin.html";
-
-}
-
-
-// ============================================================
-// INICIALIZAÇÃO
+// EVENTOS DA PÁGINA
 // ============================================================
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    () => {
 
-        carregarRegioes();
+        const botaoBuscar =
+            document.getElementById("buscar");
 
-        const regiao =
-            document.getElementById("regiao");
 
-        const estado =
-            document.getElementById("estado");
-
-        if (regiao) {
-
-            regiao.addEventListener(
-                "change",
-                carregarEstados
+        if (!botaoBuscar) {
+            console.error(
+                "Botão #buscar não encontrado."
             );
 
+            return;
         }
 
-        if (estado) {
 
-            estado.addEventListener(
-                "change",
-                carregarCidades
-            );
+        // ====================================================
+        // BOTÃO BUSCAR
+        // ====================================================
 
-        }
+        botaoBuscar.addEventListener(
+            "click",
+            buscarClinicas
+        );
+
+
+        console.log(
+            "Botão de busca da Rede Especialistas configurado."
+        );
 
     }
 );
 
 
+// ============================================================
+// DISPONIBILIZAR FUNÇÕES
+// ============================================================
+
 window.buscarClinicas =
     buscarClinicas;
 
-window.carregarRegioes =
-    carregarRegioes;
-
-window.carregarEstados =
-    carregarEstados;
-
-window.carregarCidades =
-    carregarCidades;
-
-window.irParaAdmin =
-    irParaAdmin;
-
-console.log(
-    "Rede Especialistas inicializada."
-);
+window.obterBairrosPorLocalizacao =
+    obterBairrosPorLocalizacao;
