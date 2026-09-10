@@ -1,10 +1,9 @@
 const REDE_ESPECIALISTAS = "especialistas";
-const REDE_SINDILEGIS = "sindilegis";
 
 
-/* =========================================================
-   VERIFICA LOCALIZAÇÃO
-========================================================= */
+// =====================================================
+// VERIFICA LOCALIZAÇÃO
+// =====================================================
 
 function clinicaPertenceAoLocal(clinica, filtros) {
 
@@ -50,9 +49,9 @@ function clinicaPertenceAoLocal(clinica, filtros) {
 }
 
 
-/* =========================================================
-   BUSCAR CLÍNICAS ESPECIALISTAS
-========================================================= */
+// =====================================================
+// BUSCAR CLÍNICAS DA REDE ESPECIALISTAS
+// =====================================================
 
 async function buscarClinicasEspecialistas(filtros = {}) {
 
@@ -61,13 +60,13 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     console.log("==============================");
 
 
-    /* =====================================================
-       1. BUSCA TODOS OS VÍNCULOS ATIVOS
-    ===================================================== */
+    // -------------------------------------------------
+    // BUSCA OS VÍNCULOS DA REDE
+    // -------------------------------------------------
 
     const {
-        data: todosVinculos,
-        error: erroTodosVinculos
+        data: vinculos,
+        error: erroVinculos
     } = await supabaseClient
         .from("clinica_especialidades")
         .select(`
@@ -80,14 +79,15 @@ async function buscarClinicasEspecialistas(filtros = {}) {
                 nome
             )
         `)
+        .eq("rede", REDE_ESPECIALISTAS)
         .eq("ativo", true);
 
 
-    if (erroTodosVinculos) {
+    if (erroVinculos) {
 
         console.error(
-            "Erro ao buscar vínculos das clínicas:",
-            erroTodosVinculos
+            "Erro ao buscar vínculos Especialistas:",
+            erroVinculos
         );
 
         mostrarClinicasEspecialistas([]);
@@ -96,13 +96,10 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     }
 
 
-    if (
-        !todosVinculos ||
-        todosVinculos.length === 0
-    ) {
+    if (!vinculos || vinculos.length === 0) {
 
         console.log(
-            "Nenhum vínculo encontrado."
+            "Nenhum vínculo encontrado para Especialistas."
         );
 
         mostrarClinicasEspecialistas([]);
@@ -111,125 +108,31 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     }
 
 
-    /* =====================================================
-       2. IDENTIFICA TODAS AS REDES DE CADA CLÍNICA
-    ===================================================== */
+    // -------------------------------------------------
+    // FILTRO POR ESPECIALIDADE
+    // -------------------------------------------------
 
-    const redesPorClinica = {};
+    let vinculosFiltrados = vinculos;
 
-
-    todosVinculos.forEach(vinculo => {
-
-        const idClinica =
-            vinculo.clinica_id;
-
-
-        if (!idClinica) {
-            return;
-        }
-
-
-        if (!redesPorClinica[idClinica]) {
-
-            redesPorClinica[idClinica] =
-                new Set();
-        }
-
-
-        redesPorClinica[idClinica].add(
-            String(vinculo.rede || "")
-                .trim()
-                .toLowerCase()
-        );
-    });
-
-
-    /* =====================================================
-       3. PEGA SOMENTE CLÍNICAS EXCLUSIVAS
-          DA REDE ESPECIALISTAS
-       
-       Se a clínica também estiver no Sindilegis,
-       ela NÃO aparece aqui.
-    ===================================================== */
-
-    let vinculosEspecialistas =
-        todosVinculos.filter(vinculo => {
-
-            const idClinica =
-                vinculo.clinica_id;
-
-
-            const redes =
-                redesPorClinica[idClinica];
-
-
-            if (!redes) {
-                return false;
-            }
-
-
-            const pertenceEspecialistas =
-                redes.has(
-                    REDE_ESPECIALISTAS
-                );
-
-
-            const pertenceSindilegis =
-                redes.has(
-                    REDE_SINDILEGIS
-                );
-
-
-            /*
-             * Só permite clínica que:
-             *
-             * 1. Está em Especialistas
-             * 2. NÃO está em Sindilegis
-             */
-
-            if (
-                pertenceEspecialistas &&
-                !pertenceSindilegis
-            ) {
-
-                return true;
-            }
-
-
-            return false;
-        });
-
-
-    /* =====================================================
-       4. FILTRA PELA ESPECIALIDADE
-    ===================================================== */
 
     if (filtros.especialidadeId) {
 
-        vinculosEspecialistas =
-            vinculosEspecialistas.filter(
-                vinculo =>
-                    String(
-                        vinculo.especialidade_id
-                    ) ===
-                    String(
-                        filtros.especialidadeId
-                    )
-            );
+        vinculosFiltrados =
+            vinculos.filter(vinculo => {
+
+                return (
+                    String(vinculo.especialidade_id) ===
+                    String(filtros.especialidadeId)
+                );
+
+            });
     }
 
 
-    /* =====================================================
-       5. VERIFICA SE EXISTEM RESULTADOS
-    ===================================================== */
-
-    if (
-        !vinculosEspecialistas ||
-        vinculosEspecialistas.length === 0
-    ) {
+    if (vinculosFiltrados.length === 0) {
 
         console.log(
-            "Nenhuma clínica exclusiva da rede Especialistas encontrada."
+            "Nenhuma clínica possui a especialidade selecionada na rede Especialistas."
         );
 
         mostrarClinicasEspecialistas([]);
@@ -238,17 +141,14 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     }
 
 
-    /* =====================================================
-       6. PEGA OS IDS DAS CLÍNICAS
-    ===================================================== */
+    // -------------------------------------------------
+    // OBTÉM IDS DAS CLÍNICAS
+    // -------------------------------------------------
 
     const idsClinicas = [
         ...new Set(
-            vinculosEspecialistas
-                .map(
-                    item =>
-                        item.clinica_id
-                )
+            vinculosFiltrados
+                .map(vinculo => vinculo.clinica_id)
                 .filter(Boolean)
         )
     ];
@@ -260,9 +160,9 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     );
 
 
-    /* =====================================================
-       7. BUSCA AS CLÍNICAS
-    ===================================================== */
+    // -------------------------------------------------
+    // BUSCA AS CLÍNICAS
+    // -------------------------------------------------
 
     const {
         data: clinicas,
@@ -294,10 +194,7 @@ async function buscarClinicasEspecialistas(filtros = {}) {
             )
         `)
         .eq("ativo", true)
-        .in(
-            "id",
-            idsClinicas
-        );
+        .in("id", idsClinicas);
 
 
     if (erroClinicas) {
@@ -313,10 +210,7 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     }
 
 
-    if (
-        !clinicas ||
-        clinicas.length === 0
-    ) {
+    if (!clinicas || clinicas.length === 0) {
 
         console.log(
             "Nenhuma clínica encontrada na tabela clinicas."
@@ -328,68 +222,51 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     }
 
 
-    /* =====================================================
-       8. MONTA AS ESPECIALIDADES
-    ===================================================== */
+    // -------------------------------------------------
+    // MONTA ESPECIALIDADES DA REDE ESPECIALISTAS
+    // -------------------------------------------------
 
     const mapaEspecialidades = {};
 
 
-    vinculosEspecialistas.forEach(
-        vinculo => {
+    vinculosFiltrados.forEach(vinculo => {
 
-            const idClinica =
-                vinculo.clinica_id;
-
-
-            if (
-                !mapaEspecialidades[
-                    idClinica
-                ]
-            ) {
-
-                mapaEspecialidades[
-                    idClinica
-                ] = [];
-            }
+        const idClinica =
+            vinculo.clinica_id;
 
 
-            if (
-                vinculo.especialidades
-            ) {
+        if (!mapaEspecialidades[idClinica]) {
 
-                const jaExiste =
-                    mapaEspecialidades[
-                        idClinica
-                    ].some(
-                        especialidade =>
-                            String(
-                                especialidade.id
-                            ) ===
-                            String(
-                                vinculo
-                                    .especialidades
-                                    .id
-                            )
-                    );
+            mapaEspecialidades[idClinica] = [];
+        }
 
 
-                if (!jaExiste) {
+        if (vinculo.especialidades) {
 
-                    mapaEspecialidades[
-                        idClinica
-                    ].push(
-                        vinculo.especialidades
-                    );
-                }
+            const existe =
+                mapaEspecialidades[idClinica].some(
+                    especialidade =>
+                        String(especialidade.id) ===
+                        String(
+                            vinculo.especialidades.id
+                        )
+                );
+
+
+            if (!existe) {
+
+                mapaEspecialidades[idClinica].push(
+                    vinculo.especialidades
+                );
             }
         }
-    );
+
+    });
 
 
-    /* =====================================================
-       9. JUNTA CLÍNICAS + ESPECIALIDADES
-    ===================================================== */
+    // -------------------------------------------------
+    // JUNTA CLÍNICA + ESPECIALIDADES
+    // -------------------------------------------------
 
     let resultado =
         clinicas.map(clinica => {
@@ -399,30 +276,25 @@ async function buscarClinicasEspecialistas(filtros = {}) {
                 ...clinica,
 
                 especialidades:
-                    mapaEspecialidades[
-                        clinica.id
-                    ] || []
+                    mapaEspecialidades[clinica.id] || []
+
             };
+
         });
 
 
-    /* =====================================================
-       10. FILTRA POR LOCALIZAÇÃO
-    ===================================================== */
+    // -------------------------------------------------
+    // FILTRO DE LOCALIZAÇÃO
+    // -------------------------------------------------
 
     resultado =
-        resultado.filter(
-            clinica =>
-                clinicaPertenceAoLocal(
-                    clinica,
-                    filtros
-                )
+        resultado.filter(clinica =>
+            clinicaPertenceAoLocal(
+                clinica,
+                filtros
+            )
         );
 
-
-    /* =====================================================
-       11. MOSTRA NO CONSOLE
-    ===================================================== */
 
     console.log(
         "Clínicas Especialistas encontradas:",
@@ -436,28 +308,18 @@ async function buscarClinicasEspecialistas(filtros = {}) {
     );
 
 
-    /* =====================================================
-       12. RENDERIZA
-    ===================================================== */
-
-    mostrarClinicasEspecialistas(
-        resultado
-    );
+    mostrarClinicasEspecialistas(resultado);
 }
 
 
-/* =========================================================
-   MOSTRAR CLÍNICAS
-========================================================= */
+// =====================================================
+// MOSTRAR CLÍNICAS
+// =====================================================
 
-function mostrarClinicasEspecialistas(
-    clinicas
-) {
+function mostrarClinicasEspecialistas(clinicas) {
 
     const resultado =
-        document.getElementById(
-            "resultado"
-        );
+        document.getElementById("resultado");
 
 
     if (!resultado) {
@@ -465,98 +327,91 @@ function mostrarClinicasEspecialistas(
     }
 
 
-    /* =====================================================
-       REMOVE DUPLICADOS
-    ===================================================== */
+    // -------------------------------------------------
+    // REMOVE DUPLICIDADES
+    // -------------------------------------------------
 
     const mapa =
         new Map();
 
 
-    (clinicas || [])
-        .forEach(clinica => {
+    (clinicas || []).forEach(clinica => {
 
-            if (
-                !mapa.has(
-                    clinica.id
-                )
-            ) {
+        if (!clinica || !clinica.id) {
+            return;
+        }
 
-                mapa.set(
-                    clinica.id,
-                    clinica
-                );
-            }
-        });
+
+        if (!mapa.has(clinica.id)) {
+
+            mapa.set(
+                clinica.id,
+                clinica
+            );
+        }
+
+    });
 
 
     const lista =
         [...mapa.values()];
 
 
-    /* =====================================================
-       RENDERIZA OS CARDS
-    ===================================================== */
+    // -------------------------------------------------
+    // RENDERIZA
+    // -------------------------------------------------
 
     if (
-        typeof window
-            .renderizarCardsClinicas ===
+        typeof window.renderizarCardsClinicas ===
         "function"
     ) {
 
-        window.renderizarCardsClinicas(
-            lista
-        );
+        window.renderizarCardsClinicas(lista);
 
         return;
     }
 
 
-    /* =====================================================
-       SEM RESULTADOS
-    ===================================================== */
+    // -------------------------------------------------
+    // SEM RESULTADO
+    // -------------------------------------------------
 
-    if (
-        lista.length === 0
-    ) {
+    resultado.innerHTML = `
 
-        resultado.innerHTML = `
-            <div class="semResultado">
+        <div class="semResultado">
 
-                <div class="semResultado-icone">
-                    🦷
-                </div>
-
-                <h2>
-                    Nenhuma clínica encontrada
-                </h2>
-
-                <p>
-                    Não encontramos clínicas da
-                    <strong>Rede Especialistas</strong>
-                    com os filtros selecionados.
-                </p>
-
+            <div class="semResultado-icone">
+                🦷
             </div>
-        `;
 
-        return;
-    }
+            <h2>
+                Nenhuma clínica encontrada
+            </h2>
+
+            <p>
+                Não encontramos clínicas da
+                <strong>
+                    Rede Especialistas
+                </strong>
+                com os filtros selecionados.
+            </p>
+
+        </div>
+
+    `;
 }
 
 
-/* =========================================================
-   BOTÃO BUSCAR
-========================================================= */
+// =====================================================
+// BOTÃO BUSCAR
+// =====================================================
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
         const botao =
-            document.getElementById(
-                "buscar"
-            );
+            document.getElementById("buscar");
 
 
         if (!botao) {
@@ -578,19 +433,21 @@ document.addEventListener(
                 buscarClinicasEspecialistas(
                     filtros
                 );
+
             }
         );
+
     }
 );
 
 
-/* =========================================================
-   DISPONIBILIZA GLOBALMENTE
-========================================================= */
+// =====================================================
+// DISPONIBILIZA GLOBALMENTE
+// =====================================================
 
 window.buscarClinicasEspecialistas =
     buscarClinicasEspecialistas;
 
+
 window.mostrarClinicasEspecialistas =
     mostrarClinicasEspecialistas;
-
