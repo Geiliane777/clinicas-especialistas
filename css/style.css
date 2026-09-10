@@ -1,343 +1,1330 @@
-/* =====================================
-   TEM
-===================================== */
-:root{
-    --cor-fundo:#f3f6fb;
-    --cor-card:#ffffff;
-    --cor-header1:#0f172a;
-    --cor-header2:#2563eb;
-    --cor-primaria:#2563eb;
-    --cor-primaria-hover:#1d4ed8;
-    --cor-sucesso:#059669;
-    --cor-sucesso-hover:#047857;
-    --texto:#374151;
-    --texto-forte:#111827;
-    --sombra:0 10px 30px rgba(0,0,0,.08);
-}
-/* =====================================
-   TEMA ESCURO
-===================================== */
-body.dark{
-    --cor-fundo:#0f172a;
-    --cor-card:#1e293b;
-    --cor-header1:#020617;
-    --cor-header2:#1e40af;
-    --cor-primaria:#3b82f6;
-    --cor-primaria-hover:#2563eb;
-    --cor-sucesso:#10b981;
-    --cor-sucesso-hover:#059669;
-    --texto:#f8fafc;
-    --texto-forte:#ffffff;
-    --sombra:0 10px 30px rgba(0,0,0,.35);
-}
-/* =====================================
+/* ============================================================
    RESET
-===================================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-body{
-    background:var(--cor-fundo);
-    color:var(--texto);
-    transition:.3s;
+
+
+html {
+    scroll-behavior: smooth;
 }
-/* NÃO ALTERAR TODAS AS IMAGENS */
-/* Não coloque img { width:100%; } */
-/* =====================================
-   HEADER
-===================================== */
-.header{
-    background:linear-gradient(
-    135deg,
-    var(--cor-header1),
-    var(--cor-header2)
-);
-    color:white;
-    text-align:center;
-    padding:50px 20px;
-    border-bottom-left-radius:30px;
-    border-bottom-right-radius:30px;
-   box-shadow:var(--sombra);
-}
-/* =====================================
-   LOGO
-===================================== */
-.logo{
-    width:90px;
-    height:auto;
-    display:block;
-    margin:0 auto 20px;
-}
-/* =====================================
-   TÍTULOS
-===================================== */
-.header h1{
-    font-size:36px;
-    margin-bottom:10px;
-}
-.header p{
-    font-size:18px;
-    opacity:.9;
-}
-/* =====================================
-   CONTAINER
-===================================== */
-.container{
-    width:95%;
-    max-width:1200px;
-    margin:auto;
-    margin-top:-30px;
-    margin-bottom:40px;
-}
-/* =====================================
-   FILTROS
-===================================== */
-.filtros{
-background:var(--cor-card);
-    padding:25px;
-    border-radius:20px;
- box-shadow:var(--sombra);
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-/* =====================================
-   SELECT
-===================================== */
-select{
-    width:100%;
-    padding:14px;
-    border-radius:10px;
-    border:1px solid #d1d5db;
-    font-size:15px;
-    background:var(--cor-card);
-    color:var(--texto);
-}
-/* =====================================
-   BOTÃO
-===================================== */
-button{
-    background:var(--cor-primaria);
-    color:white;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    padding:14px;
-    transition:.3s;
-}
-button:hover{
-  background:var(--cor-primaria-hover);
-}
-/* =====================================
-   RESULTADO
-===================================== */
-#resultado{
-    margin-top:35px;
-}
-.tituloResultado{
-    margin-bottom:20px;
-    color:var(--cor-primaria);
-}
-/* =====================================
-   CARD
-===================================== */
-.card{
-background:var(--cor-card);
-    border-radius:18px;
-    overflow:hidden;
-    margin-bottom:25px;
-  box-shadow:var(--sombra);
-    transition:.3s;
-}
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:var(--sombra);
-}
-/* =====================================
-   CABEÇALHO DO CARD
-===================================== */
-.cardHeader{
-background:var(--cor-primaria);
-    color:white;
-    padding:20px;
-}
-.cardHeader h2{
-    font-size:24px;
-}
-/* =====================================
-   INFORMAÇÕES
-===================================== */
-.info{
-    padding:25px;
-}
-/* =====================================
-   LINKS (Telefone)
-===================================== */
-/* =====================================
-   TELEFONE
-===================================== */
-.info p a,
-.info p a:link,
-.info p a:visited,
-.info p a:hover,
-.info p a:active{
-    color:inherit !important;
-    text-decoration:none !important;
-    font-weight:normal;
-}
-.info p a:hover{
-    color:var(--cor-primaria) !important;
-}
-/* Chrome / Safari */
-a[href^="tel"]{
-    color:inherit !important;
-    text-decoration:none !important;
-}
-a[href^="tel"]:visited{
-    color:inherit !important;
-}
-a[href^="tel"]:hover{
-    color:var(--cor-primaria) !important;
-}
-/* =====================================
-   ESPECIALIDADES
-===================================== */
-.especialidades{
-    margin-top:20px;
-}
-.tags{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:10px;
-}
-.tag{
-    background:var(--cor-primaria);
-    color:white;
-    padding:8px 14px;
-    border-radius:30px;
-    font-size:13px;
-    font-weight:bold;
-}
-/* =====================================
-   BOTÃO GOOGLE MAPS
-===================================== */
-.acoes{
-    margin-top:25px;
-}
-.btnAcao{
-    display:block;
-    width:100%;
-    text-align:center;
-    text-decoration:none;
-    padding:15px;
-    background:var(--cor-sucesso);
-    color:white;
-    border-radius:10px;
-    font-weight:bold;
-    transition:.3s;
-}
-.btnAcao:hover{
-    background:var(--cor-sucesso-hover);
-}
-/* =====================================
-   SEM RESULTADO
-===================================== */
-.semResultado{
-    background:var(--cor-card);
-    padding:40px;
-    border-radius:20px;
-    text-align:center;
-   box-shadow:var(--sombra);
-}
-/* =====================================
-   RESPONSIVO
-===================================== */
-@media(max-width:768px){
-    .header h1{
-        font-size:30px;
-    }
-    .header p{
-        font-size:16px;
-    }
-    .logo{
-        width:75px;
-    }
-    .filtros{
-        grid-template-columns:1fr;
-    }
-}
-/* =====================================
-   TRANSIÇÃO DO TEMA
-===================================== */
-body,
-.header,
-.filtros,
-.card,
-.cardHeader,
-.info,
-button,
-.btnAcao,
-.tag,
-select,
-.semResultado,
-a{
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f3f6fb;
+
+    color: #172033;
+
+    min-height: 100vh;
+
     transition:
-        background .3s,
-        color .3s,
-        border-color .3s,
-        box-shadow .3s;
+        background 0.3s ease,
+        color 0.3s ease;
 }
-/* =====================================
-   BOTÃO ATIVO
-===================================== */
-button.ativo{
-    background:var(--cor-primaria);
-    color:#fff;
+
+
+/* ============================================================
+   CABEÇALHO
+============================================================ */
+
+.header {
+
+    width: 100%;
+
+    min-height: 110px;
+
+    padding: 22px 5%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #172b63,
+            #2451c7
+        );
+
+    color: white;
+
+    border-bottom-left-radius: 28px;
+
+    border-bottom-right-radius: 28px;
+
+    box-shadow:
+        0 10px 30px rgba(
+            20,
+            43,
+            100,
+            0.18
+        );
 }
-button.ativo:hover{
-    background:var(--cor-primaria-hover);
+
+
+/* ============================================================
+   PARTE ESQUERDA DO HEADER
+============================================================ */
+
+.header-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    min-width: 0;
 }
-/* =====================================
-   REDE SINDILEGIS
-===================================== */
-body.sindilegis{
-    --cor-header1:#0f172a;
-    --cor-header2:#581c87;
-    --cor-primaria:#7c3aed;
-    --cor-primaria-hover:#6d28d9;
-    --cor-sucesso:#16a34a;
-    --cor-sucesso-hover:#15803d;
+
+
+.logo {
+
+    width: 62px;
+
+    height: 62px;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
 }
-body.sindilegis .header{
-    background:linear-gradient(
-        135deg,
-        #0f172a,
-        #581c87,
-        #7c3aed
+
+
+.titulo-site h1 {
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    margin-bottom: 5px;
+}
+
+
+.titulo-site p {
+
+    font-size: 14px;
+
+    opacity: 0.88;
+}
+
+
+/* ============================================================
+   MENU
+============================================================ */
+
+.menu-topo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.menu-link {
+
+    color: white !important;
+
+    text-decoration: none !important;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    padding: 11px 14px;
+
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+    white-space: nowrap;
+}
+
+
+.menu-link:hover {
+
+    background:
+        rgba(255, 255, 255, 0.15);
+
+    transform: translateY(-1px);
+}
+
+
+.menu-link.ativo {
+
+    background:
+        rgba(255, 255, 255, 0.18);
+}
+
+
+.login-link {
+
+    background:
+        rgba(255, 255, 255, 0.10);
+}
+
+
+.btn-tema {
+
+    width: 44px;
+
+    height: 44px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.btn-tema:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(
+            0,
+            0,
+            0,
+            0.2
+        );
+}
+
+
+/* ============================================================
+   CONTAINER
+============================================================ */
+
+.container {
+
+    width: min(
+        1200px,
+        92%
     );
+
+    margin: 0 auto;
+
+    padding:
+        40px
+        0
+        70px;
 }
-body.sindilegis .tag{
-    background:#7c3aed;
+
+
+/* ============================================================
+   TÍTULO
+============================================================ */
+
+.titulo-principal {
+
+    margin-bottom: 22px;
 }
-body.sindilegis .cardHeader{
-    background:#7c3aed;
+
+
+.titulo-principal h2 {
+
+    font-size: 28px;
+
+    color: #172033;
+
+    margin-bottom: 7px;
 }
-body.sindilegis .tituloResultado{
-    color:#7c3aed;
+
+
+.titulo-principal p {
+
+    color: #61708b;
+
+    font-size: 15px;
 }
-body.sindilegis button{
-    background:#7c3aed;
+
+
+/* ============================================================
+   FILTROS
+============================================================ */
+
+.filtros {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(
+            23,
+            32,
+            51,
+            0.08
+        );
+
+    border: 1px solid #e1e7f0;
 }
-body.sindilegis button:hover{
-    background:#6d28d9;
+
+
+.filtro {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
 }
-body.sindilegis .ativo{
-    background:#7c3aed;
-    color:#fff;
+
+
+.filtro label {
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #34415a;
+}
+
+
+.filtro select {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding:
+        0
+        14px;
+
+    border:
+        1px solid #cbd4e2;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #26344d;
+
+    font-size: 14px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.filtro select:focus {
+
+    border-color: #3978ee;
+
+    box-shadow:
+        0 0 0 3px rgba(
+            57,
+            120,
+            238,
+            0.12
+        );
+}
+
+
+.filtro-botao {
+
+    justify-content: flex-end;
+}
+
+
+.btn-buscar {
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    padding:
+        0
+        22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2775ee,
+            #3d8cff
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 16px rgba(
+            39,
+            117,
+            238,
+            0.25
+        );
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.btn-buscar:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(
+            39,
+            117,
+            238,
+            0.32
+        );
+}
+
+
+/* ============================================================
+   RESULTADOS
+============================================================ */
+
+#resultado {
+
+    margin-top: 28px;
+}
+
+
+.tituloResultado {
+
+    background: white;
+
+    border: 1px solid #e1e7f0;
+
+    border-radius: 16px;
+
+    padding:
+        16px
+        20px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    color: #34415a;
+
+    font-weight: 700;
+}
+
+
+.tituloResultado small {
+
+    color: #6b7890;
+
+    font-weight: 600;
+}
+
+
+.contadorResultado {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 30px;
+
+    height: 30px;
+
+    padding: 0 8px;
+
+    margin-right: 7px;
+
+    border-radius: 9px;
+
+    background: #eaf2ff;
+
+    color: #2167db;
+}
+
+
+/* ============================================================
+   CARDS
+============================================================ */
+
+.lista-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 20px;
+}
+
+
+.card {
+
+    background: white;
+
+    border:
+        1px solid #e1e7f0;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(
+            23,
+            32,
+            51,
+            0.07
+        );
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.card:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 13px 30px rgba(
+            23,
+            32,
+            51,
+            0.12
+        );
+}
+
+
+.cardHeader {
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border-bottom:
+        1px solid #edf0f5;
+}
+
+
+.icone-clinica {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eaf2ff;
+
+    font-size: 24px;
+
+    flex-shrink: 0;
+}
+
+
+.cardHeader h3 {
+
+    color: #172033;
+
+    font-size: 18px;
+
+    margin-bottom: 6px;
+}
+
+
+.rede-badge {
+
+    display: inline-block;
+
+    padding:
+        4px
+        9px;
+
+    border-radius: 20px;
+
+    background: #edf4ff;
+
+    color: #2568d9;
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+.card-body {
+
+    padding: 20px;
+}
+
+
+.info {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+}
+
+
+.info-icone {
+
+    width: 30px;
+
+    flex-shrink: 0;
+
+    font-size: 18px;
+}
+
+
+.info strong {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #65738c;
+
+    margin-bottom: 3px;
+}
+
+
+.info p {
+
+    color: #29364d;
+
+    font-size: 14px;
+
+    line-height: 1.45;
+}
+
+
+/* ============================================================
+   ESPECIALIDADES
+============================================================ */
+
+.especialidades {
+
+    padding-top: 8px;
+
+    margin-top: 5px;
+
+    border-top:
+        1px solid #edf0f5;
+}
+
+
+.especialidades > strong {
+
+    display: block;
+
+    font-size: 12px;
+
+    color: #65738c;
+
+    margin-bottom: 9px;
+}
+
+
+.tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+
+.tag {
+
+    padding:
+        6px
+        9px;
+
+    border-radius: 8px;
+
+    background: #eef4ff;
+
+    color: #2768d5;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   AÇÕES
+============================================================ */
+
+.acoes {
+
+    display: flex;
+
+    gap: 10px;
+
+    padding:
+        16px
+        20px;
+
+    border-top:
+        1px solid #edf0f5;
+}
+
+
+.btnAcao {
+
+    flex: 1;
+
+    min-height: 42px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none !important;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.btnAcao:hover {
+
+    transform: translateY(-1px);
+}
+
+
+.btnTelefone {
+
+    background: #eaf8ef;
+
+    color: #178344 !important;
+}
+
+
+.btnMapa {
+
+    background: #edf3ff;
+
+    color: #2867d6 !important;
+}
+
+
+/* ============================================================
+   SEM RESULTADO
+============================================================ */
+
+.semResultado {
+
+    background: white;
+
+    border:
+        1px solid #e1e7f0;
+
+    border-radius: 20px;
+
+    padding: 55px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px rgba(
+            23,
+            32,
+            51,
+            0.06
+        );
+}
+
+
+.icone-vazio {
+
+    font-size: 42px;
+
+    margin-bottom: 12px;
+}
+
+
+.semResultado h2 {
+
+    color: #26344d;
+
+    margin-bottom: 8px;
+}
+
+
+.semResultado p {
+
+    color: #6b7890;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   CARREGANDO
+============================================================ */
+
+.carregando {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 50px;
+
+    text-align: center;
+
+    border:
+        1px solid #e1e7f0;
+}
+
+
+.spinner {
+
+    width: 38px;
+
+    height: 38px;
+
+    margin:
+        0 auto
+        15px;
+
+    border:
+        4px solid #e5ebf5;
+
+    border-top-color: #2775ee;
+
+    border-radius: 50%;
+
+    animation:
+        girar 0.8s linear infinite;
+}
+
+
+@keyframes girar {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.carregando p {
+
+    color: #61708b;
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   ERRO
+============================================================ */
+
+.erroResultado {
+
+    background: white;
+
+    border:
+        1px solid #f0d2d2;
+
+    border-radius: 20px;
+
+    padding: 45px 25px;
+
+    text-align: center;
+}
+
+
+.icone-erro {
+
+    font-size: 40px;
+
+    margin-bottom: 12px;
+}
+
+
+.erroResultado h2 {
+
+    color: #a52d2d;
+
+    margin-bottom: 8px;
+}
+
+
+.erroResultado p {
+
+    color: #68758b;
+
+    margin-bottom: 20px;
+}
+
+
+.btn-tentar {
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2775ee;
+
+    color: white;
+
+    padding:
+        12px
+        18px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   SINDILEGIS
+============================================================ */
+
+body.sindilegis {
+
+    background: #f5f6fb;
+}
+
+
+body.sindilegis .header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #182c64,
+            #314b9b
+        );
+}
+
+
+body.sindilegis .btn-buscar {
+
+    background:
+        linear-gradient(
+            135deg,
+            #3d63c9,
+            #5878dc
+        );
+}
+
+
+body.sindilegis .tag {
+
+    background: #f0efff;
+
+    color: #5b48bb;
+}
+
+
+body.sindilegis .rede-badge {
+
+    background: #f0efff;
+
+    color: #5b48bb;
+}
+
+
+/* ============================================================
+   TEMA ESCURO
+============================================================ */
+
+body.dark {
+
+    background: #0d1628;
+
+    color: #edf3ff;
+}
+
+
+body.dark .titulo-principal h2 {
+
+    color: #ffffff;
+}
+
+
+body.dark .titulo-principal p {
+
+    color: #aebbd0;
+}
+
+
+body.dark .filtros,
+body.dark .card,
+body.dark .tituloResultado,
+body.dark .semResultado,
+body.dark .carregando,
+body.dark .erroResultado {
+
+    background: #172236;
+
+    border-color: #283750;
+
+    box-shadow:
+        0 8px 25px rgba(
+            0,
+            0,
+            0,
+            0.18
+        );
+}
+
+
+body.dark .filtro label {
+
+    color: #dce5f5;
+}
+
+
+body.dark .filtro select {
+
+    background: #1d2a40;
+
+    color: #edf3ff;
+
+    border-color: #3b4a63;
+}
+
+
+body.dark .cardHeader {
+
+    border-color: #29384f;
+}
+
+
+body.dark .cardHeader h3 {
+
+    color: #ffffff;
+}
+
+
+body.dark .info strong,
+body.dark .especialidades > strong {
+
+    color: #aebbd0;
+}
+
+
+body.dark .info p {
+
+    color: #d8e1ef;
+}
+
+
+body.dark .acoes {
+
+    border-color: #29384f;
+}
+
+
+body.dark .tituloResultado {
+
+    color: #dce5f5;
+}
+
+
+body.dark .tituloResultado small {
+
+    color: #9eabc0;
+}
+
+
+body.dark .semResultado h2 {
+
+    color: #ffffff;
+}
+
+
+body.dark .semResultado p {
+
+    color: #aebbd0;
+}
+
+
+body.dark .tag {
+
+    background: #243858;
+
+    color: #a9c7ff;
+}
+
+
+body.dark .rede-badge {
+
+    background: #243858;
+
+    color: #a9c7ff;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .menu-topo {
+
+        width: 100%;
+
+        justify-content: flex-start;
+
+    }
+
+
+    .filtros {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .container {
+
+        width: 94%;
+
+        padding-top: 28px;
+
+    }
+
+
+    .header {
+
+        padding:
+            20px
+            3%;
+
+    }
+
+
+    .header-left {
+
+        width: 100%;
+
+    }
+
+
+    .titulo-site h1 {
+
+        font-size: 22px;
+
+    }
+
+
+    .menu-topo {
+
+        gap: 4px;
+
+    }
+
+
+    .menu-link {
+
+        font-size: 12px;
+
+        padding:
+            9px
+            10px;
+
+    }
+
+
+    .filtros {
+
+        grid-template-columns: 1fr;
+
+        padding: 18px;
+
+    }
+
+
+    .lista-cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .tituloResultado {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .logo {
+
+        width: 52px;
+
+        height: 52px;
+
+    }
+
+
+    .titulo-site h1 {
+
+        font-size: 19px;
+
+    }
+
+
+    .titulo-site p {
+
+        font-size: 12px;
+
+    }
+
+
+    .menu-topo {
+
+        width: 100%;
+
+    }
+
+
+    .menu-link {
+
+        flex: 1;
+
+        text-align: center;
+
+    }
+
+
+    .btn-tema {
+
+        flex-shrink: 0;
+
+    }
+
+
+    .acoes {
+
+        flex-direction: column;
+
+    }
+
 }
