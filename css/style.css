@@ -1,5 +1,5 @@
 /* =========================================================
-   RESET / BASE
+   RESET
 ========================================================= */
 
 * {
@@ -88,6 +88,9 @@ body.dark {
 
     --sombra:
         0 10px 30px rgba(0, 0, 0, .30);
+
+    background: #0f172a;
+    color: #cbd5e1;
 }
 
 
@@ -118,6 +121,15 @@ body.dark {
     z-index: 50;
 }
 
+body.dark .header {
+    background: #111827;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, .25);
+}
+
 
 /* =========================================================
    HEADER ESQUERDO
@@ -126,6 +138,7 @@ body.dark {
 .header-left {
     display: flex;
     align-items: center;
+
     gap: 14px;
 
     min-width: 0;
@@ -208,9 +221,13 @@ body.dark {
     color: var(--azul);
 }
 
+body.dark .menu-link {
+    color: #cbd5e1;
+}
+
 body.dark .menu-link:hover,
 body.dark .menu-link.ativo {
-    background: #172554;
+    background: #1e293b;
     color: #93c5fd;
 }
 
@@ -220,6 +237,16 @@ body.dark .menu-link.ativo {
 
 .login-link:hover {
     border-color: #bfdbfe;
+}
+
+body.dark .login-link {
+    border-color: #334155;
+    background: #111827;
+}
+
+body.dark .login-link:hover {
+    background: #1e293b;
+    border-color: #475569;
 }
 
 
@@ -250,7 +277,14 @@ body.dark .menu-link.ativo {
 
 .btn-tema:hover {
     background: #f8fafc;
+
     transform: translateY(-1px);
+}
+
+body.dark .btn-tema {
+    background: #1e293b;
+    border-color: #475569;
+    color: #f8fafc;
 }
 
 body.dark .btn-tema:hover {
@@ -259,7 +293,7 @@ body.dark .btn-tema:hover {
 
 
 /* =========================================================
-   CONTAINER PRINCIPAL
+   CONTAINER
 ========================================================= */
 
 .container {
@@ -393,7 +427,7 @@ body.sindilegis .hero-texto h2 span {
 
 
 /* =========================================================
-   DESTAQUE DO HERO
+   HERO DESTAQUE
 ========================================================= */
 
 .hero-destaque {
@@ -453,7 +487,7 @@ body.sindilegis .hero-texto h2 span {
 
 
 /* =========================================================
-   TÍTULO DA PESQUISA
+   TÍTULO PRINCIPAL
 ========================================================= */
 
 .titulo-principal {
@@ -559,14 +593,41 @@ body.sindilegis .hero-texto h2 span {
         0 0 0 3px rgba(37, 99, 235, .10);
 }
 
-.filtro-botao {
-    justify-content: flex-end;
+body.dark .filtros {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25);
+}
+
+body.dark .filtro label {
+    color: #e2e8f0;
+}
+
+body.dark .filtro select {
+    background: #0f172a;
+
+    border-color: #475569;
+
+    color: #e2e8f0;
+}
+
+body.dark .filtro select option {
+    background: #1e293b;
+
+    color: #f8fafc;
 }
 
 
 /* =========================================================
    BOTÃO BUSCAR
 ========================================================= */
+
+.filtro-botao {
+    justify-content: flex-end;
+}
 
 .btn-buscar {
     width: 100%;
@@ -629,7 +690,7 @@ body.sindilegis .hero-texto h2 span {
 
 
 /* =========================================================
-   CARD DA CLÍNICA
+   CARD
 ========================================================= */
 
 .card {
@@ -666,8 +727,20 @@ body.sindilegis .hero-texto h2 span {
         0 16px 35px rgba(15, 23, 42, .12);
 }
 
+body.dark .card {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25);
+}
+
 body.dark .card:hover {
     border-color: #475569;
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, .35);
 }
 
 
@@ -700,9 +773,11 @@ body.dark .cardHeader {
     background:
         linear-gradient(
             180deg,
-            rgba(15, 23, 42, .22),
-            transparent
+            rgba(30, 41, 59, .95),
+            #1e293b
         );
+
+    border-color: #334155;
 }
 
 .cardHeader-principal {
@@ -740,6 +815,7 @@ body.dark .cardHeader {
 
 body.dark .card-icone-clinica {
     background: #172554;
+
     border-color: #1e3a8a;
 }
 
@@ -779,6 +855,18 @@ body.sindilegis .card-rede {
     color: var(--roxo);
 }
 
+body.dark .card-titulo h3 {
+    color: #f8fafc;
+}
+
+body.dark .card-rede {
+    color: #60a5fa;
+}
+
+body.dark.sindilegis .card-rede {
+    color: #a78bfa;
+}
+
 .card-status {
     flex-shrink: 0;
 
@@ -797,6 +885,10 @@ body.sindilegis .card-rede {
     font-size: 10px;
 }
 
+body.dark .card-status {
+    color: #34d399;
+}
+
 
 /* =========================================================
    CORPO DO CARD
@@ -813,7 +905,7 @@ body.sindilegis .card-rede {
 
 
 /* =========================================================
-   INFORMAÇÕES
+   INFORMAÇÕES DO CARD
 ========================================================= */
 
 .card-informacoes {
@@ -871,6 +963,7 @@ body.dark .card-info-icone {
     font-weight: 800;
 
     letter-spacing: .9px;
+
     text-transform: uppercase;
 }
 
@@ -892,9 +985,21 @@ body.dark .card-info-icone {
     line-height: 1.45;
 }
 
+body.dark .card-info-label {
+    color: #94a3b8;
+}
+
+body.dark .card-info-conteudo strong {
+    color: #f1f5f9;
+}
+
+body.dark .card-info-conteudo > span:last-child {
+    color: #94a3b8;
+}
+
 
 /* =========================================================
-   SEÇÃO DE ESPECIALIDADES
+   ESPECIALIDADES
 ========================================================= */
 
 .card-secao {
@@ -949,25 +1054,40 @@ body.dark .card-info-icone {
 
 .tag:hover {
     background: #eff6ff;
+
     border-color: #bfdbfe;
+}
+
+body.dark .card-secao {
+    border-color: #334155;
+}
+
+body.dark .card-secao-titulo {
+    color: #e2e8f0;
 }
 
 body.dark .tag {
     background: #273449;
+
+    border-color: #475569;
+
+    color: #dbeafe;
 }
 
 body.dark .tag:hover {
-    background: #172554;
-    border-color: #1e3a8a;
+    background: #334155;
+
+    border-color: #64748b;
 }
 
 
 /* =========================================================
-   AÇÕES
+   BOTÕES DO CARD
 ========================================================= */
 
 .acoes {
     margin-top: auto;
+
     padding-top: 22px;
 
     display: grid;
@@ -1030,10 +1150,22 @@ body.dark .tag:hover {
 
 body.dark .btn-mapa {
     background: #172554;
+
+    color: #93c5fd;
+}
+
+body.dark .btn-mapa:hover {
+    background: #1e3a8a;
 }
 
 body.dark .btn-whatsapp {
     background: #064e3b;
+
+    color: #6ee7b7;
+}
+
+body.dark .btn-whatsapp:hover {
+    background: #065f46;
 }
 
 
@@ -1048,6 +1180,7 @@ body.dark .btn-whatsapp {
 
     display: flex;
     flex-direction: column;
+
     align-items: center;
     justify-content: center;
 
@@ -1079,10 +1212,6 @@ body.dark .btn-whatsapp {
     font-size: 28px;
 }
 
-body.dark .semResultado-icone {
-    background: #172554;
-}
-
 .semResultado h2 {
     color: var(--texto-forte);
 
@@ -1099,9 +1228,30 @@ body.dark .semResultado-icone {
     font-size: 13px;
 }
 
+body.dark .semResultado {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25);
+}
+
+body.dark .semResultado-icone {
+    background: #172554;
+}
+
+body.dark .semResultado h2 {
+    color: #f8fafc;
+}
+
+body.dark .semResultado p {
+    color: #94a3b8;
+}
+
 
 /* =========================================================
-   INFORMAÇÕES INFERIORES
+   INFORMAÇÕES DO SITE
 ========================================================= */
 
 .informacoes-site {
@@ -1164,7 +1314,29 @@ body.dark .semResultado-icone {
     color: var(--texto-claro);
 
     font-size: 11px;
+
     line-height: 1.5;
+}
+
+body.dark .info-site-item {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, .20);
+}
+
+body.dark .info-site-icone {
+    background: #172554;
+}
+
+body.dark .info-site-item strong {
+    color: #f8fafc;
+}
+
+body.dark .info-site-item p {
+    color: #94a3b8;
 }
 
 
@@ -1230,6 +1402,21 @@ body.dark .semResultado-icone {
     color: var(--texto-claro);
 
     font-size: 10px;
+}
+
+body.dark .rodape {
+    background: #111827;
+
+    border-color: #334155;
+}
+
+body.dark .rodape-marca strong {
+    color: #f8fafc;
+}
+
+body.dark .rodape-marca span,
+body.dark .rodape-direitos {
+    color: #94a3b8;
 }
 
 
@@ -1434,6 +1621,10 @@ body.dark .semResultado-icone {
     background: var(--fundo);
 }
 
+body.dark .conteudo {
+    background: #0f172a;
+}
+
 
 /* =========================================================
    PÁGINAS
@@ -1451,20 +1642,25 @@ body.dark .semResultado-icone {
 }
 
 @keyframes aparecer {
+
     from {
         opacity: 0;
-        transform: translateY(5px);
+
+        transform:
+            translateY(5px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 
 /* =========================================================
-   TÍTULO DAS PÁGINAS ADMIN
+   TÍTULOS ADMIN
 ========================================================= */
 
 .titulo-pagina {
@@ -1513,16 +1709,6 @@ body.dark .semResultado-icone {
 
 
 /* =========================================================
-   FILTROS ADMIN
-========================================================= */
-
-.filtros-admin,
-.filtros {
-    margin-bottom: 20px;
-}
-
-
-/* =========================================================
    BOTÕES ADMIN
 ========================================================= */
 
@@ -1535,6 +1721,7 @@ body.dark .semResultado-icone {
     border-radius: 9px;
 
     font-size: 12px;
+
     font-weight: 800;
 
     transition:
@@ -1575,6 +1762,32 @@ body.dark .semResultado-icone {
     background: #f8fafc;
 }
 
+body.dark .painel {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25);
+}
+
+body.dark .titulo-pagina h1,
+body.dark .titulo-pagina h2 {
+    color: #f8fafc;
+}
+
+body.dark .titulo-pagina p {
+    color: #94a3b8;
+}
+
+body.dark .btn-secundario {
+    background: #1e293b;
+
+    border-color: #475569;
+
+    color: #e2e8f0;
+}
+
 body.dark .btn-secundario:hover {
     background: #334155;
 }
@@ -1600,10 +1813,6 @@ table {
 
 thead {
     background: #f8fafc;
-}
-
-body.dark thead {
-    background: #172033;
 }
 
 th {
@@ -1643,6 +1852,22 @@ tbody tr:hover {
     background: #f8fafc;
 }
 
+body.dark thead {
+    background: #172033;
+}
+
+body.dark th {
+    color: #94a3b8;
+
+    border-color: #334155;
+}
+
+body.dark td {
+    color: #cbd5e1;
+
+    border-color: #334155;
+}
+
 body.dark tbody tr:hover {
     background: #273449;
 }
@@ -1680,10 +1905,14 @@ body.dark tbody tr:hover {
 
 body.dark .status.ativo {
     background: #064e3b;
+
+    color: #6ee7b7;
 }
 
 body.dark .status.inativo {
     background: #450a0a;
+
+    color: #fca5a5;
 }
 
 
@@ -1732,6 +1961,21 @@ body.dark .status.inativo {
     background: #fef2f2;
 }
 
+body.dark .btn-editar,
+body.dark .btn-excluir {
+    background: #1e293b;
+
+    border-color: #475569;
+}
+
+body.dark .btn-editar:hover {
+    background: #172554;
+}
+
+body.dark .btn-excluir:hover {
+    background: #450a0a;
+}
+
 
 /* =========================================================
    FORMULÁRIOS
@@ -1764,6 +2008,7 @@ body.dark .status.inativo {
     color: var(--texto-forte);
 
     font-size: 11px;
+
     font-weight: 800;
 }
 
@@ -1777,11 +2022,13 @@ body.dark .status.inativo {
     padding: 0 12px;
 
     border: 1px solid var(--borda);
+
     border-radius: 9px;
 
     outline: none;
 
     background: var(--card);
+
     color: var(--texto);
 
     font-size: 12px;
@@ -1808,6 +2055,31 @@ body.dark .status.inativo {
         0 0 0 3px rgba(37, 99, 235, .10);
 }
 
+body.dark .form-grupo label {
+    color: #e2e8f0;
+}
+
+body.dark .form-grupo input,
+body.dark .form-grupo select,
+body.dark .form-grupo textarea {
+    background: #0f172a;
+
+    border-color: #475569;
+
+    color: #e2e8f0;
+}
+
+body.dark .form-grupo input::placeholder,
+body.dark .form-grupo textarea::placeholder {
+    color: #64748b;
+}
+
+body.dark .form-grupo select option {
+    background: #1e293b;
+
+    color: #f8fafc;
+}
+
 
 /* =========================================================
    FORM INLINE
@@ -1828,11 +2100,6 @@ body.dark .status.inativo {
     margin: 0;
 }
 
-
-/* =========================================================
-   ESTADOS / CIDADES / BAIRROS
-========================================================= */
-
 #pagina-estados .form-inline,
 #pagina-cidades .form-inline,
 #pagina-bairros .form-inline {
@@ -1842,7 +2109,7 @@ body.dark .status.inativo {
 
 
 /* =========================================================
-   CHECKBOX STATUS
+   STATUS / CHECKBOX
 ========================================================= */
 
 .area-status,
@@ -1854,11 +2121,6 @@ body.dark .status.inativo {
     background: #f8fafc;
 
     border: 1px solid var(--borda);
-}
-
-body.dark .area-status,
-body.dark .status-checkbox {
-    background: #172033;
 }
 
 .area-status label,
@@ -1882,6 +2144,18 @@ body.dark .status-checkbox {
     height: 16px;
 
     accent-color: var(--azul);
+}
+
+body.dark .area-status,
+body.dark .status-checkbox {
+    background: #172033;
+
+    border-color: #334155;
+}
+
+body.dark .area-status label,
+body.dark .status-checkbox label {
+    color: #cbd5e1;
 }
 
 
@@ -1910,10 +2184,6 @@ body.dark .status-checkbox {
     background: #f8fafc;
 }
 
-body.dark #containerEspecialidades {
-    background: #172033;
-}
-
 .especialidade-item {
     padding: 9px;
 
@@ -1935,6 +2205,20 @@ body.dark #containerEspecialidades {
 
 .especialidade-item input {
     accent-color: var(--azul);
+}
+
+body.dark #containerEspecialidades {
+    background: #172033;
+
+    border-color: #334155;
+}
+
+body.dark .especialidade-item {
+    background: #1e293b;
+
+    border-color: #475569;
+
+    color: #cbd5e1;
 }
 
 
@@ -1968,6 +2252,12 @@ body.dark #containerEspecialidades {
     font-weight: 800;
 }
 
+body.dark .btn-remover-especialidade {
+    background: #450a0a;
+
+    color: #fca5a5;
+}
+
 
 /* =========================================================
    AÇÕES DO FORMULÁRIO
@@ -1977,6 +2267,7 @@ body.dark #containerEspecialidades {
     padding-top: 8px;
 
     display: flex;
+
     justify-content: flex-end;
 
     gap: 9px;
@@ -2028,11 +2319,6 @@ body.dark #containerEspecialidades {
         0 25px 60px rgba(15, 23, 42, .25);
 }
 
-
-/* =========================================================
-   CABEÇALHO DO MODAL
-========================================================= */
-
 .modal-header {
     min-height: 70px;
 
@@ -2072,9 +2358,33 @@ body.dark #containerEspecialidades {
     background: #e2e8f0;
 }
 
+body.dark .modal-conteudo {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, .45);
+}
+
+body.dark .modal-header {
+    border-color: #334155;
+}
+
+body.dark .modal-header h2 {
+    color: #f8fafc;
+}
+
 body.dark .btn-fechar,
 body.dark .modal-fechar {
     background: #334155;
+
+    color: #e2e8f0;
+}
+
+body.dark .btn-fechar:hover,
+body.dark .modal-fechar:hover {
+    background: #475569;
 }
 
 
@@ -2096,6 +2406,7 @@ body.dark .modal-fechar {
     color: var(--texto-forte);
 
     font-size: 28px;
+
     font-weight: 800;
 }
 
@@ -2121,9 +2432,25 @@ body.dark .modal-fechar {
     font-size: 11px;
 }
 
+body.dark .topo-dashboard h1 {
+    color: #f8fafc;
+}
+
+body.dark .topo-dashboard p {
+    color: #94a3b8;
+}
+
+body.dark .data-dashboard {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    color: #94a3b8;
+}
+
 
 /* =========================================================
-   CARDS DO DASHBOARD
+   CARDS DASHBOARD
 ========================================================= */
 
 .dashboard-cards {
@@ -2176,6 +2503,7 @@ body.dark .modal-fechar {
     color: var(--texto-forte);
 
     font-size: 28px;
+
     font-weight: 800;
 }
 
@@ -2185,6 +2513,27 @@ body.dark .modal-fechar {
     color: var(--texto-claro);
 
     font-size: 11px;
+}
+
+body.dark .dashboard-card {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25);
+}
+
+body.dark .dashboard-card-icone {
+    background: #172554;
+}
+
+body.dark .dashboard-card-numero {
+    color: #f8fafc;
+}
+
+body.dark .dashboard-card-label {
+    color: #94a3b8;
 }
 
 
@@ -2225,6 +2574,23 @@ body.dark .modal-fechar {
     color: var(--texto-claro);
 
     font-size: 11px;
+}
+
+body.dark .dashboard-painel {
+    background: #1e293b;
+
+    border-color: #334155;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .25);
+}
+
+body.dark .dashboard-painel h2 {
+    color: #f8fafc;
+}
+
+body.dark .dashboard-painel p {
+    color: #94a3b8;
 }
 
 
@@ -2271,9 +2637,17 @@ body.dark .modal-fechar {
     font-size: 11px;
 }
 
+body.dark .progresso-barra {
+    background: #334155;
+}
+
+body.dark .progresso-legenda {
+    color: #94a3b8;
+}
+
 
 /* =========================================================
-   LISTA DE CLÍNICAS RECENTES
+   CLÍNICAS RECENTES
 ========================================================= */
 
 #ultimasClinicas {
@@ -2329,9 +2703,27 @@ body.dark .modal-fechar {
     font-size: 10px;
 }
 
+body.dark .clinica-recente {
+    border-color: #334155;
+
+    background: #1e293b;
+}
+
+body.dark .clinica-recente-icone {
+    background: #172554;
+}
+
+body.dark .clinica-recente strong {
+    color: #f8fafc;
+}
+
+body.dark .clinica-recente span {
+    color: #94a3b8;
+}
+
 
 /* =========================================================
-   GRID DE COBERTURA
+   COBERTURA
 ========================================================= */
 
 .cobertura-grid {
@@ -2355,10 +2747,6 @@ body.dark .modal-fechar {
     background: #f8fafc;
 }
 
-body.dark .cobertura-item {
-    background: #172033;
-}
-
 .cobertura-item strong {
     display: block;
 
@@ -2373,9 +2761,47 @@ body.dark .cobertura-item {
     font-size: 10px;
 }
 
+body.dark .cobertura-item {
+    background: #172033;
+
+    border-color: #334155;
+}
+
+body.dark .cobertura-item strong {
+    color: #f8fafc;
+}
+
+body.dark .cobertura-item span {
+    color: #94a3b8;
+}
+
 
 /* =========================================================
-   RESPONSIVIDADE
+   SCROLLBARS
+========================================================= */
+
+body.dark ::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+body.dark ::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+
+    border-radius: 999px;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE - 1200
 ========================================================= */
 
 @media (max-width: 1200px) {
@@ -2399,6 +2825,10 @@ body.dark .cobertura-item {
 }
 
 
+/* =========================================================
+   RESPONSIVIDADE - 1050
+========================================================= */
+
 @media (max-width: 1050px) {
 
     .cards {
@@ -2417,11 +2847,13 @@ body.dark .cobertura-item {
 
     .hero-site {
         flex-direction: column;
+
         align-items: flex-start;
     }
 
     .hero-destaque {
         width: 100%;
+
         max-width: 400px;
     }
 
@@ -2431,12 +2863,17 @@ body.dark .cobertura-item {
 }
 
 
+/* =========================================================
+   RESPONSIVIDADE - 800
+========================================================= */
+
 @media (max-width: 800px) {
 
     .header {
         padding: 14px 20px;
 
         flex-direction: column;
+
         align-items: stretch;
 
         gap: 12px;
@@ -2510,6 +2947,10 @@ body.dark .cobertura-item {
     }
 }
 
+
+/* =========================================================
+   RESPONSIVIDADE - 600
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -2605,6 +3046,7 @@ body.dark .cobertura-item {
         position: relative;
 
         width: 100%;
+
         height: auto;
 
         min-height: auto;
@@ -2631,6 +3073,10 @@ body.dark .cobertura-item {
     }
 }
 
+
+/* =========================================================
+   RESPONSIVIDADE - 430
+========================================================= */
 
 @media (max-width: 430px) {
 
