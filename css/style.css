@@ -14,15 +14,19 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6fb;
-    color: #334155;
-    transition: background 0.3s ease, color 0.3s ease;
+    background: #0f172a;
+    color: #f8fafc;
+    min-height: 100vh;
+    line-height: 1.5;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
 }
 
 button,
 input,
 select {
-    font: inherit;
+    font-family: inherit;
 }
 
 
@@ -41,102 +45,81 @@ select {
     --verde: #10b981;
     --vermelho: #ef4444;
 
-    --fundo: #f4f6fb;
-    --card: #ffffff;
-
-    --texto: #334155;
-    --texto-forte: #1e293b;
-    --texto-claro: #64748b;
-
-    --borda: #e2e8f0;
-
-    --sombra: 0 10px 30px rgba(15, 23, 42, 0.08);
-    --sombra-forte: 0 18px 45px rgba(15, 23, 42, 0.12);
-}
-
-
-/* ============================================================
-   MODO ESCURO
-============================================================ */
-
-body.dark {
     --fundo: #0f172a;
-    --card: #1e293b;
+    --fundo-card: #1e293b;
+    --fundo-card-2: #202d42;
 
-    --texto: #cbd5e1;
-    --texto-forte: #f8fafc;
+    --texto: #f8fafc;
+    --texto-secundario: #cbd5e1;
     --texto-claro: #94a3b8;
 
     --borda: #334155;
 
-    --sombra: 0 10px 30px rgba(0, 0, 0, 0.30);
-    --sombra-forte: 0 18px 45px rgba(0, 0, 0, 0.40);
+    --sombra:
+        0 15px 40px rgba(0, 0, 0, 0.25);
 
-    background: var(--fundo);
-    color: var(--texto);
+    --sombra-hover:
+        0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
 
 /* ============================================================
-   SCROLLBAR
+   TEMA ESCURO
 ============================================================ */
 
-::-webkit-scrollbar {
-    width: 10px;
-}
+body.dark {
+    --fundo: #0f172a;
+    --fundo-card: #1e293b;
+    --fundo-card-2: #202d42;
 
-::-webkit-scrollbar-track {
-    background: var(--fundo);
-}
+    --texto: #f8fafc;
+    --texto-secundario: #cbd5e1;
+    --texto-claro: #94a3b8;
 
-::-webkit-scrollbar-thumb {
-    background: #64748b;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+    --borda: #334155;
 }
 
 
 /* ============================================================
-   CABEÇALHO
+   HEADER
 ============================================================ */
 
 .header {
     width: 100%;
     min-height: 88px;
 
+    padding: 0 4%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 14px 42px;
+    background:
+        linear-gradient(
+            135deg,
+            #172554 0%,
+            #1e3a8a 55%,
+            #2563eb 100%
+        );
 
-    background: linear-gradient(
-        135deg,
-        #172554 0%,
-        #1e3a8a 50%,
-        #2563eb 100%
-    );
-
-    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 
     position: relative;
     z-index: 100;
 
-    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.18);
+    box-shadow:
+        0 8px 30px rgba(0,0,0,0.20);
 }
 
 
 /* ============================================================
-   LADO ESQUERDO DO CABEÇALHO
+   LADO ESQUERDO DO HEADER
 ============================================================ */
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
 }
 
 .logo {
@@ -151,20 +134,21 @@ body.dark {
 .titulo-site {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    justify-content: center;
 }
 
 .titulo-site h1 {
-    font-size: 30px;
-    line-height: 1.1;
+    font-size: 27px;
     font-weight: 800;
+    line-height: 1.1;
     color: #ffffff;
-    letter-spacing: -0.5px;
 }
 
 .titulo-site p {
+    margin-top: 5px;
+
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.90);
+    color: rgba(255,255,255,0.85);
 }
 
 
@@ -178,72 +162,85 @@ body.dark {
     gap: 10px;
 }
 
-.menu-link,
-.btn-tema {
-    height: 44px;
-
-    display: inline-flex;
+.menu-link {
+    display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 0 17px;
+    min-height: 42px;
 
-    border: 0;
+    padding: 0 16px;
+
     border-radius: 12px;
 
-    color: white;
-    background: rgba(255, 255, 255, 0.08);
-
+    color: #ffffff;
     text-decoration: none;
 
     font-size: 14px;
     font-weight: 700;
 
-    cursor: pointer;
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid transparent;
 
     transition:
-        background 0.25s ease,
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
 }
 
-.menu-link:hover,
-.btn-tema:hover {
-    background: rgba(255, 255, 255, 0.18);
+.menu-link:hover {
+    background: rgba(255,255,255,0.16);
+
+    border-color:
+        rgba(255,255,255,0.12);
+
     transform: translateY(-2px);
 }
 
 .menu-link.ativo {
-    background: rgba(255, 255, 255, 0.20);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
-}
+    background: rgba(255,255,255,0.18);
 
-.login-link {
-    background: rgba(255, 255, 255, 0.14);
-}
+    border-color:
+        rgba(255,255,255,0.12);
 
-.btn-tema {
-    width: 48px;
-    padding: 0;
-    font-size: 20px;
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.12);
 }
 
 
 /* ============================================================
-   SINDILEGIS - ROXO
+   BOTÃO TEMA
 ============================================================ */
 
-body.sindilegis .header {
-    background: linear-gradient(
-        135deg,
-        #3b0764 0%,
-        #581c87 50%,
-        #7c3aed 100%
-    );
+.btn-tema {
+    width: 48px;
+    height: 44px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.16);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
-body.sindilegis .menu-link.ativo {
-    background: rgba(255, 255, 255, 0.20);
+.btn-tema:hover {
+    background: rgba(255,255,255,0.24);
+
+    transform: translateY(-2px);
 }
 
 
@@ -252,10 +249,12 @@ body.sindilegis .menu-link.ativo {
 ============================================================ */
 
 .container {
-    width: min(1140px, calc(100% - 48px));
+    width: min(1140px, 92%);
+
     margin: 0 auto;
 
-    padding: 42px 0 70px;
+    padding:
+        38px 0 70px;
 }
 
 
@@ -264,22 +263,23 @@ body.sindilegis .menu-link.ativo {
 ============================================================ */
 
 .titulo-principal {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 }
 
 .titulo-principal h2 {
-    color: var(--texto-forte);
-
-    font-size: 30px;
+    font-size: 29px;
     font-weight: 800;
 
-    letter-spacing: -0.6px;
+    color: #ffffff;
 
-    margin-bottom: 7px;
+    letter-spacing: -0.4px;
 }
 
 .titulo-principal p {
-    color: var(--texto-claro);
+    margin-top: 5px;
+
+    color: #94a3b8;
+
     font-size: 15px;
 }
 
@@ -289,56 +289,63 @@ body.sindilegis .menu-link.ativo {
 ============================================================ */
 
 .filtros {
-    width: 100%;
-
     display: grid;
 
     grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(4, 1fr);
 
-    gap: 20px;
+    gap: 20px 16px;
 
     padding: 25px;
 
-    background: var(--card);
+    background:
+        linear-gradient(
+            145deg,
+            #1e293b,
+            #202d42
+        );
 
-    border: 1px solid var(--borda);
+    border: 1px solid #334155;
+
     border-radius: 18px;
 
-    box-shadow: var(--sombra);
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.18);
+
+    margin-bottom: 32px;
 }
-
-
-/* ============================================================
-   FILTRO
-============================================================ */
 
 .filtro {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+
+    gap: 7px;
 }
 
 .filtro label {
-    color: var(--texto-forte);
+    padding-left: 2px;
+
+    color: #f8fafc;
 
     font-size: 13px;
-    font-weight: 800;
-
-    padding-left: 2px;
+    font-weight: 700;
 }
 
 .filtro select {
     width: 100%;
-    height: 48px;
+    height: 49px;
 
     padding: 0 14px;
 
-    border: 1px solid var(--borda);
     border-radius: 11px;
 
-    background: var(--card);
-    color: var(--texto-forte);
+    border: 1px solid #475569;
+
+    background: #1e293b;
+
+    color: #f8fafc;
+
+    font-size: 14px;
 
     outline: none;
 
@@ -351,17 +358,24 @@ body.sindilegis .menu-link.ativo {
 }
 
 .filtro select:hover {
-    border-color: #94a3b8;
+    border-color: #64748b;
 }
 
 .filtro select:focus {
-    border-color: var(--azul);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px rgba(59,130,246,0.18);
+}
+
+.filtro select option {
+    background: #1e293b;
+    color: #ffffff;
 }
 
 
 /* ============================================================
-   BOTÃO BUSCAR
+   ÁREA DO BOTÃO
 ============================================================ */
 
 .filtro-botao {
@@ -370,25 +384,27 @@ body.sindilegis .menu-link.ativo {
 
 .btn-buscar {
     width: 100%;
-    height: 48px;
+    height: 49px;
 
     border: none;
     border-radius: 11px;
 
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #3b82f6
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
 
-    color: white;
+    color: #ffffff;
 
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 800;
 
     cursor: pointer;
 
-    box-shadow: 0 7px 16px rgba(37, 99, 235, 0.24);
+    box-shadow:
+        0 8px 20px rgba(37,99,235,0.25);
 
     transition:
         transform 0.2s ease,
@@ -398,8 +414,11 @@ body.sindilegis .menu-link.ativo {
 
 .btn-buscar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 11px 22px rgba(37, 99, 235, 0.30);
-    filter: brightness(1.04);
+
+    box-shadow:
+        0 12px 25px rgba(37,99,235,0.35);
+
+    filter: brightness(1.06);
 }
 
 .btn-buscar:active {
@@ -412,36 +431,30 @@ body.sindilegis .menu-link.ativo {
 ============================================================ */
 
 #resultado {
-    margin-top: 34px;
+    width: 100%;
 }
-
-
-/* ============================================================
-   CABEÇALHO DOS RESULTADOS
-============================================================ */
 
 .tituloResultado {
     display: flex;
-    align-items: flex-end;
+
+    align-items: center;
     justify-content: space-between;
 
     gap: 15px;
 
     margin-bottom: 18px;
+
+    color: #ffffff;
 }
 
 .tituloResultado h2 {
-    color: var(--texto-forte);
-
     font-size: 21px;
     font-weight: 800;
 }
 
 .tituloResultado p {
-    color: var(--texto-claro);
-
+    color: #94a3b8;
     font-size: 14px;
-    margin-top: 4px;
 }
 
 
@@ -452,19 +465,24 @@ body.sindilegis .menu-link.ativo {
 .card {
     width: 100%;
 
-    background: var(--card);
+    margin-bottom: 20px;
 
-    border: 1px solid var(--borda);
-    border-radius: 20px;
+    padding: 24px;
 
-    padding: 25px;
+    background:
+        linear-gradient(
+            145deg,
+            #1e293b 0%,
+            #202d42 100%
+        );
 
-    margin-bottom: 18px;
+    border:
+        1px solid #334155;
 
-    box-shadow: var(--sombra);
+    border-radius: 18px;
 
-    position: relative;
-    overflow: hidden;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.18);
 
     transition:
         transform 0.25s ease,
@@ -472,70 +490,86 @@ body.sindilegis .menu-link.ativo {
         border-color 0.25s ease;
 }
 
-.card::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-    bottom: 0;
-
-    width: 4px;
-
-    background: #2563eb;
-
-    opacity: 0;
-
-    transition: opacity 0.25s ease;
-}
-
 .card:hover {
     transform: translateY(-3px);
-    box-shadow: var(--sombra-forte);
-    border-color: #cbd5e1;
-}
 
-.card:hover::before {
-    opacity: 1;
+    border-color:
+        rgba(59,130,246,0.45);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.28);
 }
 
 
 /* ============================================================
-   CARD HEADER
+   CABEÇALHO DO CARD
 ============================================================ */
 
 .cardHeader {
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
 
     gap: 25px;
 
     padding-bottom: 18px;
 
-    border-bottom: 1px solid var(--borda);
+    border-bottom:
+        1px solid rgba(148,163,184,0.16);
 }
 
 .cardHeader > div:first-child {
-    flex: 1;
+    display: flex;
+    align-items: center;
+
     min-width: 0;
 }
 
 .cardHeader h3 {
-    color: var(--texto-forte);
+    color: #ffffff;
 
-    font-size: 21px;
+    font-size: 20px;
+
     font-weight: 800;
 
     line-height: 1.25;
 
-    margin-bottom: 5px;
+    margin: 0;
 }
 
 .cardHeader p {
-    color: var(--texto-claro);
+    margin-top: 4px;
+
+    color: #94a3b8;
+
     font-size: 13px;
+}
+
+
+/* ============================================================
+   REDE DO CARD
+============================================================ */
+
+.cardHeader .rede {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 10px;
+
+    margin-top: 5px;
+
+    border-radius: 8px;
+
+    background: rgba(37,99,235,0.10);
+
+    color: #93c5fd;
+
+    font-size: 12px;
+
+    font-weight: 700;
 }
 
 
@@ -544,31 +578,43 @@ body.sindilegis .menu-link.ativo {
 ============================================================ */
 
 .info {
-    display: grid;
+    display: flex;
 
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+    flex-direction: column;
 
-    gap: 12px 28px;
+    gap: 9px;
 
-    padding: 19px 0;
+    padding: 18px 0;
 }
 
 .info p {
     display: flex;
+
     align-items: flex-start;
 
-    gap: 9px;
+    gap: 8px;
 
-    color: var(--texto);
+    color: #cbd5e1;
 
     font-size: 14px;
+
     line-height: 1.5;
 }
 
-.info strong {
-    color: var(--texto-forte);
-    font-weight: 700;
+.info p strong {
+    color: #f8fafc;
+}
+
+.info a {
+    color: #60a5fa;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
 }
 
 
@@ -577,58 +623,59 @@ body.sindilegis .menu-link.ativo {
 ============================================================ */
 
 .especialidades {
-    padding: 17px 0;
+    padding-top: 17px;
 
-    border-top: 1px solid var(--borda);
+    border-top:
+        1px solid rgba(148,163,184,0.13);
 }
 
-.especialidades h4 {
-    color: var(--texto-forte);
+.especialidades > strong {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #f8fafc;
 
     font-size: 14px;
-    font-weight: 800;
-
-    margin-bottom: 10px;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.tag {
-    display: inline-flex;
-    align-items: center;
-
-    min-height: 30px;
-
-    padding: 5px 11px;
-
-    border-radius: 999px;
-
-    background: rgba(37, 99, 235, 0.10);
-    color: #2563eb;
-
-    border: 1px solid rgba(37, 99, 235, 0.15);
-
-    font-size: 12px;
-    font-weight: 700;
 }
 
 
 /* ============================================================
-   REDE SINDILEGIS
+   TAGS
 ============================================================ */
 
-body.sindilegis .card::before {
-    background: #7c3aed;
+.tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
 }
 
-body.sindilegis .tag {
-    background: rgba(124, 58, 237, 0.10);
-    color: #7c3aed;
-    border-color: rgba(124, 58, 237, 0.18);
+.tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 27px;
+
+    padding: 4px 10px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(59,130,246,0.10);
+
+    border:
+        1px solid rgba(59,130,246,0.25);
+
+    color: #93c5fd;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
 }
 
 
@@ -638,149 +685,189 @@ body.sindilegis .tag {
 
 .acoes {
     display: flex;
+
+    align-items: center;
+
     flex-wrap: wrap;
 
-    gap: 10px;
+    gap: 9px;
 
-    padding-top: 18px;
+    margin-top: 18px;
 
-    border-top: 1px solid var(--borda);
+    padding-top: 17px;
+
+    border-top:
+        1px solid rgba(148,163,184,0.13);
 }
 
 .btnAcao {
-    min-height: 39px;
-
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 7px;
 
-    padding: 0 15px;
+    min-height: 38px;
 
-    border-radius: 10px;
+    padding: 0 14px;
 
-    border: 1px solid var(--borda);
+    border-radius: 9px;
 
-    background: var(--card);
-    color: var(--texto-forte);
+    border: 1px solid #475569;
+
+    background: #1e293b;
+
+    color: #f8fafc;
 
     text-decoration: none;
 
-    font-size: 13px;
+    font-size: 12px;
+
     font-weight: 700;
 
     cursor: pointer;
 
     transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
         background 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .btnAcao:hover {
-    transform: translateY(-2px);
+    background: #334155;
 
-    border-color: #94a3b8;
+    border-color: #64748b;
 
-    background: #f8fafc;
-
-    box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
-}
-
-body.dark .btnAcao:hover {
-    background: #273449;
+    transform: translateY(-1px);
 }
 
 
 /* ============================================================
-   BOTÕES ESPECÍFICOS
-============================================================ */
-
-.btnAcao.telefone {
-    color: #2563eb;
-}
-
-.btnAcao.whatsapp {
-    color: #10b981;
-}
-
-.btnAcao.mapa {
-    color: #7c3aed;
-}
-
-
-/* ============================================================
-   SEM RESULTADO
+   MENSAGEM SEM RESULTADOS
 ============================================================ */
 
 .semResultado {
     width: 100%;
 
-    padding: 55px 30px;
+    padding: 55px 25px;
 
     text-align: center;
 
-    background: var(--card);
+    background:
+        linear-gradient(
+            145deg,
+            #1e293b,
+            #202d42
+        );
 
-    border: 1px solid var(--borda);
-    border-radius: 20px;
+    border:
+        1px solid #334155;
 
-    box-shadow: var(--sombra);
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.15);
 }
 
 .semResultado h2 {
-    color: var(--texto-forte);
+    margin-bottom: 8px;
+
+    color: #ffffff;
 
     font-size: 21px;
-
-    margin-bottom: 8px;
 }
 
 .semResultado p {
-    color: var(--texto-claro);
+    color: #94a3b8;
 
     font-size: 14px;
 }
 
 
 /* ============================================================
-   ESTADO DE CARREGAMENTO
+   LOADING
 ============================================================ */
 
 .carregando {
-    padding: 45px 20px;
+    display: flex;
 
-    text-align: center;
+    align-items: center;
+    justify-content: center;
 
-    color: var(--texto-claro);
+    min-height: 180px;
 
-    background: var(--card);
+    color: #94a3b8;
 
-    border: 1px solid var(--borda);
-    border-radius: 18px;
-
-    box-shadow: var(--sombra);
+    font-size: 14px;
 }
 
 
 /* ============================================================
-   MENSAGEM DE ERRO
+   SINDILEGIS
+   MANTÉM A IDENTIDADE ROXA
 ============================================================ */
 
-.erro {
-    padding: 20px;
+body.sindilegis .header {
+    background:
+        linear-gradient(
+            135deg,
+            #4c1d95 0%,
+            #6d28d9 55%,
+            #7c3aed 100%
+        );
+}
 
-    background: rgba(239, 68, 68, 0.08);
+body.sindilegis .menu-link.ativo {
+    background:
+        rgba(255,255,255,0.18);
+}
 
-    border: 1px solid rgba(239, 68, 68, 0.25);
+body.sindilegis .btn-buscar {
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #8b5cf6
+        );
 
-    border-radius: 14px;
+    box-shadow:
+        0 8px 20px rgba(124,58,237,0.25);
+}
 
-    color: #ef4444;
+body.sindilegis .btn-buscar:hover {
+    box-shadow:
+        0 12px 25px rgba(124,58,237,0.35);
+}
 
-    font-size: 14px;
+body.sindilegis .filtro select:focus {
+    border-color: #8b5cf6;
+
+    box-shadow:
+        0 0 0 3px rgba(139,92,246,0.18);
+}
+
+body.sindilegis .card:hover {
+    border-color:
+        rgba(139,92,246,0.50);
+}
+
+body.sindilegis .tag {
+    background:
+        rgba(124,58,237,0.12);
+
+    border-color:
+        rgba(139,92,246,0.30);
+
+    color: #c4b5fd;
+}
+
+body.sindilegis .cardHeader .rede {
+    background:
+        rgba(124,58,237,0.12);
+
+    color: #c4b5fd;
 }
 
 
@@ -791,7 +878,7 @@ body.dark .btnAcao:hover {
 @keyframes aparecer {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(8px);
     }
 
     to {
@@ -801,30 +888,19 @@ body.dark .btnAcao:hover {
 }
 
 .card {
-    animation: aparecer 0.35s ease both;
+    animation:
+        aparecer 0.35s ease both;
 }
 
 
 /* ============================================================
-   TABLET
+   RESPONSIVIDADE
 ============================================================ */
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
 
     .header {
-        padding: 14px 25px;
-    }
-
-    .titulo-site h1 {
-        font-size: 25px;
-    }
-
-    .menu-topo {
-        gap: 6px;
-    }
-
-    .menu-link {
-        padding: 0 12px;
+        padding: 0 25px;
     }
 
     .container {
@@ -833,71 +909,53 @@ body.dark .btnAcao:hover {
 
     .filtros {
         grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .info {
-        grid-template-columns: 1fr;
+            repeat(2, 1fr);
     }
 }
 
 
-/* ============================================================
-   CELULAR
-============================================================ */
-
-@media (max-width: 650px) {
+@media (max-width: 760px) {
 
     .header {
         min-height: auto;
 
-        padding: 18px;
+        padding:
+            15px 20px;
 
         flex-direction: column;
 
         align-items: stretch;
 
-        gap: 16px;
+        gap: 15px;
     }
 
     .header-left {
         justify-content: center;
     }
 
-    .logo {
-        width: 50px;
-        height: 50px;
-    }
-
-    .titulo-site h1 {
-        font-size: 23px;
-    }
-
-    .titulo-site p {
-        font-size: 12px;
-    }
-
     .menu-topo {
-        width: 100%;
+        justify-content: center;
 
-        display: grid;
-
-        grid-template-columns:
-            1fr 1fr 48px 1fr;
+        flex-wrap: wrap;
     }
 
-    .menu-link,
-    .btn-tema {
-        width: 100%;
-        padding: 0 8px;
+    .menu-link {
+        min-height: 38px;
+
+        padding: 0 12px;
 
         font-size: 12px;
+    }
+
+    .btn-tema {
+        width: 40px;
+        height: 38px;
     }
 
     .container {
-        width: calc(100% - 24px);
+        width: 92%;
 
-        padding: 30px 0 50px;
+        padding-top: 30px;
     }
 
     .titulo-principal h2 {
@@ -907,50 +965,27 @@ body.dark .btnAcao:hover {
     .filtros {
         grid-template-columns: 1fr;
 
-        padding: 18px;
-
-        gap: 15px;
-
-        border-radius: 16px;
-    }
-
-    .filtro select,
-    .btn-buscar {
-        height: 46px;
-    }
-
-    #resultado {
-        margin-top: 25px;
-    }
-
-    .tituloResultado {
-        display: block;
-
-        margin-bottom: 15px;
+        padding: 20px;
     }
 
     .card {
         padding: 19px;
-
-        border-radius: 17px;
     }
 
     .cardHeader {
-        gap: 12px;
-
         flex-direction: column;
+
+        gap: 10px;
     }
 
     .cardHeader h3 {
-        font-size: 19px;
-    }
-
-    .info {
-        gap: 10px;
+        font-size: 18px;
     }
 
     .acoes {
         flex-direction: column;
+
+        align-items: stretch;
     }
 
     .btnAcao {
@@ -959,23 +994,33 @@ body.dark .btnAcao:hover {
 }
 
 
-/* ============================================================
-   CELULARES MUITO PEQUENOS
-============================================================ */
+@media (max-width: 480px) {
 
-@media (max-width: 420px) {
-
-    .menu-topo {
-        grid-template-columns:
-            1fr 1fr 44px;
+    .header-left {
+        gap: 9px;
     }
 
-    .login-link {
-        grid-column: 1 / -1;
+    .logo {
+        width: 48px;
+        height: 48px;
     }
 
     .titulo-site h1 {
         font-size: 21px;
+    }
+
+    .titulo-site p {
+        font-size: 11px;
+    }
+
+    .menu-topo {
+        gap: 6px;
+    }
+
+    .menu-link {
+        padding: 0 9px;
+
+        font-size: 11px;
     }
 
     .titulo-principal h2 {
@@ -983,39 +1028,18 @@ body.dark .btnAcao:hover {
     }
 
     .filtros {
-        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .card {
+        border-radius: 15px;
     }
 
     .cardHeader h3 {
-        font-size: 18px;
+        font-size: 17px;
     }
-}
 
-
-/* ============================================================
-   ACESSIBILIDADE
-============================================================ */
-
-button:focus-visible,
-select:focus-visible,
-a:focus-visible {
-    outline: 3px solid rgba(59, 130, 246, 0.35);
-    outline-offset: 2px;
-}
-
-
-/* ============================================================
-   REDUÇÃO DE MOVIMENTO
-============================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+    .info p {
+        font-size: 13px;
     }
 }
