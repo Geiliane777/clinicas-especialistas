@@ -4,23 +4,13 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Rede Especialistas</title>
 
-    <link
-        rel="icon"
-        type="image/png"
-        href="img/tooth.png"
-    >
+    <link rel="icon" type="image/png" href="img/tooth.png">
 
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -28,7 +18,6 @@
     <!-- =========================================================
          CABEÇALHO
     ========================================================== -->
-
     <header class="header">
 
         <div class="header-left">
@@ -40,8 +29,13 @@
             >
 
             <div class="titulo-site">
+
                 <h1>Rede Especialistas</h1>
-                <p>Encontre clínicas e especialistas</p>
+
+                <p>
+                    Encontre clínicas e especialistas
+                </p>
+
             </div>
 
         </div>
@@ -50,7 +44,6 @@
         <!-- =====================================================
              MENU SUPERIOR
         ====================================================== -->
-
         <nav class="menu-topo">
 
             <a
@@ -60,12 +53,14 @@
                 🦷 Rede Especialistas
             </a>
 
+
             <a
                 href="sindilegis.html"
                 class="menu-link"
             >
                 🏥 Sindilegis
             </a>
+
 
             <button
                 type="button"
@@ -76,6 +71,7 @@
             >
                 🌙
             </button>
+
 
             <a
                 href="login.html"
@@ -89,16 +85,16 @@
     </header>
 
 
+
     <!-- =========================================================
          CONTEÚDO PRINCIPAL
     ========================================================== -->
-
     <main class="container">
+
 
         <!-- =====================================================
              TÍTULO
         ====================================================== -->
-
         <section class="titulo-principal">
 
             <h2>
@@ -112,14 +108,14 @@
         </section>
 
 
+
         <!-- =====================================================
              FILTROS
         ====================================================== -->
-
         <section class="filtros">
 
-            <!-- Região -->
 
+            <!-- REGIÃO -->
             <div class="filtro">
 
                 <label for="regiao">
@@ -137,8 +133,8 @@
             </div>
 
 
-            <!-- Estado -->
 
+            <!-- ESTADO -->
             <div class="filtro">
 
                 <label for="estado">
@@ -156,8 +152,8 @@
             </div>
 
 
-            <!-- Cidade -->
 
+            <!-- CIDADE -->
             <div class="filtro">
 
                 <label for="cidade">
@@ -175,8 +171,8 @@
             </div>
 
 
-            <!-- Bairro -->
 
+            <!-- BAIRRO -->
             <div class="filtro">
 
                 <label for="bairro">
@@ -194,8 +190,8 @@
             </div>
 
 
-            <!-- Especialidade -->
 
+            <!-- ESPECIALIDADE -->
             <div class="filtro">
 
                 <label for="especialidade">
@@ -213,8 +209,8 @@
             </div>
 
 
-            <!-- Botão pesquisar -->
 
+            <!-- BOTÃO -->
             <div class="filtro filtro-botao">
 
                 <button
@@ -230,10 +226,10 @@
         </section>
 
 
+
         <!-- =====================================================
              RESULTADOS
         ====================================================== -->
-
         <section
             id="resultado"
             aria-live="polite"
@@ -257,17 +253,13 @@
     </main>
 
 
+
     <!-- =========================================================
          SCRIPTS
-         
-         IMPORTANTE:
-         A ordem desses arquivos é importante.
     ========================================================== -->
 
-    <!-- Biblioteca Supabase -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
     <!-- Configuração do Supabase -->
@@ -282,7 +274,7 @@
     <script src="js/filtros.js"></script>
 
 
-    <!-- Montagem dos cards das clínicas -->
+    <!-- Cards das clínicas -->
     <script src="js/cards.js"></script>
 
 
