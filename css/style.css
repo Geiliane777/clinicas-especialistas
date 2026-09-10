@@ -1326,5 +1326,84 @@ body.dark .rede-badge {
         flex-direction: column;
 
     }
+/* ============================================================
+   REDE SINDILEGIS - TEMA ROXO
+   ============================================================ */
 
+body.sindilegis {
+    --azul-escuro: #581c87;
+    --azul: #7c3aed;
+    --azul-claro: #8b5cf6;
+    --roxo: #7c3aed;
+    --roxo-claro: #a78bfa;
+}
+
+
+/* Cabeçalho Sindilegis */
+body.sindilegis .header {
+    background: linear-gradient(
+        135deg,
+        #3b0764 0%,
+        #581c87 50%,
+        #7c3aed 100%
+    );
+}
+
+
+/* Link ativo */
+body.sindilegis .menu-link.ativo {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+
+/* Botão buscar */
+body.sindilegis .btn-buscar {
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #8b5cf6
+    );
+    color: #ffffff;
+}
+
+body.sindilegis .btn-buscar:hover {
+    background: linear-gradient(
+        135deg,
+        #6d28d9,
+        #7c3aed
+    );
+}
+
+
+/* Tags de especialidades */
+body.sindilegis .tag {
+    background: #ede9fe;
+    color: #6d28d9;
+    border-color: #c4b5fd;
+}
+
+
+/* Título dos resultados */
+body.sindilegis .tituloResultado {
+    color: #581c87;
+}
+
+
+/* Botões dos cards */
+body.sindilegis .btnAcao {
+    border-color: #8b5cf6;
+    color: #6d28d9;
+}
+
+body.sindilegis .btnAcao:hover {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+
+/* Links */
+body.sindilegis a {
+    color: #7c3aed;
+}
 }
