@@ -1,1345 +1,603 @@
 /* ============================================================
    RESET
-============================================================ */
+   ============================================================ */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-
 
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
     font-family: Arial, Helvetica, sans-serif;
-
-    background: #f3f6fb;
-
-    color: #172033;
-
+    background: #f4f6fb;
+    color: #334155;
     min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+}
 
-    transition:
-        background 0.3s ease,
-        color 0.3s ease;
+button,
+input,
+select {
+    font: inherit;
+}
+
+
+/* ============================================================
+   VARIÁVEIS - REDE ESPECIALISTAS
+   ============================================================ */
+
+:root {
+    --azul-escuro: #172554;
+    --azul: #2563eb;
+    --azul-claro: #3b82f6;
+
+    --roxo: #7c3aed;
+    --roxo-claro: #8b5cf6;
+
+    --verde: #10b981;
+    --vermelho: #ef4444;
+
+    --fundo: #f4f6fb;
+    --card: #ffffff;
+
+    --texto: #334155;
+    --texto-forte: #1e293b;
+    --texto-claro: #64748b;
+
+    --borda: #e2e8f0;
+
+    --sombra: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ============================================================
+   TEMA ESCURO
+   ============================================================ */
+
+body.dark {
+    --fundo: #0f172a;
+    --card: #1e293b;
+
+    --texto: #cbd5e1;
+    --texto-forte: #f8fafc;
+    --texto-claro: #94a3b8;
+
+    --borda: #334155;
+
+    --sombra: 0 10px 30px rgba(0, 0, 0, 0.30);
+
+    background: var(--fundo);
+    color: var(--texto);
 }
 
 
 /* ============================================================
    CABEÇALHO
-============================================================ */
+   ============================================================ */
 
 .header {
-
     width: 100%;
+    background: linear-gradient(
+        135deg,
+        #172554 0%,
+        #1e3a8a 50%,
+        #2563eb 100%
+    );
 
-    min-height: 110px;
-
-    padding: 22px 5%;
+    color: white;
+    padding: 25px 50px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 30px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #172b63,
-            #2451c7
-        );
+    box-shadow: 0 8px 25px rgba(15, 23, 42, 0.18);
 
-    color: white;
-
-    border-bottom-left-radius: 28px;
-
-    border-bottom-right-radius: 28px;
-
-    box-shadow:
-        0 10px 30px rgba(
-            20,
-            43,
-            100,
-            0.18
-        );
+    position: relative;
+    z-index: 10;
 }
-
-
-/* ============================================================
-   PARTE ESQUERDA DO HEADER
-============================================================ */
 
 .header-left {
-
     display: flex;
-
     align-items: center;
-
     gap: 18px;
-
-    min-width: 0;
 }
-
 
 .logo {
-
-    width: 62px;
-
-    height: 62px;
-
+    width: 65px;
+    height: 65px;
     object-fit: contain;
-
-    flex-shrink: 0;
 }
 
-
 .titulo-site h1 {
-
-    font-size: 26px;
-
-    font-weight: 800;
-
-    line-height: 1.1;
-
+    font-size: 28px;
     margin-bottom: 5px;
 }
 
-
 .titulo-site p {
-
     font-size: 14px;
-
-    opacity: 0.88;
+    opacity: 0.9;
 }
 
 
 /* ============================================================
-   MENU
-============================================================ */
+   MENU SUPERIOR
+   ============================================================ */
 
 .menu-topo {
-
     display: flex;
-
     align-items: center;
-
-    justify-content: flex-end;
-
-    gap: 8px;
-
+    gap: 10px;
     flex-wrap: wrap;
 }
 
-
 .menu-link {
+    color: white;
+    text-decoration: none;
 
-    color: white !important;
-
-    text-decoration: none !important;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    padding: 11px 14px;
+    padding: 11px 15px;
 
     border-radius: 10px;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+    font-size: 14px;
+    font-weight: 600;
 
-    white-space: nowrap;
+    transition: all 0.25s ease;
 }
-
 
 .menu-link:hover {
-
-    background:
-        rgba(255, 255, 255, 0.15);
-
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.15);
 }
-
 
 .menu-link.ativo {
-
-    background:
-        rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.18);
 }
-
 
 .login-link {
-
-    background:
-        rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.10);
 }
 
 
+/* ============================================================
+   BOTÃO TEMA
+   ============================================================ */
+
 .btn-tema {
-
-    width: 44px;
-
-    height: 44px;
+    width: 48px;
+    height: 48px;
 
     border: none;
-
     border-radius: 12px;
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.16);
+
+    color: white;
 
     cursor: pointer;
 
     font-size: 20px;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: all 0.25s ease;
 }
 
-
 .btn-tema:hover {
-
+    background: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 15px rgba(
-            0,
-            0,
-            0,
-            0.2
-        );
 }
 
 
 /* ============================================================
    CONTAINER
-============================================================ */
+   ============================================================ */
 
 .container {
-
-    width: min(
-        1200px,
-        92%
-    );
+    width: 100%;
+    max-width: 1200px;
 
     margin: 0 auto;
 
-    padding:
-        40px
-        0
-        70px;
+    padding: 40px 30px;
 }
 
 
 /* ============================================================
-   TÍTULO
-============================================================ */
+   TÍTULO PRINCIPAL
+   ============================================================ */
 
 .titulo-principal {
-
     margin-bottom: 22px;
 }
 
-
 .titulo-principal h2 {
-
+    color: var(--texto-forte);
     font-size: 28px;
-
-    color: #172033;
-
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 }
 
-
 .titulo-principal p {
-
-    color: #61708b;
-
+    color: var(--texto-claro);
     font-size: 15px;
 }
 
 
 /* ============================================================
    FILTROS
-============================================================ */
+   ============================================================ */
 
 .filtros {
+    background: var(--card);
 
-    background: white;
+    border: 1px solid var(--borda);
 
-    border-radius: 20px;
+    border-radius: 18px;
 
-    padding: 25px;
+    padding: 24px;
 
     display: grid;
 
     grid-template-columns:
-        repeat(
-            4,
-            minmax(
-                0,
-                1fr
-            )
-        );
+        repeat(4, 1fr);
 
-    gap: 20px;
+    gap: 18px;
 
-    box-shadow:
-        0 8px 25px rgba(
-            23,
-            32,
-            51,
-            0.08
-        );
+    box-shadow: var(--sombra);
 
-    border: 1px solid #e1e7f0;
+    margin-bottom: 30px;
 }
-
 
 .filtro {
-
     display: flex;
-
     flex-direction: column;
-
-    gap: 8px;
+    gap: 7px;
 }
-
 
 .filtro label {
+    color: var(--texto-forte);
 
     font-size: 14px;
-
-    font-weight: 700;
-
-    color: #34415a;
+    font-weight: 600;
 }
 
-
 .filtro select {
-
     width: 100%;
 
     height: 48px;
 
-    padding:
-        0
-        14px;
+    padding: 0 14px;
 
-    border:
-        1px solid #cbd4e2;
+    border: 1px solid var(--borda);
 
-    border-radius: 11px;
+    border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--card);
 
-    color: #26344d;
-
-    font-size: 14px;
+    color: var(--texto);
 
     outline: none;
 
     cursor: pointer;
 
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: border 0.2s ease,
+                box-shadow 0.2s ease;
 }
-
 
 .filtro select:focus {
-
-    border-color: #3978ee;
-
-    box-shadow:
-        0 0 0 3px rgba(
-            57,
-            120,
-            238,
-            0.12
-        );
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 
-.filtro-botao {
+/* ============================================================
+   BOTÃO BUSCAR
+   ============================================================ */
 
+.filtro-botao {
     justify-content: flex-end;
 }
 
-
 .btn-buscar {
-
     height: 48px;
+
+    padding: 0 22px;
 
     border: none;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
-    padding:
-        0
-        22px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2775ee,
-            #3d8cff
-        );
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
 
     color: white;
 
-    font-size: 15px;
-
-    font-weight: 800;
+    font-weight: 700;
 
     cursor: pointer;
 
-    box-shadow:
-        0 7px 16px rgba(
-            39,
-            117,
-            238,
-            0.25
-        );
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: all 0.25s ease;
 }
 
-
 .btn-buscar:hover {
-
     transform: translateY(-2px);
 
     box-shadow:
-        0 10px 22px rgba(
-            39,
-            117,
-            238,
-            0.32
-        );
+        0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.btn-buscar:active {
+    transform: translateY(0);
 }
 
 
 /* ============================================================
    RESULTADOS
-============================================================ */
+   ============================================================ */
 
 #resultado {
+    width: 100%;
+}
 
-    margin-top: 28px;
+.tituloResultado {
+    color: var(--texto-forte);
+
+    font-size: 21px;
+
+    margin-bottom: 18px;
 }
 
 
-.tituloResultado {
+/* ============================================================
+   SEM RESULTADOS
+   ============================================================ */
 
-    background: white;
+.semResultado {
+    background: var(--card);
 
-    border: 1px solid #e1e7f0;
+    border: 1px solid var(--borda);
 
-    border-radius: 16px;
+    border-radius: 18px;
 
-    padding:
-        16px
-        20px;
+    padding: 45px 25px;
 
-    margin-bottom: 18px;
+    text-align: center;
 
+    box-shadow: var(--sombra);
+}
+
+.semResultado h2 {
+    color: var(--texto-forte);
+
+    margin-bottom: 8px;
+}
+
+.semResultado p {
+    color: var(--texto-claro);
+
+    font-size: 15px;
+}
+
+
+/* ============================================================
+   CARDS DAS CLÍNICAS
+   ============================================================ */
+
+.card {
+    background: var(--card);
+
+    border: 1px solid var(--borda);
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    margin-bottom: 20px;
+
+    box-shadow: var(--sombra);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.12);
+}
+
+
+/* ============================================================
+   CABEÇALHO DO CARD
+   ============================================================ */
+
+.cardHeader {
     display: flex;
 
-    align-items: center;
+    align-items: flex-start;
 
     justify-content: space-between;
 
-    color: #34415a;
+    gap: 20px;
 
-    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.cardHeader h3 {
+    color: var(--texto-forte);
+
+    font-size: 21px;
+
+    margin-bottom: 5px;
 }
 
 
-.tituloResultado small {
+/* ============================================================
+   INFORMAÇÕES
+   ============================================================ */
 
-    color: #6b7890;
+.info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+.info p {
+    color: var(--texto);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.info strong {
+    color: var(--texto-forte);
+}
+
+.info a {
+    color: var(--azul);
+
+    text-decoration: none;
+}
+
+.info a:hover {
+    text-decoration: underline;
+}
+
+
+/* ============================================================
+   ESPECIALIDADES
+   ============================================================ */
+
+.especialidades {
+    margin-top: 15px;
+}
+
+.especialidades h4 {
+    color: var(--texto-forte);
+
+    font-size: 15px;
+
+    margin-bottom: 10px;
+}
+
+.tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 20px;
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    border: 1px solid #bfdbfe;
+
+    font-size: 12px;
 
     font-weight: 600;
 }
 
 
-.contadorResultado {
+/* ============================================================
+   AÇÕES DO CARD
+   ============================================================ */
 
+.acoes {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.btnAcao {
     display: inline-flex;
 
     align-items: center;
 
     justify-content: center;
 
-    min-width: 30px;
+    gap: 6px;
 
-    height: 30px;
+    min-height: 40px;
 
-    padding: 0 8px;
-
-    margin-right: 7px;
+    padding: 8px 14px;
 
     border-radius: 9px;
 
-    background: #eaf2ff;
+    border: 1px solid var(--borda);
 
-    color: #2167db;
-}
+    background: var(--card);
 
+    color: var(--texto);
 
-/* ============================================================
-   CARDS
-============================================================ */
-
-.lista-cards {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
-    gap: 20px;
-}
-
-
-.card {
-
-    background: white;
-
-    border:
-        1px solid #e1e7f0;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 8px 25px rgba(
-            23,
-            32,
-            51,
-            0.07
-        );
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.card:hover {
-
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 13px 30px rgba(
-            23,
-            32,
-            51,
-            0.12
-        );
-}
-
-
-.cardHeader {
-
-    padding: 20px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    border-bottom:
-        1px solid #edf0f5;
-}
-
-
-.icone-clinica {
-
-    width: 48px;
-
-    height: 48px;
-
-    border-radius: 14px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #eaf2ff;
-
-    font-size: 24px;
-
-    flex-shrink: 0;
-}
-
-
-.cardHeader h3 {
-
-    color: #172033;
-
-    font-size: 18px;
-
-    margin-bottom: 6px;
-}
-
-
-.rede-badge {
-
-    display: inline-block;
-
-    padding:
-        4px
-        9px;
-
-    border-radius: 20px;
-
-    background: #edf4ff;
-
-    color: #2568d9;
-
-    font-size: 11px;
-
-    font-weight: 800;
-}
-
-
-.card-body {
-
-    padding: 20px;
-}
-
-
-.info {
-
-    display: flex;
-
-    gap: 12px;
-
-    margin-bottom: 15px;
-}
-
-
-.info-icone {
-
-    width: 30px;
-
-    flex-shrink: 0;
-
-    font-size: 18px;
-}
-
-
-.info strong {
-
-    display: block;
-
-    font-size: 12px;
-
-    color: #65738c;
-
-    margin-bottom: 3px;
-}
-
-
-.info p {
-
-    color: #29364d;
-
-    font-size: 14px;
-
-    line-height: 1.45;
-}
-
-
-/* ============================================================
-   ESPECIALIDADES
-============================================================ */
-
-.especialidades {
-
-    padding-top: 8px;
-
-    margin-top: 5px;
-
-    border-top:
-        1px solid #edf0f5;
-}
-
-
-.especialidades > strong {
-
-    display: block;
-
-    font-size: 12px;
-
-    color: #65738c;
-
-    margin-bottom: 9px;
-}
-
-
-.tags {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-}
-
-
-.tag {
-
-    padding:
-        6px
-        9px;
-
-    border-radius: 8px;
-
-    background: #eef4ff;
-
-    color: #2768d5;
-
-    font-size: 12px;
-
-    font-weight: 700;
-}
-
-
-/* ============================================================
-   AÇÕES
-============================================================ */
-
-.acoes {
-
-    display: flex;
-
-    gap: 10px;
-
-    padding:
-        16px
-        20px;
-
-    border-top:
-        1px solid #edf0f5;
-}
-
-
-.btnAcao {
-
-    flex: 1;
-
-    min-height: 42px;
-
-    border-radius: 10px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-decoration: none !important;
+    text-decoration: none;
 
     font-size: 13px;
 
-    font-weight: 800;
+    font-weight: 600;
 
-    transition:
-        transform 0.2s ease;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
 }
 
-
 .btnAcao:hover {
+    background: #f1f5f9;
 
     transform: translateY(-1px);
 }
 
-
-.btnTelefone {
-
-    background: #eaf8ef;
-
-    color: #178344 !important;
-}
-
-
-.btnMapa {
-
-    background: #edf3ff;
-
-    color: #2867d6 !important;
+body.dark .btnAcao:hover {
+    background: #334155;
 }
 
 
 /* ============================================================
-   SEM RESULTADO
-============================================================ */
-
-.semResultado {
-
-    background: white;
-
-    border:
-        1px solid #e1e7f0;
-
-    border-radius: 20px;
-
-    padding: 55px 25px;
-
-    text-align: center;
-
-    box-shadow:
-        0 8px 25px rgba(
-            23,
-            32,
-            51,
-            0.06
-        );
-}
-
-
-.icone-vazio {
-
-    font-size: 42px;
-
-    margin-bottom: 12px;
-}
-
-
-.semResultado h2 {
-
-    color: #26344d;
-
-    margin-bottom: 8px;
-}
-
-
-.semResultado p {
-
-    color: #6b7890;
-
-    line-height: 1.5;
-}
-
-
-/* ============================================================
-   CARREGANDO
-============================================================ */
-
-.carregando {
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 50px;
-
-    text-align: center;
-
-    border:
-        1px solid #e1e7f0;
-}
-
-
-.spinner {
-
-    width: 38px;
-
-    height: 38px;
-
-    margin:
-        0 auto
-        15px;
-
-    border:
-        4px solid #e5ebf5;
-
-    border-top-color: #2775ee;
-
-    border-radius: 50%;
-
-    animation:
-        girar 0.8s linear infinite;
-}
-
-
-@keyframes girar {
-
-    to {
-        transform: rotate(360deg);
-    }
-
-}
-
-
-.carregando p {
-
-    color: #61708b;
-
-    font-size: 14px;
-}
-
-
-/* ============================================================
-   ERRO
-============================================================ */
-
-.erroResultado {
-
-    background: white;
-
-    border:
-        1px solid #f0d2d2;
-
-    border-radius: 20px;
-
-    padding: 45px 25px;
-
-    text-align: center;
-}
-
-
-.icone-erro {
-
-    font-size: 40px;
-
-    margin-bottom: 12px;
-}
-
-
-.erroResultado h2 {
-
-    color: #a52d2d;
-
-    margin-bottom: 8px;
-}
-
-
-.erroResultado p {
-
-    color: #68758b;
-
-    margin-bottom: 20px;
-}
-
-
-.btn-tentar {
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #2775ee;
-
-    color: white;
-
-    padding:
-        12px
-        18px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-
-/* ============================================================
-   SINDILEGIS
-============================================================ */
-
-body.sindilegis {
-
-    background: #f5f6fb;
-}
-
-
-body.sindilegis .header {
-
-    background:
-        linear-gradient(
-            135deg,
-            #182c64,
-            #314b9b
-        );
-}
-
-
-body.sindilegis .btn-buscar {
-
-    background:
-        linear-gradient(
-            135deg,
-            #3d63c9,
-            #5878dc
-        );
-}
-
-
-body.sindilegis .tag {
-
-    background: #f0efff;
-
-    color: #5b48bb;
-}
-
-
-body.sindilegis .rede-badge {
-
-    background: #f0efff;
-
-    color: #5b48bb;
-}
-
-
-/* ============================================================
-   TEMA ESCURO
-============================================================ */
-
-body.dark {
-
-    background: #0d1628;
-
-    color: #edf3ff;
-}
-
-
-body.dark .titulo-principal h2 {
-
-    color: #ffffff;
-}
-
-
-body.dark .titulo-principal p {
-
-    color: #aebbd0;
-}
-
-
-body.dark .filtros,
-body.dark .card,
-body.dark .tituloResultado,
-body.dark .semResultado,
-body.dark .carregando,
-body.dark .erroResultado {
-
-    background: #172236;
-
-    border-color: #283750;
-
-    box-shadow:
-        0 8px 25px rgba(
-            0,
-            0,
-            0,
-            0.18
-        );
-}
-
-
-body.dark .filtro label {
-
-    color: #dce5f5;
-}
-
-
-body.dark .filtro select {
-
-    background: #1d2a40;
-
-    color: #edf3ff;
-
-    border-color: #3b4a63;
-}
-
-
-body.dark .cardHeader {
-
-    border-color: #29384f;
-}
-
-
-body.dark .cardHeader h3 {
-
-    color: #ffffff;
-}
-
-
-body.dark .info strong,
-body.dark .especialidades > strong {
-
-    color: #aebbd0;
-}
-
-
-body.dark .info p {
-
-    color: #d8e1ef;
-}
-
-
-body.dark .acoes {
-
-    border-color: #29384f;
-}
-
-
-body.dark .tituloResultado {
-
-    color: #dce5f5;
-}
-
-
-body.dark .tituloResultado small {
-
-    color: #9eabc0;
-}
-
-
-body.dark .semResultado h2 {
-
-    color: #ffffff;
-}
-
-
-body.dark .semResultado p {
-
-    color: #aebbd0;
-}
-
-
-body.dark .tag {
-
-    background: #243858;
-
-    color: #a9c7ff;
-}
-
-
-body.dark .rede-badge {
-
-    background: #243858;
-
-    color: #a9c7ff;
-}
-
-
-/* ============================================================
-   RESPONSIVIDADE
-============================================================ */
-
-@media (max-width: 1000px) {
-
-    .header {
-
-        flex-direction: column;
-
-        align-items: flex-start;
-
-    }
-
-
-    .menu-topo {
-
-        width: 100%;
-
-        justify-content: flex-start;
-
-    }
-
-
-    .filtros {
-
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
-
-    }
-
-}
-
-
-@media (max-width: 700px) {
-
-    .container {
-
-        width: 94%;
-
-        padding-top: 28px;
-
-    }
-
-
-    .header {
-
-        padding:
-            20px
-            3%;
-
-    }
-
-
-    .header-left {
-
-        width: 100%;
-
-    }
-
-
-    .titulo-site h1 {
-
-        font-size: 22px;
-
-    }
-
-
-    .menu-topo {
-
-        gap: 4px;
-
-    }
-
-
-    .menu-link {
-
-        font-size: 12px;
-
-        padding:
-            9px
-            10px;
-
-    }
-
-
-    .filtros {
-
-        grid-template-columns: 1fr;
-
-        padding: 18px;
-
-    }
-
-
-    .lista-cards {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .tituloResultado {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 8px;
-
-    }
-
-}
-
-
-@media (max-width: 450px) {
-
-    .logo {
-
-        width: 52px;
-
-        height: 52px;
-
-    }
-
-
-    .titulo-site h1 {
-
-        font-size: 19px;
-
-    }
-
-
-    .titulo-site p {
-
-        font-size: 12px;
-
-    }
-
-
-    .menu-topo {
-
-        width: 100%;
-
-    }
-
-
-    .menu-link {
-
-        flex: 1;
-
-        text-align: center;
-
-    }
-
-
-    .btn-tema {
-
-        flex-shrink: 0;
-
-    }
-
-
-    .acoes {
-
-        flex-direction: column;
-
-    }
-/* ============================================================
-   REDE SINDILEGIS - TEMA ROXO
+   REDE SINDILEGIS - ROXO
    ============================================================ */
 
 body.sindilegis {
     --azul-escuro: #581c87;
     --azul: #7c3aed;
     --azul-claro: #8b5cf6;
+
     --roxo: #7c3aed;
     --roxo-claro: #a78bfa;
 }
 
 
-/* Cabeçalho Sindilegis */
+/* ------------------------------------------------------------
+   CABEÇALHO ROXO
+   ------------------------------------------------------------ */
+
 body.sindilegis .header {
     background: linear-gradient(
         135deg,
@@ -1350,20 +608,28 @@ body.sindilegis .header {
 }
 
 
-/* Link ativo */
+/* ------------------------------------------------------------
+   LINK ATIVO ROXO
+   ------------------------------------------------------------ */
+
 body.sindilegis .menu-link.ativo {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.20);
+
     color: #ffffff;
 }
 
 
-/* Botão buscar */
+/* ------------------------------------------------------------
+   BOTÃO BUSCAR ROXO
+   ------------------------------------------------------------ */
+
 body.sindilegis .btn-buscar {
     background: linear-gradient(
         135deg,
         #7c3aed,
         #8b5cf6
     );
+
     color: #ffffff;
 }
 
@@ -1373,37 +639,240 @@ body.sindilegis .btn-buscar:hover {
         #6d28d9,
         #7c3aed
     );
+
+    box-shadow:
+        0 8px 20px rgba(124, 58, 237, 0.30);
 }
 
 
-/* Tags de especialidades */
-body.sindilegis .tag {
-    background: #ede9fe;
-    color: #6d28d9;
-    border-color: #c4b5fd;
+/* ------------------------------------------------------------
+   FOCO DOS CAMPOS ROXO
+   ------------------------------------------------------------ */
+
+body.sindilegis .filtro select:focus {
+    border-color: #7c3aed;
+
+    box-shadow:
+        0 0 0 3px rgba(124, 58, 237, 0.13);
 }
 
 
-/* Título dos resultados */
+/* ------------------------------------------------------------
+   TÍTULO DOS RESULTADOS
+   ------------------------------------------------------------ */
+
 body.sindilegis .tituloResultado {
     color: #581c87;
 }
 
+body.dark.sindilegis .tituloResultado {
+    color: #c4b5fd;
+}
 
-/* Botões dos cards */
+
+/* ------------------------------------------------------------
+   TAGS ROXAS
+   ------------------------------------------------------------ */
+
+body.sindilegis .tag {
+    background: #ede9fe;
+
+    color: #6d28d9;
+
+    border-color: #c4b5fd;
+}
+
+
+/* ------------------------------------------------------------
+   BOTÕES DOS CARDS ROXOS
+   ------------------------------------------------------------ */
+
 body.sindilegis .btnAcao {
-    border-color: #8b5cf6;
+    border-color: #c4b5fd;
+
     color: #6d28d9;
 }
 
 body.sindilegis .btnAcao:hover {
     background: #7c3aed;
+
+    border-color: #7c3aed;
+
     color: #ffffff;
 }
 
 
-/* Links */
-body.sindilegis a {
+/* ------------------------------------------------------------
+   LINKS ROXOS
+   ------------------------------------------------------------ */
+
+body.sindilegis .info a {
     color: #7c3aed;
 }
+
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+    .header {
+        padding: 22px 25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .menu-topo {
+        width: 100%;
+
+        justify-content: flex-start;
+    }
+
+    .filtros {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .container {
+        padding: 25px 16px;
+    }
+
+    .header {
+        padding: 20px 16px;
+    }
+
+    .header-left {
+        width: 100%;
+    }
+
+    .titulo-site h1 {
+        font-size: 23px;
+    }
+
+    .logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    .menu-topo {
+        gap: 5px;
+    }
+
+    .menu-link {
+        padding: 9px 10px;
+
+        font-size: 12px;
+    }
+
+    .btn-tema {
+        width: 42px;
+        height: 42px;
+    }
+
+    .titulo-principal h2 {
+        font-size: 24px;
+    }
+
+    .filtros {
+        grid-template-columns: 1fr;
+
+        padding: 18px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .cardHeader {
+        flex-direction: column;
+    }
+
+    .acoes {
+        flex-direction: column;
+    }
+
+    .btnAcao {
+        width: 100%;
+    }
+}
+
+
+/* ============================================================
+   TEMA ESCURO - ELEMENTOS
+   ============================================================ */
+
+body.dark .titulo-principal h2,
+body.dark .cardHeader h3,
+body.dark .especialidades h4,
+body.dark .filtro label,
+body.dark .semResultado h2 {
+    color: var(--texto-forte);
+}
+
+body.dark .filtro select {
+    background: #1e293b;
+
+    color: #f8fafc;
+
+    border-color: #475569;
+}
+
+body.dark .filtro select option {
+    background: #1e293b;
+
+    color: #f8fafc;
+}
+
+body.dark .tag {
+    background: #1e3a8a;
+
+    color: #bfdbfe;
+
+    border-color: #2563eb;
+}
+
+
+/* ============================================================
+   TEMA ESCURO - SINDILEGIS
+   ============================================================ */
+
+body.dark.sindilegis .tag {
+    background: #4c1d95;
+
+    color: #ddd6fe;
+
+    border-color: #7c3aed;
+}
+
+body.dark.sindilegis .btnAcao {
+    border-color: #7c3aed;
+
+    color: #c4b5fd;
+}
+
+body.dark.sindilegis .btnAcao:hover {
+    background: #7c3aed;
+
+    color: #ffffff;
+}
+
+
+/* ============================================================
+   ACESSIBILIDADE / FOCO
+   ============================================================ */
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, 0.35);
+
+    outline-offset: 2px;
 }
