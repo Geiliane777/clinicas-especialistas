@@ -1,85 +1,39 @@
-// ============================================================
-// CARDS DAS CLÍNICAS
-// ============================================================
-
 console.log("cards.js carregado");
 
 
 // ============================================================
-// ESCAPAR TEXTO
+// ESCAPAR HTML
 // ============================================================
 
 function escaparTextoCard(texto) {
 
-    if (texto === null || texto === undefined) {
+    if (
+        texto === null ||
+        texto === undefined
+    ) {
         return "";
     }
 
-    const div = document.createElement("div");
-
-    div.textContent = String(texto);
-
-    return div.innerHTML;
+    return String(texto)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
 // ============================================================
-// NORMALIZAR REDE
+// REDE ATUAL
 // ============================================================
 
-function normalizarRedeCard(valor) {
+function obterRedeAtual() {
 
-    const rede =
-        String(valor ?? "")
-            .trim()
-            .toLowerCase();
-
-
-    if (
-        rede === "especialistas" ||
-        rede === "especialista" ||
-        rede === "rede especialistas"
-    ) {
-
-        return "especialistas";
-
-    }
-
-
-    if (
-        rede === "sindilegis" ||
-        rede === "rede sindilegis"
-    ) {
-
-        return "sindilegis";
-
-    }
-
-
-    return "";
-
-}
-
-
-// ============================================================
-// OBTER REDE DA PÁGINA
-// ============================================================
-
-function obterRedeCard() {
-
-    if (
-        document.body.classList.contains(
-            "sindilegis"
-        )
-    ) {
-
-        return "sindilegis";
-
-    }
-
-
-    return "especialistas";
-
+    return document.body.classList.contains(
+        "sindilegis"
+    )
+        ? "sindilegis"
+        : "especialistas";
 }
 
 
@@ -93,172 +47,55 @@ function formatarTelefone(telefone) {
         return "";
     }
 
-
-    return String(telefone).trim();
-
-}
-
-
-// ============================================================
-// CRIAR LINK DO TELEFONE
-// ============================================================
-
-function criarLinkTelefone(telefone) {
-
-    const telefoneFormatado =
-        formatarTelefone(telefone);
-
-
-    if (!telefoneFormatado) {
-
-        return "Não informado";
-
-    }
-
-
-    const telefoneLimpo =
-        String(telefoneFormatado)
+    const numeros =
+        String(telefone)
             .replace(/\D/g, "");
 
 
-    if (!telefoneLimpo) {
+    if (numeros.length === 11) {
 
-        return escaparTextoCard(
-            telefoneFormatado
+        return numeros.replace(
+            /(\d{2})(\d{5})(\d{4})/,
+            "($1) $2-$3"
         );
 
     }
 
 
-    return `
-        <a
-            href="tel:${telefoneLimpo}"
-        >
-            ${escaparTextoCard(
-                telefoneFormatado
-            )}
-        </a>
-    `;
+    if (numeros.length === 10) {
 
-}
-
-
-// ============================================================
-// CRIAR LINK DO WHATSAPP
-// ============================================================
-
-function criarLinkWhatsApp(whatsapp) {
-
-    if (!whatsapp) {
-        return "";
-    }
-
-
-    const numero =
-        String(whatsapp)
-            .replace(/\D/g, "");
-
-
-    if (!numero) {
-        return "";
-    }
-
-
-    return `
-        <a
-            class="btnAcao"
-            href="https://wa.me/${numero}"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            💬 WhatsApp
-        </a>
-    `;
-
-}
-
-
-// ============================================================
-// CRIAR LINK DO GOOGLE MAPS
-// ============================================================
-
-function criarLinkMaps(clinica) {
-
-    const partes = [
-
-        clinica.nome,
-
-        clinica.endereco,
-
-        clinica.numero,
-
-        clinica.bairro?.nome,
-
-        clinica.bairro?.cidades?.nome,
-
-        clinica.bairro?.cidades?.estados?.nome
-
-    ];
-
-
-    const enderecoBusca =
-        partes
-            .filter(
-                item =>
-                    item !== null &&
-                    item !== undefined &&
-                    String(item).trim() !== ""
-            )
-            .join(", ");
-
-
-    if (!enderecoBusca) {
-        return "";
-    }
-
-
-    const query =
-        encodeURIComponent(
-            enderecoBusca
+        return numeros.replace(
+            /(\d{2})(\d{4})(\d{4})/,
+            "($1) $2-$3"
         );
 
+    }
 
-    return `
-        <a
-            class="btnAcao"
-            href="https://www.google.com/maps/search/?api=1&query=${query}"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            📍 Ver no Google Maps
-        </a>
-    `;
 
+    return telefone;
 }
 
 
 // ============================================================
-// MONTAR ENDEREÇO
+// ENDEREÇO
 // ============================================================
 
-function montarEnderecoCard(clinica) {
+function montarEndereco(clinica) {
 
     const partes = [];
 
 
     if (clinica.endereco) {
-
         partes.push(
             clinica.endereco
         );
-
     }
 
 
     if (clinica.numero) {
 
         partes.push(
-            clinica.numero
+            `nº ${clinica.numero}`
         );
 
     }
@@ -282,180 +119,123 @@ function montarEnderecoCard(clinica) {
     }
 
 
-    if (partes.length === 0) {
-
-        return "Não informado";
-
-    }
-
-
-    return partes
-        .map(
-            parte =>
-                escaparTextoCard(
-                    parte
-                )
-        )
-        .join(", ");
-
+    return partes.join(", ");
 }
 
 
 // ============================================================
-// MONTAR LOCALIZAÇÃO
+// LOCALIZAÇÃO
 // ============================================================
 
-function montarLocalizacaoCard(clinica) {
+function obterLocalizacao(clinica) {
 
     const bairro =
-        clinica.bairros?.nome ||
-        "Não informado";
+        clinica.bairros;
+
+
+    if (!bairro) {
+        return "";
+    }
 
 
     const cidade =
-        clinica.bairros?.cidades?.nome ||
-        "Não informado";
+        bairro.cidades;
 
 
     const estado =
-        clinica.bairros?.cidades?.estados?.nome ||
-        "Não informado";
+        cidade?.estados;
 
 
-    return `
-        ${escaparTextoCard(bairro)}
-        <br>
-        ${escaparTextoCard(cidade)}
-        -
-        ${escaparTextoCard(estado)}
-    `;
-
-}
+    const partes = [];
 
 
-// ============================================================
-// OBTER ESPECIALIDADES DA REDE ATUAL
-// ============================================================
-
-function obterEspecialidadesDaRede(clinica) {
-
-    const redeAtual =
-        obterRedeCard();
-
-
-    const mapa =
-        new Map();
-
-
-    const relacionamentos =
-        Array.isArray(
-            clinica.clinica_especialidades
-        )
-            ? clinica.clinica_especialidades
-            : [];
-
-
-    relacionamentos.forEach(item => {
-
-        if (!item) {
-            return;
-        }
-
-
-        if (item.ativo !== true) {
-            return;
-        }
-
-
-        const rede =
-            normalizarRedeCard(
-                item.rede
-            );
-
-
-        if (rede !== redeAtual) {
-            return;
-        }
-
-
-        const especialidade =
-            item.especialidades;
-
-
-        if (
-            !especialidade ||
-            !especialidade.id
-        ) {
-
-            return;
-
-        }
-
-
-        if (
-            !mapa.has(
-                especialidade.id
-            )
-        ) {
-
-            mapa.set(
-                especialidade.id,
-                especialidade.nome
-            );
-
-        }
-
-    });
-
-
-    return Array.from(
-        mapa.values()
-    ).sort(
-        (a, b) =>
-            String(a).localeCompare(
-                String(b),
-                "pt-BR",
-                {
-                    sensitivity: "base"
-                }
-            )
-    );
-
-}
-
-
-// ============================================================
-// MONTAR TAGS DE ESPECIALIDADES
-// ============================================================
-
-function montarTagsEspecialidades(
-    especialidades
-) {
-
-    if (
-        !especialidades ||
-        especialidades.length === 0
-    ) {
-
-        return `
-            <span class="tag">
-                Nenhuma especialidade informada
-            </span>
-        `;
-
+    if (bairro.nome) {
+        partes.push(
+            bairro.nome
+        );
     }
 
 
-    return especialidades
-        .map(
-            nome => `
-                <span class="tag">
-                    ${escaparTextoCard(nome)}
-                </span>
-            `
-        )
-        .join("");
+    if (cidade?.nome) {
+        partes.push(
+            cidade.nome
+        );
+    }
 
+
+    if (estado?.nome) {
+        partes.push(
+            estado.nome
+        );
+    }
+
+
+    return partes.join(" - ");
+}
+
+
+// ============================================================
+// GOOGLE MAPS
+// ============================================================
+
+function criarLinkMapa(clinica) {
+
+    const endereco =
+        montarEndereco(clinica);
+
+
+    const localizacao =
+        obterLocalizacao(clinica);
+
+
+    const busca = [
+        clinica.nome,
+        endereco,
+        localizacao
+    ]
+        .filter(Boolean)
+        .join(", ");
+
+
+    return (
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(busca)
+    );
+}
+
+
+// ============================================================
+// ESPECIALIDADES
+// ============================================================
+
+function obterEspecialidadesDaClinica(clinica) {
+
+    const rede =
+        obterRedeAtual();
+
+
+    const vinculos =
+        clinica.clinica_especialidades || [];
+
+
+    const nomes =
+        vinculos
+            .filter(
+                vinculo =>
+                    vinculo &&
+                    vinculo.rede === rede &&
+                    vinculo.ativo === true &&
+                    vinculo.especialidades
+            )
+            .map(
+                vinculo =>
+                    vinculo.especialidades.nome
+            );
+
+
+    return [
+        ...new Set(nomes)
+    ];
 }
 
 
@@ -466,89 +246,34 @@ function montarTagsEspecialidades(
 function mostrarClinicas(clinicas) {
 
     const resultado =
-        document.getElementById(
-            "resultado"
-        );
+        document.getElementById("resultado");
 
 
     if (!resultado) {
-
-        console.error(
-            "Elemento #resultado não encontrado."
-        );
-
         return;
-
     }
 
-
-    resultado.innerHTML = "";
-
-
-    // ========================================================
-    // GARANTIR ARRAY
-    // ========================================================
-
-    if (!Array.isArray(clinicas)) {
-
-        clinicas = [];
-
-    }
-
-
-    // ========================================================
-    // REMOVER DUPLICADAS
-    // ========================================================
-
-    const mapaClinicas =
-        new Map();
-
-
-    clinicas.forEach(clinica => {
-
-        if (
-            clinica &&
-            clinica.id &&
-            !mapaClinicas.has(
-                clinica.id
-            )
-        ) {
-
-            mapaClinicas.set(
-                clinica.id,
-                clinica
-            );
-
-        }
-
-    });
-
-
-    const clinicasUnicas =
-        Array.from(
-            mapaClinicas.values()
-        );
-
-
-    // ========================================================
-    // NENHUM RESULTADO
-    // ========================================================
 
     if (
-        clinicasUnicas.length === 0
+        !clinicas ||
+        clinicas.length === 0
     ) {
 
         resultado.innerHTML = `
 
             <div class="semResultado">
 
+                <div class="icone-vazio">
+                    🔍
+                </div>
+
                 <h2>
-                    Nenhuma clínica encontrada.
+                    Nenhuma clínica encontrada
                 </h2>
 
                 <p>
-                    Não encontramos clínicas
-                    para os filtros selecionados.
+                    Tente alterar os filtros
+                    e realizar uma nova busca.
                 </p>
 
             </div>
@@ -556,252 +281,311 @@ function mostrarClinicas(clinicas) {
         `;
 
         return;
-
     }
 
 
-    // ========================================================
-    // TÍTULO DOS RESULTADOS
-    // ========================================================
+    // --------------------------------------------------------
+    // REMOVER DUPLICADOS
+    // --------------------------------------------------------
 
-    resultado.innerHTML = `
+    const mapa =
+        new Map();
 
-        <h2 class="tituloResultado">
 
-            Clínicas Encontradas
-            (${clinicasUnicas.length})
+    clinicas.forEach(
+        clinica => {
 
-        </h2>
+            mapa.set(
+                clinica.id,
+                clinica
+            );
+
+        }
+    );
+
+
+    const lista =
+        Array.from(
+            mapa.values()
+        );
+
+
+    const rede =
+        obterRedeAtual();
+
+
+    const nomeRede =
+        rede === "sindilegis"
+            ? "Sindilegis"
+            : "Rede Especialistas";
+
+
+    let html = `
+
+        <div class="tituloResultado">
+
+            <div>
+
+                <span class="contadorResultado">
+                    ${lista.length}
+                </span>
+
+                <span>
+                    clínica${lista.length !== 1 ? "s" : ""}
+                    encontrada${lista.length !== 1 ? "s" : ""}
+                </span>
+
+            </div>
+
+            <small>
+                ${nomeRede}
+            </small>
+
+        </div>
+
+        <div class="lista-cards">
 
     `;
 
 
-    // ========================================================
-    // CRIAR CARDS
-    // ========================================================
+    lista.forEach(
+        clinica => {
 
-    clinicasUnicas.forEach(clinica => {
+            const endereco =
+                montarEndereco(clinica);
 
-        const endereco =
-            montarEnderecoCard(
-                clinica
-            );
 
+            const localizacao =
+                obterLocalizacao(clinica);
 
-        const localizacao =
-            montarLocalizacaoCard(
-                clinica
-            );
 
+            const telefone =
+                formatarTelefone(
+                    clinica.telefone
+                );
 
-        const telefone =
-            criarLinkTelefone(
-                clinica.telefone
-            );
 
+            const especialidades =
+                obterEspecialidadesDaClinica(
+                    clinica
+                );
 
-        const whatsapp =
-            criarLinkWhatsApp(
-                clinica.whatsapp
-            );
 
+            const mapa =
+                criarLinkMapa(
+                    clinica
+                );
 
-        const maps =
-            criarLinkMaps(
-                clinica
-            );
 
+            html += `
 
-        const especialidades =
-            obterEspecialidadesDaRede(
-                clinica
-            );
+                <article class="card">
 
+                    <div class="cardHeader">
 
-        const tags =
-            montarTagsEspecialidades(
-                especialidades
-            );
+                        <div class="icone-clinica">
+                            🦷
+                        </div>
 
+                        <div>
 
-        // ====================================================
-        // BOTÕES DE AÇÃO
-        // ====================================================
+                            <h3>
+                                ${escaparTextoCard(
+                                    clinica.nome ||
+                                    "Clínica"
+                                )}
+                            </h3>
 
-        let botoes = "";
-
-
-        if (maps) {
-
-            botoes += maps;
-
-        }
-
-
-        if (whatsapp) {
-
-            botoes += whatsapp;
-
-        }
-
-
-        // ====================================================
-        // HTML DO CARD
-        // ====================================================
-
-        resultado.innerHTML += `
-
-            <div class="card">
-
-                <div class="cardHeader">
-
-                    <h2>
-                        ${escaparTextoCard(
-                            clinica.nome ||
-                            "Clínica sem nome"
-                        )}
-                    </h2>
-
-                </div>
-
-
-                <div class="info">
-
-                    <!-- ======================================
-                         ENDEREÇO
-                    ======================================= -->
-
-                    <p>
-
-                        <strong>
-                            Endereço
-                        </strong>
-
-                        <br>
-
-                        ${endereco}
-
-                    </p>
-
-
-                    <!-- ======================================
-                         LOCALIZAÇÃO
-                    ======================================= -->
-
-                    <p>
-
-                        <strong>
-                            Localização
-                        </strong>
-
-                        <br>
-
-                        ${localizacao}
-
-                    </p>
-
-
-                    <!-- ======================================
-                         TELEFONE
-                    ======================================= -->
-
-                    <p>
-
-                        <strong>
-                            Telefone
-                        </strong>
-
-                        <br>
-
-                        ${telefone}
-
-                    </p>
-
-
-                    <!-- ======================================
-                         EMAIL
-                    ======================================= -->
-
-                    ${
-                        clinica.email
-                            ? `
-                                <p>
-
-                                    <strong>
-                                        E-mail
-                                    </strong>
-
-                                    <br>
-
-                                    <a
-                                        href="mailto:${escaparTextoCard(
-                                            clinica.email
-                                        )}"
-                                    >
-                                        ${escaparTextoCard(
-                                            clinica.email
-                                        )}
-                                    </a>
-
-                                </p>
-                              `
-                            : ""
-                    }
-
-
-                    <!-- ======================================
-                         ESPECIALIDADES
-                    ======================================= -->
-
-                    <div class="especialidades">
-
-                        <strong>
-                            Procedimentos disponíveis
-                        </strong>
-
-
-                        <div class="tags">
-
-                            ${tags}
+                            <span class="rede-badge">
+                                ${nomeRede}
+                            </span>
 
                         </div>
 
                     </div>
 
 
-                    <!-- ======================================
-                         AÇÕES
-                    ======================================= -->
+                    <div class="card-body">
 
-                    ${
-                        botoes
-                            ? `
-                                <div class="acoes">
 
-                                    ${botoes}
+                        ${
+                            endereco
+                                ? `
+                                    <div class="info">
 
-                                </div>
-                              `
-                            : ""
-                    }
+                                        <span class="info-icone">
+                                            📍
+                                        </span>
 
-                </div>
+                                        <div>
 
-            </div>
+                                            <strong>
+                                                Endereço
+                                            </strong>
 
-        `;
+                                            <p>
+                                                ${escaparTextoCard(
+                                                    endereco
+                                                )}
+                                            </p>
 
-    });
+                                        </div>
 
+                                    </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            localizacao
+                                ? `
+                                    <div class="info">
+
+                                        <span class="info-icone">
+                                            🗺️
+                                        </span>
+
+                                        <div>
+
+                                            <strong>
+                                                Localização
+                                            </strong>
+
+                                            <p>
+                                                ${escaparTextoCard(
+                                                    localizacao
+                                                )}
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            telefone
+                                ? `
+                                    <div class="info">
+
+                                        <span class="info-icone">
+                                            📞
+                                        </span>
+
+                                        <div>
+
+                                            <strong>
+                                                Telefone
+                                            </strong>
+
+                                            <p>
+                                                ${escaparTextoCard(
+                                                    telefone
+                                                )}
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+                                `
+                                : ""
+                        }
+
+
+                        ${
+                            especialidades.length
+                                ? `
+
+                                    <div class="especialidades">
+
+                                        <strong>
+                                            Especialidades
+                                        </strong>
+
+                                        <div class="tags">
+
+                                            ${especialidades
+                                                .map(
+                                                    nome =>
+                                                        `
+                                                        <span class="tag">
+                                                            ${escaparTextoCard(
+                                                                nome
+                                                            )}
+                                                        </span>
+                                                        `
+                                                )
+                                                .join("")
+                                            }
+
+                                        </div>
+
+                                    </div>
+
+                                `
+                                : ""
+                        }
+
+
+                    </div>
+
+
+                    <div class="acoes">
+
+                        ${
+                            clinica.telefone
+                                ? `
+                                    <a
+                                        href="tel:${String(
+                                            clinica.telefone
+                                        ).replace(
+                                            /\D/g,
+                                            ""
+                                        )}"
+                                        class="btnAcao btnTelefone"
+                                    >
+                                        📞 Ligar
+                                    </a>
+                                `
+                                : ""
+                        }
+
+
+                        <a
+                            href="${mapa}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btnAcao btnMapa"
+                        >
+                            📍 Ver no mapa
+                        </a>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+        </div>
+    `;
+
+
+    resultado.innerHTML =
+        html;
 }
 
 
 // ============================================================
-// DISPONIBILIZAR FUNÇÃO
+// EXPORTAR
 // ============================================================
 
 window.mostrarClinicas =
     mostrarClinicas;
-
-window.escaparTextoCard =
-    escaparTextoCard;
