@@ -302,12 +302,20 @@ async function carregarDashboard() {
             clinicas
         ] = await Promise.all([
 
+            // ==================================================
+            // REGIÕES
+            // ==================================================
+
             supabaseClient
                 .from("regioes")
                 .select("id", {
                     count: "exact",
                     head: true
                 }),
+
+            // ==================================================
+            // ESTADOS
+            // ==================================================
 
             supabaseClient
                 .from("estados")
@@ -316,12 +324,20 @@ async function carregarDashboard() {
                     head: true
                 }),
 
+            // ==================================================
+            // CIDADES
+            // ==================================================
+
             supabaseClient
                 .from("cidades")
                 .select("id", {
                     count: "exact",
                     head: true
                 }),
+
+            // ==================================================
+            // BAIRROS
+            // ==================================================
 
             supabaseClient
                 .from("bairros")
@@ -330,6 +346,10 @@ async function carregarDashboard() {
                     head: true
                 }),
 
+            // ==================================================
+            // ESPECIALIDADES
+            // ==================================================
+
             supabaseClient
                 .from("especialidades")
                 .select("id", {
@@ -337,21 +357,51 @@ async function carregarDashboard() {
                     head: true
                 }),
 
+            // ==================================================
+            // CLÍNICAS
+            // ==================================================
+            // IMPORTANTE:
+            // Não usamos created_at porque essa coluna pode
+            // não existir na tabela clinicas.
+
             supabaseClient
                 .from("clinicas")
                 .select(
-                    "id, nome, ativo, created_at",
+                    "id, nome, ativo",
                     {
                         count: "exact"
                     }
                 )
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                )
         ]);
+
+
+        // ====================================================
+        // VERIFICAR ERROS
+        // ====================================================
+
+        if (regioes.error) {
+            throw regioes.error;
+        }
+
+        if (estados.error) {
+            throw estados.error;
+        }
+
+        if (cidades.error) {
+            throw cidades.error;
+        }
+
+        if (bairros.error) {
+            throw bairros.error;
+        }
+
+        if (especialidades.error) {
+            throw especialidades.error;
+        }
+
+        if (clinicas.error) {
+            throw clinicas.error;
+        }
 
 
         // ====================================================
@@ -391,14 +441,17 @@ async function carregarDashboard() {
         const listaClinicas =
             clinicas.data || [];
 
+
         const totalClinicas =
-            listaClinicas.length;
+            clinicas.count || listaClinicas.length;
+
 
         const ativas =
             listaClinicas.filter(
                 clinica =>
                     clinica.ativo === true
             ).length;
+
 
         const inativas =
             listaClinicas.filter(
@@ -430,8 +483,7 @@ async function carregarDashboard() {
         const porcentagem =
             totalClinicas > 0
                 ? Math.round(
-                    (ativas / totalClinicas) *
-                    100
+                    (ativas / totalClinicas) * 100
                 )
                 : 0;
 
@@ -442,16 +494,26 @@ async function carregarDashboard() {
         );
 
 
+        // ====================================================
+        // BARRA
+        // ====================================================
+
         const barra =
             document.getElementById(
                 "barraAtivas"
             );
 
+
         if (barra) {
+
             barra.style.width =
                 `${porcentagem}%`;
         }
 
+
+        // ====================================================
+        // LEGENDAS
+        // ====================================================
 
         definirTexto(
             "legendaAtivas",
@@ -467,6 +529,8 @@ async function carregarDashboard() {
         // ====================================================
         // ÚLTIMAS CLÍNICAS
         // ====================================================
+        // Como não estamos usando created_at,
+        // mostramos as primeiras 5 retornadas pelo banco.
 
         carregarUltimasClinicas(
             listaClinicas.slice(0, 5)
@@ -479,88 +543,9 @@ async function carregarDashboard() {
             "Erro ao carregar dashboard:",
             erro
         );
+
     }
 }
-
-
-// ============================================================
-// AUXILIAR — DEFINIR TEXTO
-// ============================================================
-
-function definirTexto(id, texto) {
-
-    const elemento =
-        document.getElementById(id);
-
-    if (elemento) {
-        elemento.textContent = texto;
-    }
-}
-
-
-// ============================================================
-// ÚLTIMAS CLÍNICAS
-// ============================================================
-
-function carregarUltimasClinicas(
-    clinicas
-) {
-
-    const container =
-        document.getElementById(
-            "ultimasClinicas"
-        );
-
-    if (!container) return;
-
-
-    if (!clinicas.length) {
-
-        container.innerHTML = `
-            <p class="sem-dados">
-                Nenhuma clínica cadastrada.
-            </p>
-        `;
-
-        return;
-    }
-
-
-    container.innerHTML =
-        clinicas.map(clinica => {
-
-            const status =
-                clinica.ativo === true
-                    ? "Ativa"
-                    : "Inativa";
-
-            const classe =
-                clinica.ativo === true
-                    ? "ativo"
-                    : "inativo";
-
-            return `
-                <div class="clinica-recente">
-
-                    <div>
-                        <strong>
-                            ${escaparHTML(
-                                clinica.nome ||
-                                "Sem nome"
-                            )}
-                        </strong>
-                    </div>
-
-                    <span class="status ${classe}">
-                        ${status}
-                    </span>
-
-                </div>
-            `;
-
-        }).join("");
-}
-
 
 // ============================================================
 // ESPECIALIDADES
