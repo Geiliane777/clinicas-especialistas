@@ -17,9 +17,10 @@ body {
     background: var(--fundo);
     color: var(--texto);
     min-height: 100vh;
+
     transition:
-        background-color 0.25s ease,
-        color 0.25s ease;
+        background-color .2s ease,
+        color .2s ease;
 }
 
 button,
@@ -64,18 +65,18 @@ a {
     --borda: #e2e8f0;
 
     --sombra:
-        0 10px 30px rgba(15, 23, 42, 0.08);
+        0 6px 20px rgba(15, 23, 42, .07);
 
     --sombra-forte:
-        0 18px 45px rgba(15, 23, 42, 0.12);
+        0 12px 30px rgba(15, 23, 42, .11);
 
-    --raio: 16px;
-    --raio-pequeno: 10px;
+    --raio: 13px;
+    --raio-pequeno: 8px;
 }
 
 
 /* =========================================================
-   MODO ESCURO
+   DARK MODE
 ========================================================= */
 
 body.dark {
@@ -89,49 +90,52 @@ body.dark {
     --borda: #334155;
 
     --sombra:
-        0 10px 30px rgba(0, 0, 0, 0.30);
+        0 6px 20px rgba(0, 0, 0, .25);
 
     --sombra-forte:
-        0 18px 45px rgba(0, 0, 0, 0.40);
+        0 12px 30px rgba(0, 0, 0, .35);
 }
 
 
 /* =========================================================
-   HEADER - SITE PÚBLICO
+   HEADER PÚBLICO
 ========================================================= */
 
 .header {
     width: 100%;
-    min-height: 86px;
+    min-height: 68px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 14px 32px;
+    padding: 9px 25px;
 
     background: var(--card);
+
     border-bottom: 1px solid var(--borda);
 
     position: sticky;
     top: 0;
+
     z-index: 1000;
 
     box-shadow:
-        0 4px 20px rgba(15, 23, 42, 0.05);
+        0 2px 12px rgba(15, 23, 42, .04);
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 14px;
+
+    gap: 10px;
 
     min-width: 0;
 }
 
 .logo {
-    width: 52px;
-    height: 52px;
+    width: 42px;
+    height: 42px;
 
     object-fit: contain;
 
@@ -145,18 +149,18 @@ body.dark {
 .titulo-site h1 {
     color: var(--azul-escuro);
 
-    font-size: 21px;
-    line-height: 1.15;
+    font-size: 17px;
+    line-height: 1.1;
 
     font-weight: 800;
 }
 
 .titulo-site p {
-    margin-top: 4px;
+    margin-top: 3px;
 
     color: var(--texto-claro);
 
-    font-size: 12px;
+    font-size: 10px;
 }
 
 body.dark .titulo-site h1 {
@@ -165,45 +169,49 @@ body.dark .titulo-site h1 {
 
 
 /* =========================================================
-   MENU DO TOPO
+   MENU TOPO
 ========================================================= */
 
 .menu-topo {
     display: flex;
     align-items: center;
-    gap: 8px;
+
+    gap: 5px;
 }
 
 .menu-link {
+    min-height: 34px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-height: 42px;
-    padding: 0 15px;
+    padding: 0 11px;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
     color: var(--texto-claro);
 
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 700;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease;
 }
 
 .menu-link:hover {
     color: var(--azul);
-    background: rgba(37, 99, 235, 0.08);
+
+    background:
+        rgba(37, 99, 235, .07);
 
     transform: translateY(-1px);
 }
 
 .menu-link.ativo {
-    color: #ffffff;
+    color: #fff;
 
     background:
         linear-gradient(
@@ -213,7 +221,7 @@ body.dark .titulo-site h1 {
         );
 
     box-shadow:
-        0 8px 18px rgba(37, 99, 235, 0.24);
+        0 5px 13px rgba(37, 99, 235, .20);
 }
 
 body.sindilegis .menu-link.ativo {
@@ -225,62 +233,58 @@ body.sindilegis .menu-link.ativo {
         );
 
     box-shadow:
-        0 8px 18px rgba(124, 58, 237, 0.25);
+        0 5px 13px rgba(124, 58, 237, .22);
 }
 
 .login-link {
     border: 1px solid var(--borda);
 }
 
-.login-link:hover {
-    border-color: var(--azul);
-}
-
 
 /* =========================================================
-   BOTÃO TEMA
+   TEMA
 ========================================================= */
 
 .btn-tema {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
 
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     border: 1px solid var(--borda);
-    border-radius: 10px;
+    border-radius: 8px;
 
     background: var(--card);
     color: var(--texto);
 
     cursor: pointer;
 
+    font-size: 13px;
+
     transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease;
+        background .18s ease,
+        transform .18s ease;
 }
 
 .btn-tema:hover {
-    border-color: var(--azul);
-    background: rgba(37, 99, 235, 0.08);
+    background: rgba(37, 99, 235, .07);
 
     transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   CONTAINER PÚBLICO
+   CONTAINER
 ========================================================= */
 
 .container {
-    width: min(1380px, calc(100% - 48px));
+    width: min(1320px, calc(100% - 40px));
 
     margin: 0 auto;
 
-    padding: 42px 0 60px;
+    padding: 28px 0 42px;
 }
 
 
@@ -289,19 +293,19 @@ body.sindilegis .menu-link.ativo {
 ========================================================= */
 
 .hero-site {
-    min-height: 250px;
+    min-height: 185px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 40px;
+    gap: 28px;
 
-    padding: 38px 42px;
+    padding: 27px 32px;
 
-    margin-bottom: 34px;
+    margin-bottom: 25px;
 
-    border-radius: 22px;
+    border-radius: 17px;
 
     background:
         linear-gradient(
@@ -311,10 +315,10 @@ body.sindilegis .menu-link.ativo {
             #2563eb 100%
         );
 
-    color: #ffffff;
+    color: #fff;
 
     box-shadow:
-        0 20px 45px rgba(23, 37, 84, 0.22);
+        0 12px 30px rgba(23, 37, 84, .18);
 
     overflow: hidden;
 
@@ -326,15 +330,16 @@ body.sindilegis .menu-link.ativo {
 
     position: absolute;
 
-    width: 280px;
-    height: 280px;
+    width: 220px;
+    height: 220px;
 
-    right: -80px;
-    top: -100px;
+    right: -70px;
+    top: -85px;
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.08);
+    background:
+        rgba(255, 255, 255, .07);
 }
 
 body.sindilegis .hero-site {
@@ -347,48 +352,53 @@ body.sindilegis .hero-site {
         );
 
     box-shadow:
-        0 20px 45px rgba(76, 29, 149, 0.22);
+        0 12px 30px rgba(76, 29, 149, .18);
 }
 
 .hero-texto {
-    max-width: 760px;
+    max-width: 700px;
 
     position: relative;
+
     z-index: 2;
 }
 
 .hero-badge {
     display: inline-flex;
+
     align-items: center;
 
-    padding: 7px 12px;
+    padding: 5px 9px;
 
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 
     border-radius: 999px;
 
-    background: rgba(255, 255, 255, 0.14);
+    background:
+        rgba(255, 255, 255, .12);
 
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border:
+        1px solid rgba(255, 255, 255, .13);
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 
-    letter-spacing: 0.5px;
+    letter-spacing: .4px;
 }
 
 .hero-texto h2 {
-    font-size: clamp(30px, 4vw, 46px);
+    font-size: clamp(27px, 3vw, 35px);
 
     line-height: 1.08;
 
-    font-weight: 850;
+    font-weight: 800;
 
-    color: #ffffff;
+    color: #fff;
 
-    margin-bottom: 14px;
+    margin-bottom: 9px;
 }
 
 .hero-texto h2 span {
@@ -400,39 +410,44 @@ body.sindilegis .hero-texto h2 span {
 }
 
 .hero-texto p {
-    max-width: 700px;
+    max-width: 620px;
 
-    color: rgba(255, 255, 255, 0.82);
+    color:
+        rgba(255, 255, 255, .78);
 
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 12px;
+
+    line-height: 1.55;
 }
 
 .hero-destaque {
-    min-width: 300px;
+    min-width: 255px;
 
     display: flex;
     align-items: center;
 
-    gap: 16px;
+    gap: 12px;
 
-    padding: 20px;
+    padding: 15px;
 
-    border-radius: 16px;
+    border-radius: 12px;
 
-    background: rgba(255, 255, 255, 0.10);
+    background:
+        rgba(255, 255, 255, .09);
 
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border:
+        1px solid rgba(255, 255, 255, .12);
 
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(7px);
 
     position: relative;
+
     z-index: 2;
 }
 
 .hero-icone {
-    width: 58px;
-    height: 58px;
+    width: 44px;
+    height: 44px;
 
     display: flex;
     align-items: center;
@@ -440,53 +455,57 @@ body.sindilegis .hero-texto h2 span {
 
     flex-shrink: 0;
 
-    border-radius: 15px;
+    border-radius: 11px;
 
-    background: rgba(255, 255, 255, 0.14);
+    background:
+        rgba(255, 255, 255, .12);
 
-    font-size: 28px;
+    font-size: 20px;
 }
 
 .hero-destaque strong {
     display: block;
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 15px;
+    font-size: 12px;
 
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .hero-destaque span {
     display: block;
 
-    color: rgba(255, 255, 255, 0.70);
+    color:
+        rgba(255, 255, 255, .66);
 
-    font-size: 12px;
+    font-size: 9px;
 
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 
 /* =========================================================
-   TÍTULO DAS SEÇÕES
+   TÍTULOS
 ========================================================= */
 
 .titulo-principal {
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .section-label {
     display: block;
 
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 
     color: var(--azul);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 
-    letter-spacing: 0.8px;
+    letter-spacing: .7px;
+
     text-transform: uppercase;
 }
 
@@ -498,18 +517,20 @@ body.sindilegis .section-label {
 .resultado-topo h2 {
     color: var(--texto-forte);
 
-    font-size: 25px;
+    font-size: 20px;
+
     font-weight: 800;
 
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .titulo-principal p,
 .resultado-topo p {
     color: var(--texto-claro);
 
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 11px;
+
+    line-height: 1.5;
 }
 
 
@@ -522,19 +543,19 @@ body.sindilegis .section-label {
 
     grid-template-columns:
         repeat(5, minmax(0, 1fr))
-        170px;
+        145px;
 
-    gap: 14px;
+    gap: 10px;
 
-    padding: 22px;
+    padding: 17px;
 
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 
     background: var(--card);
 
     border: 1px solid var(--borda);
 
-    border-radius: 17px;
+    border-radius: 13px;
 
     box-shadow: var(--sombra);
 
@@ -547,12 +568,12 @@ body.sindilegis .section-label {
     position: absolute;
 
     left: 0;
-    top: 18px;
-    bottom: 18px;
+    top: 14px;
+    bottom: 14px;
 
-    width: 4px;
+    width: 3px;
 
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 4px 4px 0;
 
     background: var(--azul);
 }
@@ -568,25 +589,29 @@ body.sindilegis .filtros::before {
 .filtro label {
     display: block;
 
-    margin: 0 0 7px 2px;
+    margin: 0 0 5px 2px;
 
     color: var(--texto-forte);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 
     text-transform: uppercase;
-    letter-spacing: 0.4px;
+
+    letter-spacing: .3px;
 }
 
 .filtro select {
     width: 100%;
-    height: 42px;
+    height: 36px;
 
-    padding: 0 12px;
+    padding: 0 10px;
 
-    border: 1px solid var(--borda);
-    border-radius: 9px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 8px;
 
     background: var(--card);
     color: var(--texto);
@@ -595,11 +620,11 @@ body.sindilegis .filtros::before {
 
     cursor: pointer;
 
-    font-size: 12px;
+    font-size: 10px;
 
     transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color .18s ease,
+        box-shadow .18s ease;
 }
 
 .filtro select:hover {
@@ -610,28 +635,31 @@ body.sindilegis .filtros::before {
     border-color: var(--azul);
 
     box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.12);
+        0 0 0 2px rgba(37, 99, 235, .10);
 }
 
 body.sindilegis .filtro select:focus {
     border-color: var(--roxo);
 
     box-shadow:
-        0 0 0 3px rgba(124, 58, 237, 0.12);
+        0 0 0 2px rgba(124, 58, 237, .10);
 }
 
 .filtro-botao {
     display: flex;
+
     flex-direction: column;
+
     justify-content: flex-end;
 }
 
 .btn-buscar {
     width: 100%;
-    height: 42px;
+    height: 36px;
 
     border: 0;
-    border-radius: 9px;
+
+    border-radius: 8px;
 
     background:
         linear-gradient(
@@ -640,35 +668,33 @@ body.sindilegis .filtro select:focus {
             var(--azul-claro)
         );
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 800;
 
     cursor: pointer;
 
     box-shadow:
-        0 8px 18px rgba(37, 99, 235, 0.22);
+        0 5px 13px rgba(37, 99, 235, .18);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        opacity 0.2s ease;
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
 }
 
 .btn-buscar:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 
     box-shadow:
-        0 12px 24px rgba(37, 99, 235, 0.30);
-}
-
-.btn-buscar:active {
-    transform: translateY(0);
+        0 8px 16px rgba(37, 99, 235, .24);
 }
 
 .btn-buscar:disabled {
-    opacity: 0.65;
+    opacity: .65;
+
     cursor: wait;
 }
 
@@ -679,9 +705,6 @@ body.sindilegis .btn-buscar {
             var(--roxo),
             var(--roxo-claro)
         );
-
-    box-shadow:
-        0 8px 18px rgba(124, 58, 237, 0.22);
 }
 
 
@@ -700,26 +723,29 @@ body.sindilegis .btn-buscar {
     align-items: flex-end;
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 15px;
 
-    margin: 0 0 20px;
+    margin-bottom: 14px;
 }
 
 .resultado-contador {
-    min-width: 105px;
+    min-width: 80px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
-    padding: 13px 18px;
+    padding: 9px 13px;
 
     background: var(--card);
 
     border: 1px solid var(--borda);
 
-    border-radius: 13px;
+    border-radius: 10px;
 
     box-shadow: var(--sombra);
 }
@@ -727,7 +753,8 @@ body.sindilegis .btn-buscar {
 .resultado-contador strong {
     color: var(--azul);
 
-    font-size: 24px;
+    font-size: 19px;
+
     line-height: 1;
 }
 
@@ -736,11 +763,12 @@ body.sindilegis .resultado-contador strong {
 }
 
 .resultado-contador span {
-    margin-top: 5px;
+    margin-top: 3px;
 
     color: var(--texto-claro);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 700;
 }
 
@@ -757,7 +785,7 @@ body.sindilegis .resultado-contador strong {
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 20px;
+    gap: 14px;
 
     align-items: stretch;
 }
@@ -769,61 +797,68 @@ body.sindilegis .resultado-contador strong {
 
 .card {
     width: 100%;
+
     min-width: 0;
 
     display: flex;
+
     flex-direction: column;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 17px;
+    border-radius: 13px;
 
     overflow: hidden;
 
     box-shadow: var(--sombra);
 
     transition:
-        transform 0.22s ease,
-        box-shadow 0.22s ease,
-        border-color 0.22s ease;
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
 }
 
 .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
 
     box-shadow: var(--sombra-forte);
 
-    border-color: rgba(37, 99, 235, 0.25);
+    border-color:
+        rgba(37, 99, 235, .22);
 }
 
 body.sindilegis .card:hover {
-    border-color: rgba(124, 58, 237, 0.28);
+    border-color:
+        rgba(124, 58, 237, .25);
 }
 
 
 /* =========================================================
-   CABEÇALHO DO CARD
+   CABEÇALHO CARD
 ========================================================= */
 
 .cardHeader {
-    min-height: 92px;
+    min-height: 68px;
 
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 10px;
 
-    padding: 20px;
+    padding: 13px 15px;
 
     border-top: 3px solid var(--azul);
 
     background:
         linear-gradient(
             180deg,
-            rgba(37, 99, 235, 0.055),
+            rgba(37, 99, 235, .045),
             transparent
         );
 }
@@ -834,7 +869,7 @@ body.sindilegis .cardHeader {
     background:
         linear-gradient(
             180deg,
-            rgba(124, 58, 237, 0.065),
+            rgba(124, 58, 237, .05),
             transparent
         );
 }
@@ -843,30 +878,34 @@ body.sindilegis .cardHeader {
     min-width: 0;
 
     display: flex;
+
     align-items: center;
 
-    gap: 13px;
+    gap: 9px;
 }
 
 .card-icone-clinica {
-    width: 48px;
-    height: 48px;
+    width: 37px;
+    height: 37px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
 
-    border-radius: 13px;
+    border-radius: 9px;
 
-    background: rgba(37, 99, 235, 0.10);
+    background:
+        rgba(37, 99, 235, .08);
 
-    font-size: 22px;
+    font-size: 17px;
 }
 
 body.sindilegis .card-icone-clinica {
-    background: rgba(124, 58, 237, 0.11);
+    background:
+        rgba(124, 58, 237, .09);
 }
 
 .card-titulo {
@@ -876,16 +915,17 @@ body.sindilegis .card-icone-clinica {
 .card-rede {
     display: block;
 
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 
     color: var(--azul);
 
-    font-size: 10px;
+    font-size: 8px;
+
     font-weight: 800;
 
     text-transform: uppercase;
 
-    letter-spacing: 0.4px;
+    letter-spacing: .3px;
 }
 
 body.sindilegis .card-rede {
@@ -895,8 +935,9 @@ body.sindilegis .card-rede {
 .card-titulo h3 {
     color: var(--texto-forte);
 
-    font-size: 17px;
-    line-height: 1.25;
+    font-size: 14px;
+
+    line-height: 1.2;
 
     font-weight: 800;
 
@@ -907,85 +948,91 @@ body.sindilegis .card-rede {
     flex-shrink: 0;
 
     display: inline-flex;
+
     align-items: center;
 
-    gap: 6px;
+    gap: 4px;
 
-    padding: 6px 9px;
+    padding: 4px 7px;
 
     border-radius: 999px;
 
-    background: rgba(16, 185, 129, 0.09);
+    background:
+        rgba(16, 185, 129, .08);
 
     color: var(--verde);
 
-    font-size: 10px;
+    font-size: 8px;
+
     font-weight: 800;
 
     white-space: nowrap;
 }
 
 .status-ponto {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
 
     border-radius: 50%;
 
     background: var(--verde);
-
-    box-shadow:
-        0 0 0 3px rgba(16, 185, 129, 0.10);
 }
 
 
 /* =========================================================
-   CORPO DO CARD
+   CORPO CARD
 ========================================================= */
 
 .card-corpo {
     flex: 1;
 
     display: flex;
+
     flex-direction: column;
 
-    padding: 0 20px 20px;
+    padding: 0 15px 14px;
 }
 
 .card-informacoes {
     display: flex;
+
     flex-direction: column;
 
-    gap: 10px;
+    gap: 7px;
 
     padding-top: 2px;
 }
 
 .card-info-item {
     display: flex;
+
     align-items: flex-start;
 
-    gap: 10px;
+    gap: 8px;
 }
 
 .card-info-icone {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
 
-    border-radius: 8px;
+    border-radius: 6px;
 
-    background: rgba(37, 99, 235, 0.08);
+    background:
+        rgba(37, 99, 235, .07);
 
-    font-size: 13px;
+    font-size: 11px;
 }
 
 body.sindilegis .card-info-icone {
-    background: rgba(124, 58, 237, 0.09);
+    background:
+        rgba(124, 58, 237, .08);
 }
 
 .card-info-conteudo {
@@ -995,16 +1042,17 @@ body.sindilegis .card-info-icone {
 .card-info-label {
     display: block;
 
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 
     color: var(--texto-claro);
 
-    font-size: 10px;
+    font-size: 8px;
+
     font-weight: 700;
 
     text-transform: uppercase;
 
-    letter-spacing: 0.3px;
+    letter-spacing: .2px;
 }
 
 .card-info-conteudo strong {
@@ -1012,8 +1060,9 @@ body.sindilegis .card-info-icone {
 
     color: var(--texto);
 
-    font-size: 12px;
-    line-height: 1.45;
+    font-size: 10px;
+
+    line-height: 1.35;
 
     font-weight: 600;
 
@@ -1026,55 +1075,63 @@ body.sindilegis .card-info-icone {
 ========================================================= */
 
 .card-secao {
-    margin-top: 17px;
+    margin-top: 11px;
 
-    padding-top: 15px;
+    padding-top: 10px;
 
-    border-top: 1px solid var(--borda);
+    border-top:
+        1px solid var(--borda);
 }
 
 .card-secao-titulo {
     display: flex;
+
     align-items: center;
 
-    gap: 7px;
+    gap: 5px;
 
-    margin-bottom: 9px;
+    margin-bottom: 6px;
 
     color: var(--texto-forte);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 }
 
 .card-secao-icone {
-    font-size: 13px;
+    font-size: 10px;
 }
 
 .tags {
     display: flex;
+
     flex-wrap: wrap;
 
-    gap: 6px;
+    gap: 4px;
 }
 
 .tag {
     display: inline-flex;
+
     align-items: center;
 
     max-width: 100%;
 
-    padding: 6px 9px;
+    padding: 4px 7px;
 
     border-radius: 999px;
 
-    background: rgba(37, 99, 235, 0.08);
+    background:
+        rgba(37, 99, 235, .07);
 
-    border: 1px solid rgba(37, 99, 235, 0.10);
+    border:
+        1px solid rgba(37, 99, 235, .09);
 
     color: var(--azul);
 
-    font-size: 10px;
+    font-size: 8px;
+
     font-weight: 700;
 
     line-height: 1.2;
@@ -1083,9 +1140,11 @@ body.sindilegis .card-info-icone {
 }
 
 body.sindilegis .tag {
-    background: rgba(124, 58, 237, 0.09);
+    background:
+        rgba(124, 58, 237, .08);
 
-    border-color: rgba(124, 58, 237, 0.11);
+    border-color:
+        rgba(124, 58, 237, .10);
 
     color: var(--roxo-claro);
 }
@@ -1093,48 +1152,52 @@ body.sindilegis .tag {
 .sem-especialidades {
     color: var(--texto-claro);
 
-    font-size: 11px;
+    font-size: 9px;
 }
 
 
 /* =========================================================
-   AÇÕES DOS CARDS
+   AÇÕES
 ========================================================= */
 
 .acoes {
     display: flex;
+
     flex-wrap: wrap;
 
-    gap: 8px;
+    gap: 6px;
 
     margin-top: auto;
-    padding-top: 18px;
+
+    padding-top: 12px;
 }
 
 .btnAcao {
-    min-height: 38px;
+    min-height: 31px;
 
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
-    gap: 7px;
+    gap: 5px;
 
-    padding: 0 13px;
+    padding: 0 10px;
 
-    border-radius: 9px;
+    border-radius: 7px;
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        transform .18s ease,
+        box-shadow .18s ease;
 }
 
 .btnAcao:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .btn-mapa {
@@ -1145,27 +1208,20 @@ body.sindilegis .tag {
             var(--azul-claro)
         );
 
-    color: #ffffff;
+    color: #fff;
 
     box-shadow:
-        0 6px 15px rgba(37, 99, 235, 0.18);
-}
-
-.btn-mapa:hover {
-    box-shadow:
-        0 9px 20px rgba(37, 99, 235, 0.28);
+        0 4px 10px rgba(37, 99, 235, .16);
 }
 
 .btn-whatsapp {
-    background: rgba(16, 185, 129, 0.08);
+    background:
+        rgba(16, 185, 129, .07);
 
-    border: 1px solid rgba(16, 185, 129, 0.18);
+    border:
+        1px solid rgba(16, 185, 129, .16);
 
     color: var(--verde);
-}
-
-.btn-whatsapp:hover {
-    background: rgba(16, 185, 129, 0.14);
 }
 
 
@@ -1177,55 +1233,62 @@ body.sindilegis .tag {
     width: 100%;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
 
-    padding: 55px 25px;
+    padding: 38px 20px;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 18px;
+    border-radius: 13px;
 
     box-shadow: var(--sombra);
 }
 
 .semResultado-icone {
-    width: 58px;
-    height: 58px;
+    width: 45px;
+    height: 45px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
-    border-radius: 15px;
+    border-radius: 11px;
 
-    background: rgba(37, 99, 235, 0.09);
-
-    font-size: 25px;
-}
-
-.semResultado h2 {
-    margin-bottom: 7px;
-
-    color: var(--texto-forte);
+    background:
+        rgba(37, 99, 235, .08);
 
     font-size: 20px;
 }
 
+.semResultado h2 {
+    margin-bottom: 5px;
+
+    color: var(--texto-forte);
+
+    font-size: 17px;
+}
+
 .semResultado p {
-    max-width: 500px;
+    max-width: 480px;
 
     color: var(--texto-claro);
 
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: 11px;
+
+    line-height: 1.5;
 }
 
 
@@ -1239,64 +1302,70 @@ body.sindilegis .tag {
     grid-template-columns:
         repeat(3, minmax(0, 1fr));
 
-    gap: 16px;
+    gap: 12px;
 
-    margin-top: 36px;
+    margin-top: 25px;
 }
 
 .info-site-item {
     display: flex;
+
     align-items: flex-start;
 
-    gap: 13px;
+    gap: 10px;
 
-    padding: 20px;
+    padding: 14px;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 15px;
+    border-radius: 11px;
 
     box-shadow: var(--sombra);
 }
 
 .info-site-icone {
-    width: 42px;
-    height: 42px;
+    width: 34px;
+    height: 34px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
 
-    border-radius: 11px;
+    border-radius: 8px;
 
-    background: rgba(37, 99, 235, 0.09);
+    background:
+        rgba(37, 99, 235, .08);
 
-    font-size: 18px;
+    font-size: 15px;
 }
 
 body.sindilegis .info-site-icone {
-    background: rgba(124, 58, 237, 0.10);
+    background:
+        rgba(124, 58, 237, .09);
 }
 
 .info-site-item strong {
     display: block;
 
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 
     color: var(--texto-forte);
 
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .info-site-item p {
     color: var(--texto-claro);
 
-    font-size: 11px;
-    line-height: 1.5;
+    font-size: 9px;
+
+    line-height: 1.45;
 }
 
 
@@ -1305,37 +1374,41 @@ body.sindilegis .info-site-icone {
 ========================================================= */
 
 .rodape {
-    margin-top: 10px;
+    margin-top: 5px;
 
-    border-top: 1px solid var(--borda);
+    border-top:
+        1px solid var(--borda);
 
     background: var(--card);
 }
 
 .rodape-conteudo {
-    width: min(1380px, calc(100% - 48px));
+    width: min(1320px, calc(100% - 40px));
 
-    min-height: 90px;
+    min-height: 66px;
 
     margin: 0 auto;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 15px;
 }
 
 .rodape-marca {
     display: flex;
+
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 }
 
 .rodape-marca img {
-    width: 38px;
-    height: 38px;
+    width: 30px;
+    height: 30px;
 
     object-fit: contain;
 }
@@ -1345,23 +1418,23 @@ body.sindilegis .info-site-icone {
 
     color: var(--texto-forte);
 
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .rodape-marca span {
     display: block;
 
-    margin-top: 3px;
+    margin-top: 2px;
 
     color: var(--texto-claro);
 
-    font-size: 10px;
+    font-size: 8px;
 }
 
 .rodape-direitos {
     color: var(--texto-claro);
 
-    font-size: 10px;
+    font-size: 8px;
 }
 
 
@@ -1373,7 +1446,7 @@ body.sindilegis .info-site-icone {
 
 
 /* =========================================================
-   MENU LATERAL
+   MENU ADMIN
 ========================================================= */
 
 .menu {
@@ -1383,9 +1456,10 @@ body.sindilegis .info-site-icone {
     top: 0;
     bottom: 0;
 
-    width: 260px;
+    width: 240px;
 
     display: flex;
+
     flex-direction: column;
 
     background:
@@ -1396,22 +1470,23 @@ body.sindilegis .info-site-icone {
             #581c87 100%
         );
 
-    color: #ffffff;
+    color: #fff;
 
     overflow-y: auto;
 
     z-index: 1000;
 
     box-shadow:
-        8px 0 30px rgba(15, 23, 42, 0.15);
+        5px 0 22px rgba(15, 23, 42, .13);
 }
 
 .menu::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
 }
 
 .menu::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.20);
+    background:
+        rgba(255, 255, 255, .18);
 
     border-radius: 10px;
 }
@@ -1423,19 +1498,20 @@ body.sindilegis .info-site-icone {
 
 .menu-logo {
     display: flex;
+
     align-items: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    padding: 25px 20px;
+    padding: 19px 16px;
 
     border-bottom:
-        1px solid rgba(255, 255, 255, 0.10);
+        1px solid rgba(255, 255, 255, .09);
 }
 
 .logo-admin {
-    width: 58px;
-    height: 58px;
+    width: 47px;
+    height: 47px;
 
     object-fit: contain;
 
@@ -1449,55 +1525,61 @@ body.sindilegis .info-site-icone {
 .menu-logo-text strong {
     display: block;
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .menu-logo-text span {
     display: block;
 
-    margin-top: 4px;
+    margin-top: 3px;
 
-    color: rgba(255, 255, 255, 0.58);
+    color:
+        rgba(255, 255, 255, .55);
 
-    font-size: 10px;
+    font-size: 8px;
 }
 
 
 /* =========================================================
-   NAVEGAÇÃO ADMIN
+   NAVEGAÇÃO
 ========================================================= */
 
 .menu-nav {
     display: flex;
+
     flex-direction: column;
 
-    gap: 5px;
+    gap: 4px;
 
-    padding: 20px 12px;
+    padding: 15px 9px;
 }
 
 .menu-btn {
     width: 100%;
 
-    min-height: 45px;
+    min-height: 39px;
 
     display: flex;
+
     align-items: center;
 
-    gap: 11px;
+    gap: 9px;
 
-    padding: 0 13px;
+    padding: 0 11px;
 
     border: 0;
-    border-radius: 10px;
+
+    border-radius: 8px;
 
     background: transparent;
 
-    color: rgba(255, 255, 255, 0.70);
+    color:
+        rgba(255, 255, 255, .68);
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 700;
 
     text-align: left;
@@ -1505,80 +1587,84 @@ body.sindilegis .info-site-icone {
     cursor: pointer;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+        background .18s ease,
+        color .18s ease,
+        transform .18s ease;
 }
 
 .menu-btn:hover {
-    background: rgba(255, 255, 255, 0.09);
+    background:
+        rgba(255, 255, 255, .08);
 
-    color: #ffffff;
+    color: #fff;
 
-    transform: translateX(2px);
+    transform: translateX(1px);
 }
 
 .menu-btn.ativo {
     background:
         linear-gradient(
             135deg,
-            rgba(59, 130, 246, 0.95),
-            rgba(37, 99, 235, 0.88)
+            rgba(59, 130, 246, .95),
+            rgba(37, 99, 235, .85)
         );
 
-    color: #ffffff;
+    color: #fff;
 
     box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.15);
+        0 6px 15px rgba(0, 0, 0, .12);
 }
 
 .menu-btn span {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 
 /* =========================================================
-   FOOTER MENU
+   MENU FOOTER
 ========================================================= */
 
 .menu-footer {
     margin-top: auto;
 
-    padding: 15px 12px;
+    padding: 11px 9px;
 
     border-top:
-        1px solid rgba(255, 255, 255, 0.10);
+        1px solid rgba(255, 255, 255, .09);
 }
 
 .btn-sair {
     width: 100%;
 
-    min-height: 43px;
+    min-height: 38px;
 
     display: flex;
+
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 
-    padding: 0 13px;
+    padding: 0 11px;
 
     border: 0;
-    border-radius: 10px;
 
-    background: rgba(239, 68, 68, 0.10);
+    border-radius: 8px;
+
+    background:
+        rgba(239, 68, 68, .09);
 
     color: #fecaca;
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 700;
 
     cursor: pointer;
-
-    transition: background 0.2s ease;
 }
 
 .btn-sair:hover {
-    background: rgba(239, 68, 68, 0.20);
+    background:
+        rgba(239, 68, 68, .17);
 }
 
 
@@ -1589,14 +1675,14 @@ body.sindilegis .info-site-icone {
 .conteudo {
     min-height: 100vh;
 
-    margin-left: 260px;
+    margin-left: 240px;
 
-    padding: 35px;
+    padding: 27px;
 }
 
 
 /* =========================================================
-   PÁGINAS ADMIN
+   PÁGINAS
 ========================================================= */
 
 .pagina {
@@ -1607,105 +1693,118 @@ body.sindilegis .info-site-icone {
     display: block;
 
     animation:
-        aparecer 0.25s ease;
+        aparecer .2s ease;
 }
 
 @keyframes aparecer {
+
     from {
         opacity: 0;
-        transform: translateY(8px);
+
+        transform:
+            translateY(5px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 }
 
 
 /* =========================================================
-   TOPO DASHBOARD
+   DASHBOARD TOPO
 ========================================================= */
 
 .topo-dashboard {
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
 
-    gap: 25px;
+    gap: 18px;
 
-    margin-bottom: 30px;
+    margin-bottom: 22px;
 }
 
 .topo-dashboard h1 {
     color: var(--texto-forte);
 
-    font-size: 29px;
+    font-size: 24px;
+
     font-weight: 800;
 
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 .subtitulo-dashboard {
     color: var(--texto-claro);
 
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 11px;
+
+    line-height: 1.4;
 }
 
 .data-dashboard {
-    min-width: 170px;
+    min-width: 145px;
 
-    padding: 13px 16px;
+    padding: 10px 13px;
 
-    border-radius: 13px;
+    border-radius: 10px;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
     box-shadow: var(--sombra);
 
     color: var(--texto-claro);
 
-    font-size: 11px;
+    font-size: 9px;
 
     text-align: center;
 }
 
 
 /* =========================================================
-   TÍTULOS DAS PÁGINAS ADMIN
+   TÍTULO PÁGINA
 ========================================================= */
 
 .titulo-pagina {
     display: flex;
+
     align-items: flex-start;
+
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 15px;
 
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 }
 
 .titulo-pagina h1 {
     color: var(--texto-forte);
 
-    font-size: 27px;
+    font-size: 22px;
+
     font-weight: 800;
 
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .titulo-pagina p {
     color: var(--texto-claro);
 
-    font-size: 13px;
+    font-size: 11px;
 }
 
 
 /* =========================================================
-   CARDS DO DASHBOARD
+   CARDS DASHBOARD
 ========================================================= */
 
 .dashboard-cards {
@@ -1714,67 +1813,74 @@ body.sindilegis .info-site-icone {
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
 
-    gap: 16px;
+    gap: 12px;
 
-    margin-bottom: 22px;
+    margin-bottom: 15px;
 }
 
 .dashboard-card {
     min-width: 0;
 
     display: flex;
+
     align-items: center;
 
-    gap: 14px;
+    gap: 11px;
 
-    padding: 20px;
+    padding: 15px;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 15px;
+    border-radius: 12px;
 
     box-shadow: var(--sombra);
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform .18s ease,
+        box-shadow .18s ease;
 }
 
 .dashboard-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 
     box-shadow: var(--sombra-forte);
 }
 
 .dashboard-card-icon {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     flex-shrink: 0;
 
-    border-radius: 13px;
+    border-radius: 9px;
 
-    background: rgba(37, 99, 235, 0.09);
+    background:
+        rgba(37, 99, 235, .08);
 
-    font-size: 21px;
+    font-size: 17px;
 }
 
 .dashboard-card:nth-child(2) .dashboard-card-icon {
-    background: rgba(16, 185, 129, 0.10);
+    background:
+        rgba(16, 185, 129, .09);
 }
 
 .dashboard-card:nth-child(3) .dashboard-card-icon {
-    background: rgba(239, 68, 68, 0.10);
+    background:
+        rgba(239, 68, 68, .09);
 }
 
 .dashboard-card:nth-child(4) .dashboard-card-icon {
-    background: rgba(124, 58, 237, 0.10);
+    background:
+        rgba(124, 58, 237, .09);
 }
 
 .dashboard-card strong {
@@ -1782,7 +1888,7 @@ body.sindilegis .info-site-icone {
 
     color: var(--texto-forte);
 
-    font-size: 24px;
+    font-size: 19px;
 
     line-height: 1;
 }
@@ -1790,17 +1896,18 @@ body.sindilegis .info-site-icone {
 .dashboard-card span {
     display: block;
 
-    margin-top: 5px;
+    margin-top: 4px;
 
     color: var(--texto-claro);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 700;
 }
 
 
 /* =========================================================
-   GRID DASHBOARD
+   DASHBOARD GRID
 ========================================================= */
 
 .dashboard-grid {
@@ -1808,23 +1915,24 @@ body.sindilegis .info-site-icone {
 
     grid-template-columns:
         minmax(0, 1.3fr)
-        minmax(300px, 0.9fr);
+        minmax(260px, .9fr);
 
-    gap: 20px;
+    gap: 14px;
 
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .dashboard-panel {
     min-width: 0;
 
-    padding: 22px;
+    padding: 16px;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 16px;
+    border-radius: 12px;
 
     box-shadow: var(--sombra);
 }
@@ -1832,10 +1940,11 @@ body.sindilegis .info-site-icone {
 .panel-titulo {
     color: var(--texto-forte);
 
-    font-size: 15px;
+    font-size: 12px;
+
     font-weight: 800;
 
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .panel-label {
@@ -1843,9 +1952,9 @@ body.sindilegis .info-site-icone {
 
     color: var(--texto-claro);
 
-    font-size: 11px;
+    font-size: 9px;
 
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 
 
@@ -1854,26 +1963,28 @@ body.sindilegis .info-site-icone {
 ========================================================= */
 
 .progresso-container {
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
 .progresso-info {
     display: flex;
+
     justify-content: space-between;
 
-    gap: 10px;
+    gap: 8px;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
     color: var(--texto);
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 700;
 }
 
 .barra-progresso {
     width: 100%;
-    height: 10px;
+    height: 7px;
 
     overflow: hidden;
 
@@ -1895,27 +2006,29 @@ body.sindilegis .info-site-icone {
             var(--azul-claro)
         );
 
-    transition: width 0.4s ease;
+    transition:
+        width .35s ease;
 }
 
 .legenda-progresso {
     display: flex;
+
     justify-content: space-between;
 
-    margin-top: 10px;
+    margin-top: 7px;
 
     color: var(--texto-claro);
 
-    font-size: 10px;
+    font-size: 8px;
 }
 
 .ponto {
     display: inline-block;
 
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
 
-    margin-right: 4px;
+    margin-right: 3px;
 
     border-radius: 50%;
 }
@@ -1939,35 +2052,39 @@ body.sindilegis .info-site-icone {
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 10px;
+    gap: 7px;
 }
 
 .coverage-item {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 10px;
+    gap: 7px;
 
-    padding: 12px;
+    padding: 9px;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
-    background: rgba(37, 99, 235, 0.05);
+    background:
+        rgba(37, 99, 235, .04);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 }
 
 .coverage-item span {
     color: var(--texto-claro);
 
-    font-size: 11px;
+    font-size: 9px;
 }
 
 .coverage-item strong {
     color: var(--texto-forte);
 
-    font-size: 15px;
+    font-size: 12px;
 }
 
 
@@ -1976,109 +2093,119 @@ body.sindilegis .info-site-icone {
 ========================================================= */
 
 .ultimas-clinicas-panel {
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .ultimas-clinicas {
     display: flex;
+
     flex-direction: column;
 
-    gap: 9px;
+    gap: 6px;
 }
 
 .ultima-clinica {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 10px;
 
-    padding: 12px;
+    padding: 9px;
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .ultima-clinica strong {
     color: var(--texto-forte);
 
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .ultima-clinica span {
     color: var(--texto-claro);
 
-    font-size: 10px;
+    font-size: 8px;
 }
 
 .estado-vazio {
-    padding: 25px;
+    padding: 18px;
 
     text-align: center;
 
     color: var(--texto-claro);
 
-    font-size: 12px;
+    font-size: 10px;
 }
 
 
 /* =========================================================
-   PAINÉIS ADMIN
+   PAINÉIS
 ========================================================= */
 
 .painel {
-    padding: 22px;
+    padding: 16px;
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 16px;
+    border-radius: 12px;
 
     box-shadow: var(--sombra);
 
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 
 .pagina-acoes {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 10px;
 
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 
 .campo-busca {
     position: relative;
 
-    width: min(360px, 100%);
+    width: min(320px, 100%);
 }
 
 .campo-busca input {
     width: 100%;
-    height: 42px;
+    height: 36px;
 
-    padding: 0 13px;
+    padding: 0 10px;
 
-    border: 1px solid var(--borda);
-    border-radius: 9px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 8px;
 
     background: var(--card);
+
     color: var(--texto);
 
     outline: none;
 
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .campo-busca input:focus {
     border-color: var(--azul);
 
     box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.10);
+        0 0 0 2px rgba(37, 99, 235, .09);
 }
 
 
@@ -2087,18 +2214,21 @@ body.sindilegis .info-site-icone {
 ========================================================= */
 
 .btn-primario {
-    min-height: 42px;
+    min-height: 36px;
 
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
-    gap: 7px;
+    gap: 5px;
 
-    padding: 0 16px;
+    padding: 0 13px;
 
     border: 0;
-    border-radius: 9px;
+
+    border-radius: 8px;
 
     background:
         linear-gradient(
@@ -2107,40 +2237,34 @@ body.sindilegis .info-site-icone {
             var(--azul-claro)
         );
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 800;
 
     cursor: pointer;
 
     box-shadow:
-        0 7px 17px rgba(37, 99, 235, 0.18);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.btn-primario:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 22px rgba(37, 99, 235, 0.25);
+        0 5px 12px rgba(37, 99, 235, .16);
 }
 
 .btn-secundario {
-    min-height: 40px;
+    min-height: 35px;
 
-    padding: 0 14px;
+    padding: 0 12px;
 
-    border: 1px solid var(--borda);
-    border-radius: 9px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 8px;
 
     background: var(--card);
+
     color: var(--texto);
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 700;
 
     cursor: pointer;
@@ -2161,11 +2285,11 @@ body.sindilegis .info-site-icone {
     display: grid;
 
     grid-template-columns:
-        1fr 220px auto;
+        1fr 190px auto;
 
-    gap: 12px;
+    gap: 9px;
 
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 
 
@@ -2180,27 +2304,30 @@ body.sindilegis .info-site-icone {
         minmax(0, 1fr)
         auto;
 
-    gap: 10px;
+    gap: 8px;
 
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 
 .form-inline input,
 .form-inline select {
     width: 100%;
-    height: 42px;
+    height: 36px;
 
-    padding: 0 12px;
+    padding: 0 10px;
 
-    border: 1px solid var(--borda);
-    border-radius: 9px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 8px;
 
     background: var(--card);
+
     color: var(--texto);
 
     outline: none;
 
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .form-inline input:focus,
@@ -2208,12 +2335,12 @@ body.sindilegis .info-site-icone {
     border-color: var(--azul);
 
     box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.10);
+        0 0 0 2px rgba(37, 99, 235, .09);
 }
 
 
 /* =========================================================
-   FORM INLINE LOCALIZAÇÃO
+   FORM LOCALIZAÇÃO
 ========================================================= */
 
 #pagina-estados .form-inline,
@@ -2221,7 +2348,7 @@ body.sindilegis .info-site-icone {
 #pagina-bairros .form-inline {
     grid-template-columns:
         minmax(0, 1fr)
-        minmax(180px, 0.7fr)
+        minmax(160px, .7fr)
         auto;
 }
 
@@ -2235,46 +2362,51 @@ body.sindilegis .info-site-icone {
 
     overflow-x: auto;
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 12px;
+    border-radius: 9px;
 }
 
 .tabela-container table {
     width: 100%;
 
-    min-width: 700px;
+    min-width: 650px;
 
     border-collapse: collapse;
 }
 
 .tabela-container th {
-    padding: 13px 14px;
+    padding: 10px 11px;
 
-    background: rgba(37, 99, 235, 0.05);
+    background:
+        rgba(37, 99, 235, .04);
 
-    border-bottom: 1px solid var(--borda);
+    border-bottom:
+        1px solid var(--borda);
 
     color: var(--texto-claro);
 
-    font-size: 10px;
+    font-size: 8px;
+
     font-weight: 800;
 
     text-transform: uppercase;
 
-    letter-spacing: 0.4px;
+    letter-spacing: .3px;
 
     text-align: left;
 }
 
 .tabela-container td {
-    padding: 13px 14px;
+    padding: 10px 11px;
 
-    border-bottom: 1px solid var(--borda);
+    border-bottom:
+        1px solid var(--borda);
 
     color: var(--texto);
 
-    font-size: 12px;
+    font-size: 10px;
 
     vertical-align: middle;
 }
@@ -2283,60 +2415,54 @@ body.sindilegis .info-site-icone {
     border-bottom: 0;
 }
 
-.tabela-container tbody tr {
-    transition: background 0.2s ease;
-}
-
 .tabela-container tbody tr:hover {
-    background: rgba(37, 99, 235, 0.035);
+    background:
+        rgba(37, 99, 235, .025);
 }
 
 .acoes-tabela {
     display: flex;
+
     align-items: center;
 
-    gap: 6px;
+    gap: 4px;
 }
 
 .btn-editar,
 .btn-excluir {
-    width: 32px;
-    height: 32px;
+    width: 27px;
+    height: 27px;
 
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     cursor: pointer;
 
-    font-size: 13px;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+    font-size: 11px;
 }
 
 .btn-editar {
-    border: 1px solid rgba(37, 99, 235, 0.16);
+    border:
+        1px solid rgba(37, 99, 235, .14);
 
-    background: rgba(37, 99, 235, 0.07);
+    background:
+        rgba(37, 99, 235, .06);
 
     color: var(--azul);
 }
 
 .btn-excluir {
-    border: 1px solid rgba(239, 68, 68, 0.16);
+    border:
+        1px solid rgba(239, 68, 68, .14);
 
-    background: rgba(239, 68, 68, 0.07);
+    background:
+        rgba(239, 68, 68, .06);
 
     color: var(--vermelho);
-}
-
-.btn-editar:hover,
-.btn-excluir:hover {
-    transform: translateY(-1px);
 }
 
 
@@ -2346,24 +2472,28 @@ body.sindilegis .info-site-icone {
 
 .status {
     display: inline-flex;
+
     align-items: center;
 
-    padding: 5px 9px;
+    padding: 4px 7px;
 
     border-radius: 999px;
 
-    font-size: 10px;
+    font-size: 8px;
+
     font-weight: 800;
 }
 
 .status.ativo {
-    background: rgba(16, 185, 129, 0.10);
+    background:
+        rgba(16, 185, 129, .09);
 
     color: var(--verde);
 }
 
 .status.inativo {
-    background: rgba(239, 68, 68, 0.10);
+    background:
+        rgba(239, 68, 68, .09);
 
     color: var(--vermelho);
 }
@@ -2379,14 +2509,17 @@ body.sindilegis .info-site-icone {
     inset: 0;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    padding: 20px;
+    padding: 15px;
 
-    background: rgba(15, 23, 42, 0.68);
+    background:
+        rgba(15, 23, 42, .65);
 
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
 
     z-index: 2000;
 }
@@ -2396,7 +2529,7 @@ body.sindilegis .info-site-icone {
 }
 
 .modal-conteudo {
-    width: min(800px, 100%);
+    width: min(760px, 100%);
 
     max-height: 90vh;
 
@@ -2404,57 +2537,57 @@ body.sindilegis .info-site-icone {
 
     background: var(--card);
 
-    border: 1px solid var(--borda);
+    border:
+        1px solid var(--borda);
 
-    border-radius: 18px;
+    border-radius: 14px;
 
     box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.25);
+        0 20px 55px rgba(0, 0, 0, .22);
 }
 
 .modal-header {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 10px;
 
-    padding: 20px 22px;
+    padding: 15px 17px;
 
-    border-bottom: 1px solid var(--borda);
+    border-bottom:
+        1px solid var(--borda);
 }
 
 .modal-header h2 {
     color: var(--texto-forte);
 
-    font-size: 19px;
+    font-size: 15px;
 }
 
 .modal-fechar {
-    width: 34px;
-    height: 34px;
+    width: 29px;
+    height: 29px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    border: 1px solid var(--borda);
-    border-radius: 8px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 7px;
 
     background: var(--card);
+
     color: var(--texto-claro);
 
     cursor: pointer;
 
-    font-size: 18px;
-}
-
-.modal-fechar:hover {
-    color: var(--vermelho);
-
-    border-color: rgba(239, 68, 68, 0.25);
-
-    background: rgba(239, 68, 68, 0.06);
+    font-size: 15px;
 }
 
 
@@ -2463,7 +2596,7 @@ body.sindilegis .info-site-icone {
 ========================================================= */
 
 .formulario {
-    padding: 22px;
+    padding: 17px;
 }
 
 .form-grid {
@@ -2472,41 +2605,47 @@ body.sindilegis .info-site-icone {
     grid-template-columns:
         repeat(2, minmax(0, 1fr));
 
-    gap: 16px;
+    gap: 12px;
 }
 
 .form-section {
-    margin-bottom: 22px;
+    margin-bottom: 17px;
 }
 
 .form-section-titulo {
     display: flex;
+
     align-items: center;
 
-    gap: 8px;
+    gap: 6px;
 
-    margin-bottom: 14px;
-    padding-bottom: 9px;
+    margin-bottom: 10px;
 
-    border-bottom: 1px solid var(--borda);
+    padding-bottom: 7px;
+
+    border-bottom:
+        1px solid var(--borda);
 
     color: var(--texto-forte);
 
-    font-size: 13px;
+    font-size: 11px;
+
     font-weight: 800;
 }
 
 .campo-formulario {
     display: flex;
+
     flex-direction: column;
 
-    gap: 6px;
+    gap: 5px;
 }
 
 .campo-formulario label {
     color: var(--texto);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 }
 
@@ -2515,23 +2654,22 @@ body.sindilegis .info-site-icone {
 .campo-formulario textarea {
     width: 100%;
 
-    min-height: 42px;
+    min-height: 36px;
 
-    padding: 10px 12px;
+    padding: 8px 10px;
 
-    border: 1px solid var(--borda);
-    border-radius: 9px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 8px;
 
     background: var(--card);
+
     color: var(--texto);
 
     outline: none;
 
-    font-size: 12px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    font-size: 10px;
 }
 
 .campo-formulario textarea {
@@ -2544,7 +2682,7 @@ body.sindilegis .info-site-icone {
     border-color: var(--azul);
 
     box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.10);
+        0 0 0 2px rgba(37, 99, 235, .09);
 }
 
 .campo-completo {
@@ -2553,39 +2691,40 @@ body.sindilegis .info-site-icone {
 
 
 /* =========================================================
-   CHECKBOX STATUS
+   CHECKBOX
 ========================================================= */
 
 .checkbox-status {
     display: flex;
+
     align-items: center;
 
-    gap: 9px;
+    gap: 7px;
 
     cursor: pointer;
 
     color: var(--texto);
 
-    font-size: 12px;
+    font-size: 10px;
+
     font-weight: 700;
 }
 
 .checkbox-custom {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    border: 1px solid var(--borda);
-    border-radius: 6px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 5px;
 
     background: var(--card);
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
 }
 
 .checkbox-status input {
@@ -2601,22 +2740,24 @@ body.sindilegis .info-site-icone {
 .checkbox-status input:checked + .checkbox-custom::after {
     content: "✓";
 
-    color: #ffffff;
+    color: #fff;
 
-    font-size: 13px;
+    font-size: 11px;
+
     font-weight: 800;
 }
 
 
 /* =========================================================
-   ESPECIALIDADES NO FORMULÁRIO
+   ESPECIALIDADES FORM
 ========================================================= */
 
 .especialidades-form {
     display: flex;
+
     flex-direction: column;
 
-    gap: 9px;
+    gap: 7px;
 }
 
 .especialidade-form-row {
@@ -2626,32 +2767,38 @@ body.sindilegis .info-site-icone {
         minmax(0, 1fr)
         auto;
 
-    gap: 8px;
+    gap: 6px;
 }
 
 .especialidade-form-row select {
     width: 100%;
-    height: 40px;
+    height: 34px;
 
-    padding: 0 10px;
+    padding: 0 8px;
 
-    border: 1px solid var(--borda);
-    border-radius: 8px;
+    border:
+        1px solid var(--borda);
+
+    border-radius: 7px;
 
     background: var(--card);
+
     color: var(--texto);
 
-    font-size: 11px;
+    font-size: 9px;
 }
 
 .btn-remover-especialidade {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
 
-    border: 1px solid rgba(239, 68, 68, 0.18);
-    border-radius: 8px;
+    border:
+        1px solid rgba(239, 68, 68, .15);
 
-    background: rgba(239, 68, 68, 0.07);
+    border-radius: 7px;
+
+    background:
+        rgba(239, 68, 68, .06);
 
     color: var(--vermelho);
 
@@ -2659,21 +2806,24 @@ body.sindilegis .info-site-icone {
 }
 
 .btn-adicionar-especialidade {
-    min-height: 38px;
+    min-height: 32px;
 
     align-self: flex-start;
 
-    padding: 0 12px;
+    padding: 0 10px;
 
-    border: 1px dashed var(--azul);
+    border:
+        1px dashed var(--azul);
 
-    border-radius: 8px;
+    border-radius: 7px;
 
-    background: rgba(37, 99, 235, 0.05);
+    background:
+        rgba(37, 99, 235, .04);
 
     color: var(--azul);
 
-    font-size: 11px;
+    font-size: 9px;
+
     font-weight: 800;
 
     cursor: pointer;
@@ -2681,7 +2831,7 @@ body.sindilegis .info-site-icone {
 
 
 /* =========================================================
-   AÇÕES DO FORMULÁRIO
+   AÇÕES FORM
 ========================================================= */
 
 .form-acoes {
@@ -2689,29 +2839,26 @@ body.sindilegis .info-site-icone {
 
     justify-content: flex-end;
 
-    gap: 10px;
+    gap: 8px;
 
-    padding-top: 18px;
+    padding-top: 13px;
 
-    margin-top: 8px;
+    margin-top: 5px;
 
-    border-top: 1px solid var(--borda);
+    border-top:
+        1px solid var(--borda);
 }
 
 
 /* =========================================================
-   RESPONSIVIDADE - TABLET
+   TABLET
 ========================================================= */
 
-@media (max-width: 1200px) {
+@media (max-width: 1150px) {
 
     .filtros {
         grid-template-columns:
             repeat(3, minmax(0, 1fr));
-    }
-
-    .filtro-botao {
-        justify-content: flex-end;
     }
 
     .dashboard-cards {
@@ -2727,28 +2874,23 @@ body.sindilegis .info-site-icone {
 
 
 /* =========================================================
-   RESPONSIVIDADE - 900px
+   TABLET PEQUENO
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 850px) {
 
     .header {
-        padding: 12px 18px;
-    }
-
-    .menu-topo {
-        gap: 4px;
+        padding: 8px 15px;
     }
 
     .menu-link {
-        padding: 0 10px;
-        font-size: 11px;
+        padding: 0 8px;
     }
 
     .container {
-        width: min(100% - 30px, 760px);
+        width: calc(100% - 28px);
 
-        padding-top: 28px;
+        padding-top: 22px;
     }
 
     .hero-site {
@@ -2756,11 +2898,12 @@ body.sindilegis .info-site-icone {
 
         align-items: flex-start;
 
-        padding: 30px;
+        padding: 23px;
     }
 
     .hero-destaque {
         width: 100%;
+
         min-width: 0;
     }
 
@@ -2773,25 +2916,17 @@ body.sindilegis .info-site-icone {
     }
 
     .conteudo {
-        padding: 25px;
-    }
-
-    .topo-dashboard {
-        flex-direction: column;
-    }
-
-    .data-dashboard {
-        width: 100%;
+        padding: 22px;
     }
 
 }
 
 
 /* =========================================================
-   RESPONSIVIDADE - MOBILE
+   MOBILE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 650px) {
 
     .header {
         position: relative;
@@ -2800,17 +2935,11 @@ body.sindilegis .info-site-icone {
 
         align-items: stretch;
 
-        gap: 12px;
-
-        padding: 12px 15px;
+        gap: 8px;
     }
 
     .header-left {
         justify-content: center;
-    }
-
-    .titulo-site h1 {
-        font-size: 18px;
     }
 
     .menu-topo {
@@ -2819,66 +2948,49 @@ body.sindilegis .info-site-icone {
         display: grid;
 
         grid-template-columns:
-            1fr 1fr 44px 70px;
+            1fr 1fr 36px 65px;
     }
 
     .menu-link {
-        min-height: 38px;
+        min-height: 34px;
 
-        padding: 0 7px;
+        padding: 0 5px;
 
-        font-size: 9px;
+        font-size: 8px;
 
         text-align: center;
     }
 
     .btn-tema {
         width: 100%;
-        height: 38px;
+
+        height: 34px;
     }
 
     .container {
-        width: calc(100% - 22px);
+        width: calc(100% - 18px);
 
-        padding-top: 20px;
-        padding-bottom: 40px;
+        padding-top: 16px;
     }
 
     .hero-site {
-        min-height: auto;
+        padding: 20px 16px;
 
-        padding: 25px 20px;
-
-        border-radius: 17px;
+        border-radius: 13px;
     }
 
     .hero-texto h2 {
-        font-size: 30px;
+        font-size: 26px;
     }
 
     .hero-texto p {
-        font-size: 13px;
-    }
-
-    .hero-destaque {
-        padding: 15px;
+        font-size: 11px;
     }
 
     .filtros {
         grid-template-columns: 1fr;
 
-        padding: 17px;
-
-        gap: 12px;
-    }
-
-    .filtros::before {
-        top: 15px;
-        bottom: 15px;
-    }
-
-    .filtro-botao {
-        padding-top: 4px;
+        padding: 14px;
     }
 
     .resultado-topo {
@@ -2886,11 +2998,7 @@ body.sindilegis .info-site-icone {
     }
 
     .resultado-contador {
-        min-width: 80px;
-    }
-
-    .resultado-topo h2 {
-        font-size: 21px;
+        min-width: 70px;
     }
 
     .cardHeader {
@@ -2910,21 +3018,17 @@ body.sindilegis .info-site-icone {
     }
 
     .rodape-conteudo {
-        width: calc(100% - 22px);
+        width: calc(100% - 18px);
 
         flex-direction: column;
 
         justify-content: center;
 
-        padding: 20px 0;
-    }
-
-    .rodape-direitos {
-        text-align: center;
+        padding: 15px 0;
     }
 
 
-    /* ADMIN MOBILE */
+    /* ADMIN */
 
     .menu {
         position: relative;
@@ -2932,12 +3036,10 @@ body.sindilegis .info-site-icone {
         width: 100%;
 
         min-height: auto;
-
-        max-height: none;
     }
 
     .menu-logo {
-        padding: 15px;
+        padding: 13px;
     }
 
     .menu-nav {
@@ -2946,17 +3048,17 @@ body.sindilegis .info-site-icone {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
 
-        padding: 12px;
+        padding: 10px;
     }
 
     .menu-footer {
-        padding: 12px;
+        padding: 10px;
     }
 
     .conteudo {
         margin-left: 0;
 
-        padding: 20px 13px;
+        padding: 17px 10px;
     }
 
     .dashboard-cards {
@@ -3003,29 +3105,25 @@ body.sindilegis .info-site-icone {
    MOBILE PEQUENO
 ========================================================= */
 
-@media (max-width: 450px) {
+@media (max-width: 420px) {
 
     .menu-topo {
         grid-template-columns:
-            1fr 1fr 40px 62px;
+            1fr 1fr 34px 60px;
     }
 
     .menu-link {
-        font-size: 8px;
+        font-size: 7px;
     }
 
     .hero-texto h2 {
-        font-size: 27px;
-    }
-
-    .hero-badge {
-        font-size: 9px;
+        font-size: 24px;
     }
 
     .cardHeader,
     .card-corpo {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 13px;
+        padding-right: 13px;
     }
 
     .resultado-topo {
@@ -3033,7 +3131,7 @@ body.sindilegis .info-site-icone {
     }
 
     .resultado-contador {
-        align-self: stretch;
+        width: 100%;
     }
 
 }
