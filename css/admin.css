@@ -1447,291 +1447,53 @@ tr:hover td{
 }
 
 
-/* ============================================================
-   LISTAS DE GERENCIAMENTO
-   Especialidades, Regiões, Estados, Cidades e Bairros
-   ============================================================ */
+/* =====================================
+   LISTAS GERENCIAMENTO
+===================================== */
 
-.lista-gerenciamento {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
+.lista-gerenciamento{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
 }
 
-/* Cada registro fica em UMA única linha */
-.lista-gerenciamento .item-gerenciamento {
-    width: 100%;
-    min-height: 64px;
-    padding: 12px 14px;
 
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
+.item-gerenciamento{
 
-    gap: 18px;
+    display:flex;
 
-    background: var(--card);
-    border: 1px solid var(--borda);
-    border-radius: 12px;
+    justify-content:space-between;
 
-    box-shadow: 0 3px 10px rgba(15, 23, 42, .04);
+    align-items:center;
 
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        transform .2s ease;
+    padding:14px 16px;
+
+    border:1px solid var(--borda);
+
+    background:var(--fundo);
+
+    border-radius:12px;
+
 }
 
-.lista-gerenciamento .item-gerenciamento:hover {
-    border-color: rgba(124, 58, 237, .25);
-    box-shadow: 0 6px 16px rgba(15, 23, 42, .07);
-    transform: translateY(-1px);
+
+.item-gerenciamento strong{
+
+    color:var(--texto-forte);
+
 }
 
-/* Informações do lado esquerdo */
-.lista-gerenciamento .item-gerenciamento-info {
-    min-width: 0;
-    flex: 1;
 
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
+.item-acoes{
 
-    gap: 11px;
-}
+    display:flex;
 
-.lista-gerenciamento .item-gerenciamento-icone {
-    width: 38px;
-    height: 38px;
-    min-width: 38px;
+    gap:8px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-    background: rgba(124, 58, 237, .09);
-
-    font-size: 17px;
-}
-
-.lista-gerenciamento .item-gerenciamento-info > div {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.lista-gerenciamento .item-gerenciamento strong {
-    display: block;
-
-    color: var(--texto-forte);
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.3;
-
-    overflow-wrap: anywhere;
-}
-
-.lista-gerenciamento .item-gerenciamento small,
-.lista-gerenciamento .item-subtitulo {
-    display: block;
-
-    color: var(--texto-claro);
-    font-size: 11px;
-    line-height: 1.3;
-}
-
-/* Área dos botões - SEMPRE lateral */
-.lista-gerenciamento .item-acoes {
-    width: auto !important;
-    min-width: max-content;
-
-    margin: 0 0 0 auto !important;
-    padding: 0 !important;
-
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-
-    gap: 7px !important;
-
-    flex-shrink: 0;
-}
-
-/* Botões Editar e Excluir */
-.lista-gerenciamento .item-acoes .btn-editar,
-.lista-gerenciamento .item-acoes .btn-excluir {
-    width: 72px !important;
-    min-width: 72px !important;
-    max-width: 72px !important;
-
-    height: 34px !important;
-    min-height: 34px !important;
-
-    margin: 0 !important;
-    padding: 0 8px !important;
-
-    display: inline-flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    gap: 4px;
-
-    border-radius: 8px !important;
-    border: 1px solid transparent !important;
-
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    line-height: 1 !important;
-
-    white-space: nowrap !important;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        color .2s ease,
-        border-color .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-/* EDITAR = AZUL */
-.lista-gerenciamento .item-acoes .btn-editar {
-    background: var(--azul) !important;
-    color: #ffffff !important;
-    border-color: var(--azul) !important;
-}
-
-.lista-gerenciamento .item-acoes .btn-editar:hover {
-    background: #1d4ed8 !important;
-    border-color: #1d4ed8 !important;
-    color: #ffffff !important;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 5px 12px rgba(37, 99, 235, .22);
-}
-
-/* EXCLUIR = ROXO */
-.lista-gerenciamento .item-acoes .btn-excluir {
-    background: var(--roxo) !important;
-    color: #ffffff !important;
-    border-color: var(--roxo) !important;
-}
-
-.lista-gerenciamento .item-acoes .btn-excluir:hover {
-    background: #6d28d9 !important;
-    border-color: #6d28d9 !important;
-    color: #ffffff !important;
-
-    transform: translateY(-1px);
-
-    box-shadow: 0 5px 12px rgba(124, 58, 237, .22);
-}
-
-/* Estados de carregamento/vazio/erro */
-.lista-gerenciamento .item-carregando,
-.lista-gerenciamento .item-vazio,
-.lista-gerenciamento .item-erro {
-    justify-content: center !important;
-    text-align: center;
-
-    min-height: 58px;
-
-    color: var(--texto-claro);
-}
-
-.lista-gerenciamento .item-erro {
-    color: var(--vermelho);
-}
-
-/* Tema escuro */
-body.dark .lista-gerenciamento .item-gerenciamento {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, .14);
-}
-
-body.dark .lista-gerenciamento .item-gerenciamento-icone {
-    background: rgba(139, 92, 246, .15);
-}
-
-/* ============================================================
-   RESPONSIVO
-   ============================================================ */
-
-@media (max-width: 768px) {
-
-    .lista-gerenciamento .item-gerenciamento {
-        min-height: 60px;
-        padding: 10px 12px;
-        gap: 10px;
-    }
-
-    .lista-gerenciamento .item-gerenciamento-info {
-        gap: 8px;
-    }
-
-    .lista-gerenciamento .item-gerenciamento-icone {
-        width: 34px;
-        height: 34px;
-        min-width: 34px;
-        font-size: 15px;
-    }
-
-    .lista-gerenciamento .item-gerenciamento strong {
-        font-size: 12px;
-    }
-
-    .lista-gerenciamento .item-gerenciamento small,
-    .lista-gerenciamento .item-subtitulo {
-        font-size: 10px;
-    }
-
-    .lista-gerenciamento .item-acoes {
-        min-width: 0 !important;
-        gap: 5px !important;
-    }
-
-    .lista-gerenciamento .item-acoes .btn-editar,
-    .lista-gerenciamento .item-acoes .btn-excluir {
-        width: 62px !important;
-        min-width: 62px !important;
-        max-width: 62px !important;
-        height: 32px !important;
-        min-height: 32px !important;
-        font-size: 10px !important;
-    }
-}
-
-@media (max-width: 520px) {
-
-    .lista-gerenciamento .item-gerenciamento {
-        align-items: center !important;
-    }
-
-    .lista-gerenciamento .item-gerenciamento-info {
-        flex: 1;
-    }
-
-    .lista-gerenciamento .item-acoes {
-        flex-shrink: 0;
-    }
-
-    .lista-gerenciamento .item-acoes .btn-editar,
-    .lista-gerenciamento .item-acoes .btn-excluir {
-        width: 56px !important;
-        min-width: 56px !important;
-        max-width: 56px !important;
-        padding: 0 4px !important;
-        font-size: 9px !important;
-    }
 }
 
 
@@ -2680,139 +2442,157 @@ body.dark .item-gerenciamento-icone {
 
 @media (max-width: 768px) {
     .item-gerenciamento {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        flex-wrap: nowrap !important;
-        gap: 12px !important;
-    }
-
-    .item-gerenciamento-info {
-        min-width: 0 !important;
-        flex: 1 1 auto !important;
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .item-acoes {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        width: auto !important;
-        margin-left: auto !important;
-        flex: 0 0 auto !important;
-        flex-wrap: nowrap !important;
+        width: 100%;
+        margin-left: 0;
     }
 
     .lista-gerenciamento .btn-editar,
     .lista-gerenciamento .btn-excluir {
-        flex: 0 0 auto !important;
-        width: 72px !important;
-        min-width: 72px !important;
+        flex: 1;
     }
 }
 
-
-/* ============================================================
-   CORREÇÃO DEFINITIVA — BOTÕES LATERAIS
-   Editar e Excluir ficam SEMPRE na lateral direita.
-   Esta regra vem por último para sobrescrever regras anteriores.
-   ============================================================ */
+/* =========================================================
+   CORREÇÃO FINAL — AÇÕES LATERAIS DAS LISTAS
+   Editar = azul | Excluir = roxo
+   ========================================================= */
 
 .lista-gerenciamento .item-gerenciamento {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
-    grid-template-rows: auto !important;
+    position: relative !important;
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
-    justify-content: initial !important;
-    flex-direction: initial !important;
+    justify-content: flex-start !important;
     flex-wrap: nowrap !important;
-    column-gap: 14px !important;
-    row-gap: 0 !important;
     width: 100% !important;
+    min-height: 72px !important;
     box-sizing: border-box !important;
+    padding: 14px 220px 14px 16px !important;
 }
 
-.lista-gerenciamento .item-gerenciamento > div:first-child,
 .lista-gerenciamento .item-gerenciamento-info {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 13px !important;
     min-width: 0 !important;
-    margin: 0 !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
 }
 
-.lista-gerenciamento .item-gerenciamento .item-acoes,
-.lista-gerenciamento .item-gerenciamento .acoes-tabela {
-    grid-column: 2 !important;
-    grid-row: 1 !important;
+.lista-gerenciamento .item-acoes {
+    position: absolute !important;
+    top: 50% !important;
+    right: 14px !important;
+    transform: translateY(-50%) !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: flex-end !important;
     flex-wrap: nowrap !important;
+    gap: 8px !important;
     width: auto !important;
-    min-width: max-content !important;
-    max-width: none !important;
+    min-width: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 7px !important;
     flex-shrink: 0 !important;
 }
 
-.lista-gerenciamento .item-gerenciamento .item-acoes button,
-.lista-gerenciamento .item-gerenciamento .acoes-tabela button {
+.lista-gerenciamento .item-acoes button {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    white-space: nowrap !important;
+}
+
+.lista-gerenciamento .btn-editar,
+.lista-gerenciamento .btn-excluir {
     display: inline-flex !important;
-    flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
-    width: auto !important;
-    min-width: 72px !important;
-    max-width: none !important;
-    height: 34px !important;
-    margin: 0 !important;
-    padding: 0 10px !important;
+    gap: 6px !important;
+    min-width: 94px !important;
+    height: 38px !important;
+    padding: 0 13px !important;
+    border-radius: 9px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
     box-sizing: border-box !important;
-    white-space: nowrap !important;
-    flex: 0 0 auto !important;
+    transition: .22s ease !important;
 }
 
+/* EDITAR — AZUL */
+.lista-gerenciamento .btn-editar {
+    background: rgba(37, 99, 235, .10) !important;
+    color: var(--azul) !important;
+    border: 1px solid rgba(37, 99, 235, .16) !important;
+}
+
+.lista-gerenciamento .btn-editar:hover {
+    background: var(--azul) !important;
+    color: #fff !important;
+    border-color: var(--azul) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 5px 14px rgba(37, 99, 235, .22) !important;
+}
+
+/* EXCLUIR — ROXO */
+.lista-gerenciamento .btn-excluir {
+    background: rgba(124, 58, 237, .10) !important;
+    color: var(--roxo) !important;
+    border: 1px solid rgba(124, 58, 237, .16) !important;
+}
+
+.lista-gerenciamento .btn-excluir:hover {
+    background: var(--roxo) !important;
+    color: #fff !important;
+    border-color: var(--roxo) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 5px 14px rgba(124, 58, 237, .22) !important;
+}
+
+/*
+   Mantém os botões LADO A LADO mesmo quando o DevTools
+   deixa a viewport abaixo de 768px.
+*/
 @media (max-width: 768px) {
     .lista-gerenciamento .item-gerenciamento {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1fr) auto !important;
-        grid-template-rows: auto !important;
-        flex-direction: initial !important;
+        flex-direction: row !important;
         align-items: center !important;
         flex-wrap: nowrap !important;
+        min-height: 64px !important;
+        padding: 10px 208px 10px 12px !important;
     }
 
-    .lista-gerenciamento .item-gerenciamento .item-acoes,
-    .lista-gerenciamento .item-gerenciamento .acoes-tabela {
+    .lista-gerenciamento .item-gerenciamento-info {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+    }
+
+    .lista-gerenciamento .item-acoes {
+        position: absolute !important;
+        top: 50% !important;
+        right: 10px !important;
+        transform: translateY(-50%) !important;
         width: auto !important;
-        min-width: max-content !important;
+        margin: 0 !important;
         display: flex !important;
         flex-direction: row !important;
+        align-items: center !important;
         flex-wrap: nowrap !important;
-        margin: 0 !important;
+        gap: 6px !important;
     }
 
-    .lista-gerenciamento .item-gerenciamento .item-acoes button,
-    .lista-gerenciamento .item-gerenciamento .acoes-tabela button {
-        width: auto !important;
-        min-width: 62px !important;
-        max-width: none !important;
+    .lista-gerenciamento .btn-editar,
+    .lista-gerenciamento .btn-excluir {
         flex: 0 0 auto !important;
-    }
-}
-
-@media (max-width: 520px) {
-    .lista-gerenciamento .item-gerenciamento .item-acoes button,
-    .lista-gerenciamento .item-gerenciamento .acoes-tabela button {
-        width: auto !important;
-        min-width: 56px !important;
-        max-width: none !important;
-        padding: 0 6px !important;
-        font-size: 10px !important;
+        min-width: 92px !important;
+        height: 36px !important;
+        padding: 0 10px !important;
+        font-size: 11px !important;
     }
 }
