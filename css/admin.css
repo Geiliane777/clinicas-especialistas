@@ -2294,3 +2294,165 @@ body.dark .especialidade-nome {
         gap: 15px;
     }
 }
+
+/* ============================================================
+   LISTAS DE GERENCIAMENTO - VISUAL NOVO
+   Especialidades, Regiões, Estados, Cidades e Bairros
+   ============================================================ */
+
+.lista-gerenciamento {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.item-gerenciamento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 72px;
+    padding: 14px 16px;
+    background: var(--card);
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, .05);
+    transition: .25s ease;
+}
+
+.item-gerenciamento:hover {
+    border-color: rgba(124, 58, 237, .28);
+    box-shadow: 0 8px 22px rgba(124, 58, 237, .08);
+    transform: translateY(-1px);
+}
+
+.item-gerenciamento-info {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+    flex: 1;
+}
+
+.item-gerenciamento-icone {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(124, 58, 237, .10);
+    font-size: 19px;
+}
+
+.item-gerenciamento-info > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.item-gerenciamento strong {
+    color: var(--texto-forte);
+    font-size: 14px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.item-gerenciamento small {
+    color: var(--texto-claro);
+    font-size: 12px;
+}
+
+.item-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.lista-gerenciamento .btn-editar,
+.lista-gerenciamento .btn-excluir {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 94px;
+    height: 38px;
+    padding: 0 13px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .22s ease;
+}
+
+.lista-gerenciamento .btn-editar {
+    background: rgba(124, 58, 237, .10);
+    color: var(--roxo);
+    border-color: rgba(124, 58, 237, .14);
+}
+
+.lista-gerenciamento .btn-editar:hover {
+    background: var(--roxo);
+    color: #fff;
+    border-color: var(--roxo);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(124, 58, 237, .22);
+}
+
+.lista-gerenciamento .btn-excluir {
+    background: rgba(239, 68, 68, .08);
+    color: var(--vermelho);
+    border-color: rgba(239, 68, 68, .12);
+}
+
+.lista-gerenciamento .btn-excluir:hover {
+    background: var(--vermelho);
+    color: #fff;
+    border-color: var(--vermelho);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(239, 68, 68, .20);
+}
+
+.item-carregando,
+.item-vazio,
+.item-erro {
+    justify-content: center;
+    color: var(--texto-claro);
+    min-height: 60px;
+}
+
+.item-erro {
+    color: var(--vermelho);
+}
+
+body.dark .item-gerenciamento {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .15);
+}
+
+body.dark .item-gerenciamento-icone {
+    background: rgba(139, 92, 246, .16);
+}
+
+@media (max-width: 768px) {
+    .item-gerenciamento {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .item-acoes {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .lista-gerenciamento .btn-editar,
+    .lista-gerenciamento .btn-excluir {
+        flex: 1;
+    }
+}
