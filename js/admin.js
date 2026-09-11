@@ -1,32 +1,21 @@
 // ============================================================
-// ADMIN.JS
-// PAINEL ADMINISTRATIVO | REDE ESPECIALISTAS
-// PARTE 1 DE 2
+// ADMIN - PARTE 1
+// Dashboard, especialidades, regiões, estados,
+// cidades, bairros e funções gerais
 // ============================================================
 
+console.log("admin_parte1.js carregado");
 
 // ============================================================
 // FUNÇÕES AUXILIARES
 // ============================================================
 
-function definirTexto(elemento, texto) {
-    if (!elemento) return;
-
-    elemento.textContent =
-        texto === null ||
-        texto === undefined ||
-        texto === ""
-            ? "Não informado"
-            : texto;
-}
-
-
-function escaparHTML(texto) {
-    if (texto === null || texto === undefined) {
+function escaparHTML(valor) {
+    if (valor === null || valor === undefined) {
         return "";
     }
 
-    return String(texto)
+    return String(valor)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -34,125 +23,43 @@ function escaparHTML(texto) {
         .replace(/'/g, "&#039;");
 }
 
+function definirTexto(id, texto) {
+    const elemento = document.getElementById(id);
 
-// ============================================================
-// TROCA DE PÁGINA
-// ============================================================
-
-function abrirPagina(nomePagina) {
-
-    document
-        .querySelectorAll(".pagina")
-        .forEach(pagina => {
-            pagina.classList.remove("ativa");
-        });
-
-
-    const pagina =
-        document.getElementById(
-            `pagina-${nomePagina}`
-        );
-
-
-    if (pagina) {
-        pagina.classList.add("ativa");
-    }
-
-
-    document
-        .querySelectorAll(".menu-btn")
-        .forEach(botao => {
-
-            botao.classList.remove("ativo");
-
-            if (
-                botao.dataset.pagina ===
-                nomePagina
-            ) {
-                botao.classList.add("ativo");
-            }
-
-        });
-
-
-    if (
-        nomePagina === "dashboard"
-    ) {
-        carregarDashboard();
-    }
-
-    if (
-        nomePagina === "clinicas"
-    ) {
-        listarClinicas();
-    }
-
-    if (
-        nomePagina === "especialidades"
-    ) {
-        listarEspecialidades();
-    }
-
-    if (
-        nomePagina === "regioes"
-    ) {
-        listarRegioes();
-    }
-
-    if (
-        nomePagina === "estados"
-    ) {
-        listarEstados();
-    }
-
-    if (
-        nomePagina === "cidades"
-    ) {
-        listarCidades();
-    }
-
-    if (
-        nomePagina === "bairros"
-    ) {
-        listarBairros();
+    if (elemento) {
+        elemento.textContent = texto;
     }
 }
 
+function encontrarElemento(ids) {
+    for (const id of ids) {
+        const elemento = document.getElementById(id);
 
-// ============================================================
-// EVENTOS DO MENU
-// ============================================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        document
-            .querySelectorAll(".menu-btn")
-            .forEach(botao => {
-
-                botao.addEventListener(
-                    "click",
-                    () => {
-
-                        const pagina =
-                            botao.dataset.pagina;
-
-                        if (pagina) {
-                            abrirPagina(pagina);
-                        }
-
-                    }
-                );
-
-            });
-
-
-        abrirPagina("dashboard");
-
+        if (elemento) {
+            return elemento;
+        }
     }
-);
 
+    return null;
+}
+
+function obterValor(ids) {
+    const elemento = encontrarElemento(ids);
+
+    if (!elemento) {
+        return "";
+    }
+
+    return elemento.value || "";
+}
+
+// ============================================================
+// MENSAGEM
+// ============================================================
+
+function mostrarMensagem(mensagem, tipo = "sucesso") {
+    alert(mensagem);
+}
 
 // ============================================================
 // DASHBOARD
@@ -162,267 +69,155 @@ async function carregarDashboard() {
 
     try {
 
-        const hoje =
-            new Date();
+        const regioes = await supabaseClient
+            .from("regioes")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
 
-        const dataFormatada =
-            hoje.toLocaleDateString(
-                "pt-BR",
+        const estados = await supabaseClient
+            .from("estados")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
+
+        const cidades = await supabaseClient
+            .from("cidades")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
+
+        const bairros = await supabaseClient
+            .from("bairros")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
+
+        const especialidades = await supabaseClient
+            .from("especialidades")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
+
+        const clinicas = await supabaseClient
+            .from("clinicas")
+            .select(
+                "id,nome,ativo",
                 {
-                    weekday: "long",
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric"
+                    count: "exact"
+                }
+            )
+            .order(
+                "id",
+                {
+                    ascending: false
                 }
             );
 
-
-        const dataAtual =
-            document.getElementById(
-                "dataAtual"
-            );
-
-
         definirTexto(
-            dataAtual,
-            dataFormatada
+            "totalRegioes",
+            regioes.count || 0
         );
 
+        definirTexto(
+            "totalEstados",
+            estados.count || 0
+        );
 
-        const [
-            clinicasResult,
-            especialidadesResult,
-            regioesResult,
-            estadosResult,
-            cidadesResult,
-            bairrosResult
-        ] = await Promise.all([
+        definirTexto(
+            "totalCidades",
+            cidades.count || 0
+        );
 
-            supabaseClient
-                .from("clinicas")
-                .select("id, ativo, nome, created_at"),
+        definirTexto(
+            "totalBairros",
+            bairros.count || 0
+        );
 
-            supabaseClient
-                .from("especialidades")
-                .select("id"),
+        definirTexto(
+            "totalEspecialidades",
+            especialidades.count || 0
+        );
 
-            supabaseClient
-                .from("regioes")
-                .select("id"),
+        const listaClinicas =
+            clinicas.data || [];
 
-            supabaseClient
-                .from("estados")
-                .select("id"),
-
-            supabaseClient
-                .from("cidades")
-                .select("id"),
-
-            supabaseClient
-                .from("bairros")
-                .select("id")
-
-        ]);
-
-
-        if (clinicasResult.error) {
-            throw clinicasResult.error;
-        }
-
-        if (especialidadesResult.error) {
-            throw especialidadesResult.error;
-        }
-
-        if (regioesResult.error) {
-            throw regioesResult.error;
-        }
-
-        if (estadosResult.error) {
-            throw estadosResult.error;
-        }
-
-        if (cidadesResult.error) {
-            throw cidadesResult.error;
-        }
-
-        if (bairrosResult.error) {
-            throw bairrosResult.error;
-        }
-
-
-        const clinicas =
-            clinicasResult.data || [];
+        const totalClinicas =
+            clinicas.count ??
+            listaClinicas.length;
 
         const ativas =
-            clinicas.filter(
+            listaClinicas.filter(
                 clinica =>
                     clinica.ativo === true
             ).length;
 
-
         const inativas =
-            clinicas.length -
-            ativas;
-
-
-        const totalClinicas =
-            document.getElementById(
-                "totalClinicas"
-            );
-
-        const totalClinicasAtivas =
-            document.getElementById(
-                "totalClinicasAtivas"
-            );
-
-        const totalClinicasInativas =
-            document.getElementById(
-                "totalClinicasInativas"
-            );
-
-        const totalEspecialidades =
-            document.getElementById(
-                "totalEspecialidades"
-            );
-
-        const totalRegioes =
-            document.getElementById(
-                "totalRegioes"
-            );
-
-        const totalEstados =
-            document.getElementById(
-                "totalEstados"
-            );
-
-        const totalCidades =
-            document.getElementById(
-                "totalCidades"
-            );
-
-        const totalBairros =
-            document.getElementById(
-                "totalBairros"
-            );
-
+            listaClinicas.filter(
+                clinica =>
+                    clinica.ativo !== true
+            ).length;
 
         definirTexto(
-            totalClinicas,
-            clinicas.length
+            "totalClinicas",
+            totalClinicas
         );
 
         definirTexto(
-            totalClinicasAtivas,
+            "totalClinicasAtivas",
             ativas
         );
 
         definirTexto(
-            totalClinicasInativas,
+            "totalClinicasInativas",
             inativas
         );
 
-        definirTexto(
-            totalEspecialidades,
-            (
-                especialidadesResult.data ||
-                []
-            ).length
-        );
-
-        definirTexto(
-            totalRegioes,
-            (
-                regioesResult.data ||
-                []
-            ).length
-        );
-
-        definirTexto(
-            totalEstados,
-            (
-                estadosResult.data ||
-                []
-            ).length
-        );
-
-        definirTexto(
-            totalCidades,
-            (
-                cidadesResult.data ||
-                []
-            ).length
-        );
-
-        definirTexto(
-            totalBairros,
-            (
-                bairrosResult.data ||
-                []
-            ).length
-        );
-
-
         const porcentagem =
-            clinicas.length
+            totalClinicas > 0
                 ? Math.round(
                     (
                         ativas /
-                        clinicas.length
+                        totalClinicas
                     ) * 100
                 )
                 : 0;
 
+        definirTexto(
+            "porcentagemAtivas",
+            `${porcentagem}%`
+        );
 
-        const porcentagemAtivas =
-            document.getElementById(
-                "porcentagemAtivas"
-            );
-
-
-        const barraAtivas =
+        const barra =
             document.getElementById(
                 "barraAtivas"
             );
 
-
-        const legendaAtivas =
-            document.getElementById(
-                "legendaAtivas"
-            );
-
-
-        const legendaInativas =
-            document.getElementById(
-                "legendaInativas"
-            );
-
-
-        definirTexto(
-            porcentagemAtivas,
-            `${porcentagem}%`
-        );
-
-
-        if (barraAtivas) {
-            barraAtivas.style.width =
+        if (barra) {
+            barra.style.width =
                 `${porcentagem}%`;
         }
 
-
         definirTexto(
-            legendaAtivas,
-            `${ativas} ativas`
+            "legendaAtivas",
+            `Ativas: ${ativas}`
         );
 
-
         definirTexto(
-            legendaInativas,
-            `${inativas} inativas`
+            "legendaInativas",
+            `Inativas: ${inativas}`
         );
-
 
         carregarUltimasClinicas(
-            clinicas
+            listaClinicas.slice(
+                0,
+                5
+            )
         );
 
     } catch (erro) {
@@ -432,101 +227,120 @@ async function carregarDashboard() {
             erro
         );
 
+        definirTexto(
+            "totalRegioes",
+            "0"
+        );
+
+        definirTexto(
+            "totalEstados",
+            "0"
+        );
+
+        definirTexto(
+            "totalCidades",
+            "0"
+        );
+
+        definirTexto(
+            "totalBairros",
+            "0"
+        );
+
+        definirTexto(
+            "totalEspecialidades",
+            "0"
+        );
+
+        definirTexto(
+            "totalClinicas",
+            "0"
+        );
+
+        definirTexto(
+            "totalClinicasAtivas",
+            "0"
+        );
+
+        definirTexto(
+            "totalClinicasInativas",
+            "0"
+        );
+
+        definirTexto(
+            "porcentagemAtivas",
+            "0%"
+        );
     }
 }
-
 
 // ============================================================
 // ÚLTIMAS CLÍNICAS
 // ============================================================
 
-function carregarUltimasClinicas(
-    clinicas
-) {
+function carregarUltimasClinicas(clinicas) {
 
-    const lista =
+    const container =
         document.getElementById(
             "ultimasClinicas"
         );
 
+    if (!container) {
+        return;
+    }
 
-    if (!lista) return;
+    if (
+        !clinicas ||
+        !clinicas.length
+    ) {
 
-
-    const ultimas =
-        [...clinicas]
-            .sort(
-                (a, b) =>
-                    new Date(
-                        b.created_at || 0
-                    ) -
-                    new Date(
-                        a.created_at || 0
-                    )
-            )
-            .slice(0, 5);
-
-
-    if (!ultimas.length) {
-
-        lista.innerHTML =
-            `
-            <div class="vazio-dashboard">
+        container.innerHTML = `
+            <p class="sem-dados">
                 Nenhuma clínica cadastrada.
-            </div>
-            `;
+            </p>
+        `;
 
         return;
     }
 
+    container.innerHTML =
+        clinicas.map(
+            clinica => {
 
-    lista.innerHTML =
-        ultimas
-            .map(
-                clinica => {
+                const ativa =
+                    clinica.ativo === true;
 
-                    const status =
-                        clinica.ativo
-                            ? "Ativa"
-                            : "Inativa";
+                const status =
+                    ativa
+                        ? "Ativa"
+                        : "Inativa";
 
+                const classe =
+                    ativa
+                        ? "ativo"
+                        : "inativo";
 
-                    return `
-                        <div class="ultima-clinica">
+                return `
+                    <div class="clinica-recente">
 
-                            <div class="ultima-clinica-info">
-
-                                <strong>
-                                    ${escaparHTML(
-                                        clinica.nome
-                                    )}
-                                </strong>
-
-                                <span>
-                                    Clínica cadastrada
-                                </span>
-
-                            </div>
-
-                            <span
-                                class="status ${
-                                    clinica.ativo
-                                        ? "ativo"
-                                        : "inativo"
-                                }"
-                            >
-                                ${status}
-                            </span>
-
+                        <div>
+                            <strong>
+                                ${escaparHTML(
+                                    clinica.nome ||
+                                    "Sem nome"
+                                )}
+                            </strong>
                         </div>
-                    `;
 
-                }
-            )
-            .join("");
+                        <span class="status ${classe}">
+                            ${status}
+                        </span>
 
+                    </div>
+                `;
+            }
+        ).join("");
 }
-
 
 // ============================================================
 // ESPECIALIDADES
@@ -539,123 +353,183 @@ async function listarEspecialidades() {
             "listaEspecialidades"
         );
 
+    if (!lista) {
+        return;
+    }
 
-    if (!lista) return;
-
+    lista.innerHTML = `
+        <tr>
+            <td colspan="3">
+                Carregando...
+            </td>
+        </tr>
+    `;
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("especialidades")
-                .select("id, nome")
-                .order("nome");
-
+        } = await supabaseClient
+            .from("especialidades")
+            .select("*")
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
-
         if (!data || !data.length) {
 
-            lista.innerHTML =
-                `
-                <div class="item-gerenciamento vazio">
-                    Nenhuma especialidade cadastrada.
-                </div>
-                `;
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="3">
+                        Nenhuma especialidade cadastrada.
+                    </td>
+                </tr>
+            `;
 
             return;
         }
 
-
         lista.innerHTML =
-            data
-                .map(
-                    especialidade => {
+            data.map(
+                especialidade => `
+                    <tr>
 
-                        return `
-                            <div
-                                class="item-gerenciamento"
+                        <td>
+                            ${escaparHTML(
+                                especialidade.nome
+                            )}
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn-editar"
+                                onclick="editarEspecialidade(${especialidade.id})"
                             >
+                                ✏️ Editar
+                            </button>
 
-                                <div
-                                    class="item-gerenciamento-info"
-                                >
-                                    <span
-                                        class="item-icone"
-                                    >
-                                        🦷
-                                    </span>
+                            <button
+                                type="button"
+                                class="btn-excluir"
+                                onclick="excluirEspecialidade(${especialidade.id})"
+                            >
+                                🗑️ Excluir
+                            </button>
+                        </td>
 
-                                    <strong>
-                                        ${escaparHTML(
-                                            especialidade.nome
-                                        )}
-                                    </strong>
-                                </div>
-
-
-                                <div
-                                    class="item-acoes"
-                                >
-
-                                    <button
-                                        type="button"
-                                        class="btn-editar"
-                                        onclick="editarEspecialidade(
-                                            '${especialidade.id}',
-                                            '${escaparHTML(
-                                                especialidade.nome
-                                            )}'
-                                        )"
-                                    >
-                                        ✏️ Editar
-                                    </button>
-
-
-                                    <button
-                                        type="button"
-                                        class="btn-excluir"
-                                        onclick="excluirEspecialidade(
-                                            '${especialidade.id}'
-                                        )"
-                                    >
-                                        🗑️ Excluir
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
+                    </tr>
+                `
+            ).join("");
 
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar especialidades:",
+            "Erro ao listar especialidades:",
             erro
         );
 
-
-        lista.innerHTML =
-            `
-            <div class="item-gerenciamento erro">
-                Erro ao carregar especialidades.
-            </div>
-            `;
-
+        lista.innerHTML = `
+            <tr>
+                <td colspan="3">
+                    Erro ao carregar especialidades.
+                </td>
+            </tr>
+        `;
     }
 }
 
+// ============================================================
+// LIMPAR FORMULÁRIO DE ESPECIALIDADE
+// ============================================================
+
+function limparFormularioEspecialidade() {
+
+    const id =
+        document.getElementById(
+            "especialidadeEditId"
+        );
+
+    const nome =
+        document.getElementById(
+            "nomeEspecialidade"
+        );
+
+    if (id) {
+        id.value = "";
+    }
+
+    if (nome) {
+        nome.value = "";
+    }
+}
+
+// ============================================================
+// EDITAR ESPECIALIDADE
+// ============================================================
+
+async function editarEspecialidade(id) {
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("especialidades")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        const campoId =
+            document.getElementById(
+                "especialidadeEditId"
+            );
+
+        const campoNome =
+            document.getElementById(
+                "nomeEspecialidade"
+            );
+
+        if (campoId) {
+            campoId.value =
+                data.id;
+        }
+
+        if (campoNome) {
+            campoNome.value =
+                data.nome || "";
+
+            campoNome.focus();
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao editar especialidade:",
+            erro
+        );
+
+        alert(
+            "Erro ao carregar especialidade."
+        );
+    }
+}
 
 // ============================================================
 // SALVAR ESPECIALIDADE
@@ -668,16 +542,10 @@ async function salvarEspecialidade() {
             "especialidadeEditId"
         )?.value || "";
 
-
-    const input =
+    const nome =
         document.getElementById(
             "nomeEspecialidade"
-        );
-
-
-    const nome =
-        input?.value.trim();
-
+        )?.value.trim() || "";
 
     if (!nome) {
 
@@ -688,48 +556,54 @@ async function salvarEspecialidade() {
         return;
     }
 
-
     try {
-
-        let resultado;
-
 
         if (id) {
 
-            resultado =
-                await supabaseClient
-                    .from("especialidades")
-                    .update({
-                        nome
-                    })
-                    .eq("id", id);
+            const {
+                error
+            } = await supabaseClient
+                .from("especialidades")
+                .update({
+                    nome: nome
+                })
+                .eq(
+                    "id",
+                    id
+                );
+
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Especialidade atualizada com sucesso."
+            );
 
         } else {
 
-            resultado =
-                await supabaseClient
-                    .from("especialidades")
-                    .insert({
-                        nome
-                    });
+            const {
+                error
+            } = await supabaseClient
+                .from("especialidades")
+                .insert({
+                    nome: nome
+                });
 
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Especialidade cadastrada com sucesso."
+            );
         }
 
+        limparFormularioEspecialidade();
 
-        if (resultado.error) {
-            throw resultado.error;
-        }
+        await listarEspecialidades();
 
-
-        document.getElementById(
-            "especialidadeEditId"
-        ).value = "";
-
-
-        input.value = "";
-
-
-        listarEspecialidades();
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -738,88 +612,51 @@ async function salvarEspecialidade() {
             erro
         );
 
-
         alert(
-            "Não foi possível salvar a especialidade."
+            erro?.message ||
+            "Erro ao salvar especialidade."
         );
-
     }
 }
-
-
-// ============================================================
-// EDITAR ESPECIALIDADE
-// ============================================================
-
-function editarEspecialidade(
-    id,
-    nome
-) {
-
-    const campoId =
-        document.getElementById(
-            "especialidadeEditId"
-        );
-
-
-    const campoNome =
-        document.getElementById(
-            "nomeEspecialidade"
-        );
-
-
-    if (campoId) {
-        campoId.value = id;
-    }
-
-
-    if (campoNome) {
-
-        campoNome.value =
-            nome;
-
-        campoNome.focus();
-
-    }
-
-}
-
 
 // ============================================================
 // EXCLUIR ESPECIALIDADE
 // ============================================================
 
-async function excluirEspecialidade(
-    id
-) {
+async function excluirEspecialidade(id) {
 
-    if (
-        !confirm(
+    const confirmar =
+        confirm(
             "Deseja realmente excluir esta especialidade?"
-        )
-    ) {
+        );
+
+    if (!confirmar) {
         return;
     }
-
 
     try {
 
         const {
             error
-        } =
-            await supabaseClient
-                .from("especialidades")
-                .delete()
-                .eq("id", id);
-
+        } = await supabaseClient
+            .from("especialidades")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
         if (error) {
             throw error;
         }
 
+        alert(
+            "Especialidade excluída com sucesso."
+        );
 
-        listarEspecialidades();
+        await listarEspecialidades();
 
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -828,15 +665,12 @@ async function excluirEspecialidade(
             erro
         );
 
-
         alert(
+            erro?.message ||
             "Não foi possível excluir a especialidade."
         );
-
     }
-
 }
-
 
 // ============================================================
 // REGIÕES
@@ -849,123 +683,99 @@ async function listarRegioes() {
             "listaRegioes"
         );
 
+    if (!lista) {
+        return;
+    }
 
-    if (!lista) return;
-
+    lista.innerHTML = `
+        <tr>
+            <td colspan="3">
+                Carregando...
+            </td>
+        </tr>
+    `;
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("regioes")
-                .select("id, nome")
-                .order("nome");
-
+        } = await supabaseClient
+            .from("regioes")
+            .select("*")
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
-
         if (!data || !data.length) {
 
-            lista.innerHTML =
-                `
-                <div class="item-gerenciamento vazio">
-                    Nenhuma região cadastrada.
-                </div>
-                `;
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="3">
+                        Nenhuma região cadastrada.
+                    </td>
+                </tr>
+            `;
 
             return;
         }
 
-
         lista.innerHTML =
-            data
-                .map(
-                    regiao => {
+            data.map(
+                regiao => `
+                    <tr>
 
-                        return `
-                            <div
-                                class="item-gerenciamento"
+                        <td>
+                            ${escaparHTML(
+                                regiao.nome
+                            )}
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn-editar"
+                                onclick="editarRegiao(${regiao.id})"
                             >
+                                ✏️ Editar
+                            </button>
 
-                                <div
-                                    class="item-gerenciamento-info"
-                                >
-                                    <span
-                                        class="item-icone"
-                                    >
-                                        🌎
-                                    </span>
+                            <button
+                                type="button"
+                                class="btn-excluir"
+                                onclick="excluirRegiao(${regiao.id})"
+                            >
+                                🗑️ Excluir
+                            </button>
+                        </td>
 
-                                    <strong>
-                                        ${escaparHTML(
-                                            regiao.nome
-                                        )}
-                                    </strong>
-                                </div>
-
-
-                                <div
-                                    class="item-acoes"
-                                >
-
-                                    <button
-                                        type="button"
-                                        class="btn-editar"
-                                        onclick="editarRegiao(
-                                            '${regiao.id}',
-                                            '${escaparHTML(
-                                                regiao.nome
-                                            )}'
-                                        )"
-                                    >
-                                        ✏️ Editar
-                                    </button>
-
-
-                                    <button
-                                        type="button"
-                                        class="btn-excluir"
-                                        onclick="excluirRegiao(
-                                            '${regiao.id}'
-                                        )"
-                                    >
-                                        🗑️ Excluir
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
+                    </tr>
+                `
+            ).join("");
 
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar regiões:",
+            "Erro ao listar regiões:",
             erro
         );
 
-
-        lista.innerHTML =
-            `
-            <div class="item-gerenciamento erro">
-                Erro ao carregar regiões.
-            </div>
-            `;
-
+        lista.innerHTML = `
+            <tr>
+                <td colspan="3">
+                    Erro ao carregar regiões.
+                </td>
+            </tr>
+        `;
     }
 }
-
 
 // ============================================================
 // SALVAR REGIÃO
@@ -978,16 +788,10 @@ async function salvarRegiao() {
             "regiaoEditId"
         )?.value || "";
 
-
-    const input =
+    const nome =
         document.getElementById(
             "nomeRegiao"
-        );
-
-
-    const nome =
-        input?.value.trim();
-
+        )?.value.trim() || "";
 
     if (!nome) {
 
@@ -998,49 +802,70 @@ async function salvarRegiao() {
         return;
     }
 
-
     try {
-
-        let resultado;
-
 
         if (id) {
 
-            resultado =
-                await supabaseClient
-                    .from("regioes")
-                    .update({
-                        nome
-                    })
-                    .eq("id", id);
+            const {
+                error
+            } = await supabaseClient
+                .from("regioes")
+                .update({
+                    nome: nome
+                })
+                .eq(
+                    "id",
+                    id
+                );
+
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Região atualizada com sucesso."
+            );
 
         } else {
 
-            resultado =
-                await supabaseClient
-                    .from("regioes")
-                    .insert({
-                        nome
-                    });
+            const {
+                error
+            } = await supabaseClient
+                .from("regioes")
+                .insert({
+                    nome: nome
+                });
 
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Região cadastrada com sucesso."
+            );
         }
 
+        const campoId =
+            document.getElementById(
+                "regiaoEditId"
+            );
 
-        if (resultado.error) {
-            throw resultado.error;
+        const campoNome =
+            document.getElementById(
+                "nomeRegiao"
+            );
+
+        if (campoId) {
+            campoId.value = "";
         }
 
+        if (campoNome) {
+            campoNome.value = "";
+        }
 
-        document.getElementById(
-            "regiaoEditId"
-        ).value = "";
+        await listarRegioes();
 
-
-        input.value = "";
-
-
-        listarRegioes();
-
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -1049,61 +874,67 @@ async function salvarRegiao() {
             erro
         );
 
-
         alert(
-            "Não foi possível salvar a região."
+            erro?.message ||
+            "Erro ao salvar região."
         );
-
     }
-
 }
-
 
 // ============================================================
 // EDITAR REGIÃO
 // ============================================================
 
-function editarRegiao(
-    id,
-    nome
-) {
+async function editarRegiao(id) {
 
-    const campoId =
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("regioes")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
         document.getElementById(
             "regiaoEditId"
-        );
+        ).value = data.id;
 
-
-    const campoNome =
         document.getElementById(
             "nomeRegiao"
+        ).value = data.nome || "";
+
+        document.getElementById(
+            "nomeRegiao"
+        ).focus();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao editar região:",
+            erro
         );
 
-
-    if (campoId) {
-        campoId.value = id;
+        alert(
+            "Erro ao carregar região."
+        );
     }
-
-
-    if (campoNome) {
-
-        campoNome.value =
-            nome;
-
-        campoNome.focus();
-
-    }
-
 }
-
 
 // ============================================================
 // EXCLUIR REGIÃO
 // ============================================================
 
-async function excluirRegiao(
-    id
-) {
+async function excluirRegiao(id) {
 
     if (
         !confirm(
@@ -1113,25 +944,29 @@ async function excluirRegiao(
         return;
     }
 
-
     try {
 
         const {
             error
-        } =
-            await supabaseClient
-                .from("regioes")
-                .delete()
-                .eq("id", id);
-
+        } = await supabaseClient
+            .from("regioes")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
         if (error) {
             throw error;
         }
 
+        alert(
+            "Região excluída com sucesso."
+        );
 
-        listarRegioes();
+        await listarRegioes();
 
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -1140,78 +975,64 @@ async function excluirRegiao(
             erro
         );
 
-
         alert(
+            erro?.message ||
             "Não foi possível excluir a região."
         );
-
     }
-
 }
 
-
 // ============================================================
-// POPULAR SELECT DE REGIÕES
+// ESTADOS
 // ============================================================
 
-async function popularSelectRegioes(
-    idSelect
-) {
+async function carregarRegioesSelect() {
 
     const select =
         document.getElementById(
-            idSelect
+            "estadoRegiao"
         );
 
+    if (!select) {
+        return;
+    }
 
-    if (!select) return;
-
+    limparSelectAdmin(
+        "estadoRegiao",
+        "Selecione a Região"
+    );
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("regioes")
-                .select("id, nome")
-                .order("nome");
-
+        } = await supabaseClient
+            .from("regioes")
+            .select("id,nome")
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
+        data?.forEach(
+            regiao => {
 
-        select.innerHTML =
-            `<option value="">
-                Selecione a Região
-            </option>`;
-
-
-        (data || [])
-            .forEach(
-                regiao => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value =
-                        regiao.id;
-
-                    option.textContent =
-                        regiao.nome;
-
-                    select.appendChild(
-                        option
-                    );
-
-                }
-            );
-
+                select.innerHTML += `
+                    <option value="${regiao.id}">
+                        ${escaparHTML(
+                            regiao.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
 
     } catch (erro) {
 
@@ -1219,14 +1040,38 @@ async function popularSelectRegioes(
             "Erro ao carregar regiões:",
             erro
         );
-
     }
-
 }
 
+// ============================================================
+// LIMPAR SELECT ADMIN
+// ============================================================
+
+function limparSelectAdmin(
+    id,
+    mensagem
+) {
+
+    const select =
+        document.getElementById(
+            id
+        );
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML = `
+        <option value="">
+            ${escaparHTML(
+                mensagem
+            )}
+        </option>
+    `;
+}
 
 // ============================================================
-// ESTADOS
+// LISTAR ESTADOS
 // ============================================================
 
 async function listarEstados() {
@@ -1236,148 +1081,113 @@ async function listarEstados() {
             "listaEstados"
         );
 
+    if (!lista) {
+        return;
+    }
 
-    if (!lista) return;
-
+    lista.innerHTML = `
+        <tr>
+            <td colspan="4">
+                Carregando...
+            </td>
+        </tr>
+    `;
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("estados")
-                .select(`
-                    id,
-                    nome,
-                    regiao_id,
-                    regioes (
-                        nome
-                    )
-                `)
-                .order("nome");
-
+        } = await supabaseClient
+            .from("estados")
+            .select(`
+                id,
+                nome,
+                regiao_id,
+                regioes (
+                    nome
+                )
+            `)
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
-
         if (!data || !data.length) {
 
-            lista.innerHTML =
-                `
-                <div class="item-gerenciamento vazio">
-                    Nenhum estado cadastrado.
-                </div>
-                `;
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="4">
+                        Nenhum estado cadastrado.
+                    </td>
+                </tr>
+            `;
 
             return;
         }
 
-
         lista.innerHTML =
-            data
-                .map(
-                    estado => {
+            data.map(
+                estado => `
+                    <tr>
 
-                        return `
-                            <div
-                                class="item-gerenciamento"
+                        <td>
+                            ${escaparHTML(
+                                estado.nome
+                            )}
+                        </td>
+
+                        <td>
+                            ${escaparHTML(
+                                estado.regioes?.nome ||
+                                "-"
+                            )}
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn-editar"
+                                onclick="editarEstado(${estado.id})"
                             >
+                                ✏️ Editar
+                            </button>
 
-                                <div
-                                    class="item-gerenciamento-info"
-                                >
+                            <button
+                                type="button"
+                                class="btn-excluir"
+                                onclick="excluirEstado(${estado.id})"
+                            >
+                                🗑️ Excluir
+                            </button>
+                        </td>
 
-                                    <span
-                                        class="item-icone"
-                                    >
-                                        📍
-                                    </span>
-
-                                    <div>
-
-                                        <strong>
-                                            ${escaparHTML(
-                                                estado.nome
-                                            )}
-                                        </strong>
-
-                                        <span
-                                            class="item-subtexto"
-                                        >
-                                            ${
-                                                escaparHTML(
-                                                    estado.regioes?.nome ||
-                                                    "Região não informada"
-                                                )
-                                            }
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div
-                                    class="item-acoes"
-                                >
-
-                                    <button
-                                        type="button"
-                                        class="btn-editar"
-                                        onclick="editarEstado(
-                                            '${estado.id}',
-                                            '${escaparHTML(
-                                                estado.nome
-                                            )}',
-                                            '${estado.regiao_id || ""}'
-                                        )"
-                                    >
-                                        ✏️ Editar
-                                    </button>
-
-
-                                    <button
-                                        type="button"
-                                        class="btn-excluir"
-                                        onclick="excluirEstado(
-                                            '${estado.id}'
-                                        )"
-                                    >
-                                        🗑️ Excluir
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
+                    </tr>
+                `
+            ).join("");
 
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar estados:",
+            "Erro ao listar estados:",
             erro
         );
 
-
-        lista.innerHTML =
-            `
-            <div class="item-gerenciamento erro">
-                Erro ao carregar estados.
-            </div>
-            `;
-
+        lista.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    Erro ao carregar estados.
+                </td>
+            </tr>
+        `;
     }
 }
-
 
 // ============================================================
 // SALVAR ESTADO
@@ -1390,18 +1200,15 @@ async function salvarEstado() {
             "estadoEditId"
         )?.value || "";
 
-
     const nome =
         document.getElementById(
             "nomeEstado"
-        )?.value.trim();
-
+        )?.value.trim() || "";
 
     const regiaoId =
         document.getElementById(
             "estadoRegiao"
-        )?.value || null;
-
+        )?.value || "";
 
     if (!nome) {
 
@@ -1412,7 +1219,6 @@ async function salvarEstado() {
         return;
     }
 
-
     if (!regiaoId) {
 
         alert(
@@ -1422,58 +1228,65 @@ async function salvarEstado() {
         return;
     }
 
-
     try {
 
-        let resultado;
-
-
         const dados = {
-            nome,
+            nome: nome,
             regiao_id: regiaoId
         };
 
-
         if (id) {
 
-            resultado =
-                await supabaseClient
-                    .from("estados")
-                    .update(dados)
-                    .eq("id", id);
+            const {
+                error
+            } = await supabaseClient
+                .from("estados")
+                .update(dados)
+                .eq(
+                    "id",
+                    id
+                );
+
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Estado atualizado com sucesso."
+            );
 
         } else {
 
-            resultado =
-                await supabaseClient
-                    .from("estados")
-                    .insert(dados);
+            const {
+                error
+            } = await supabaseClient
+                .from("estados")
+                .insert(dados);
 
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Estado cadastrado com sucesso."
+            );
         }
-
-
-        if (resultado.error) {
-            throw resultado.error;
-        }
-
 
         document.getElementById(
             "estadoEditId"
         ).value = "";
 
-
         document.getElementById(
             "nomeEstado"
         ).value = "";
-
 
         document.getElementById(
             "estadoRegiao"
         ).value = "";
 
+        await listarEstados();
 
-        listarEstados();
-
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -1482,79 +1295,71 @@ async function salvarEstado() {
             erro
         );
 
-
         alert(
-            "Não foi possível salvar o estado."
+            erro?.message ||
+            "Erro ao salvar estado."
         );
-
     }
-
 }
-
 
 // ============================================================
 // EDITAR ESTADO
 // ============================================================
 
-async function editarEstado(
-    id,
-    nome,
-    regiaoId
-) {
+async function editarEstado(id) {
 
-    await popularSelectRegioes(
-        "estadoRegiao"
-    );
+    try {
 
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("estados")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
 
-    const campoId =
+        if (error) {
+            throw error;
+        }
+
         document.getElementById(
             "estadoEditId"
-        );
+        ).value = data.id;
 
-
-    const campoNome =
         document.getElementById(
             "nomeEstado"
-        );
+        ).value = data.nome || "";
 
-
-    const campoRegiao =
         document.getElementById(
             "estadoRegiao"
+        ).value = data.regiao_id || "";
+
+        document.getElementById(
+            "nomeEstado"
+        ).focus();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao editar estado:",
+            erro
         );
 
-
-    if (campoId) {
-        campoId.value = id;
+        alert(
+            "Erro ao carregar estado."
+        );
     }
-
-
-    if (campoNome) {
-        campoNome.value = nome;
-    }
-
-
-    if (campoRegiao) {
-        campoRegiao.value =
-            regiaoId || "";
-    }
-
-
-    if (campoNome) {
-        campoNome.focus();
-    }
-
 }
-
 
 // ============================================================
 // EXCLUIR ESTADO
 // ============================================================
 
-async function excluirEstado(
-    id
-) {
+async function excluirEstado(id) {
 
     if (
         !confirm(
@@ -1564,25 +1369,29 @@ async function excluirEstado(
         return;
     }
 
-
     try {
 
         const {
             error
-        } =
-            await supabaseClient
-                .from("estados")
-                .delete()
-                .eq("id", id);
-
+        } = await supabaseClient
+            .from("estados")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
         if (error) {
             throw error;
         }
 
+        alert(
+            "Estado excluído com sucesso."
+        );
 
-        listarEstados();
+        await listarEstados();
 
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -1591,78 +1400,64 @@ async function excluirEstado(
             erro
         );
 
-
         alert(
+            erro?.message ||
             "Não foi possível excluir o estado."
         );
-
     }
-
 }
 
-
 // ============================================================
-// POPULAR SELECT DE ESTADOS
+// CIDADES
 // ============================================================
 
-async function popularSelectEstados(
-    idSelect
-) {
+async function carregarEstadosSelectCidade() {
 
     const select =
         document.getElementById(
-            idSelect
+            "cidadeEstado"
         );
 
+    if (!select) {
+        return;
+    }
 
-    if (!select) return;
-
+    limparSelectAdmin(
+        "cidadeEstado",
+        "Selecione o Estado"
+    );
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("estados")
-                .select("id, nome")
-                .order("nome");
-
+        } = await supabaseClient
+            .from("estados")
+            .select("id,nome")
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
+        data?.forEach(
+            estado => {
 
-        select.innerHTML =
-            `<option value="">
-                Selecione o Estado
-            </option>`;
-
-
-        (data || [])
-            .forEach(
-                estado => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value =
-                        estado.id;
-
-                    option.textContent =
-                        estado.nome;
-
-                    select.appendChild(
-                        option
-                    );
-
-                }
-            );
-
+                select.innerHTML += `
+                    <option value="${estado.id}">
+                        ${escaparHTML(
+                            estado.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
 
     } catch (erro) {
 
@@ -1670,14 +1465,11 @@ async function popularSelectEstados(
             "Erro ao carregar estados:",
             erro
         );
-
     }
-
 }
 
-
 // ============================================================
-// CIDADES
+// LISTAR CIDADES
 // ============================================================
 
 async function listarCidades() {
@@ -1687,157 +1479,113 @@ async function listarCidades() {
             "listaCidades"
         );
 
+    if (!lista) {
+        return;
+    }
 
-    if (!lista) return;
-
+    lista.innerHTML = `
+        <tr>
+            <td colspan="4">
+                Carregando...
+            </td>
+        </tr>
+    `;
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("cidades")
-                .select(`
-                    id,
-                    nome,
-                    estado_id,
-                    estados (
-                        nome,
-                        regioes (
-                            nome
-                        )
-                    )
-                `)
-                .order("nome");
-
+        } = await supabaseClient
+            .from("cidades")
+            .select(`
+                id,
+                nome,
+                estado_id,
+                estados (
+                    nome
+                )
+            `)
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
-
         if (!data || !data.length) {
 
-            lista.innerHTML =
-                `
-                <div class="item-gerenciamento vazio">
-                    Nenhuma cidade cadastrada.
-                </div>
-                `;
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="4">
+                        Nenhuma cidade cadastrada.
+                    </td>
+                </tr>
+            `;
 
             return;
         }
 
-
         lista.innerHTML =
-            data
-                .map(
-                    cidade => {
+            data.map(
+                cidade => `
+                    <tr>
 
-                        return `
-                            <div
-                                class="item-gerenciamento"
+                        <td>
+                            ${escaparHTML(
+                                cidade.nome
+                            )}
+                        </td>
+
+                        <td>
+                            ${escaparHTML(
+                                cidade.estados?.nome ||
+                                "-"
+                            )}
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn-editar"
+                                onclick="editarCidade(${cidade.id})"
                             >
+                                ✏️ Editar
+                            </button>
 
-                                <div
-                                    class="item-gerenciamento-info"
-                                >
+                            <button
+                                type="button"
+                                class="btn-excluir"
+                                onclick="excluirCidade(${cidade.id})"
+                            >
+                                🗑️ Excluir
+                            </button>
+                        </td>
 
-                                    <span
-                                        class="item-icone"
-                                    >
-                                        🏙️
-                                    </span>
-
-                                    <div>
-
-                                        <strong>
-                                            ${escaparHTML(
-                                                cidade.nome
-                                            )}
-                                        </strong>
-
-                                        <span
-                                            class="item-subtexto"
-                                        >
-                                            ${escaparHTML(
-                                                cidade.estados?.nome ||
-                                                "Estado não informado"
-                                            )}
-
-                                            ${
-                                                cidade.estados?.regioes?.nome
-                                                    ? ` • ${escaparHTML(
-                                                        cidade.estados.regioes.nome
-                                                    )}`
-                                                    : ""
-                                            }
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div
-                                    class="item-acoes"
-                                >
-
-                                    <button
-                                        type="button"
-                                        class="btn-editar"
-                                        onclick="editarCidade(
-                                            '${cidade.id}',
-                                            '${escaparHTML(
-                                                cidade.nome
-                                            )}',
-                                            '${cidade.estado_id || ""}'
-                                        )"
-                                    >
-                                        ✏️ Editar
-                                    </button>
-
-
-                                    <button
-                                        type="button"
-                                        class="btn-excluir"
-                                        onclick="excluirCidade(
-                                            '${cidade.id}'
-                                        )"
-                                    >
-                                        🗑️ Excluir
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
+                    </tr>
+                `
+            ).join("");
 
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar cidades:",
+            "Erro ao listar cidades:",
             erro
         );
 
-
-        lista.innerHTML =
-            `
-            <div class="item-gerenciamento erro">
-                Erro ao carregar cidades.
-            </div>
-            `;
-
+        lista.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    Erro ao carregar cidades.
+                </td>
+            </tr>
+        `;
     }
 }
-
 
 // ============================================================
 // SALVAR CIDADE
@@ -1850,18 +1598,15 @@ async function salvarCidade() {
             "cidadeEditId"
         )?.value || "";
 
-
     const nome =
         document.getElementById(
             "nomeCidade"
-        )?.value.trim();
-
+        )?.value.trim() || "";
 
     const estadoId =
         document.getElementById(
             "cidadeEstado"
-        )?.value || null;
-
+        )?.value || "";
 
     if (!nome) {
 
@@ -1872,7 +1617,6 @@ async function salvarCidade() {
         return;
     }
 
-
     if (!estadoId) {
 
         alert(
@@ -1882,58 +1626,65 @@ async function salvarCidade() {
         return;
     }
 
-
     try {
 
-        let resultado;
-
-
         const dados = {
-            nome,
+            nome: nome,
             estado_id: estadoId
         };
 
-
         if (id) {
 
-            resultado =
-                await supabaseClient
-                    .from("cidades")
-                    .update(dados)
-                    .eq("id", id);
+            const {
+                error
+            } = await supabaseClient
+                .from("cidades")
+                .update(dados)
+                .eq(
+                    "id",
+                    id
+                );
+
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Cidade atualizada com sucesso."
+            );
 
         } else {
 
-            resultado =
-                await supabaseClient
-                    .from("cidades")
-                    .insert(dados);
+            const {
+                error
+            } = await supabaseClient
+                .from("cidades")
+                .insert(dados);
 
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Cidade cadastrada com sucesso."
+            );
         }
-
-
-        if (resultado.error) {
-            throw resultado.error;
-        }
-
 
         document.getElementById(
             "cidadeEditId"
         ).value = "";
 
-
         document.getElementById(
             "nomeCidade"
         ).value = "";
-
 
         document.getElementById(
             "cidadeEstado"
         ).value = "";
 
+        await listarCidades();
 
-        listarCidades();
-
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -1942,79 +1693,71 @@ async function salvarCidade() {
             erro
         );
 
-
         alert(
-            "Não foi possível salvar a cidade."
+            erro?.message ||
+            "Erro ao salvar cidade."
         );
-
     }
-
 }
-
 
 // ============================================================
 // EDITAR CIDADE
 // ============================================================
 
-async function editarCidade(
-    id,
-    nome,
-    estadoId
-) {
+async function editarCidade(id) {
 
-    await popularSelectEstados(
-        "cidadeEstado"
-    );
+    try {
 
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("cidades")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
 
-    const campoId =
+        if (error) {
+            throw error;
+        }
+
         document.getElementById(
             "cidadeEditId"
-        );
+        ).value = data.id;
 
-
-    const campoNome =
         document.getElementById(
             "nomeCidade"
-        );
+        ).value = data.nome || "";
 
-
-    const campoEstado =
         document.getElementById(
             "cidadeEstado"
+        ).value = data.estado_id || "";
+
+        document.getElementById(
+            "nomeCidade"
+        ).focus();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao editar cidade:",
+            erro
         );
 
-
-    if (campoId) {
-        campoId.value = id;
+        alert(
+            "Erro ao carregar cidade."
+        );
     }
-
-
-    if (campoNome) {
-        campoNome.value = nome;
-    }
-
-
-    if (campoEstado) {
-        campoEstado.value =
-            estadoId || "";
-    }
-
-
-    if (campoNome) {
-        campoNome.focus();
-    }
-
 }
-
 
 // ============================================================
 // EXCLUIR CIDADE
 // ============================================================
 
-async function excluirCidade(
-    id
-) {
+async function excluirCidade(id) {
 
     if (
         !confirm(
@@ -2024,25 +1767,29 @@ async function excluirCidade(
         return;
     }
 
-
     try {
 
         const {
             error
-        } =
-            await supabaseClient
-                .from("cidades")
-                .delete()
-                .eq("id", id);
-
+        } = await supabaseClient
+            .from("cidades")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
         if (error) {
             throw error;
         }
 
+        alert(
+            "Cidade excluída com sucesso."
+        );
 
-        listarCidades();
+        await listarCidades();
 
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -2051,78 +1798,64 @@ async function excluirCidade(
             erro
         );
 
-
         alert(
+            erro?.message ||
             "Não foi possível excluir a cidade."
         );
-
     }
-
 }
 
-
 // ============================================================
-// POPULAR SELECT DE CIDADES
+// BAIRROS
 // ============================================================
 
-async function popularSelectCidades(
-    idSelect
-) {
+async function carregarCidadesSelectBairro() {
 
     const select =
         document.getElementById(
-            idSelect
+            "bairroCidade"
         );
 
+    if (!select) {
+        return;
+    }
 
-    if (!select) return;
-
+    limparSelectAdmin(
+        "bairroCidade",
+        "Selecione a Cidade"
+    );
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("cidades")
-                .select("id, nome")
-                .order("nome");
-
+        } = await supabaseClient
+            .from("cidades")
+            .select("id,nome")
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
+        data?.forEach(
+            cidade => {
 
-        select.innerHTML =
-            `<option value="">
-                Selecione a Cidade
-            </option>`;
-
-
-        (data || [])
-            .forEach(
-                cidade => {
-
-                    const option =
-                        document.createElement(
-                            "option"
-                        );
-
-                    option.value =
-                        cidade.id;
-
-                    option.textContent =
-                        cidade.nome;
-
-                    select.appendChild(
-                        option
-                    );
-
-                }
-            );
-
+                select.innerHTML += `
+                    <option value="${cidade.id}">
+                        ${escaparHTML(
+                            cidade.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
 
     } catch (erro) {
 
@@ -2130,14 +1863,11 @@ async function popularSelectCidades(
             "Erro ao carregar cidades:",
             erro
         );
-
     }
-
 }
 
-
 // ============================================================
-// BAIRROS
+// LISTAR BAIRROS
 // ============================================================
 
 async function listarBairros() {
@@ -2147,157 +1877,113 @@ async function listarBairros() {
             "listaBairros"
         );
 
+    if (!lista) {
+        return;
+    }
 
-    if (!lista) return;
-
+    lista.innerHTML = `
+        <tr>
+            <td colspan="4">
+                Carregando...
+            </td>
+        </tr>
+    `;
 
     try {
 
         const {
             data,
             error
-        } =
-            await supabaseClient
-                .from("bairros")
-                .select(`
-                    id,
-                    nome,
-                    cidade_id,
-                    cidades (
-                        nome,
-                        estados (
-                            nome
-                        )
-                    )
-                `)
-                .order("nome");
-
+        } = await supabaseClient
+            .from("bairros")
+            .select(`
+                id,
+                nome,
+                cidade_id,
+                cidades (
+                    nome
+                )
+            `)
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
-
         if (!data || !data.length) {
 
-            lista.innerHTML =
-                `
-                <div class="item-gerenciamento vazio">
-                    Nenhum bairro cadastrado.
-                </div>
-                `;
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="4">
+                        Nenhum bairro cadastrado.
+                    </td>
+                </tr>
+            `;
 
             return;
         }
 
-
         lista.innerHTML =
-            data
-                .map(
-                    bairro => {
+            data.map(
+                bairro => `
+                    <tr>
 
-                        return `
-                            <div
-                                class="item-gerenciamento"
+                        <td>
+                            ${escaparHTML(
+                                bairro.nome
+                            )}
+                        </td>
+
+                        <td>
+                            ${escaparHTML(
+                                bairro.cidades?.nome ||
+                                "-"
+                            )}
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn-editar"
+                                onclick="editarBairro(${bairro.id})"
                             >
+                                ✏️ Editar
+                            </button>
 
-                                <div
-                                    class="item-gerenciamento-info"
-                                >
+                            <button
+                                type="button"
+                                class="btn-excluir"
+                                onclick="excluirBairro(${bairro.id})"
+                            >
+                                🗑️ Excluir
+                            </button>
+                        </td>
 
-                                    <span
-                                        class="item-icone"
-                                    >
-                                        🏘️
-                                    </span>
-
-                                    <div>
-
-                                        <strong>
-                                            ${escaparHTML(
-                                                bairro.nome
-                                            )}
-                                        </strong>
-
-                                        <span
-                                            class="item-subtexto"
-                                        >
-                                            ${escaparHTML(
-                                                bairro.cidades?.nome ||
-                                                "Cidade não informada"
-                                            )}
-
-                                            ${
-                                                bairro.cidades?.estados?.nome
-                                                    ? ` • ${escaparHTML(
-                                                        bairro.cidades.estados.nome
-                                                    )}`
-                                                    : ""
-                                            }
-                                        </span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div
-                                    class="item-acoes"
-                                >
-
-                                    <button
-                                        type="button"
-                                        class="btn-editar"
-                                        onclick="editarBairro(
-                                            '${bairro.id}',
-                                            '${escaparHTML(
-                                                bairro.nome
-                                            )}',
-                                            '${bairro.cidade_id || ""}'
-                                        )"
-                                    >
-                                        ✏️ Editar
-                                    </button>
-
-
-                                    <button
-                                        type="button"
-                                        class="btn-excluir"
-                                        onclick="excluirBairro(
-                                            '${bairro.id}'
-                                        )"
-                                    >
-                                        🗑️ Excluir
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
+                    </tr>
+                `
+            ).join("");
 
     } catch (erro) {
 
         console.error(
-            "Erro ao carregar bairros:",
+            "Erro ao listar bairros:",
             erro
         );
 
-
-        lista.innerHTML =
-            `
-            <div class="item-gerenciamento erro">
-                Erro ao carregar bairros.
-            </div>
-            `;
-
+        lista.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    Erro ao carregar bairros.
+                </td>
+            </tr>
+        `;
     }
 }
-
 
 // ============================================================
 // SALVAR BAIRRO
@@ -2310,18 +1996,15 @@ async function salvarBairro() {
             "bairroEditId"
         )?.value || "";
 
-
     const nome =
         document.getElementById(
             "nomeBairro"
-        )?.value.trim();
-
+        )?.value.trim() || "";
 
     const cidadeId =
         document.getElementById(
             "bairroCidade"
-        )?.value || null;
-
+        )?.value || "";
 
     if (!nome) {
 
@@ -2332,7 +2015,6 @@ async function salvarBairro() {
         return;
     }
 
-
     if (!cidadeId) {
 
         alert(
@@ -2342,58 +2024,65 @@ async function salvarBairro() {
         return;
     }
 
-
     try {
 
-        let resultado;
-
-
         const dados = {
-            nome,
+            nome: nome,
             cidade_id: cidadeId
         };
 
-
         if (id) {
 
-            resultado =
-                await supabaseClient
-                    .from("bairros")
-                    .update(dados)
-                    .eq("id", id);
+            const {
+                error
+            } = await supabaseClient
+                .from("bairros")
+                .update(dados)
+                .eq(
+                    "id",
+                    id
+                );
+
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Bairro atualizado com sucesso."
+            );
 
         } else {
 
-            resultado =
-                await supabaseClient
-                    .from("bairros")
-                    .insert(dados);
+            const {
+                error
+            } = await supabaseClient
+                .from("bairros")
+                .insert(dados);
 
+            if (error) {
+                throw error;
+            }
+
+            alert(
+                "Bairro cadastrado com sucesso."
+            );
         }
-
-
-        if (resultado.error) {
-            throw resultado.error;
-        }
-
 
         document.getElementById(
             "bairroEditId"
         ).value = "";
 
-
         document.getElementById(
             "nomeBairro"
         ).value = "";
-
 
         document.getElementById(
             "bairroCidade"
         ).value = "";
 
+        await listarBairros();
 
-        listarBairros();
-
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -2402,79 +2091,71 @@ async function salvarBairro() {
             erro
         );
 
-
         alert(
-            "Não foi possível salvar o bairro."
+            erro?.message ||
+            "Erro ao salvar bairro."
         );
-
     }
-
 }
-
 
 // ============================================================
 // EDITAR BAIRRO
 // ============================================================
 
-async function editarBairro(
-    id,
-    nome,
-    cidadeId
-) {
+async function editarBairro(id) {
 
-    await popularSelectCidades(
-        "bairroCidade"
-    );
+    try {
 
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("bairros")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
 
-    const campoId =
+        if (error) {
+            throw error;
+        }
+
         document.getElementById(
             "bairroEditId"
-        );
+        ).value = data.id;
 
-
-    const campoNome =
         document.getElementById(
             "nomeBairro"
-        );
+        ).value = data.nome || "";
 
-
-    const campoCidade =
         document.getElementById(
             "bairroCidade"
+        ).value = data.cidade_id || "";
+
+        document.getElementById(
+            "nomeBairro"
+        ).focus();
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao editar bairro:",
+            erro
         );
 
-
-    if (campoId) {
-        campoId.value = id;
+        alert(
+            "Erro ao carregar bairro."
+        );
     }
-
-
-    if (campoNome) {
-        campoNome.value = nome;
-    }
-
-
-    if (campoCidade) {
-        campoCidade.value =
-            cidadeId || "";
-    }
-
-
-    if (campoNome) {
-        campoNome.focus();
-    }
-
 }
-
 
 // ============================================================
 // EXCLUIR BAIRRO
 // ============================================================
 
-async function excluirBairro(
-    id
-) {
+async function excluirBairro(id) {
 
     if (
         !confirm(
@@ -2484,25 +2165,29 @@ async function excluirBairro(
         return;
     }
 
-
     try {
 
         const {
             error
-        } =
-            await supabaseClient
-                .from("bairros")
-                .delete()
-                .eq("id", id);
-
+        } = await supabaseClient
+            .from("bairros")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
 
         if (error) {
             throw error;
         }
 
+        alert(
+            "Bairro excluído com sucesso."
+        );
 
-        listarBairros();
+        await listarBairros();
 
+        await carregarDashboard();
 
     } catch (erro) {
 
@@ -2511,22 +2196,327 @@ async function excluirBairro(
             erro
         );
 
-
         alert(
+            erro?.message ||
             "Não foi possível excluir o bairro."
         );
-
     }
-
 }
 
+// ============================================================
+// MENU
+// ============================================================
+
+function iniciarMenu() {
+
+    const botoes =
+        document.querySelectorAll(
+            ".menu-btn"
+        );
+
+    botoes.forEach(
+        botao => {
+
+            botao.addEventListener(
+                "click",
+                () => {
+
+                    const pagina =
+                        botao.dataset.pagina ||
+                        botao.dataset.page;
+
+                    if (pagina) {
+                        mostrarPagina(pagina);
+                    }
+                }
+            );
+        }
+    );
+}
 
 // ============================================================
-// EXPOR FUNÇÕES PARA O HTML
+// TÍTULOS DAS PÁGINAS
 // ============================================================
 
-window.abrirPagina =
-    abrirPagina;
+const TITULOS_PAGINA = {
+
+    dashboard:
+        "Dashboard",
+
+    clinicas:
+        "Clínicas",
+
+    especialidades:
+        "Especialidades",
+
+    regioes:
+        "Regiões",
+
+    estados:
+        "Estados",
+
+    cidades:
+        "Cidades",
+
+    bairros:
+        "Bairros"
+};
+
+// ============================================================
+// MOSTRAR PÁGINA
+// ============================================================
+
+function mostrarPagina(pagina) {
+
+    document
+        .querySelectorAll(
+            ".pagina"
+        )
+        .forEach(
+            item => {
+                item.classList.remove(
+                    "ativa"
+                );
+            }
+        );
+
+    const paginaSelecionada =
+        document.getElementById(
+            `pagina-${pagina}`
+        ) ||
+        document.getElementById(
+            pagina
+        );
+
+    if (paginaSelecionada) {
+
+        paginaSelecionada.classList.add(
+            "ativa"
+        );
+    }
+
+    document
+        .querySelectorAll(
+            ".menu-btn"
+        )
+        .forEach(
+            item => {
+
+                item.classList.remove(
+                    "ativo"
+                );
+
+                item.classList.remove(
+                    "active"
+                );
+            }
+        );
+
+    const botao =
+        document.querySelector(
+            `[data-pagina="${pagina}"]`
+        ) ||
+        document.querySelector(
+            `[data-page="${pagina}"]`
+        );
+
+    if (botao) {
+
+        botao.classList.add(
+            "ativo"
+        );
+
+        botao.classList.add(
+            "active"
+        );
+    }
+
+    const titulo =
+        document.getElementById(
+            "tituloPagina"
+        );
+
+    if (titulo) {
+
+        titulo.textContent =
+            TITULOS_PAGINA[pagina] ||
+            "Painel";
+    }
+
+    switch (pagina) {
+
+        case "dashboard":
+
+            carregarDashboard();
+
+            break;
+
+        case "clinicas":
+
+            if (
+                typeof listarClinicas ===
+                "function"
+            ) {
+                listarClinicas();
+            }
+
+            break;
+
+        case "especialidades":
+
+            listarEspecialidades();
+
+            break;
+
+        case "regioes":
+
+            listarRegioes();
+
+            break;
+
+        case "estados":
+
+            carregarRegioesSelect();
+
+            listarEstados();
+
+            break;
+
+        case "cidades":
+
+            carregarEstadosSelectCidade();
+
+            listarCidades();
+
+            break;
+
+        case "bairros":
+
+            carregarCidadesSelectBairro();
+
+            listarBairros();
+
+            break;
+    }
+}
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+function iniciarAdmin() {
+
+    iniciarMenu();
+
+    document
+        .getElementById(
+            "btnSalvarEspecialidade"
+        )
+        ?.addEventListener(
+            "click",
+            salvarEspecialidade
+        );
+
+    document
+        .getElementById(
+            "btnSalvarRegiao"
+        )
+        ?.addEventListener(
+            "click",
+            salvarRegiao
+        );
+
+    document
+        .getElementById(
+            "btnSalvarEstado"
+        )
+        ?.addEventListener(
+            "click",
+            salvarEstado
+        );
+
+    document
+        .getElementById(
+            "btnSalvarCidade"
+        )
+        ?.addEventListener(
+            "click",
+            salvarCidade
+        );
+
+    document
+        .getElementById(
+            "btnSalvarBairro"
+        )
+        ?.addEventListener(
+            "click",
+            salvarBairro
+        );
+
+    document
+        .getElementById(
+            "estadoRegiao"
+        )
+        ?.addEventListener(
+            "focus",
+            carregarRegioesSelect
+        );
+
+    document
+        .getElementById(
+            "cidadeEstado"
+        )
+        ?.addEventListener(
+            "focus",
+            carregarEstadosSelectCidade
+        );
+
+    document
+        .getElementById(
+            "bairroCidade"
+        )
+        ?.addEventListener(
+            "focus",
+            carregarCidadesSelectBairro
+        );
+
+    const dataAtual =
+        document.getElementById(
+            "dataAtual"
+        );
+
+    if (dataAtual) {
+
+        const agora =
+            new Date();
+
+        dataAtual.textContent =
+            agora.toLocaleDateString(
+                "pt-BR",
+                {
+                    weekday: "long",
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric"
+                }
+            );
+    }
+
+    carregarDashboard();
+}
+
+// ============================================================
+// DOM
+// ============================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    iniciarAdmin
+);
+
+// ============================================================
+// EXPORTAÇÕES
+// ============================================================
 
 window.carregarDashboard =
     carregarDashboard;
@@ -2534,11 +2524,11 @@ window.carregarDashboard =
 window.listarEspecialidades =
     listarEspecialidades;
 
-window.salvarEspecialidade =
-    salvarEspecialidade;
-
 window.editarEspecialidade =
     editarEspecialidade;
+
+window.salvarEspecialidade =
+    salvarEspecialidade;
 
 window.excluirEspecialidade =
     excluirEspecialidade;
@@ -2546,23 +2536,26 @@ window.excluirEspecialidade =
 window.listarRegioes =
     listarRegioes;
 
-window.salvarRegiao =
-    salvarRegiao;
-
 window.editarRegiao =
     editarRegiao;
+
+window.salvarRegiao =
+    salvarRegiao;
 
 window.excluirRegiao =
     excluirRegiao;
 
+window.carregarRegioesSelect =
+    carregarRegioesSelect;
+
 window.listarEstados =
     listarEstados;
 
-window.salvarEstado =
-    salvarEstado;
-
 window.editarEstado =
     editarEstado;
+
+window.salvarEstado =
+    salvarEstado;
 
 window.excluirEstado =
     excluirEstado;
@@ -2570,11 +2563,11 @@ window.excluirEstado =
 window.listarCidades =
     listarCidades;
 
-window.salvarCidade =
-    salvarCidade;
-
 window.editarCidade =
     editarCidade;
+
+window.salvarCidade =
+    salvarCidade;
 
 window.excluirCidade =
     excluirCidade;
@@ -2582,45 +2575,187 @@ window.excluirCidade =
 window.listarBairros =
     listarBairros;
 
-window.salvarBairro =
-    salvarBairro;
-
 window.editarBairro =
     editarBairro;
+
+window.salvarBairro =
+    salvarBairro;
 
 window.excluirBairro =
     excluirBairro;
 
-window.popularSelectRegioes =
-    popularSelectRegioes;
-
-window.popularSelectEstados =
-    popularSelectEstados;
-
-window.popularSelectCidades =
-    popularSelectCidades;
-
+window.mostrarPagina =
+    mostrarPagina;
 
 console.log(
-    "admin_parte1.js carregado com sucesso."
+    "Parte 1 do admin.js carregada."
 );
-
 // ============================================================
 // ADMIN.JS
 // PAINEL ADMINISTRATIVO | REDE ESPECIALISTAS
 // PARTE 2 DE 2
 // ============================================================
 
+console.log("admin_parte2.js carregado");
 
 // ============================================================
-// CLÍNICAS
+// CONSTANTES
+// ============================================================
+
+const REDE_ESPECIALISTAS = "especialistas";
+const REDE_SINDILEGIS = "sindilegis";
+
+let clinicaEditandoId = null;
+
+
+// ============================================================
+// FUNÇÕES AUXILIARES
+// ============================================================
+
+function escaparHTMLClinica(valor) {
+
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
+        return "";
+    }
+
+    return String(valor)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function limparSelectClinica(
+    id,
+    texto
+) {
+
+    const select =
+        document.getElementById(id);
+
+    if (!select) {
+        return;
+    }
+
+    select.innerHTML = `
+        <option value="">
+            ${escaparHTMLClinica(texto)}
+        </option>
+    `;
+}
+
+
+// ============================================================
+// NORMALIZAR REDE
+// ============================================================
+
+function normalizarRedeAdmin(
+    valor
+) {
+
+    const rede =
+        String(valor ?? "")
+            .trim()
+            .toLowerCase();
+
+    if (
+        rede === "especialistas" ||
+        rede === "especialista" ||
+        rede === "rede especialistas"
+    ) {
+
+        return REDE_ESPECIALISTAS;
+    }
+
+    if (
+        rede === "sindilegis" ||
+        rede === "rede sindilegis"
+    ) {
+
+        return REDE_SINDILEGIS;
+    }
+
+    return "";
+}
+
+
+// ============================================================
+// OBTER REDES DA CLÍNICA
+// ============================================================
+
+function obterRedesClinica(
+    clinica
+) {
+
+    const resultado = {
+        especialistas: false,
+        sindilegis: false
+    };
+
+    const vinculos =
+        Array.isArray(
+            clinica?.clinica_especialidades
+        )
+            ? clinica.clinica_especialidades
+            : [];
+
+    vinculos.forEach(
+        vinculo => {
+
+            if (
+                vinculo.ativo === false
+            ) {
+                return;
+            }
+
+            const rede =
+                normalizarRedeAdmin(
+                    vinculo.rede
+                );
+
+            if (
+                rede ===
+                REDE_ESPECIALISTAS
+            ) {
+
+                resultado.especialistas =
+                    true;
+            }
+
+            if (
+                rede ===
+                REDE_SINDILEGIS
+            ) {
+
+                resultado.sindilegis =
+                    true;
+            }
+        }
+    );
+
+    return resultado;
+}
+
+
+// ============================================================
+// LISTAR CLÍNICAS
 // ============================================================
 
 async function listarClinicas() {
 
-    const lista = document.getElementById("listaClinicas");
+    const lista =
+        document.getElementById(
+            "listaClinicas"
+        );
 
-    if (!lista) return;
+    if (!lista) {
+        return;
+    }
 
     lista.innerHTML = `
         <tr>
@@ -2633,15 +2768,16 @@ async function listarClinicas() {
     try {
 
         const busca =
-            document.getElementById("buscarClinica")
-                ?.value
-                ?.trim()
-                ?.toLowerCase() || "";
+            document.getElementById(
+                "buscarClinica"
+            )?.value
+            ?.trim()
+            ?.toLowerCase() || "";
 
         const statusFiltro =
-            document.getElementById("filtroStatusClinica")
-                ?.value || "";
-
+            document.getElementById(
+                "filtroStatusClinica"
+            )?.value || "";
 
         const {
             data,
@@ -2688,65 +2824,76 @@ async function listarClinicas() {
                     )
                 )
             `)
-            .order("nome", {
-                ascending: true
-            });
-
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
         if (error) {
             throw error;
         }
 
-
-        let clinicas = data || [];
+        let clinicas =
+            data || [];
 
 
         // ====================================================
-        // FILTRO DE BUSCA
+        // FILTRO DE TEXTO
         // ====================================================
 
         if (busca) {
 
-            clinicas = clinicas.filter(clinica => {
+            clinicas =
+                clinicas.filter(
+                    clinica => {
 
-                const nome =
-                    String(clinica.nome || "")
-                        .toLowerCase();
+                        const nome =
+                            String(
+                                clinica.nome || ""
+                            ).toLowerCase();
 
-                const telefone =
-                    String(clinica.telefone || "")
-                        .toLowerCase();
+                        const telefone =
+                            String(
+                                clinica.telefone || ""
+                            ).toLowerCase();
 
-                const endereco =
-                    String(clinica.endereco || "")
-                        .toLowerCase();
+                        const endereco =
+                            String(
+                                clinica.endereco || ""
+                            ).toLowerCase();
 
-                const bairro =
-                    String(clinica.bairros?.nome || "")
-                        .toLowerCase();
+                        const bairro =
+                            String(
+                                clinica.bairros?.nome || ""
+                            ).toLowerCase();
 
-                const cidade =
-                    String(
-                        clinica.bairros?.cidades?.nome || ""
-                    )
-                    .toLowerCase();
+                        const cidade =
+                            String(
+                                clinica.bairros
+                                    ?.cidades
+                                    ?.nome || ""
+                            ).toLowerCase();
 
-                const estado =
-                    String(
-                        clinica.bairros?.cidades?.estados?.nome || ""
-                    )
-                    .toLowerCase();
+                        const estado =
+                            String(
+                                clinica.bairros
+                                    ?.cidades
+                                    ?.estados
+                                    ?.nome || ""
+                            ).toLowerCase();
 
-                return (
-                    nome.includes(busca) ||
-                    telefone.includes(busca) ||
-                    endereco.includes(busca) ||
-                    bairro.includes(busca) ||
-                    cidade.includes(busca) ||
-                    estado.includes(busca)
+                        return (
+                            nome.includes(busca) ||
+                            telefone.includes(busca) ||
+                            endereco.includes(busca) ||
+                            bairro.includes(busca) ||
+                            cidade.includes(busca) ||
+                            estado.includes(busca)
+                        );
+                    }
                 );
-
-            });
         }
 
 
@@ -2754,17 +2901,26 @@ async function listarClinicas() {
         // FILTRO DE STATUS
         // ====================================================
 
-        if (statusFiltro === "ativa") {
+        if (
+            statusFiltro === "ativa"
+        ) {
 
-            clinicas = clinicas.filter(
-                clinica => clinica.ativo === true
-            );
+            clinicas =
+                clinicas.filter(
+                    clinica =>
+                        clinica.ativo === true
+                );
+        }
 
-        } else if (statusFiltro === "inativa") {
+        else if (
+            statusFiltro === "inativa"
+        ) {
 
-            clinicas = clinicas.filter(
-                clinica => clinica.ativo !== true
-            );
+            clinicas =
+                clinicas.filter(
+                    clinica =>
+                        clinica.ativo !== true
+                );
         }
 
 
@@ -2790,244 +2946,165 @@ async function listarClinicas() {
         // MONTAR TABELA
         // ====================================================
 
-        lista.innerHTML = clinicas.map(clinica => {
+        lista.innerHTML =
+            clinicas.map(
+                clinica => {
 
-            const bairro = clinica.bairros;
-            const cidade = bairro?.cidades;
-            const estado = cidade?.estados;
-            const regiao = estado?.regioes;
+                    const bairro =
+                        clinica.bairros;
 
-            const redes =
-                obterRedesClinica(clinica);
+                    const cidade =
+                        bairro?.cidades;
 
-            const ativa =
-                clinica.ativo === true;
+                    const estado =
+                        cidade?.estados;
 
-            const status =
-                ativa ? "Ativa" : "Inativa";
+                    const regiao =
+                        estado?.regioes;
 
-            const classeStatus =
-                ativa ? "ativo" : "inativo";
+                    const redes =
+                        obterRedesClinica(
+                            clinica
+                        );
 
+                    const ativa =
+                        clinica.ativo === true;
 
-            // =================================================
-            // ESPECIALIDADES
-            // =================================================
+                    const status =
+                        ativa
+                            ? "Ativa"
+                            : "Inativa";
 
-            const especialidades =
-                (clinica.clinica_especialidades || [])
-                    .filter(vinculo => vinculo.ativo !== false)
-                    .map(vinculo =>
-                        vinculo.especialidades?.nome
-                    )
-                    .filter(Boolean);
-
-
-            const especialidadesUnicas =
-                [...new Set(especialidades)];
+                    const classeStatus =
+                        ativa
+                            ? "ativo"
+                            : "inativo";
 
 
-            const especialidadesHTML =
-                especialidadesUnicas.length
-                    ? especialidadesUnicas
-                        .map(nome => `
-                            <span class="tag-especialidade">
-                                ${escaparHTML(nome)}
-                            </span>
-                        `)
-                        .join("")
-                    : `
-                        <span class="texto-sem-dado">
-                            Nenhuma
-                        </span>
-                    `;
+                    return `
+                        <tr>
 
+                            <td>
+                                <strong>
+                                    ${escaparHTMLClinica(
+                                        clinica.nome ||
+                                        "Sem nome"
+                                    )}
+                                </strong>
+                            </td>
 
-            // =================================================
-            // REDES
-            // =================================================
-
-            const redesHTML = `
-
-                <div class="redes-clinica">
-
-                    ${
-                        redes.especialistas
-                            ? `
-                                <span class="tag-rede especialistas">
-                                    Especialistas
-                                </span>
-                            `
-                            : ""
-                    }
-
-                    ${
-                        redes.sindilegis
-                            ? `
-                                <span class="tag-rede sindilegis">
-                                    Sindilegis
-                                </span>
-                            `
-                            : ""
-                    }
-
-                    ${
-                        !redes.especialistas &&
-                        !redes.sindilegis
-                            ? `
-                                <span class="texto-sem-dado">
-                                    Nenhuma
-                                </span>
-                            `
-                            : ""
-                    }
-
-                </div>
-            `;
-
-
-            return `
-                <tr>
-
-                    <!-- CLÍNICA -->
-
-                    <td>
-                        <strong>
-                            ${escaparHTML(
-                                clinica.nome || "Sem nome"
-                            )}
-                        </strong>
-                    </td>
-
-
-                    <!-- LOCALIZAÇÃO -->
-
-                    <td>
-
-                        <div class="localizacao-clinica">
-
-                            <strong>
-                                ${escaparHTML(
-                                    bairro?.nome ||
+                            <td>
+                                ${escaparHTMLClinica(
+                                    regiao?.nome ||
                                     "Não informado"
                                 )}
-                            </strong>
+                            </td>
 
-                            <small>
-                                ${escaparHTML(
+                            <td>
+                                ${escaparHTMLClinica(
+                                    estado?.nome ||
+                                    "Não informado"
+                                )}
+                            </td>
+
+                            <td>
+                                ${escaparHTMLClinica(
                                     cidade?.nome ||
                                     "Não informado"
                                 )}
-                                ${
-                                    estado?.nome
-                                        ? ` - ${escaparHTML(
-                                            estado.nome
-                                        )}`
-                                        : ""
-                                }
-                            </small>
+                            </td>
 
-                            ${
-                                regiao?.nome
-                                    ? `
-                                        <small>
-                                            ${escaparHTML(
-                                                regiao.nome
-                                            )}
-                                        </small>
-                                    `
-                                    : ""
-                            }
+                            <td>
+                                ${escaparHTMLClinica(
+                                    bairro?.nome ||
+                                    "Não informado"
+                                )}
+                            </td>
 
-                        </div>
+                            <td>
 
-                    </td>
+                                <div class="redes-clinica">
 
+                                    ${
+                                        redes.especialistas
+                                            ? `
+                                                <span class="tag-rede especialistas">
+                                                    Especialistas
+                                                </span>
+                                            `
+                                            : ""
+                                    }
 
-                    <!-- TELEFONE -->
+                                    ${
+                                        redes.sindilegis
+                                            ? `
+                                                <span class="tag-rede sindilegis">
+                                                    Sindilegis
+                                                </span>
+                                            `
+                                            : ""
+                                    }
 
-                    <td>
-                        ${
-                            clinica.telefone
-                                ? `
-                                    <span>
-                                        ${escaparHTML(
-                                            clinica.telefone
-                                        )}
-                                    </span>
-                                `
-                                : `
-                                    <span class="texto-sem-dado">
-                                        Não informado
-                                    </span>
-                                `
-                        }
-                    </td>
+                                    ${
+                                        !redes.especialistas &&
+                                        !redes.sindilegis
+                                            ? `
+                                                <span>
+                                                    Nenhuma
+                                                </span>
+                                            `
+                                            : ""
+                                    }
 
+                                </div>
 
-                    <!-- ESPECIALIDADES -->
+                            </td>
 
-                    <td>
-                        <div class="especialidades-tabela">
-                            ${especialidadesHTML}
-                        </div>
-                    </td>
+                            <td>
 
+                                <span
+                                    class="status ${classeStatus}"
+                                >
+                                    ${status}
+                                </span>
 
-                    <!-- REDES -->
+                            </td>
 
-                    <td>
-                        ${redesHTML}
-                    </td>
+                            <td>
 
+                                <div class="acoes-tabela">
 
-                    <!-- STATUS -->
+                                    <button
+                                        type="button"
+                                        class="btn-editar"
+                                        onclick="editarClinica(${clinica.id})"
+                                    >
+                                        ✏️ Editar
+                                    </button>
 
-                    <td>
-                        <span class="status ${classeStatus}">
-                            ${status}
-                        </span>
-                    </td>
+                                    <button
+                                        type="button"
+                                        class="btn-excluir"
+                                        onclick="excluirClinica(${clinica.id})"
+                                    >
+                                        🗑️ Excluir
+                                    </button>
 
+                                </div>
 
-                    <!-- AÇÕES -->
+                            </td>
 
-                    <td>
+                        </tr>
+                    `;
+                }
+            ).join("");
 
-                        <div class="acoes-tabela">
+    }
 
-                            <button
-                                type="button"
-                                class="btn-editar"
-                                onclick="editarClinica('${clinica.id}')"
-                                title="Editar clínica"
-                            >
-                                ✏️ Editar
-                            </button>
-
-                            <button
-                                type="button"
-                                class="btn-excluir"
-                                onclick="excluirClinica('${clinica.id}')"
-                                title="Excluir clínica"
-                            >
-                                🗑️ Excluir
-                            </button>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-            `;
-
-        }).join("");
-
-
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
-            "Erro ao carregar clínicas:",
+            "Erro ao listar clínicas:",
             erro
         );
 
@@ -3043,206 +3120,160 @@ async function listarClinicas() {
 
 
 // ============================================================
-// REDES DA CLÍNICA
+// ABRIR MODAL DA CLÍNICA
 // ============================================================
 
-function obterRedesClinica(clinica) {
-
-    const resultado = {
-        especialistas: false,
-        sindilegis: false
-    };
-
-
-    const vinculos =
-        clinica?.clinica_especialidades || [];
-
-
-    vinculos.forEach(vinculo => {
-
-        if (vinculo.ativo === false) {
-            return;
-        }
-
-        const rede =
-            String(vinculo.rede || "")
-                .trim()
-                .toLowerCase();
-
-
-        if (rede === "especialistas") {
-            resultado.especialistas = true;
-        }
-
-        if (rede === "sindilegis") {
-            resultado.sindilegis = true;
-        }
-
-    });
-
-
-    return resultado;
-}
-
-
-// ============================================================
-// NORMALIZAR REDE
-// ============================================================
-
-function normalizarRedeAdmin(rede) {
-
-    const valor =
-        String(rede || "")
-            .trim()
-            .toLowerCase();
-
-
-    if (
-        valor === "especialistas" ||
-        valor === "rede especialistas"
-    ) {
-        return "especialistas";
-    }
-
-
-    if (
-        valor === "sindilegis" ||
-        valor === "rede sindilegis"
-    ) {
-        return "sindilegis";
-    }
-
-
-    return "";
-}
-
-
-// ============================================================
-// ABRIR MODAL DE CLÍNICA
-// ============================================================
-
-async function abrirModalClinica(id = null) {
+async function abrirModalClinica(
+    id = ""
+) {
 
     const modal =
-        document.getElementById("modalClinica");
-
-    const form =
-        document.getElementById("formClinica");
-
-
-    if (!modal || !form) return;
-
-
-    form.reset();
-
-
-    const campoId =
-        document.getElementById("clinicaId");
-
-    const campoAtivo =
-        document.getElementById("clinicaAtivo");
-
-    const areaStatus =
-        document.getElementById("areaStatusClinica");
-
-    const containerEspecialidades =
         document.getElementById(
-            "containerEspecialidades"
+            "modalClinica"
         );
 
-
-    if (campoId) {
-        campoId.value = "";
+    if (!modal) {
+        return;
     }
 
-
-    if (campoAtivo) {
-        campoAtivo.checked = true;
-    }
-
-
-    if (areaStatus) {
-        areaStatus.style.display = "none";
-    }
-
-
-    if (containerEspecialidades) {
-
-        containerEspecialidades.innerHTML = `
-            <div class="especialidades-vazio">
-                Nenhuma especialidade adicionada.
-            </div>
-        `;
-    }
-
-
-    await carregarRegioesClinica();
+    clinicaEditandoId =
+        id || null;
 
 
     const titulo =
-        modal.querySelector(".modal-titulo") ||
-        modal.querySelector("h2");
+        document.getElementById(
+            "tituloModalClinica"
+        );
+
+    const campoId =
+        document.getElementById(
+            "clinicaId"
+        );
+
+    const campoNome =
+        document.getElementById(
+            "clinicaNome"
+        );
+
+    const campoEndereco =
+        document.getElementById(
+            "clinicaEndereco"
+        );
+
+    const campoTelefone =
+        document.getElementById(
+            "clinicaTelefone"
+        );
+
+    const campoAtivo =
+        document.getElementById(
+            "clinicaAtivo"
+        );
+
+    const campoRegiao =
+        document.getElementById(
+            "clinicaRegiao"
+        );
+
+    const campoEstado =
+        document.getElementById(
+            "clinicaEstado"
+        );
+
+    const campoCidade =
+        document.getElementById(
+            "clinicaCidade"
+        );
+
+    const campoBairro =
+        document.getElementById(
+            "clinicaBairro"
+        );
 
 
-    if (titulo) {
-        titulo.textContent = "Nova Clínica";
+    // ========================================================
+    // LIMPAR CAMPOS
+    // ========================================================
+
+    if (campoId) {
+        campoId.value =
+            id || "";
+    }
+
+    if (campoNome) {
+        campoNome.value =
+            "";
+    }
+
+    if (campoEndereco) {
+        campoEndereco.value =
+            "";
+    }
+
+    if (campoTelefone) {
+        campoTelefone.value =
+            "";
+    }
+
+    if (campoAtivo) {
+        campoAtivo.checked =
+            true;
     }
 
 
-    modal.classList.remove("hidden");
+    // ========================================================
+    // CARREGAR REGIÕES
+    // ========================================================
 
-    modal.setAttribute(
-        "aria-hidden",
-        "false"
+    await popularSelectRegioes(
+        "clinicaRegiao"
     );
-}
 
 
-// ============================================================
-// MOSTRAR MODAL
-// ============================================================
-
-function mostrarModalClinica() {
-
-    const modal =
-        document.getElementById("modalClinica");
-
-    if (!modal) return;
-
-    modal.classList.remove("hidden");
-
-    modal.setAttribute(
-        "aria-hidden",
-        "false"
+    limparSelectClinica(
+        "clinicaEstado",
+        "Selecione o Estado"
     );
-}
 
-
-// ============================================================
-// FECHAR MODAL
-// ============================================================
-
-function fecharModalClinica() {
-
-    const modal =
-        document.getElementById("modalClinica");
-
-    if (!modal) return;
-
-    modal.classList.add("hidden");
-
-    modal.setAttribute(
-        "aria-hidden",
-        "true"
+    limparSelectClinica(
+        "clinicaCidade",
+        "Selecione a Cidade"
     );
-}
+
+    limparSelectClinica(
+        "clinicaBairro",
+        "Selecione o Bairro"
+    );
 
 
-// ============================================================
-// EDITAR CLÍNICA
-// ============================================================
+    // ========================================================
+    // NOVA CLÍNICA
+    // ========================================================
 
-async function editarClinica(id) {
+    if (!id) {
+
+        if (titulo) {
+            titulo.textContent =
+                "Nova Clínica";
+        }
+
+        limparEspecialidadesClinica();
+
+        mostrarModalClinica();
+
+        return;
+    }
+
+
+    // ========================================================
+    // EDITAR
+    // ========================================================
+
+    if (titulo) {
+        titulo.textContent =
+            "Editar Clínica";
+    }
+
 
     try {
 
@@ -3259,72 +3290,16 @@ async function editarClinica(id) {
                 bairro_id,
                 ativo
             `)
-            .eq("id", id)
+            .eq(
+                "id",
+                id
+            )
             .single();
-
 
         if (error) {
             throw error;
         }
 
-
-        if (!clinica) {
-            throw new Error(
-                "Clínica não encontrada."
-            );
-        }
-
-
-        const modal =
-            document.getElementById(
-                "modalClinica"
-            );
-
-        const form =
-            document.getElementById(
-                "formClinica"
-            );
-
-
-        if (!modal || !form) {
-            return;
-        }
-
-
-        const campoId =
-            document.getElementById(
-                "clinicaId"
-            );
-
-        const campoNome =
-            document.getElementById(
-                "clinicaNome"
-            );
-
-        const campoEndereco =
-            document.getElementById(
-                "clinicaEndereco"
-            );
-
-        const campoTelefone =
-            document.getElementById(
-                "clinicaTelefone"
-            );
-
-        const campoAtivo =
-            document.getElementById(
-                "clinicaAtivo"
-            );
-
-        const areaStatus =
-            document.getElementById(
-                "areaStatusClinica"
-            );
-
-
-        if (campoId) {
-            campoId.value = clinica.id;
-        }
 
         if (campoNome) {
             campoNome.value =
@@ -3343,21 +3318,13 @@ async function editarClinica(id) {
 
         if (campoAtivo) {
             campoAtivo.checked =
-                clinica.ativo === true;
-        }
-
-        if (areaStatus) {
-            areaStatus.style.display =
-                "block";
+                clinica.ativo !== false;
         }
 
 
         // ====================================================
-        // CARREGAR LOCALIZAÇÃO
+        // LOCALIZAÇÃO
         // ====================================================
-
-        await carregarRegioesClinica();
-
 
         if (clinica.bairro_id) {
 
@@ -3368,15 +3335,22 @@ async function editarClinica(id) {
                 .from("bairros")
                 .select(`
                     id,
+                    nome,
                     cidade_id,
+
                     cidades (
                         id,
+                        nome,
                         estado_id,
+
                         estados (
                             id,
+                            nome,
                             regiao_id,
+
                             regioes (
-                                id
+                                id,
+                                nome
                             )
                         )
                     )
@@ -3387,50 +3361,29 @@ async function editarClinica(id) {
                 )
                 .single();
 
-
             if (erroBairro) {
                 throw erroBairro;
             }
 
 
-            const estado =
-                bairro?.cidades?.estados;
-
             const cidade =
                 bairro?.cidades;
+
+            const estado =
+                cidade?.estados;
 
             const regiao =
                 estado?.regioes;
 
 
-            const campoRegiao =
-                document.getElementById(
-                    "clinicaRegiao"
-                );
+            // REGIÃO
 
-            const campoEstado =
-                document.getElementById(
-                    "clinicaEstado"
-                );
+            if (regiao) {
 
-            const campoCidade =
-                document.getElementById(
-                    "clinicaCidade"
-                );
-
-            const campoBairro =
-                document.getElementById(
-                    "clinicaBairro"
-                );
-
-
-            if (
-                campoRegiao &&
-                regiao?.id
-            ) {
-
-                campoRegiao.value =
-                    regiao.id;
+                if (campoRegiao) {
+                    campoRegiao.value =
+                        regiao.id;
+                }
 
                 await carregarEstadosClinica(
                     regiao.id
@@ -3438,13 +3391,14 @@ async function editarClinica(id) {
             }
 
 
-            if (
-                campoEstado &&
-                estado?.id
-            ) {
+            // ESTADO
 
-                campoEstado.value =
-                    estado.id;
+            if (estado) {
+
+                if (campoEstado) {
+                    campoEstado.value =
+                        estado.id;
+                }
 
                 await carregarCidadesClinica(
                     estado.id
@@ -3452,13 +3406,14 @@ async function editarClinica(id) {
             }
 
 
-            if (
-                campoCidade &&
-                cidade?.id
-            ) {
+            // CIDADE
 
-                campoCidade.value =
-                    cidade.id;
+            if (cidade) {
+
+                if (campoCidade) {
+                    campoCidade.value =
+                        cidade.id;
+                }
 
                 await carregarBairrosClinica(
                     cidade.id
@@ -3466,127 +3421,98 @@ async function editarClinica(id) {
             }
 
 
-            if (
-                campoBairro &&
-                bairro?.id
-            ) {
+            // BAIRRO
 
+            if (campoBairro) {
                 campoBairro.value =
                     bairro.id;
             }
-
         }
 
 
         // ====================================================
-        // CARREGAR ESPECIALIDADES
+        // ESPECIALIDADES
         // ====================================================
 
         await carregarEspecialidadesClinica(
-            clinica.id
+            id
         );
-
-
-        const titulo =
-            modal.querySelector(
-                ".modal-titulo"
-            ) ||
-            modal.querySelector("h2");
-
-
-        if (titulo) {
-            titulo.textContent =
-                "Editar Clínica";
-        }
 
 
         mostrarModalClinica();
 
+    }
 
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
-            "Erro ao editar clínica:",
+            "Erro ao abrir clínica:",
             erro
         );
 
         alert(
-            "Não foi possível carregar os dados da clínica."
+            "Erro ao carregar os dados da clínica."
         );
     }
 }
 
 
 // ============================================================
-// CARREGAR REGIÕES DA CLÍNICA
+// MOSTRAR MODAL
 // ============================================================
 
-async function carregarRegioesClinica() {
+function mostrarModalClinica() {
 
-    const select =
+    const modal =
         document.getElementById(
-            "clinicaRegiao"
+            "modalClinica"
         );
 
-    if (!select) return;
-
-
-    try {
-
-        const {
-            data,
-            error
-        } = await supabaseClient
-            .from("regioes")
-            .select(
-                "id, nome"
-            )
-            .order(
-                "nome",
-                {
-                    ascending: true
-                }
-            );
-
-
-        if (error) {
-            throw error;
-        }
-
-
-        limparSelectAdmin(
-            select,
-            "Selecione a Região"
-        );
-
-
-        (data || []).forEach(regiao => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-            option.value =
-                regiao.id;
-
-            option.textContent =
-                regiao.nome;
-
-            select.appendChild(
-                option
-            );
-
-        });
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar regiões:",
-            erro
-        );
+    if (!modal) {
+        return;
     }
+
+    modal.classList.remove(
+        "hidden"
+    );
+}
+
+
+// ============================================================
+// FECHAR MODAL
+// ============================================================
+
+function fecharModalClinica() {
+
+    const modal =
+        document.getElementById(
+            "modalClinica"
+        );
+
+    if (!modal) {
+        return;
+    }
+
+    modal.classList.add(
+        "hidden"
+    );
+
+    clinicaEditandoId =
+        null;
+}
+
+
+// ============================================================
+// EDITAR CLÍNICA
+// ============================================================
+
+async function editarClinica(
+    id
+) {
+
+    await abrirModalClinica(
+        id
+    );
 }
 
 
@@ -3598,51 +3524,32 @@ async function carregarEstadosClinica(
     regiaoId
 ) {
 
-    const selectEstado =
+    const select =
         document.getElementById(
             "clinicaEstado"
         );
 
-    const selectCidade =
-        document.getElementById(
-            "clinicaCidade"
-        );
+    if (!select) {
+        return;
+    }
 
-    const selectBairro =
-        document.getElementById(
-            "clinicaBairro"
-        );
-
-
-    if (!selectEstado) return;
-
-
-    limparSelectAdmin(
-        selectEstado,
+    limparSelectClinica(
+        "clinicaEstado",
         "Selecione o Estado"
     );
 
-    if (selectCidade) {
-        limparSelectAdmin(
-            selectCidade,
-            "Selecione a Cidade"
-        );
-        selectCidade.disabled = true;
-    }
+    limparSelectClinica(
+        "clinicaCidade",
+        "Selecione a Cidade"
+    );
 
-    if (selectBairro) {
-        limparSelectAdmin(
-            selectBairro,
-            "Selecione o Bairro"
-        );
-        selectBairro.disabled = true;
-    }
+    limparSelectClinica(
+        "clinicaBairro",
+        "Selecione o Bairro"
+    );
 
 
     if (!regiaoId) {
-
-        selectEstado.disabled = true;
-
         return;
     }
 
@@ -3654,11 +3561,9 @@ async function carregarEstadosClinica(
             error
         } = await supabaseClient
             .from("estados")
-            .select(`
-                id,
-                nome,
-                regiao_id
-            `)
+            .select(
+                "id,nome"
+            )
             .eq(
                 "regiao_id",
                 regiaoId
@@ -3670,36 +3575,27 @@ async function carregarEstadosClinica(
                 }
             );
 
-
         if (error) {
             throw error;
         }
 
 
-        (data || []).forEach(estado => {
+        (data || []).forEach(
+            estado => {
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+                select.innerHTML += `
+                    <option value="${estado.id}">
+                        ${escaparHTMLClinica(
+                            estado.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
 
-            option.value =
-                estado.id;
+    }
 
-            option.textContent =
-                estado.nome;
-
-            selectEstado.appendChild(
-                option
-            );
-
-        });
-
-
-        selectEstado.disabled = false;
-
-
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao carregar estados:",
@@ -3717,41 +3613,27 @@ async function carregarCidadesClinica(
     estadoId
 ) {
 
-    const selectCidade =
+    const select =
         document.getElementById(
             "clinicaCidade"
         );
 
-    const selectBairro =
-        document.getElementById(
-            "clinicaBairro"
-        );
+    if (!select) {
+        return;
+    }
 
-
-    if (!selectCidade) return;
-
-
-    limparSelectAdmin(
-        selectCidade,
+    limparSelectClinica(
+        "clinicaCidade",
         "Selecione a Cidade"
     );
 
-
-    if (selectBairro) {
-
-        limparSelectAdmin(
-            selectBairro,
-            "Selecione o Bairro"
-        );
-
-        selectBairro.disabled = true;
-    }
+    limparSelectClinica(
+        "clinicaBairro",
+        "Selecione o Bairro"
+    );
 
 
     if (!estadoId) {
-
-        selectCidade.disabled = true;
-
         return;
     }
 
@@ -3763,11 +3645,9 @@ async function carregarCidadesClinica(
             error
         } = await supabaseClient
             .from("cidades")
-            .select(`
-                id,
-                nome,
-                estado_id
-            `)
+            .select(
+                "id,nome"
+            )
             .eq(
                 "estado_id",
                 estadoId
@@ -3779,36 +3659,27 @@ async function carregarCidadesClinica(
                 }
             );
 
-
         if (error) {
             throw error;
         }
 
 
-        (data || []).forEach(cidade => {
+        (data || []).forEach(
+            cidade => {
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+                select.innerHTML += `
+                    <option value="${cidade.id}">
+                        ${escaparHTMLClinica(
+                            cidade.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
 
-            option.value =
-                cidade.id;
+    }
 
-            option.textContent =
-                cidade.nome;
-
-            selectCidade.appendChild(
-                option
-            );
-
-        });
-
-
-        selectCidade.disabled = false;
-
-
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao carregar cidades:",
@@ -3831,20 +3702,17 @@ async function carregarBairrosClinica(
             "clinicaBairro"
         );
 
+    if (!select) {
+        return;
+    }
 
-    if (!select) return;
-
-
-    limparSelectAdmin(
-        select,
+    limparSelectClinica(
+        "clinicaBairro",
         "Selecione o Bairro"
     );
 
 
     if (!cidadeId) {
-
-        select.disabled = true;
-
         return;
     }
 
@@ -3856,11 +3724,9 @@ async function carregarBairrosClinica(
             error
         } = await supabaseClient
             .from("bairros")
-            .select(`
-                id,
-                nome,
-                cidade_id
-            `)
+            .select(
+                "id,nome"
+            )
             .eq(
                 "cidade_id",
                 cidadeId
@@ -3872,36 +3738,27 @@ async function carregarBairrosClinica(
                 }
             );
 
-
         if (error) {
             throw error;
         }
 
 
-        (data || []).forEach(bairro => {
+        (data || []).forEach(
+            bairro => {
 
-            const option =
-                document.createElement(
-                    "option"
-                );
+                select.innerHTML += `
+                    <option value="${bairro.id}">
+                        ${escaparHTMLClinica(
+                            bairro.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
 
-            option.value =
-                bairro.id;
+    }
 
-            option.textContent =
-                bairro.nome;
-
-            select.appendChild(
-                option
-            );
-
-        });
-
-
-        select.disabled = false;
-
-
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao carregar bairros:",
@@ -3912,24 +3769,72 @@ async function carregarBairrosClinica(
 
 
 // ============================================================
-// LIMPAR SELECT
+// POPULAR REGIÕES
 // ============================================================
 
-function limparSelectAdmin(
-    select,
-    texto
+async function popularSelectRegioes(
+    id
 ) {
 
-    if (!select) return;
+    const select =
+        document.getElementById(
+            id
+        );
+
+    if (!select) {
+        return;
+    }
+
+    limparSelectClinica(
+        id,
+        "Selecione a Região"
+    );
 
 
-    select.innerHTML = `
-        <option value="">
-            ${texto}
-        </option>
-    `;
+    try {
 
-    select.value = "";
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("regioes")
+            .select(
+                "id,nome"
+            )
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
+
+        if (error) {
+            throw error;
+        }
+
+
+        (data || []).forEach(
+            regiao => {
+
+                select.innerHTML += `
+                    <option value="${regiao.id}">
+                        ${escaparHTMLClinica(
+                            regiao.nome
+                        )}
+                    </option>
+                `;
+            }
+        );
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao carregar regiões:",
+            erro
+        );
+    }
 }
 
 
@@ -3938,68 +3843,47 @@ function limparSelectAdmin(
 // ============================================================
 
 async function salvarClinica(
-    event
+    evento
 ) {
 
-    if (event) {
-        event.preventDefault();
+    if (evento) {
+        evento.preventDefault();
     }
 
 
     try {
 
-        const campoId =
-            document.getElementById(
-                "clinicaId"
-            );
-
-        const campoNome =
+        const nome =
             document.getElementById(
                 "clinicaNome"
-            );
+            )?.value
+            ?.trim() || "";
 
-        const campoEndereco =
+        const endereco =
             document.getElementById(
                 "clinicaEndereco"
-            );
+            )?.value
+            ?.trim() || "";
 
-        const campoTelefone =
+        const telefone =
             document.getElementById(
                 "clinicaTelefone"
-            );
+            )?.value
+            ?.trim() || "";
 
-        const campoBairro =
+        const bairroId =
             document.getElementById(
                 "clinicaBairro"
-            );
+            )?.value || "";
 
-        const campoAtivo =
+        const ativoElemento =
             document.getElementById(
                 "clinicaAtivo"
             );
 
-
-        const id =
-            campoId?.value || "";
-
-        const nome =
-            campoNome?.value
-                ?.trim() || "";
-
-        const endereco =
-            campoEndereco?.value
-                ?.trim() || "";
-
-        const telefone =
-            campoTelefone?.value
-                ?.trim() || "";
-
-        const bairroId =
-            campoBairro?.value || "";
-
         const ativo =
-            campoAtivo
-                ? campoAtivo.checked
+            ativoElemento
+                ? ativoElemento.checked
                 : true;
 
 
@@ -4013,8 +3897,6 @@ async function salvarClinica(
                 "Informe o nome da clínica."
             );
 
-            campoNome?.focus();
-
             return;
         }
 
@@ -4025,63 +3907,40 @@ async function salvarClinica(
                 "Selecione o bairro da clínica."
             );
 
-            campoBairro?.focus();
-
             return;
         }
 
 
-        const dados = {
+        const dadosClinica = {
 
             nome:
                 nome,
 
             endereco:
-                endereco,
+                endereco ||
+                null,
 
             telefone:
-                telefone,
+                telefone ||
+                null,
 
             bairro_id:
-                bairroId,
+                Number(bairroId),
 
             ativo:
                 ativo
         };
 
 
-        let clinicaId = id;
+        let clinicaId =
+            clinicaEditandoId;
 
 
         // ====================================================
-        // ATUALIZAR
+        // INSERIR
         // ====================================================
 
-        if (id) {
-
-            const {
-                error
-            } = await supabaseClient
-                .from("clinicas")
-                .update(
-                    dados
-                )
-                .eq(
-                    "id",
-                    id
-                );
-
-
-            if (error) {
-                throw error;
-            }
-
-
-        // ====================================================
-        // NOVA CLÍNICA
-        // ====================================================
-
-        } else {
+        if (!clinicaId) {
 
             const {
                 data,
@@ -4089,21 +3948,43 @@ async function salvarClinica(
             } = await supabaseClient
                 .from("clinicas")
                 .insert(
-                    dados
+                    dadosClinica
                 )
                 .select(
                     "id"
                 )
                 .single();
 
-
             if (error) {
                 throw error;
             }
 
-
             clinicaId =
-                data?.id;
+                data.id;
+        }
+
+
+        // ====================================================
+        // ATUALIZAR
+        // ====================================================
+
+        else {
+
+            const {
+                error
+            } = await supabaseClient
+                .from("clinicas")
+                .update(
+                    dadosClinica
+                )
+                .eq(
+                    "id",
+                    clinicaId
+                );
+
+            if (error) {
+                throw error;
+            }
         }
 
 
@@ -4111,31 +3992,20 @@ async function salvarClinica(
         // SALVAR ESPECIALIDADES
         // ====================================================
 
-        if (clinicaId) {
-
-            await salvarEspecialidadesClinica(
-                clinicaId
-            );
-        }
+        await salvarEspecialidadesClinica(
+            clinicaId
+        );
 
 
         alert(
-            id
-                ? "Clínica atualizada com sucesso!"
-                : "Clínica cadastrada com sucesso!"
+            "Clínica salva com sucesso!"
         );
 
 
         fecharModalClinica();
 
 
-        if (
-            typeof listarClinicas ===
-            "function"
-        ) {
-
-            await listarClinicas();
-        }
+        await listarClinicas();
 
 
         if (
@@ -4146,18 +4016,18 @@ async function salvarClinica(
             await carregarDashboard();
         }
 
+    }
 
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao salvar clínica:",
             erro
         );
 
-
         alert(
             erro?.message ||
-            "Não foi possível salvar a clínica."
+            "Erro ao salvar clínica."
         );
     }
 }
@@ -4171,14 +4041,15 @@ async function excluirClinica(
     id
 ) {
 
-    if (!id) return;
+    if (!id) {
+        return;
+    }
 
 
     const confirmar =
         confirm(
-            "Tem certeza que deseja excluir esta clínica?"
+            "Deseja realmente excluir esta clínica?"
         );
-
 
     if (!confirmar) {
         return;
@@ -4188,13 +4059,15 @@ async function excluirClinica(
     try {
 
         // ====================================================
-        // EXCLUIR VÍNCULOS
+        // REMOVER ESPECIALIDADES
         // ====================================================
 
         const {
-            error: erroVinculos
+            error: erroEspecialidades
         } = await supabaseClient
-            .from("clinica_especialidades")
+            .from(
+                "clinica_especialidades"
+            )
             .delete()
             .eq(
                 "clinica_id",
@@ -4202,19 +4075,24 @@ async function excluirClinica(
             );
 
 
-        if (erroVinculos) {
-            throw erroVinculos;
+        if (
+            erroEspecialidades
+        ) {
+
+            throw erroEspecialidades;
         }
 
 
         // ====================================================
-        // EXCLUIR CLÍNICA
+        // REMOVER CLÍNICA
         // ====================================================
 
         const {
             error
         } = await supabaseClient
-            .from("clinicas")
+            .from(
+                "clinicas"
+            )
             .delete()
             .eq(
                 "id",
@@ -4228,7 +4106,7 @@ async function excluirClinica(
 
 
         alert(
-            "Clínica excluída com sucesso!"
+            "Clínica excluída com sucesso."
         );
 
 
@@ -4243,14 +4121,14 @@ async function excluirClinica(
             await carregarDashboard();
         }
 
+    }
 
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao excluir clínica:",
             erro
         );
-
 
         alert(
             erro?.message ||
@@ -4273,8 +4151,9 @@ async function carregarEspecialidadesClinica(
             "containerEspecialidades"
         );
 
-
-    if (!container) return;
+    if (!container) {
+        return;
+    }
 
 
     container.innerHTML = `
@@ -4290,9 +4169,12 @@ async function carregarEspecialidadesClinica(
             data,
             error
         } = await supabaseClient
-            .from("clinica_especialidades")
+            .from(
+                "clinica_especialidades"
+            )
             .select(`
                 id,
+                clinica_id,
                 especialidade_id,
                 rede,
                 ativo,
@@ -4307,7 +4189,10 @@ async function carregarEspecialidadesClinica(
                 clinicaId
             )
             .order(
-                "id"
+                "id",
+                {
+                    ascending: true
+                }
             );
 
 
@@ -4316,15 +4201,18 @@ async function carregarEspecialidadesClinica(
         }
 
 
-        container.innerHTML = "";
-
-
-        if (!data || !data.length) {
+        if (
+            !data ||
+            !data.length
+        ) {
 
             limparEspecialidadesClinica();
 
             return;
         }
+
+
+        container.innerHTML = "";
 
 
         for (
@@ -4336,14 +4224,14 @@ async function carregarEspecialidadesClinica(
             );
         }
 
+    }
 
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao carregar especialidades da clínica:",
             erro
         );
-
 
         container.innerHTML = `
             <div class="especialidades-vazio">
@@ -4365,9 +4253,9 @@ function mostrarMensagemSemEspecialidades() {
             "containerEspecialidades"
         );
 
-
-    if (!container) return;
-
+    if (!container) {
+        return;
+    }
 
     container.innerHTML = `
         <div class="especialidades-vazio">
@@ -4388,9 +4276,9 @@ function limparEspecialidadesClinica() {
             "containerEspecialidades"
         );
 
-
-    if (!container) return;
-
+    if (!container) {
+        return;
+    }
 
     container.innerHTML = `
         <div class="especialidades-vazio">
@@ -4413,15 +4301,15 @@ async function adicionarLinhaEspecialidade(
             "containerEspecialidades"
         );
 
-
-    if (!container) return;
+    if (!container) {
+        return;
+    }
 
 
     const vazio =
         container.querySelector(
             ".especialidades-vazio"
         );
-
 
     if (vazio) {
         vazio.remove();
@@ -4433,18 +4321,16 @@ async function adicionarLinhaEspecialidade(
             "div"
         );
 
-
     linha.className =
         "especialidade-item";
-
 
     linha.dataset.id =
         dados?.id || "";
 
 
     const especialidadeSelecionada =
-        dados?.especialidade_id || "";
-
+        dados?.especialidade_id ||
+        "";
 
     const redeSelecionada =
         normalizarRedeAdmin(
@@ -4491,11 +4377,15 @@ async function adicionarLinhaEspecialidade(
                         Selecione a Rede
                     </option>
 
-                    <option value="especialistas">
+                    <option
+                        value="${REDE_ESPECIALISTAS}"
+                    >
                         Especialistas
                     </option>
 
-                    <option value="sindilegis">
+                    <option
+                        value="${REDE_SINDILEGIS}"
+                    >
                         Sindilegis
                     </option>
 
@@ -4509,9 +4399,9 @@ async function adicionarLinhaEspecialidade(
                 <button
                     type="button"
                     class="btn-excluir-especialidade"
-                    title="Remover"
+                    title="Remover especialidade"
                 >
-                    🗑️ Remover
+                    Remover
                 </button>
 
             </div>
@@ -4530,7 +4420,6 @@ async function adicionarLinhaEspecialidade(
             ".select-especialidade"
         );
 
-
     const selectRede =
         linha.querySelector(
             ".select-rede"
@@ -4547,7 +4436,9 @@ async function adicionarLinhaEspecialidade(
     ) {
 
         selectEspecialidade.value =
-            especialidadeSelecionada;
+            String(
+                especialidadeSelecionada
+            );
     }
 
 
@@ -4585,7 +4476,6 @@ async function adicionarLinhaEspecialidade(
 
                     mostrarMensagemSemEspecialidades();
                 }
-
             }
         );
     }
@@ -4600,7 +4490,9 @@ async function popularEspecialidadesSelect(
     select
 ) {
 
-    if (!select) return;
+    if (!select) {
+        return;
+    }
 
 
     try {
@@ -4609,9 +4501,11 @@ async function popularEspecialidadesSelect(
             data,
             error
         } = await supabaseClient
-            .from("especialidades")
+            .from(
+                "especialidades"
+            )
             .select(
-                "id, nome"
+                "id,nome"
             )
             .order(
                 "nome",
@@ -4636,25 +4530,21 @@ async function popularEspecialidadesSelect(
         (data || []).forEach(
             especialidade => {
 
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-                option.value =
-                    especialidade.id;
-
-                option.textContent =
-                    especialidade.nome;
-
-                select.appendChild(
-                    option
-                );
+                select.innerHTML += `
+                    <option
+                        value="${especialidade.id}"
+                    >
+                        ${escaparHTMLClinica(
+                            especialidade.nome
+                        )}
+                    </option>
+                `;
             }
         );
 
+    }
 
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro ao carregar especialidades:",
@@ -4677,8 +4567,9 @@ async function salvarEspecialidadesClinica(
             "containerEspecialidades"
         );
 
-
-    if (!container) return;
+    if (!container) {
+        return;
+    }
 
 
     const linhas =
@@ -4702,7 +4593,6 @@ async function salvarEspecialidadesClinica(
                     ".select-especialidade"
                 )?.value || "";
 
-
             const rede =
                 linha.querySelector(
                     ".select-rede"
@@ -4717,19 +4607,24 @@ async function salvarEspecialidadesClinica(
                 registros.push({
 
                     clinica_id:
-                        clinicaId,
+                        Number(
+                            clinicaId
+                        ),
 
                     especialidade_id:
-                        especialidade,
+                        Number(
+                            especialidade
+                        ),
 
                     rede:
-                        rede,
+                        normalizarRedeAdmin(
+                            rede
+                        ),
 
                     ativo:
                         true
                 });
             }
-
         }
     );
 
@@ -4773,7 +4668,9 @@ async function salvarEspecialidadesClinica(
     const {
         error: erroDelete
     } = await supabaseClient
-        .from("clinica_especialidades")
+        .from(
+            "clinica_especialidades"
+        )
         .delete()
         .eq(
             "clinica_id",
@@ -4787,7 +4684,7 @@ async function salvarEspecialidadesClinica(
 
 
     // ========================================================
-    // SE NÃO HOUVER ESPECIALIDADES
+    // NENHUMA ESPECIALIDADE
     // ========================================================
 
     if (!registros.length) {
@@ -4802,7 +4699,9 @@ async function salvarEspecialidadesClinica(
     const {
         error
     } = await supabaseClient
-        .from("clinica_especialidades")
+        .from(
+            "clinica_especialidades"
+        )
         .insert(
             registros
         );
@@ -4815,7 +4714,180 @@ async function salvarEspecialidadesClinica(
 
 
 // ============================================================
-// EXPORTAÇÕES DA PARTE 2
+// EVENTOS
+// ============================================================
+
+function iniciarEventosClinicas() {
+
+    // --------------------------------------------------------
+    // NOVA CLÍNICA
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "btnNovaClinica"
+        )
+        ?.addEventListener(
+            "click",
+            () => abrirModalClinica()
+        );
+
+
+    // --------------------------------------------------------
+    // FECHAR MODAL
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "btnFecharModal"
+        )
+        ?.addEventListener(
+            "click",
+            fecharModalClinica
+        );
+
+
+    document
+        .getElementById(
+            "btnCancelarModal"
+        )
+        ?.addEventListener(
+            "click",
+            fecharModalClinica
+        );
+
+
+    // --------------------------------------------------------
+    // FORMULÁRIO
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "formClinica"
+        )
+        ?.addEventListener(
+            "submit",
+            salvarClinica
+        );
+
+
+    // --------------------------------------------------------
+    // ADICIONAR ESPECIALIDADE
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "btnAdicionarEspecialidade"
+        )
+        ?.addEventListener(
+            "click",
+            () =>
+                adicionarLinhaEspecialidade()
+        );
+
+
+    // --------------------------------------------------------
+    // BUSCA
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "buscarClinica"
+        )
+        ?.addEventListener(
+            "input",
+            listarClinicas
+        );
+
+
+    // --------------------------------------------------------
+    // FILTRO STATUS
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "filtroStatusClinica"
+        )
+        ?.addEventListener(
+            "change",
+            listarClinicas
+        );
+
+
+    // --------------------------------------------------------
+    // REGIÃO
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "clinicaRegiao"
+        )
+        ?.addEventListener(
+            "change",
+            evento => {
+
+                carregarEstadosClinica(
+                    evento.target.value
+                );
+            }
+        );
+
+
+    // --------------------------------------------------------
+    // ESTADO
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "clinicaEstado"
+        )
+        ?.addEventListener(
+            "change",
+            evento => {
+
+                carregarCidadesClinica(
+                    evento.target.value
+                );
+            }
+        );
+
+
+    // --------------------------------------------------------
+    // CIDADE
+    // --------------------------------------------------------
+
+    document
+        .getElementById(
+            "clinicaCidade"
+        )
+        ?.addEventListener(
+            "change",
+            evento => {
+
+                carregarBairrosClinica(
+                    evento.target.value
+                );
+            }
+        );
+}
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        iniciarEventosClinicas();
+
+    }
+);
+
+
+// ============================================================
+// EXPORTAÇÕES
 // ============================================================
 
 window.listarClinicas =
@@ -4823,6 +4895,9 @@ window.listarClinicas =
 
 window.abrirModalClinica =
     abrirModalClinica;
+
+window.mostrarModalClinica =
+    mostrarModalClinica;
 
 window.fecharModalClinica =
     fecharModalClinica;
@@ -4836,9 +4911,6 @@ window.excluirClinica =
 window.salvarClinica =
     salvarClinica;
 
-window.carregarRegioesClinica =
-    carregarRegioesClinica;
-
 window.carregarEstadosClinica =
     carregarEstadosClinica;
 
@@ -4848,16 +4920,28 @@ window.carregarCidadesClinica =
 window.carregarBairrosClinica =
     carregarBairrosClinica;
 
-window.adicionarLinhaEspecialidade =
-    adicionarLinhaEspecialidade;
+window.popularSelectRegioes =
+    popularSelectRegioes;
 
 window.carregarEspecialidadesClinica =
     carregarEspecialidadesClinica;
 
+window.adicionarLinhaEspecialidade =
+    adicionarLinhaEspecialidade;
+
+window.popularEspecialidadesSelect =
+    popularEspecialidadesSelect;
+
 window.salvarEspecialidadesClinica =
     salvarEspecialidadesClinica;
 
+window.normalizarRedeAdmin =
+    normalizarRedeAdmin;
+
+window.obterRedesClinica =
+    obterRedesClinica;
+
 
 console.log(
-    "Parte 2 do admin.js carregada."
+    "admin_parte2.js carregado com sucesso."
 );
