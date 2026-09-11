@@ -9,8 +9,11 @@
 }
 
 
-body {
+/* ======================================
+   BODY
+====================================== */
 
+body {
     min-height: 100vh;
 
     font-family:
@@ -27,13 +30,10 @@ body {
         );
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     overflow: hidden;
-
 }
 
 
@@ -42,20 +42,16 @@ body {
 ====================================== */
 
 .background {
-
     position: fixed;
-
     inset: 0;
 
     overflow: hidden;
 
     z-index: -1;
-
 }
 
 
 .bola {
-
     position: absolute;
 
     border-radius: 50%;
@@ -63,12 +59,10 @@ body {
     filter: blur(10px);
 
     opacity: 0.25;
-
 }
 
 
 .bola1 {
-
     width: 350px;
     height: 350px;
 
@@ -76,12 +70,10 @@ body {
 
     top: -100px;
     left: -100px;
-
 }
 
 
 .bola2 {
-
     width: 450px;
     height: 450px;
 
@@ -89,12 +81,10 @@ body {
 
     bottom: -200px;
     right: -100px;
-
 }
 
 
 .bola3 {
-
     width: 200px;
     height: 200px;
 
@@ -102,7 +92,6 @@ body {
 
     top: 40%;
     left: 15%;
-
 }
 
 
@@ -111,17 +100,13 @@ body {
 ====================================== */
 
 .login-container {
-
     width: 100%;
 
     padding: 20px;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
 }
 
 
@@ -130,10 +115,9 @@ body {
 ====================================== */
 
 .login-card {
+    width: 352px;
 
-    width: 100%;
-
-    max-width: 440px;
+    min-height: 563px;
 
     background:
         rgba(
@@ -143,9 +127,9 @@ body {
             0.97
         );
 
-    border-radius: 24px;
+    border-radius: 20px;
 
-    padding: 42px;
+    padding: 40px 34px 30px;
 
     text-align: center;
 
@@ -157,7 +141,6 @@ body {
             0,
             0.3
         );
-
 }
 
 
@@ -166,21 +149,18 @@ body {
 ====================================== */
 
 .logo-container {
-
     display: flex;
 
     justify-content: center;
 
-    margin-bottom: 15px;
-
+    margin-bottom: 10px;
 }
 
 
 .login-logo {
+    width: 68px;
 
-    width: 85px;
-
-    height: 85px;
+    height: 68px;
 
     object-fit: contain;
 
@@ -194,7 +174,6 @@ body {
                 0.25
             )
         );
-
 }
 
 
@@ -203,32 +182,27 @@ body {
 ====================================== */
 
 .login-card h1 {
-
     color: #2d0a63;
 
-    font-size: 28px;
+    font-size: 24px;
 
-    margin-bottom: 12px;
-
+    margin-bottom: 10px;
 }
 
 
 .login-subtitulo {
-
     color: #666;
 
-    font-size: 15px;
+    font-size: 13px;
 
-    line-height: 1.6;
-
+    line-height: 1.5;
 }
 
 
 .linha {
+    width: 56px;
 
-    width: 70px;
-
-    height: 4px;
+    height: 3px;
 
     border-radius: 10px;
 
@@ -239,8 +213,7 @@ body {
             #0096c7
         );
 
-    margin: 25px auto;
-
+    margin: 22px auto;
 }
 
 
@@ -249,74 +222,65 @@ body {
 ====================================== */
 
 .campo-login {
-
     text-align: left;
 
-    margin-bottom: 20px;
-
+    margin-bottom: 16px;
 }
 
 
 .campo-login label {
-
     display: block;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
     font-weight: bold;
 
-    color: #333;
+    font-size: 13px;
 
+    color: #333;
 }
 
 
 .input-container {
-
     position: relative;
-
 }
 
 
 .icone-input {
-
     position: absolute;
 
-    left: 15px;
+    left: 14px;
 
     top: 50%;
 
     transform:
         translateY(-50%);
-
 }
 
 
 .input-container input {
-
     width: 100%;
 
     padding:
-        14px
-        15px
-        14px
-        45px;
+        11px
+        12px
+        11px
+        40px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     border:
         1px solid #ddd;
 
-    font-size: 15px;
+    font-size: 13px;
 
     outline: none;
 
     transition: 0.3s;
-
 }
 
 
 .input-container input:focus {
-
     border-color: #6a00f4;
 
     box-shadow:
@@ -327,7 +291,6 @@ body {
             244,
             0.1
         );
-
 }
 
 
@@ -336,27 +299,21 @@ body {
 ====================================== */
 
 .mensagem-login {
+    min-height: 18px;
 
-    min-height: 20px;
+    margin-bottom: 12px;
 
-    margin-bottom: 15px;
-
-    font-size: 14px;
-
+    font-size: 12px;
 }
 
 
 .mensagem-login.erro {
-
     color: #d90429;
-
 }
 
 
 .mensagem-login.sucesso {
-
     color: #2b9348;
-
 }
 
 
@@ -365,14 +322,13 @@ body {
 ====================================== */
 
 .btn-login {
-
     width: 100%;
 
     border: none;
 
-    padding: 15px;
+    padding: 12px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     background:
         linear-gradient(
@@ -383,7 +339,7 @@ body {
 
     color: white;
 
-    font-size: 16px;
+    font-size: 13px;
 
     font-weight: bold;
 
@@ -396,12 +352,10 @@ body {
     justify-content: center;
 
     gap: 10px;
-
 }
 
 
 .btn-login:hover {
-
     transform:
         translateY(-2px);
 
@@ -413,7 +367,6 @@ body {
             154,
             0.3
         );
-
 }
 
 
@@ -422,14 +375,13 @@ body {
 ====================================== */
 
 .btn-voltar {
-
     width: 100%;
 
-    margin-top: 14px;
+    margin-top: 11px;
 
-    padding: 13px;
+    padding: 10px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     border:
         1px solid #5a189a;
@@ -438,19 +390,18 @@ body {
 
     color: #5a189a;
 
+    font-size: 12px;
+
     font-weight: bold;
 
     cursor: pointer;
 
     transition: 0.3s;
-
 }
 
 
 .btn-voltar:hover {
-
     background: #f3edff;
-
 }
 
 
@@ -459,13 +410,11 @@ body {
 ====================================== */
 
 .login-footer {
-
-    margin-top: 25px;
+    margin-top: 20px;
 
     color: #888;
 
-    font-size: 13px;
-
+    font-size: 11px;
 }
 
 
@@ -475,10 +424,21 @@ body {
 
 @media (max-width: 500px) {
 
+    .login-container {
+        padding: 15px;
+    }
+
     .login-card {
+        width: 100%;
 
-        padding: 30px 22px;
+        max-width: 352px;
 
+        min-height: 563px;
+
+        padding:
+            35px
+            28px
+            28px;
     }
 
 }
