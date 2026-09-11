@@ -1390,287 +1390,510 @@ async function popularEspecialidades() {
 
 async function listarClinicas() {
 
-    const container =
+    const lista =
         document.getElementById(
             "listaClinicas"
         );
 
 
-    if (!container) {
+    if (!lista) {
 
         return;
 
     }
 
 
-    container.innerHTML =
-        `<div class="carregando">
-            Carregando clínicas...
-        </div>`;
+    lista.innerHTML = `
+        <tr>
+            <td colspan="8">
+                Carregando clínicas...
+            </td>
+        </tr>
+    `;
 
 
-    const {
-        data,
-        error
-    } = await supabaseClient
+    try {
 
-        .from("clinicas")
+        const busca =
+            document.getElementById(
+                "buscarClinica"
+            )?.value
+            ?.trim()
+            ?.toLowerCase() || "";
 
-        .select(`
-            id,
-            nome,
-            telefone,
-            endereco,
-            bairro_id,
-            ativo,
 
-            bairros (
+        const statusFiltro =
+            document.getElementById(
+                "filtroStatusClinica"
+            )?.value || "";
+
+
+        // ========================================================
+        // CONSULTA DAS CLÍNICAS
+        // ========================================================
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("clinicas")
+
+            .select(`
                 id,
                 nome,
+                telefone,
+                endereco,
+                bairro_id,
+                ativo,
 
-                cidades (
+                bairros (
                     id,
                     nome,
 
-                    estados (
+                    cidades (
                         id,
                         nome,
 
-                        regioes (
+                        estados (
                             id,
-                            nome
+                            nome,
+
+                            regioes (
+                                id,
+                                nome
+                            )
                         )
                     )
-                )
-            ),
+                ),
 
-            clinica_especialidades (
-                id,
-                especialidade_id,
-                rede,
-                ativo,
-
-                especialidades (
+                clinica_especialidades (
                     id,
-                    nome
+                    especialidade_id,
+                    rede,
+                    ativo,
+
+                    especialidades (
+                        id,
+                        nome
+                    )
                 )
-            )
-        `)
+            `)
 
-        .order(
-            "nome",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (error) {
-
-        console.error(
-            "Erro ao listar clínicas:",
-            error
-        );
+            .order(
+                "nome",
+                {
+                    ascending: true
+                }
+            );
 
 
-        container.innerHTML =
-            `<div class="erro">
-                Erro ao carregar clínicas.
-            </div>`;
+        if (error) {
 
-
-        return;
-
-    }
-
-
-    if (!data || data.length === 0) {
-
-        container.innerHTML =
-            `<div class="vazio">
-                Nenhuma clínica cadastrada.
-            </div>`;
-
-
-        return;
-
-    }
-
-
-    container.innerHTML = "";
-
-
-    data.forEach(function (clinica) {
-
-        const bairro =
-            clinica.bairros;
-
-
-        const cidade =
-            bairro?.cidades;
-
-
-        const estado =
-            cidade?.estados;
-
-
-        const regiao =
-            estado?.regioes;
-
-
-        const redes =
-            [
-                ...new Set(
-                    (clinica.clinica_especialidades || [])
-                        .filter(
-                            item => item.ativo !== false
-                        )
-                        .map(
-                            item => item.rede
-                        )
-                        .filter(Boolean)
-                )
-            ];
-
-
-        let textoRedes =
-            "-";
-
-
-        if (redes.length > 0) {
-
-            textoRedes =
-                redes
-                    .map(function (rede) {
-
-                        if (
-                            rede ===
-                            "especialistas"
-                        ) {
-
-                            return "Especialistas";
-
-                        }
-
-
-                        if (
-                            rede ===
-                            "sindilegis"
-                        ) {
-
-                            return "Sindilegis";
-
-                        }
-
-
-                        return rede;
-
-                    })
-                    .join(", ");
+            throw error;
 
         }
 
 
-        const div =
-            document.createElement(
-                "div"
-            );
+        let clinicas =
+            data || [];
 
 
-        div.className =
-            "item-clinica";
+        // ========================================================
+        // FILTRO POR TEXTO
+        // ========================================================
+
+        if (busca) {
+
+            clinicas =
+                clinicas.filter(
+                    clinica => {
+
+                        const nome =
+                            String(
+                                clinica.nome || ""
+                            ).toLowerCase();
 
 
-        div.innerHTML = `
+                        const telefone =
+                            String(
+                                clinica.telefone || ""
+                            ).toLowerCase();
 
-            <div class="item-clinica-info">
 
-                <strong>
-                    ${escapeHTML(
-                        clinica.nome
-                    )}
-                </strong>
+                        const endereco =
+                            String(
+                                clinica.endereco || ""
+                            ).toLowerCase();
 
-                <span>
-                    ${escapeHTML(
-                        clinica.telefone || "-"
-                    )}
-                </span>
 
-            </div>
+                        const bairro =
+                            String(
+                                clinica.bairros?.nome || ""
+                            ).toLowerCase();
 
-            <div>
-                ${escapeHTML(
-                    regiao?.nome || "-"
-                )}
-            </div>
 
-            <div>
-                ${escapeHTML(
-                    estado?.nome || "-"
-                )}
-            </div>
+                        const cidade =
+                            String(
+                                clinica.bairros
+                                    ?.cidades
+                                    ?.nome || ""
+                            ).toLowerCase();
 
-            <div>
-                ${escapeHTML(
-                    cidade?.nome || "-"
-                )}
-            </div>
 
-            <div>
-                ${escapeHTML(
-                    bairro?.nome || "-"
-                )}
-            </div>
+                        const estado =
+                            String(
+                                clinica.bairros
+                                    ?.cidades
+                                    ?.estados
+                                    ?.nome || ""
+                            ).toLowerCase();
 
-            <div>
-                ${escapeHTML(
-                    textoRedes
-                )}
-            </div>
 
-            <div>
-                <span class="status ${
-                    clinica.ativo
-                        ? "ativo"
-                        : "inativo"
-                }">
-                    ${
-                        clinica.ativo
-                            ? "Ativa"
-                            : "Inativa"
+                        return (
+
+                            nome.includes(busca) ||
+
+                            telefone.includes(busca) ||
+
+                            endereco.includes(busca) ||
+
+                            bairro.includes(busca) ||
+
+                            cidade.includes(busca) ||
+
+                            estado.includes(busca)
+
+                        );
+
                     }
-                </span>
-            </div>
+                );
 
-            <div class="item-acoes">
+        }
 
-                <button
-                    type="button"
-                    class="btn-editar"
-                    onclick="editarClinica('${clinica.id}')"
-                >
-                    ✏️ Editar
-                </button>
 
-                <button
-                    type="button"
-                    class="btn-excluir"
-                    onclick="excluirClinica('${clinica.id}')"
-                >
-                    🗑️ Excluir
-                </button>
+        // ========================================================
+        // FILTRO POR STATUS
+        // ========================================================
 
-            </div>
+        if (
+            statusFiltro === "ativa"
+        ) {
+
+            clinicas =
+                clinicas.filter(
+                    clinica =>
+                        clinica.ativo === true
+                );
+
+        }
+
+
+        if (
+            statusFiltro === "inativa"
+        ) {
+
+            clinicas =
+                clinicas.filter(
+                    clinica =>
+                        clinica.ativo !== true
+                );
+
+        }
+
+
+        // ========================================================
+        // SEM RESULTADOS
+        // ========================================================
+
+        if (!clinicas.length) {
+
+            lista.innerHTML = `
+                <tr>
+                    <td colspan="8">
+                        Nenhuma clínica encontrada.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        // ========================================================
+        // MONTAR TABELA
+        // ========================================================
+
+        lista.innerHTML =
+            clinicas.map(
+                clinica => {
+
+                    const bairro =
+                        clinica.bairros;
+
+
+                    const cidade =
+                        bairro?.cidades;
+
+
+                    const estado =
+                        cidade?.estados;
+
+
+                    const regiao =
+                        estado?.regioes;
+
+
+                    const redes =
+                        obterRedesClinica(
+                            clinica
+                        );
+
+
+                    const ativa =
+                        clinica.ativo === true;
+
+
+                    const status =
+                        ativa
+                            ? "Ativa"
+                            : "Inativa";
+
+
+                    const classeStatus =
+                        ativa
+                            ? "ativo"
+                            : "inativo";
+
+
+                    return `
+
+                        <tr>
+
+                            <!-- CLÍNICA -->
+
+                            <td>
+
+                                <strong>
+                                    ${escaparHTML(
+                                        clinica.nome ||
+                                        "Sem nome"
+                                    )}
+                                </strong>
+
+                            </td>
+
+
+                            <!-- REGIÃO -->
+
+                            <td>
+                                ${escaparHTML(
+                                    regiao?.nome ||
+                                    "Não informado"
+                                )}
+                            </td>
+
+
+                            <!-- ESTADO -->
+
+                            <td>
+                                ${escaparHTML(
+                                    estado?.nome ||
+                                    "Não informado"
+                                )}
+                            </td>
+
+
+                            <!-- CIDADE -->
+
+                            <td>
+                                ${escaparHTML(
+                                    cidade?.nome ||
+                                    "Não informado"
+                                )}
+                            </td>
+
+
+                            <!-- BAIRRO -->
+
+                            <td>
+                                ${escaparHTML(
+                                    bairro?.nome ||
+                                    "Não informado"
+                                )}
+                            </td>
+
+
+                            <!-- REDES -->
+
+                            <td>
+
+                                <div class="redes-clinica">
+
+                                    ${
+                                        redes.especialistas
+                                            ? `
+                                                <span class="tag-rede especialistas">
+                                                    Especialistas
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+
+
+                                    ${
+                                        redes.sindilegis
+                                            ? `
+                                                <span class="tag-rede sindilegis">
+                                                    Sindilegis
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+
+
+                                    ${
+                                        !redes.especialistas &&
+                                        !redes.sindilegis
+                                            ? `
+                                                <span>
+                                                    Nenhuma
+                                                </span>
+                                            `
+                                            : ""
+                                    }
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                <span
+                                    class="status ${classeStatus}"
+                                >
+                                    ${status}
+                                </span>
+
+                            </td>
+
+
+                            <!-- AÇÕES -->
+
+                            <td class="acoes-tabela">
+
+                                <button
+                                    type="button"
+                                    class="btn-editar"
+                                    onclick="editarClinica('${clinica.id}')"
+                                >
+                                    Editar
+                                </button>
+
+
+                                <button
+                                    type="button"
+                                    class="btn-excluir"
+                                    onclick="excluirClinica('${clinica.id}')"
+                                >
+                                    Excluir
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            ).join("");
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao listar clínicas:",
+            erro
+        );
+
+
+        lista.innerHTML = `
+            <tr>
+                <td colspan="8">
+                    Erro ao carregar clínicas.
+                </td>
+            </tr>
         `;
 
-
-        container.appendChild(div);
-
-    });
+    }
 
 }
+// ============================================================
+// REDES DA CLÍNICA
+// ============================================================
 
+function obterRedesClinica(
+    clinica
+) {
+
+    const resultado = {
+
+        especialistas:
+            false,
+
+        sindilegis:
+            false
+
+    };
+
+
+    (
+        clinica.clinica_especialidades ||
+        []
+    ).forEach(
+        item => {
+
+            if (
+                item.ativo === false
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                item.rede ===
+                "especialistas"
+            ) {
+
+                resultado.especialistas =
+                    true;
+
+            }
+
+
+            if (
+                item.rede ===
+                "sindilegis"
+            ) {
+
+                resultado.sindilegis =
+                    true;
+
+            }
+
+        }
+    );
+
+
+    return resultado;
+
+}
 
 // ============================================================
 // ABRIR MODAL DA CLÍNICA
