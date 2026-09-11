@@ -2605,16 +2605,6 @@ console.log(
     "admin_parte1.js carregado com sucesso."
 );
 
-Essa é a Parte 1.
-
-Na Parte 2 entraremos com o código das clínicas, incluindo a correção da tabela que você mostrou na imagem e o cadastro/edição das clínicas.
-
-agora a parte 2
-
-Claro. Abaixo está a Parte 2 completa, para você colocar em js/admin_parte2.js.
-
-Ela cuida de clínicas, edição, exclusão, localização, status e especialidades vinculadas à clínica, mantendo a estrutura do projeto.
-
 // ============================================================
 // ADMIN.JS
 // PAINEL ADMINISTRATIVO | REDE ESPECIALISTAS
