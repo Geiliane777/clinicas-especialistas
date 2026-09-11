@@ -656,13 +656,29 @@ body.dark .filtro select option {
         box-shadow .2s ease;
 }
 
+
 .btn-buscar:hover {
     transform: translateY(-1px);
 
     box-shadow:
         0 10px 20px rgba(37, 99, 235, .26);
 }
+/* Botão de busca da Rede Sindilegis */
+body.sindilegis .btn-buscar {
+    background: linear-gradient(
+        90deg,
+        #5a189a,
+        #7b2cbf
+    );
+}
 
+body.sindilegis .btn-buscar:hover {
+    background: linear-gradient(
+        90deg,
+        #4a148c,
+        #6a1b9a
+    );
+}
 
 /* =========================================================
    RESULTADOS
