@@ -3138,3 +3138,268 @@ body.dark ::-webkit-scrollbar-thumb:hover {
         font-size: 9px;
     }
 }
+/* =========================================================
+   TEMA ROXO - REDE SINDILEGIS
+   ========================================================= */
+
+/* Cores principais do Sindilegis */
+body.sindilegis {
+    --sindilegis-roxo: #7c3aed;
+    --sindilegis-roxo-escuro: #5b21b6;
+    --sindilegis-roxo-claro: #8b5cf6;
+    --sindilegis-roxo-suave: #ede9fe;
+    --sindilegis-roxo-hover: #6d28d9;
+}
+
+/* =========================
+   CABEÇALHO
+   ========================= */
+
+body.sindilegis .header {
+    border-bottom-color: rgba(124, 58, 237, 0.18);
+}
+
+body.sindilegis .menu-link.ativo {
+    background: linear-gradient(
+        135deg,
+        #5b21b6,
+        #7c3aed
+    );
+    color: #ffffff;
+}
+
+body.sindilegis .menu-link:hover {
+    color: #7c3aed;
+}
+
+/* =========================
+   HERO
+   ========================= */
+
+body.sindilegis .hero-site {
+    background: linear-gradient(
+        135deg,
+        #4c1d95 0%,
+        #6d28d9 45%,
+        #7c3aed 100%
+    );
+}
+
+body.sindilegis .hero-site::before {
+    background: linear-gradient(
+        135deg,
+        rgba(124, 58, 237, 0.18),
+        rgba(139, 92, 246, 0.10)
+    );
+}
+
+body.sindilegis .hero-texto span,
+body.sindilegis .hero-texto h2 span {
+    color: #ddd6fe;
+}
+
+body.sindilegis .hero-badge {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   TÍTULOS
+   ========================= */
+
+body.sindilegis .section-label {
+    color: #7c3aed;
+}
+
+body.sindilegis .titulo-principal h2 {
+    color: var(--texto-forte);
+}
+
+/* =========================
+   FILTROS
+   ========================= */
+
+body.sindilegis .filtro select:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+/* =========================
+   BOTÃO BUSCAR
+   ========================= */
+
+body.sindilegis .btn-buscar {
+    background: linear-gradient(
+        135deg,
+        #5b21b6,
+        #7c3aed
+    );
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+}
+
+body.sindilegis .btn-buscar:hover {
+    background: linear-gradient(
+        135deg,
+        #4c1d95,
+        #6d28d9
+    );
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.35);
+}
+
+/* =========================
+   CARDS
+   ========================= */
+
+body.sindilegis .card {
+    border-top-color: #7c3aed;
+}
+
+body.sindilegis .card:hover {
+    border-color: rgba(124, 58, 237, 0.35);
+    box-shadow: 0 15px 35px rgba(124, 58, 237, 0.12);
+}
+
+body.sindilegis .card-icone-clinica {
+    background: linear-gradient(
+        135deg,
+        #ede9fe,
+        #ddd6fe
+    );
+    color: #7c3aed;
+}
+
+body.sindilegis .card-rede {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+body.sindilegis .card-status {
+    color: #7c3aed;
+}
+
+body.sindilegis .card-secao-titulo {
+    color: #6d28d9;
+}
+
+/* =========================
+   TAGS DE ESPECIALIDADES
+   ========================= */
+
+body.sindilegis .tag {
+    background: #ede9fe;
+    color: #6d28d9;
+    border-color: #ddd6fe;
+}
+
+body.sindilegis .tag:hover {
+    background: #ddd6fe;
+    color: #5b21b6;
+}
+
+/* =========================
+   BOTÕES DOS CARDS
+   ========================= */
+
+body.sindilegis .btnAcao {
+    border-color: #ddd6fe;
+}
+
+body.sindilegis .btnAcao:hover {
+    border-color: #7c3aed;
+    color: #7c3aed;
+}
+
+body.sindilegis .btn-mapa {
+    background: #7c3aed;
+    color: #ffffff;
+}
+
+body.sindilegis .btn-mapa:hover {
+    background: #6d28d9;
+}
+
+body.sindilegis .btn-whatsapp {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+body.sindilegis .btn-whatsapp:hover {
+    background: #ddd6fe;
+    color: #5b21b6;
+}
+
+/* =========================
+   INFORMAÇÕES
+   ========================= */
+
+body.sindilegis .info-site-item:hover {
+    border-color: rgba(124, 58, 237, 0.30);
+}
+
+body.sindilegis .info-site-icone {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+/* =========================
+   LINKS
+   ========================= */
+
+body.sindilegis a {
+    color: inherit;
+}
+
+body.sindilegis a:hover {
+    color: #7c3aed;
+}
+
+/* =========================
+   RODAPÉ
+   ========================= */
+
+body.sindilegis .rodape {
+    border-top-color: rgba(124, 58, 237, 0.20);
+}
+
+body.sindilegis .rodape-marca strong {
+    color: #7c3aed;
+}
+
+/* =========================
+   DARK MODE
+   ========================= */
+
+body.dark.sindilegis .card-icone-clinica {
+    background: rgba(124, 58, 237, 0.18);
+    color: #a78bfa;
+}
+
+body.dark.sindilegis .card-rede {
+    background: rgba(124, 58, 237, 0.18);
+    color: #c4b5fd;
+}
+
+body.dark.sindilegis .tag {
+    background: rgba(124, 58, 237, 0.16);
+    color: #c4b5fd;
+    border-color: rgba(124, 58, 237, 0.30);
+}
+
+body.dark.sindilegis .tag:hover {
+    background: rgba(124, 58, 237, 0.25);
+}
+
+body.dark.sindilegis .info-site-icone {
+    background: rgba(124, 58, 237, 0.18);
+    color: #a78bfa;
+}
+
+body.dark.sindilegis .btn-whatsapp {
+    background: rgba(124, 58, 237, 0.18);
+    color: #c4b5fd;
+}
+
+body.dark.sindilegis .btn-whatsapp:hover {
+    background: rgba(124, 58, 237, 0.28);
+}
