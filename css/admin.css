@@ -2711,3 +2711,108 @@ body.dark .item-gerenciamento-icone {
         min-width: 72px !important;
     }
 }
+
+
+/* ============================================================
+   CORREÇÃO DEFINITIVA — BOTÕES LATERAIS
+   Editar e Excluir ficam SEMPRE na lateral direita.
+   Esta regra vem por último para sobrescrever regras anteriores.
+   ============================================================ */
+
+.lista-gerenciamento .item-gerenciamento {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    justify-content: initial !important;
+    flex-direction: initial !important;
+    flex-wrap: nowrap !important;
+    column-gap: 14px !important;
+    row-gap: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.lista-gerenciamento .item-gerenciamento > div:first-child,
+.lista-gerenciamento .item-gerenciamento-info {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+}
+
+.lista-gerenciamento .item-gerenciamento .item-acoes,
+.lista-gerenciamento .item-gerenciamento .acoes-tabela {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex-wrap: nowrap !important;
+    width: auto !important;
+    min-width: max-content !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 7px !important;
+    flex-shrink: 0 !important;
+}
+
+.lista-gerenciamento .item-gerenciamento .item-acoes button,
+.lista-gerenciamento .item-gerenciamento .acoes-tabela button {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    min-width: 72px !important;
+    max-width: none !important;
+    height: 34px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+}
+
+@media (max-width: 768px) {
+    .lista-gerenciamento .item-gerenciamento {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        grid-template-rows: auto !important;
+        flex-direction: initial !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .lista-gerenciamento .item-gerenciamento .item-acoes,
+    .lista-gerenciamento .item-gerenciamento .acoes-tabela {
+        width: auto !important;
+        min-width: max-content !important;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        margin: 0 !important;
+    }
+
+    .lista-gerenciamento .item-gerenciamento .item-acoes button,
+    .lista-gerenciamento .item-gerenciamento .acoes-tabela button {
+        width: auto !important;
+        min-width: 62px !important;
+        max-width: none !important;
+        flex: 0 0 auto !important;
+    }
+}
+
+@media (max-width: 520px) {
+    .lista-gerenciamento .item-gerenciamento .item-acoes button,
+    .lista-gerenciamento .item-gerenciamento .acoes-tabela button {
+        width: auto !important;
+        min-width: 56px !important;
+        max-width: none !important;
+        padding: 0 6px !important;
+        font-size: 10px !important;
+    }
+}
