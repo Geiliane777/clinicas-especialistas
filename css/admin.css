@@ -3251,3 +3251,375 @@ body.dark ::-webkit-scrollbar-thumb {
         font-size: 10px;
     }
 }
+/* =========================================================
+   LISTAS DE CADASTROS
+   ESPECIALIDADES / REGIÕES / ESTADOS / CIDADES / BAIRROS
+   ========================================================= */
+
+#listaEspecialidades,
+#listaRegioes,
+#listaEstados,
+#listaCidades,
+#listaBairros {
+    width: 100%;
+}
+
+
+/* Cada registro */
+.item-gerenciamento {
+    width: 100% !important;
+
+    min-height: 62px !important;
+
+    padding: 10px 14px !important;
+
+    margin: 0 !important;
+
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    justify-content: space-between !important;
+
+    gap: 20px;
+
+    background: var(--card) !important;
+
+    border: none !important;
+
+    border-bottom: 1px solid var(--borda) !important;
+
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+}
+
+
+/* Último registro */
+.item-gerenciamento:last-child {
+    border-bottom: none !important;
+}
+
+
+/* =========================================================
+   PARTE ESQUERDA
+   ========================================================= */
+
+.item-gerenciamento-info {
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 11px;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* Ícone */
+.item-gerenciamento-icone {
+    width: 34px !important;
+
+    height: 34px !important;
+
+    min-width: 34px !important;
+
+    border-radius: 9px;
+
+    background:
+        rgba(37, 99, 235, 0.10) !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    font-size: 15px !important;
+}
+
+
+/* Nome */
+.item-gerenciamento-info strong {
+    display: block !important;
+
+    color: var(--texto-forte) !important;
+
+    font-size: 13px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1.3 !important;
+
+    margin: 0 !important;
+}
+
+
+/* Texto menor */
+.item-gerenciamento-info small {
+    display: block !important;
+
+    color: var(--texto-claro) !important;
+
+    font-size: 10px !important;
+
+    line-height: 1.3 !important;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   PARTE DIREITA - BOTÕES
+   ========================================================= */
+
+.item-acoes {
+    display: flex !important;
+
+    flex-direction: row !important;
+
+    align-items: center !important;
+
+    justify-content: flex-end !important;
+
+    gap: 7px !important;
+
+    width: auto !important;
+
+    min-width: 145px !important;
+
+    margin: 0 !important;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BOTÃO EDITAR
+   ========================================================= */
+
+.item-acoes .btn-editar {
+    width: 68px !important;
+
+    min-width: 68px !important;
+
+    max-width: 68px !important;
+
+    height: 34px !important;
+
+    min-height: 34px !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    border-radius: 8px !important;
+
+    background: #2563eb !important;
+
+    color: #ffffff !important;
+
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    font-size: 11px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1 !important;
+
+    white-space: nowrap !important;
+
+    cursor: pointer;
+
+    box-shadow: none !important;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.item-acoes .btn-editar:hover {
+    background: #1d4ed8 !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO EXCLUIR
+   ========================================================= */
+
+.item-acoes .btn-excluir {
+    width: 68px !important;
+
+    min-width: 68px !important;
+
+    max-width: 68px !important;
+
+    height: 34px !important;
+
+    min-height: 34px !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    border-radius: 8px !important;
+
+    background: #7c3aed !important;
+
+    color: #ffffff !important;
+
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    font-size: 11px !important;
+
+    font-weight: 600 !important;
+
+    line-height: 1 !important;
+
+    white-space: nowrap !important;
+
+    cursor: pointer;
+
+    box-shadow: none !important;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.item-acoes .btn-excluir:hover {
+    background: #6d28d9 !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PAINEL DAS LISTAS
+   ========================================================= */
+
+#listaEspecialidades,
+#listaRegioes,
+#listaEstados,
+#listaCidades,
+#listaBairros {
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--borda);
+
+    background: var(--card);
+
+    box-shadow: var(--sombra);
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.item-gerenciamento:hover {
+    background:
+        rgba(37, 99, 235, 0.025) !important;
+}
+
+
+/* =========================================================
+   TEMA ESCURO
+   ========================================================= */
+
+body.dark .item-gerenciamento:hover {
+    background:
+        rgba(255, 255, 255, 0.025) !important;
+}
+
+
+/* =========================================================
+   CARREGANDO / VAZIO / ERRO
+   ========================================================= */
+
+.item-carregando,
+.item-vazio,
+.item-erro {
+    min-height: 55px !important;
+
+    justify-content: center !important;
+
+    color: var(--texto-claro);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .item-gerenciamento {
+        padding: 10px !important;
+
+        gap: 10px;
+    }
+
+    .item-gerenciamento-info {
+        gap: 8px;
+    }
+
+    .item-gerenciamento-icone {
+        width: 30px !important;
+
+        height: 30px !important;
+
+        min-width: 30px !important;
+    }
+
+    .item-gerenciamento-info strong {
+        font-size: 12px !important;
+    }
+
+    .item-acoes {
+        min-width: 0 !important;
+
+        gap: 5px !important;
+    }
+
+    .item-acoes .btn-editar,
+    .item-acoes .btn-excluir {
+        width: 58px !important;
+
+        min-width: 58px !important;
+
+        max-width: 58px !important;
+
+        height: 32px !important;
+
+        font-size: 10px !important;
+    }
+}
