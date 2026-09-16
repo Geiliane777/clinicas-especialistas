@@ -3103,6 +3103,26 @@ async function carregarPaginaBairros() {
         lista.innerHTML =
             data.map(
                 bairro => {
+                    lista.querySelectorAll(
+    ".btn-editar"
+).forEach(
+    botao => {
+
+        botao.addEventListener(
+            "click",
+            () => {
+
+                editarBairro(
+                    botao.dataset.id,
+                    botao.dataset.nome,
+                    botao.dataset.cidade
+                );
+
+            }
+        );
+
+    }
+);
 
                     const cidade =
                         bairro.cidades;
@@ -3146,19 +3166,15 @@ async function carregarPaginaBairros() {
 
                             <td class="acoes-tabela">
 
-                                <button
-                                    type="button"
-                                    class="btn-editar"
-                                    onclick="editarBairro(
-                                        '${bairro.id}',
-                                        '${escaparHTML(
-                                            bairro.nome
-                                        )}',
-                                        '${bairro.cidade_id || ""}'
-                                    )"
-                                >
-                                    Editar
-                                </button>
+                             <button
+    type="button"
+    class="btn-editar"
+    data-id="${bairro.id}"
+    data-nome="${escaparHTML(bairro.nome)}"
+    data-cidade="${bairro.cidade_id || ""}"
+>
+    Editar
+</button>
 
                                 <button
                                     type="button"
