@@ -4383,28 +4383,67 @@ async function abrirModalClinica(
 
 
     // ========================================================
-    // NOVA CLÍNICA
-    // ========================================================
+// NOVA CLÍNICA
+// ========================================================
 
-    if (!id) {
+if (!id) {
 
-        if (titulo) {
+    if (titulo) {
 
-            titulo.textContent =
-                "Nova Clínica";
-        }
+        titulo.textContent =
+            "Nova Clínica";
 
-
-        limparEspecialidadesClinica();
-
-
-        mostrarModalClinica();
-
-
-        return;
     }
 
 
+    // ====================================================
+    // CARREGAR ESTADOS DA REGIÃO SELECIONADA
+    // ====================================================
+
+    if (
+        campoRegiao &&
+        campoRegiao.value
+    ) {
+
+        await carregarEstadosClinica(
+            campoRegiao.value
+        );
+
+    }
+
+
+    // ====================================================
+    // LIMPAR CIDADE E BAIRRO
+    // ====================================================
+
+    limparSelectAdmin(
+        "clinicaCidade",
+        "Selecione a Cidade"
+    );
+
+
+    limparSelectAdmin(
+        "clinicaBairro",
+        "Selecione o Bairro"
+    );
+
+
+    // ====================================================
+    // LIMPAR ESPECIALIDADES
+    // ====================================================
+
+    limparEspecialidadesClinica();
+
+
+    // ====================================================
+    // MOSTRAR MODAL
+    // ====================================================
+
+    mostrarModalClinica();
+
+
+    return;
+}
     // ========================================================
     // EDITAR
     // ========================================================
