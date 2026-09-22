@@ -77,13 +77,6 @@ async function inicializarAdmin() {
 
     carregarPaginaAtual();
 
-
-    console.log(
-
-        "Painel administrativo inicializado."
-
-    );
-
 }
 
 
@@ -6290,11 +6283,8 @@ window.excluirBairro =
     excluirBairro;
 
 
-console.log(
 
-    "Parte 1 do admin.js carregada."
 
-);
 
 // ============================================================
 
@@ -10008,10 +9998,3 @@ window.carregarEspecialidadesClinica =
 window.salvarEspecialidadesClinica =
 
     salvarEspecialidadesClinica;
-
-
-console.log(
-
-    "Parte 2 do admin.js carregada."
-
-);
