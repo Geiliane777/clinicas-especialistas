@@ -646,11 +646,6 @@ function renderizarCardsClinicas(clinicas) {
 
     resultado.appendChild(container);
 
-
-    console.log(
-        `Cards renderizados: ${lista.length}`
-    );
-
 }
 
 
@@ -666,7 +661,3 @@ window.criarCardClinica =
 
 window.obterLocalizacao =
     obterLocalizacao;
-
-console.log(
-    "Funções dos cards disponíveis."
-);
